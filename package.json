@@ -11,7 +11,8 @@
     "client": "cd client && npm run start",
     "fakeDB": "json-server --watch db.json",
     "server": "nodemon server.js",
-    "dev": "concurrently \"npm run fakeDB\" \"npm run client\""
+    "dev": "concurrently \"npm run fakeDB\" \"npm run client\"",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
