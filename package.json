@@ -1,0 +1,24 @@
+{
+  "name": "dispodisco",
+  "version": "0.0.1",
+  "description": "Final Team-Project for neueFische CGN20/04",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiscoDevs/DispoDisco.git"
+  },
+  "keywords": [
+    "awesome",
+    "bikemessenger",
+    "disco"
+  ],
+  "author": "Benamin Weinstock <info@flimmerkiste.xyz> (https://flimmerkiste.xyz)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DiscoDevs/DispoDisco/issues"
+  },
+  "homepage": "https://github.com/DiscoDevs/DispoDisco#readme"
+}
