@@ -3,8 +3,14 @@
   "version": "0.0.1",
   "description": "Final Team-Project for neueFische CGN20/04",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "npm run test"
+    "test": "cd client && npm run test",
+    "postinstall": "husky install && cd client && npm i",
+    "client": "cd client && npm run start",
+    "fakeDB": "json-server --watch db.json",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run fakeDB\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -15,10 +21,27 @@
     "bikemessenger",
     "disco"
   ],
-  "author": "Benamin Weinstock <info@flimmerkiste.xyz> (https://flimmerkiste.xyz)",
+  "author": "Team AllGlorious",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DiscoDevs/DispoDisco/issues"
   },
-  "homepage": "https://github.com/DiscoDevs/DispoDisco#readme"
+  "homepage": "https://github.com/DiscoDevs/DispoDisco#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "husky": "^5.0.1",
+    "json-server": "^0.16.3",
+    "lint-staged": "^10.5.1",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.2.0"
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md,json}": "prettier --write",
+    "*.{js,css,md}": "prettier --write"
+  }
 }
