@@ -5,14 +5,15 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "cd client && npm run test",
+    "test": "npm run lint && npm run build && cd client && npm run test",
     "hooksInstall": "husky install",
     "postinstall": "cd client && npm i",
     "client": "cd client && npm run start",
     "fakeDB": "json-server --watch db.json",
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run fakeDB\" \"npm run client\"",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "lint": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
