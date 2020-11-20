@@ -5,8 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "npm run test",
-    "postinstall": "cd client && npm i"
+    "test": "cd client && npm run test",
+    "postinstall": "husky install && cd client && npm i"
   },
   "repository": {
     "type": "git",
