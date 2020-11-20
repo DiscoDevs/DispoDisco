@@ -13,7 +13,8 @@
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run fakeDB\" \"npm run client\"",
     "build": "cd client && npm run build",
-    "lint": "eslint . --ext .js"
+    "lint": "eslint . --ext .js",
+    "start": "cd client && npm run start"
   },
   "repository": {
     "type": "git",
