@@ -25,5 +25,8 @@
     "eslint": "^7.13.0",
     "husky": "^4.3.0",
     "prettier": "^2.2.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
