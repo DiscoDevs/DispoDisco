@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "description": "Final Team-Project for neueFische CGN20/04",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "postinstall": "cd client && npm i"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,7 @@
   "homepage": "https://github.com/DiscoDevs/DispoDisco#readme",
   "devDependencies": {
     "eslint": "^7.13.0",
-    "husky": "^4.3.0",
+    "husky": "^5.0.1",
     "prettier": "^2.2.0"
   },
   "dependencies": {
