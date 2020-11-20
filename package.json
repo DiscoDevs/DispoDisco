@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/DiscoDevs/DispoDisco/issues"
   },
-  "homepage": "https://github.com/DiscoDevs/DispoDisco#readme"
+  "homepage": "https://github.com/DiscoDevs/DispoDisco#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "husky": "^4.3.0",
+    "prettier": "^2.2.0"
+  }
 }
