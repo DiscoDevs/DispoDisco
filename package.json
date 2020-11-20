@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "test": "cd client && npm run test",
-    "postinstall": "husky install && cd client && npm i",
+    "hooksInstall": "husky install",
+    "postinstall": "cd client && npm i",
     "client": "cd client && npm run start",
     "fakeDB": "json-server --watch db.json",
     "server": "nodemon server.js",
