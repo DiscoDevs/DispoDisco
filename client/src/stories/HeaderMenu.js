@@ -4,12 +4,15 @@ import MirrorBall from "./assets/mirrorBall.svg";
 import FrontCasset from "./assets/frontCassett.svg";
 
 const HeaderElement = styled.header`
-  width: 100vw;
+  position: absolute;
+  top: 0;
+  min-width: 340px;
   padding: 1rem;
   height: 200px;
   background-color: var(--header-red);
   color: var(--white);
-
+  position: fixed;
+  z-index: 10;
   text-align: center;
   display: flex;
 `;
@@ -39,7 +42,7 @@ const O = styled.img`
 const Logo = styled.img`
   position: absolute;
   z-index: 10;
-  left: 40vw;
+  left: 50%;
   height: 160px;
   margin-top: -50px;
   filter: drop-shadow(0px 3px 6px var(--black));

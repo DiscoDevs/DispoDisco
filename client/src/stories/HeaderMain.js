@@ -9,6 +9,8 @@ const HeaderElement = styled.header`
   width: 100vw;
   padding: 1rem;
   height: 111px;
+  position: fixed;
+  z-index: 10;
   background-color: var(--black);
   color: var(--white);
 
