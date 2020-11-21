@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "./assets/arrow.svg";
-import { Cargo } from "./Badge.stories";
 import { Badge } from "./Badge";
 
 /**
@@ -11,14 +10,23 @@ import { Badge } from "./Badge";
 
 const CardContainer = styled.div`
   position: relative;
-  /* width: 320px; */
-  height: 186px;
+  min-width: 300px;
+  /* min-height: 135px; */
   padding: 1rem;
   text-align: center;
   font-weight: bold;
-  color: ${(props) => (props.color ? props.color : "var(--white)")};
-  background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "var(--black)"};
+  color: var(--white);
+
+  background-color: ${(props) => {
+    switch (props.type) {
+      case "dayride":
+        return "var(--cargo)";
+      case "concurrentRide":
+        return "var(--kutsche)";
+      default:
+        return "var(--black)";
+    }
+  }};
   border-radius: var(--border-radius);
 `;
 
@@ -26,9 +34,31 @@ const Start = styled.div`
   overflow: hidden;
   position: relative;
   color: var(--white);
-  width: 40%;
-  height: 2rem;
-  line-height: 1;
+  border-radius: var(-border-radius);
+  width: ${(props) => {
+    switch (props.type) {
+      case "concurrentRide":
+        return "80%";
+      default:
+        return "40%";
+    }
+  }};
+  min-width: 110px;
+  height: 2.5rem;
+  padding: 0.25rem 0;
+  box-shadow: ${(props) => {
+    return props.type === "concurrentRide" ? "var(--shadow)" : "none";
+  }};
+
+  background-color: ${(props) => {
+    switch (props.type) {
+      case "concurrentRide":
+        return "var(--primary-color)";
+      default:
+        return "transparent";
+    }
+  }};
+
   & p {
     position: absolute;
     width: 100%;
@@ -44,6 +74,7 @@ const Start = styled.div`
     -webkit-animation: bouncing-text 5s linear infinite alternate;
     animation: bouncing-text 10s linear infinite alternate;
   }
+
   @-moz-keyframes bouncing-text {
     0% {
       -moz-transform: translateX(50%);
@@ -84,7 +115,7 @@ const Header = styled.div`
 `;
 const LabelContainer = styled.div`
   display: flex;
-  margin-top: 1rem;
+  margin: 0.75rem auto;
   & > :not(:first-child) {
     margin-left: 1rem;
   }
@@ -94,7 +125,6 @@ const LabelContainer = styled.div`
   }
 `;
 const InfoContainer = styled.div`
-  position: absolute;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -106,23 +136,24 @@ const InfoContainer = styled.div`
 const Rider = styled.p``;
 const Timer = styled.p``;
 const Info = styled(Badge)``;
-export const Card = ({ ...props }) => {
+
+export const Card = ({ labels, type, ...props }) => {
   return (
-    <CardContainer {...props}>
+    <CardContainer type={type} {...props}>
       <Header>
-        <Start>
+        <Start type={type}>
           <p>Alex-Dental</p>
         </Start>
-        <Arrow src={ArrowImg} />
-        <Destination>
-          <p>Anzag</p>
-        </Destination>
+        {type !== "concurrentRide" && (
+          <>
+            <Arrow src={ArrowImg} />
+            <Destination>
+              <p>Anzag</p>
+            </Destination>
+          </>
+        )}
       </Header>
-      <LabelContainer>
-        <Cargo type="cargo" label="5-25kg" />
-        <Cargo type="direct" label="Direct" />
-        <Cargo type="kutsche" label="Kutsche" />
-      </LabelContainer>
+      <LabelContainer>{labels && labels}</LabelContainer>
       <InfoContainer>
         <Rider>🚴‍♀️ Elena</Rider>
         <Timer>11:30</Timer>
@@ -133,7 +164,8 @@ export const Card = ({ ...props }) => {
 };
 
 Card.propTypes = {
-  type: PropTypes.oneOf(["normal", "daily", "direct", "recurrently"]),
+  type: PropTypes.oneOf(["normal", "daily", "direct", "concurrentRide"]),
+  labels: PropTypes.oneOf(),
   /**
    * Button contents
    */

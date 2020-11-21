@@ -5,6 +5,7 @@
   --primary-color: var(--green-crayola);
   --eerie-black: hsla(0, 0%, 14%, 1);
   --black: hsla(0, 0%, 14%, 1);
+  --black50: hsla(0, 0%, 14%, 0.5);
 
   --white: hsla(0, 0%, 94%, 1);
   --orange-crayola: hsla(17, 98%, 59%, 1);
@@ -21,6 +22,7 @@
   --cargo: hsla(259, 82%, 55%, 1);
 
   --border-radius: 3px;
+  --shadow: 0 3px 6px var(--black50);
 }
 *,
 *::after,

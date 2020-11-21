@@ -1,4 +1,5 @@
 import React from "react";
+import { Cargo } from "./Badge.stories";
 
 import { Card } from "./Card";
 
@@ -12,14 +13,31 @@ export default {
 
 const Template = (args) => <Card {...args} />;
 
-export const Normal = Template.bind({});
-
-// export const Cargo = Template.bind({});
-// Cargo.args = {
-//   label: "Cargo",
-//   backgroundColor: "var(--cargo)",
-// };
-
+export const NormalRide = Template.bind();
+NormalRide.args = {
+  labels: (
+    <>
+      <Cargo type="cargo" label="5-25kg" />
+      <Cargo type="direct" label="Direct" />
+      <Cargo type="kutsche" label="Kutsche" />
+    </>
+  ),
+};
+export const DayRide = Template.bind();
+DayRide.args = {
+  type: "dayride",
+  labels: (
+    <>
+      <Cargo type="cargo" label="5-25kg" />
+      <Cargo type="direct" label="Direct" />
+      <Cargo type="kutsche" label="Kutsche" />
+    </>
+  ),
+};
+export const ConcurrentRide = Template.bind();
+ConcurrentRide.args = {
+  type: "concurrentRide",
+};
 // export const Direct = Template.bind({});
 // Direct.args = {
 //   label: "Direkt",

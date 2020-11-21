@@ -43,6 +43,8 @@ const BadgeElement = styled.div`
 
   border-radius: 50%;
   border-radius: var(--border-radius);
+
+  box-shadow: var(--shadow);
 `;
 
 export const Badge = ({
@@ -73,15 +75,15 @@ Badge.propTypes = {
    * How large should the button be?
    */
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  type: PropTypes.oneOf(["direct", "kutsche", "cargo"]),
+  type: PropTypes.oneOf(["direct", "kutsche", "cargo", "cta"]),
   /**
    * Button contents
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   /**
    * Button contents
    */
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   /**
    * Optional click handler
    */
