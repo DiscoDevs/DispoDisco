@@ -18,16 +18,17 @@ Primary.args = {
   label: "Badge",
 };
 
-export const Cargo = Template.bind({});
+export const Cargo = Template.bind({
+  backgroundColor: "var(--cargo)",
+});
 Cargo.args = {
   label: "Cargo",
-  backgroundColor: "var(--cargo)",
 };
 
 export const Direct = Template.bind({});
 Direct.args = {
   label: "Direkt",
-  backgroundColor: "var(--direct)",
+  type: "direct",
 };
 
 export const Kutsche = Template.bind({});
