@@ -11,7 +11,6 @@ import { Badge } from "./Badge";
 const CardContainer = styled.div`
   position: relative;
   min-width: 300px;
-  /* min-height: 135px; */
   padding: 1rem;
   text-align: center;
   font-weight: bold;
@@ -19,10 +18,12 @@ const CardContainer = styled.div`
 
   background-color: ${(props) => {
     switch (props.type) {
-      case "dayride":
+      case "dayRide":
         return "var(--cargo)";
       case "concurrentRide":
         return "var(--kutsche)";
+      case "directRide":
+        return "var(--direct)";
       default:
         return "var(--black)";
     }
