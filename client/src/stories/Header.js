@@ -1,29 +1,35 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import MirrorBall from "./assets/mirrorBall.svg";
 import FrontCasset from "./assets/frontCassett.svg";
+import Backward from "./assets/backward.svg";
 
 const HeaderElement = styled.header`
   width: 100vw;
-  height: 33vh;
-  max-height: 234px;
-  background-color: var(--header-red);
+  height: ${(props) => (props.main ? "111px" : "200px")};
+  background-color: ${(props) =>
+    props.main ? "var(--black)" : "var(--header-red)"};
   color: var(--white);
 
+  text-align: center;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  place-content: center;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-    ". . "
+    /* ". . "
     "title .";
-  & > h1 {
-    margin-top: 5rem;
-  }
+     */ "back tour logo date";
+  /* & > h1 {
+     margin-top: 5rem;
+  } */
 `;
 const Titel = styled.h1`
-  font-size: 3.3rem;
-  grid-area: title;
+  font-size: ${(props) => (props.main ? "2rem" : "3.3rem")};
+  font-weight: ${(props) => (props.main ? "400" : "700")};
+  /* grid-area: title; */
+  grid-area: tour;
   line-height: 1;
 
   & > :nth-child(1) {
@@ -35,36 +41,48 @@ const Titel = styled.h1`
   }
 `;
 
-const Logo = styled.img`
-  position: absolute;
-  left: 40%;
-  height: 15vh;
-  margin-top: -20px;
-  filter: drop-shadow(0px 3px 6px var(--black));
-`;
 const O = styled.img`
   position: absolute;
   height: 30px;
   bottom: 6px;
 `;
 
-export const Header = ({ menu }) => (
+export const Header = () => (
   <HeaderElement>
+    <Back src={Backward} alt={"backward"} />
     <Titel>
+      <Logo src={MirrorBall} alt={"Logo"} />
       <p>
         Disp
         <O src={FrontCasset} alt={"o"} />
       </p>
       <p>Disco</p>
     </Titel>
-    <Logo src={MirrorBall} alt={"Logo"} />
   </HeaderElement>
 );
+const Back = styled.img`
+  grid-area: back;
+`;
+const Date = styled(Titel)`
+  grid-area: date;
+`;
+const Logo = styled.img`
+  /* position: absolute; */
+  /* left: 40%; */
+  width: 100%;
+  /* margin-top: -2.2srem; */
+  grid-area: logo;
+  height: ${(props) => (props.main ? "55px" : " 160px")};
+  margin-top: ${(props) => (props.main ? "2.2rem" : "-20px")};
 
-Header.propTypes = {
-  menu: PropTypes.shape(Boolean),
-};
+  filter: drop-shadow(0px 3px 6px var(--black));
+`;
 
-Header.defaultProps = {
-  menu: false,
-};
+export const HeaderMenu = () => (
+  <HeaderElement main>
+    <Back src={Backward} alt={"backward"} />
+    <Titel main>Fahrt</Titel>
+    <Logo main src={MirrorBall} alt={"Logo"} />
+    <Date>27.11.20</Date>
+  </HeaderElement>
+);
