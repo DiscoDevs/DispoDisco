@@ -1,0 +1,177 @@
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components/macro";
+import ArrowImg from "./assets/arrow.svg";
+import { Badge } from "./Badge";
+
+/**
+ * Primary UI component for user interaction
+ */
+
+const CardContainer = styled.div`
+  position: relative;
+  min-width: 300px;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: var(--white);
+
+  background-color: ${(props) => {
+    switch (props.type) {
+      case "dayRide":
+        return "var(--cargo)";
+      case "concurrentRide":
+        return "var(--kutsche)";
+      case "directRide":
+        return "var(--direct)";
+      default:
+        return "var(--black)";
+    }
+  }};
+  border-radius: var(--border-radius);
+`;
+
+const Start = styled.div`
+  overflow: hidden;
+  position: relative;
+  color: var(--white);
+  border-radius: var(-border-radius);
+  width: ${(props) => {
+    switch (props.type) {
+      case "concurrentRide":
+        return "80%";
+      default:
+        return "40%";
+    }
+  }};
+  min-width: 110px;
+  height: 2.5rem;
+  padding: 0.25rem 0;
+  box-shadow: ${(props) => {
+    return props.type === "concurrentRide" ? "var(--shadow)" : "none";
+  }};
+
+  background-color: ${(props) => {
+    switch (props.type) {
+      case "concurrentRide":
+        return "var(--primary-color)";
+      default:
+        return "transparent";
+    }
+  }};
+
+  & p {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 2;
+    text-align: center;
+    -moz-transform: translateX(50%);
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+    -moz-animation: bouncing-text 5s linear infinite alternate;
+    -webkit-animation: bouncing-text 5s linear infinite alternate;
+    animation: bouncing-text 10s linear infinite alternate;
+  }
+
+  @-moz-keyframes bouncing-text {
+    0% {
+      -moz-transform: translateX(50%);
+    }
+    100% {
+      -moz-transform: translateX(-50%);
+    }
+  }
+
+  @-webkit-keyframes bouncing-text {
+    0% {
+      -webkit-transform: translateX(50%);
+    }
+    100% {
+      -webkit-transform: translateX(-50%);
+    }
+  }
+
+  @keyframes bouncing-text {
+    0% {
+      -moz-transform: translateX(50%);
+      -webkit-transform: translateX(50%);
+      transform: translateX(50%);
+    }
+    100% {
+      -moz-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+  }
+`;
+const Arrow = styled.img``;
+const Destination = styled(Start)``;
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+const LabelContainer = styled.div`
+  display: flex;
+  margin: 0.75rem auto;
+  & > :not(:first-child) {
+    margin-left: 1rem;
+  }
+  & > * {
+    font-size: 0.8rem;
+    padding: 0.9rem;
+  }
+`;
+const InfoContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  bottom: 1rem;
+  left: 0;
+  padding: 0 1rem;
+`;
+const Rider = styled.p``;
+const Timer = styled.p``;
+const Info = styled(Badge)``;
+
+export const Card = ({ labels, type, ...props }) => {
+  return (
+    <CardContainer type={type} {...props}>
+      <Header>
+        <Start type={type}>
+          <p>Alex-Dental</p>
+        </Start>
+        {type !== "concurrentRide" && (
+          <>
+            <Arrow src={ArrowImg} />
+            <Destination>
+              <p>Anzag</p>
+            </Destination>
+          </>
+        )}
+      </Header>
+      <LabelContainer>{labels && labels}</LabelContainer>
+      <InfoContainer>
+        <Rider>🚴‍♀️ Elena</Rider>
+        <Timer>11:30</Timer>
+        <Info type="cta" label="Info" />
+      </InfoContainer>
+    </CardContainer>
+  );
+};
+
+Card.propTypes = {
+  type: PropTypes.oneOf(["normal", "daily", "direct", "concurrentRide"]),
+  labels: PropTypes.oneOf(),
+  /**
+   * Button contents
+   */
+  /**
+   * Optional click handler
+   */
+  onClick: PropTypes.func,
+};
