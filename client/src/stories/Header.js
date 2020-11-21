@@ -8,6 +8,7 @@ import FilterIcon from "./assets/filter.svg";
 
 const HeaderElement = styled.header`
   width: 100vw;
+  padding: 1rem;
   height: ${(props) => (props.main ? "111px" : "200px")};
   background-color: ${(props) =>
     props.main ? "var(--black)" : "var(--header-red)"};
@@ -31,7 +32,6 @@ const Titel = styled.h1`
   flex-grow: auto;
   align-items: center;
   justify-content: space-around;
-  margin: auto 1rem;
   line-height: 1;
 `;
 
@@ -56,22 +56,19 @@ export const Header = () => (
 );
 const Back = styled.img`
   grid-area: back;
-  /* padding: 0.5rem; */
-  margin-left: 1rem;
   align-self: center;
 `;
 
 const Logo = styled.img`
   grid-area: logo;
   height: ${(props) => (props.main ? "55px" : " 160px")};
-  margin-top: ${(props) => (props.main ? "-4rem" : "-20px")};
+  margin-top: ${(props) => (props.main ? "-0.7em" : "-20px")};
 
   filter: drop-shadow(0px 3px 6px var(--black));
 `;
 
 const Calendar = styled(Back)`
   grid-area: calendar;
-  margin-left: 1rem;
 `;
 const Infobox = styled.p`
   grid-area: info;
@@ -80,8 +77,6 @@ const Infobox = styled.p`
 
 const Filter = styled(Back)`
   grid-area: filter;
-  padding: 0;
-  margin-left: -1rem;
 `;
 export const HeaderMenu = () => (
   <HeaderElement main>
@@ -92,7 +87,10 @@ export const HeaderMenu = () => (
       27.11.20
     </Titel>
     <Calendar src={CalendarIcon} alt={"calendar"} />
-    <Infobox>Next Stop 20min</Infobox>
+    <Infobox>
+      🚀 <b>Next Stop</b> 🚀 <br />
+      <b>20</b> min
+    </Infobox>
     <Filter src={FilterIcon} alt={"filter"} />
   </HeaderElement>
 );
