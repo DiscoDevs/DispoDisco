@@ -14,14 +14,11 @@ const CardContainer = styled.div`
   /* width: 320px; */
   height: 186px;
   padding: 1rem;
-  color: ${(props) => (props.color ? props.color : "var(--white)")};
-
-  background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "var(--black)"};
-
   text-align: center;
   font-weight: bold;
-
+  color: ${(props) => (props.color ? props.color : "var(--white)")};
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "var(--black)"};
   border-radius: var(--border-radius);
 `;
 
@@ -29,7 +26,7 @@ const Start = styled.div`
   overflow: hidden;
   position: relative;
   color: var(--white);
-  width: 30%;
+  width: 40%;
   height: 2rem;
   line-height: 1;
   & p {

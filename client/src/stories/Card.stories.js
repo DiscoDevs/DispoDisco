@@ -12,11 +12,7 @@ export default {
 
 const Template = (args) => <Card {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  label: "Badge",
-};
+export const Normal = Template.bind({});
 
 // export const Cargo = Template.bind({});
 // Cargo.args = {

@@ -30,7 +30,7 @@
   margin: 0;
 }
 #root {
-  height: 100vh;
+  min-height: 100vh;
   /* margin: 1rem; */
   display: grid;
   place-content: center;
