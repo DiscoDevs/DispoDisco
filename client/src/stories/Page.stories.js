@@ -1,7 +1,7 @@
 import React from "react";
+import { HeaderMenu } from "./HeaderMenu";
 
 import { Page } from "./Page";
-import * as HeaderStories from "./Header.stories";
 
 export default {
   title: "DispoDisco/Page",
@@ -12,5 +12,5 @@ const Template = (args) => <Page {...args} />;
 
 export const HeaderMain = Template.bind({});
 HeaderMain.args = {
-  ...HeaderStories.Main.args,
+  ...HeaderMenu.Main.args,
 };

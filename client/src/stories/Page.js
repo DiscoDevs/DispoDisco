@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Header } from "./Header";
+import { HeaderMain } from "./Header.stories";
 import "./page.css";
 
 export const Page = () => (
   <article>
-    <Header menu />
+    <HeaderMain menu />
 
     <section></section>
   </article>
