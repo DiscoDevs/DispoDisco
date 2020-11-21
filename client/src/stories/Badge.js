@@ -10,8 +10,19 @@ const BadgeElement = styled.div`
   padding: 0.7rem 1rem;
   color: ${(props) => (props.color ? props.color : "var(--white)")};
 
-  background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "var(--primary-color)"};
+  background-color: ${(props) => {
+    const type = props.type;
+    switch (type) {
+      case "cargo":
+        return "var(--cargo)";
+      case "direct":
+        return "var(--direct)";
+      case "kutsche":
+        return "var(--kutsche)";
+      default:
+        return "var(--primary-color)";
+    }
+  }};
 
   text-align: center;
   font-weight: bold;
@@ -21,21 +32,15 @@ const BadgeElement = styled.div`
 `;
 
 export const Badge = ({
-  primary,
   backgroundColor,
   color,
+  type,
   size,
   label,
   ...props
 }) => {
-  const mode = primary ? "badge--primary" : "badge--secondary";
   return (
-    <BadgeElement
-      color={color}
-      className={[`badge--${size}`, mode].join(" ")}
-      backgroundColor={backgroundColor}
-      {...props}
-    >
+    <BadgeElement type={type} color={color} {...props}>
       {label}
     </BadgeElement>
   );
@@ -54,6 +59,7 @@ Badge.propTypes = {
    * How large should the button be?
    */
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  type: PropTypes.oneOf(["direct", "kutsche", "cargo"]),
   /**
    * Button contents
    */
