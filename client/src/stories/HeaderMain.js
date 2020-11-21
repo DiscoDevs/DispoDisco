@@ -6,7 +6,7 @@ import CalendarIcon from "./assets/calendar.svg";
 import FilterIcon from "./assets/filter.svg";
 
 const HeaderElement = styled.header`
-  width: 100vw;
+  top: 0;
   padding: 1rem;
   height: 111px;
   position: fixed;
