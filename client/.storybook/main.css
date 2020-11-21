@@ -34,13 +34,13 @@
 #root {
   min-height: 100vh;
   /* margin: 1rem; */
+
   display: grid;
   place-content: center;
 }
 
 body {
   font-family: "Open Sans", sans-serif;
-  padding: 0;
   margin: 0;
 }
 

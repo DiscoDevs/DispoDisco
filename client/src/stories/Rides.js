@@ -6,6 +6,7 @@ import { Card } from "./Card";
 import { ConcurrentRide, DayRide, DirectRide } from "./Card.stories";
 
 import { HeaderMenus } from "./Header.stories";
+import { HeaderMain } from "./HeaderMain";
 import "./page.css";
 
 const Wrapper = styled.div`
@@ -14,21 +15,18 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 15rem;
+  padding-top: 6rem;
   & > :not(:first-child) {
     margin: 1rem;
   }
 `;
 
-export const Page = () => (
+export const Rides = () => (
   <>
     <GlobalStyle />
     <Wrapper>
-      <HeaderMenus />
-      <Primary label={"Badge"} />
-      <Cargo type={"cargo"} label={"Cargo"} />
-      <Direct type={"direct"} label={"Direkt"} />
-      <Kutsche type={"kutsche"} label={"Kutsche"} />
+      <HeaderMain />
+
       <Card
         labels={
           <>

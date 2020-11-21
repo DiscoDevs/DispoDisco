@@ -1,10 +1,10 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 
-import { Header } from "./stories/Header";
 import { Badge } from "./stories/Badge";
+import { HeaderMain } from "./stories/HeaderMain";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   :root{
     /* CSS HSL */
 --green-crayola: hsla(158, 68%, 42%, 1);
@@ -31,7 +31,7 @@ function App() {
     <>
       <GlobalStyle />
       <div className="App">
-        <Header />
+        <HeaderMain />
         <Badge primary></Badge>
       </div>
     </>
