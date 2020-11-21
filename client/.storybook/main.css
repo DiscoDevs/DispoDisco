@@ -13,6 +13,7 @@
   --jonquil: hsla(48, 82%, 55%, 1);
   --kutsche: hsla(48, 82%, 55%, 1);
   --carnelian: hsla(0, 75%, 40%, 1);
+  --header-red: hsla(0, 75%, 40%, 1);
   --red-pigment: hsla(0, 82%, 55%, 1);
   --direct: hsla(0, 82%, 55%, 1);
   --dark-red: hsla(0, 86%, 29%, 1);
@@ -21,7 +22,13 @@
 
   --border-radius: 3px;
 }
-
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 #root {
   height: 100vh;
   margin: 1rem;

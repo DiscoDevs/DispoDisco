@@ -1,62 +1,70 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components/macro";
+import MirrorBall from "./assets/mirrorBall.svg";
+import FrontCasset from "./assets/frontCassett.svg";
 
-import { Badge } from "./Badge";
-import "./header.css";
+const HeaderElement = styled.header`
+  width: 100vw;
+  height: 33vh;
+  max-height: 234px;
+  background-color: var(--header-red);
+  color: var(--white);
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
-  <header>
-    <div className="wrapper">
-      <div>
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g fill="none" fillRule="evenodd">
-            <path
-              d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
-              fill="#FFF"
-            />
-            <path
-              d="M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z"
-              fill="#555AB9"
-            />
-            <path
-              d="M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z"
-              fill="#91BAF8"
-            />
-          </g>
-        </svg>
-        <h1>Acme</h1>
-      </div>
-      <div>
-        {user ? (
-          <Badge size="small" onClick={onLogout} label="Log out" />
-        ) : (
-          <>
-            <Badge size="small" onClick={onLogin} label="Log in" />
-            <Badge
-              primary
-              size="small"
-              onClick={onCreateAccount}
-              label="Sign up"
-            />
-          </>
-        )}
-      </div>
-    </div>
-  </header>
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    ". . "
+    "title .";
+  & > h1 {
+    margin-top: 5rem;
+  }
+`;
+const Titel = styled.h1`
+  font-size: 3.3rem;
+  grid-area: title;
+  line-height: 1;
+
+  & > :nth-child(1) {
+    position: relative;
+    margin-left: 1rem;
+  }
+  & > :nth-child(2) {
+    margin-left: 80px;
+  }
+`;
+
+const Logo = styled.img`
+  position: absolute;
+  left: 40%;
+  height: 15vh;
+  margin-top: -20px;
+  filter: drop-shadow(0px 3px 6px var(--black));
+`;
+const O = styled.img`
+  position: absolute;
+  height: 30px;
+  bottom: 6px;
+`;
+
+export const Header = ({ menu }) => (
+  <HeaderElement>
+    <Titel>
+      <p>
+        Disp
+        <O src={FrontCasset} alt={"o"} />
+      </p>
+      <p>Disco</p>
+    </Titel>
+    <Logo src={MirrorBall} alt={"Logo"} />
+  </HeaderElement>
 );
 
 Header.propTypes = {
-  user: PropTypes.shape({}),
-  onLogin: PropTypes.func.isRequired,
-  onLogout: PropTypes.func.isRequired,
-  onCreateAccount: PropTypes.func.isRequired,
+  menu: PropTypes.shape(Boolean),
 };
 
 Header.defaultProps = {
-  user: null,
+  menu: false,
 };
