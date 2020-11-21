@@ -28,8 +28,8 @@ DayRide.args = {
   type: "dayRide",
   labels: (
     <>
-      <Cargo type="cargo" label="5-25kg" />
-      <Cargo type="direct" label="Direct" />
+      <Cargo type="direct" label="5-25kg" />
+      <Cargo label="Direct" />
       <Cargo type="kutsche" label="Kutsche" />
     </>
   ),
