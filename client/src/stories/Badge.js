@@ -9,16 +9,30 @@ import styled from "styled-components/macro";
 const BadgeElement = styled.div`
   padding: 0.7rem 1rem;
   color: ${(props) => (props.color ? props.color : "var(--white)")};
+  color: ${(props) => {
+    const type = props.type;
+    switch (type) {
+      case "kutsche":
+      case "cta":
+        return "var(--black)";
+      default:
+        return "var(--white)";
+    }
+  }};
 
   background-color: ${(props) => {
     const type = props.type;
     switch (type) {
       case "cargo":
         return "var(--cargo)";
+      case "transparent":
+        return "transparent";
       case "direct":
         return "var(--direct)";
       case "kutsche":
         return "var(--kutsche)";
+      case "cta":
+        return "var(--white)";
       default:
         return "var(--primary-color)";
     }
@@ -40,7 +54,7 @@ export const Badge = ({
   ...props
 }) => {
   return (
-    <BadgeElement type={type} color={color} {...props}>
+    <BadgeElement type={type} {...props}>
       {label}
     </BadgeElement>
   );

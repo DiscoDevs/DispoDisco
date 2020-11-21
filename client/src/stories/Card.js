@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "./assets/arrow.svg";
 import { Cargo } from "./Badge.stories";
+import { Badge } from "./Badge";
 
 /**
  * Primary UI component for user interaction
  */
 
 const CardContainer = styled.div`
-  width: 320px;
+  position: relative;
+  /* width: 320px; */
   height: 186px;
   padding: 1rem;
   color: ${(props) => (props.color ? props.color : "var(--white)")};
@@ -83,22 +85,33 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-evenly;
 `;
-export const Card = ({
-  primary,
-  backgroundColor,
-  color,
-  size,
-  label,
-  ...props
-}) => {
-  const mode = primary ? "badge--primary" : "badge--secondary";
+const LabelContainer = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  & > :not(:first-child) {
+    margin-left: 1rem;
+  }
+  & > * {
+    font-size: 0.8rem;
+    padding: 0.9rem;
+  }
+`;
+const InfoContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  bottom: 1rem;
+  left: 0;
+  padding: 0 1rem;
+`;
+const Rider = styled.p``;
+const Timer = styled.p``;
+const Info = styled(Badge)``;
+export const Card = ({ ...props }) => {
   return (
-    <CardContainer
-      color={color}
-      className={[`badge--${size}`, mode].join(" ")}
-      backgroundColor={backgroundColor}
-      {...props}
-    >
+    <CardContainer {...props}>
       <Header>
         <Start>
           <p>Alex-Dental</p>
@@ -108,42 +121,27 @@ export const Card = ({
           <p>Anzag</p>
         </Destination>
       </Header>
-      <Cargo type="cargo" label="5-25kg" />
-      {/* {label} */}
+      <LabelContainer>
+        <Cargo type="cargo" label="5-25kg" />
+        <Cargo type="direct" label="Direct" />
+        <Cargo type="kutsche" label="Kutsche" />
+      </LabelContainer>
+      <InfoContainer>
+        <Rider>🚴‍♀️ Elena</Rider>
+        <Timer>11:30</Timer>
+        <Info type="cta" label="Info" />
+      </InfoContainer>
     </CardContainer>
   );
 };
 
 Card.propTypes = {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary: PropTypes.bool,
-  /**
-   * What background color to use
-   */
-  backgroundColor: PropTypes.string,
-  /**
-   * How large should the button be?
-   */
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  type: PropTypes.oneOf(["normal", "daily", "direct", "recurrently"]),
   /**
    * Button contents
    */
-  label: PropTypes.string.isRequired,
-  /**
-   * Button contents
-   */
-  color: PropTypes.string.isRequired,
   /**
    * Optional click handler
    */
   onClick: PropTypes.func,
-};
-
-Card.defaultProps = {
-  backgroundColor: null,
-  primary: false,
-  size: "medium",
-  onClick: undefined,
 };
