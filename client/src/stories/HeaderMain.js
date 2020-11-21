@@ -40,7 +40,7 @@ const Back = styled.img`
 const Logo = styled.img`
   grid-area: logo;
   height: 55px;
-  margin-top: 0.7em;
+  margin-top: -0.7em;
   filter: drop-shadow(0px 3px 6px var(--black));
 `;
 
@@ -55,7 +55,7 @@ const Filter = styled(Back)`
   grid-area: filter;
 `;
 
-export const HeaderMenu = () => (
+export const HeaderMain = () => (
   <HeaderElement>
     <Back src={Backward} alt={"backward"} />
     <Titel>
