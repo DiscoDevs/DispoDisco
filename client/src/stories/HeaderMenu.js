@@ -4,7 +4,6 @@ import MirrorBall from "./assets/mirrorBall.svg";
 import FrontCasset from "./assets/frontCassett.svg";
 
 const HeaderElement = styled.header`
-  position: absolute;
   top: 0;
   min-width: 340px;
   padding: 1rem;

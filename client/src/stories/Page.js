@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 15rem;
+  padding-top: 20rem;
   & > :not(:first-child) {
     margin: 1rem;
   }

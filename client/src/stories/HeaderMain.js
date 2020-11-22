@@ -6,10 +6,10 @@ import CalendarIcon from "./assets/calendar.svg";
 import FilterIcon from "./assets/filter.svg";
 
 const HeaderElement = styled.header`
-  top: 0;
   padding: 1rem;
   height: 111px;
   position: fixed;
+  top: 0;
   z-index: 10;
   background-color: var(--black);
   color: var(--white);

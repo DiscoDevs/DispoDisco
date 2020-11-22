@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "../App";
-import { Cargo, Direct, Kutsche, Primary } from "./Badge.stories";
+import { Cargo } from "./Badge.stories";
 import { Card } from "./Card";
 import { ConcurrentRide, DayRide, DirectRide } from "./Card.stories";
 
-import { HeaderMenus } from "./Header.stories";
 import { HeaderMain } from "./HeaderMain";
 import "./page.css";
 
@@ -26,7 +25,6 @@ export const Rides = () => (
     <GlobalStyle />
     <Wrapper>
       <HeaderMain />
-
       <Card
         labels={
           <>
