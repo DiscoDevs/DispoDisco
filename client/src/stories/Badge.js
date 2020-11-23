@@ -47,8 +47,9 @@ const BadgeElement = styled.div`
       props.type === "rider" || props.type === "timer" ? "0.2rem" : "0.7rem"}
     0.8rem;
   height: ${(props) =>
-    props.type === "rider" || props.type === "timer" ? "30px" : "auto"};
+    props.type === "rider" || props.type === "timer" ? "30px" : "40px"};
   text-align: center;
+  ${(props) => props.type === "info" && "line-height: 1"};
   font-weight: ${(props) => props.type !== "timer" && " bold"};
   border-radius: var(--border-radius);
   box-shadow: ${(props) =>
