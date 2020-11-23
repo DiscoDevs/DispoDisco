@@ -25,7 +25,7 @@ Kutsche.args = {
 };
 export const Direkt = Template.bind(0);
 Direkt.args = {
-  type: "direkt",
+  type: "direct",
 };
 export const Termin = Template.bind(0);
 Termin.args = {

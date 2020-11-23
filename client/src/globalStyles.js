@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
 
     --primary: var(--green-crayola);
     --carriage: hsla(48, 82%, 55%, 1);
-    --direct: var(--header-red);
+    --direct: var(--dark-red);
     --onTime: hsla(17, 98%, 59%, 1);
     --cargo: hsla(259, 82%, 55%, 1);
 

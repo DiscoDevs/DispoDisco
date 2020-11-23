@@ -19,7 +19,7 @@ const types = {
     color: "var(--black)",
     label: "Kutsche",
   },
-  direkt: {
+  direct: {
     color: "var(--direct)",
     label: "Direkt",
   },
