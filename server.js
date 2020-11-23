@@ -8,6 +8,7 @@ const {
   insertData,
   deleteData,
   updateData,
+  getDataByName,
 } = require("./lib/serverMethods");
 const app = express();
 const port = process.env.PORT || 3600;
@@ -19,6 +20,20 @@ app.get("/api/:collectionName", async (req, res) => {
   try {
     const collectionData = await getCollection(collectionName);
     res.send(collectionData);
+  } catch (e) {
+    console.error(e);
+    res
+      .status(500)
+      .send("An unexpected server error occured. Please try again later.");
+  }
+});
+
+app.get("/api/:collectionName/:dataName", async (req, res) => {
+  const { collectionName, dataName } = req.params;
+  console.log({ collectionName, dataName });
+  try {
+    const data = await getDataByName(collectionName, dataName);
+    res.send(data);
   } catch (e) {
     console.error(e);
     res
