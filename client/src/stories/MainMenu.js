@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { GlobalStyle } from "../App";
-import { Cargo, Direct, Kutsche, Primary } from "./Badge.stories";
+import { Badge } from "./Badge.js";
 import { Card } from "./Card";
 import { ConcurrentRide, DayRide, DirectRide } from "./Card.stories";
 
 import { HeaderMenus } from "./Header.stories";
-import "./page.css";
 
 const Wrapper = styled.div`
   position: relative;
@@ -20,21 +19,23 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Page = () => (
+export const MainMenu = () => (
   <>
     <GlobalStyle />
     <Wrapper>
       <HeaderMenus />
-      <Primary label={"Badge"} />
-      <Cargo type={"cargo"} label={"Cargo"} />
-      <Direct type={"direct"} label={"Direkt"} />
-      <Kutsche type={"kutsche"} label={"Kutsche"} />
+      <Badge type="cargo" label="5-25kg" />
+      <Badge type="direkt" label="Direct" />
+      <Badge type="kutsche" label="Kutsche" />{" "}
+      <Badge type="cargo" label="5-25kg" />
+      <Badge type="direkt" label="Direct" />
+      <Badge type="kutsche" label="Kutsche" />
       <Card
         labels={
           <>
-            <Cargo type="direct" label="5-25kg" />
-            <Cargo label="Direct" />
-            <Cargo type="kutsche" label="Kutsche" />
+            <Badge type="cargo" label="5-25kg" />
+            <Badge type="direkt" label="Direct" />
+            <Badge type="kutsche" label="Kutsche" />
           </>
         }
       />
@@ -42,9 +43,9 @@ export const Page = () => (
         type="dayRide"
         labels={
           <>
-            <Cargo type="direct" label="5-25kg" />
-            <Cargo label="Direct" />
-            <Cargo type="kutsche" label="Kutsche" />
+            <Badge type="cargo" label="5-25kg" />
+            <Badge type="direkt" label="Direct" />
+            <Badge type="kutsche" label="Kutsche" />
           </>
         }
       />
@@ -52,9 +53,9 @@ export const Page = () => (
         type="directRide"
         labels={
           <>
-            <Cargo type="direct" label="5-25kg" />
-            <Cargo label="Direct" />
-            <Cargo type="kutsche" label="Kutsche" />
+            <Badge type="cargo" label="5-25kg" />
+            <Badge type="direkt" label="Direct" />
+            <Badge type="kutsche" label="Kutsche" />
           </>
         }
       />
