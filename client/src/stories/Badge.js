@@ -44,16 +44,11 @@ const types = {
 
 const BadgeElement = styled.div`
   padding: ${(props) =>
-      props.type === "rider" || props.type === "timer" || props.type === "info"
-        ? "0.2rem"
-        : "0.7rem"}
-    1rem;
+      props.type === "rider" || props.type === "timer" ? "0.2rem" : "0.7rem"}
+    0.8rem;
   height: ${(props) =>
-    props.type === "info" || props.type === "rider" || props.type === "timer"
-      ? "30px"
-      : "auto"};
+    props.type === "rider" || props.type === "timer" ? "30px" : "auto"};
   text-align: center;
-  line-height: 1.5;
   font-weight: ${(props) => props.type !== "timer" && " bold"};
   border-radius: var(--border-radius);
   box-shadow: ${(props) =>
@@ -66,6 +61,7 @@ const BadgeElement = styled.div`
 `;
 
 export const Badge = ({ type, label }) => {
+  console.log({ label, type });
   label = types[type].label || label;
 
   return <BadgeElement type={type}>{label}</BadgeElement>;

@@ -22,7 +22,9 @@ const CardContainer = styled.div`
         return "var(--cargo)";
       case "concurrentRide":
         return "var(--kutsche)";
-      case "directRide":
+      case "onTimeRide":
+        return "var(--onPoint)";
+      case "direct":
         return "var(--direct)";
       default:
         return "var(--black)";
@@ -44,7 +46,7 @@ const Start = styled.div`
         return "40%";
     }
   }};
-  min-width: 110px;
+  min-width: 90px;
   height: 2.5rem;
   padding: 0.25rem 0;
   box-shadow: ${(props) => {
@@ -54,7 +56,7 @@ const Start = styled.div`
   background-color: ${(props) => {
     switch (props.type) {
       case "concurrentRide":
-        return "var(--primary-color)";
+        return "var(--cargo)";
       default:
         return "transparent";
     }
@@ -116,13 +118,13 @@ const Header = styled.div`
 `;
 const LabelContainer = styled.div`
   display: flex;
+  /* justify-content: space-evenly; */
   margin: 0.75rem auto;
   & > :not(:first-child) {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
   & > * {
     font-size: 0.8rem;
-    padding: 0.9rem;
   }
 `;
 const InfoContainer = styled.div`
@@ -132,11 +134,8 @@ const InfoContainer = styled.div`
   align-items: flex-end;
   bottom: 1rem;
   left: 0;
-  padding: 0 1rem;
+  padding: 0rem 0 0.2rem;
 `;
-const Rider = styled.p``;
-const Timer = styled.p``;
-const Info = styled(Badge)``;
 
 export const Card = ({ labels, type, ...props }) => {
   return (
@@ -156,9 +155,12 @@ export const Card = ({ labels, type, ...props }) => {
       </Header>
       <LabelContainer>{labels && labels}</LabelContainer>
       <InfoContainer>
-        <Rider>🚴‍♀️ Elena</Rider>
-        <Timer>11:30</Timer>
-        <Info type="cta" label="Info" />
+        <Badge type="rider" label="Elena">
+          Elena
+        </Badge>
+        <Badge type="timer" label="1:30h" />
+
+        <Badge type="info" label="Info" />
       </InfoContainer>
     </CardContainer>
   );
@@ -167,6 +169,7 @@ export const Card = ({ labels, type, ...props }) => {
 Card.propTypes = {
   type: PropTypes.oneOf(["normal", "daily", "direct", "concurrentRide"]),
   labels: PropTypes.oneOf(),
+  rider: PropTypes.oneOf(),
   /**
    * Button contents
    */

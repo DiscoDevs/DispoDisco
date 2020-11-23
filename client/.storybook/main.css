@@ -17,7 +17,7 @@
   --carnelian: hsla(0, 75%, 40%, 1);
   --header-red: hsla(0, 75%, 40%, 1);
   --red-pigment: hsla(0, 82%, 55%, 1);
-  --direct: hsla(0, 82%, 55%, 1);
+  --direct: var(--header-red);
   --dark-red: hsla(0, 86%, 29%, 1);
   --electric-indigo: hsla(259, 82%, 55%, 1);
   --cargo: hsla(259, 82%, 55%, 1);
