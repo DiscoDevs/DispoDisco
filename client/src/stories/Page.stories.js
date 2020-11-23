@@ -1,4 +1,5 @@
 import React from "react";
+import { MainMenu as MainMenuElement } from "./MainMenu";
 
 import { Rides } from "./Rides";
 
@@ -7,7 +8,7 @@ export default {
   component: Rides,
 };
 
-const PageTemplate = (args) => <Rides {...args} />;
+const PageTemplate = (args) => <MainMenuElement {...args} />;
 const RidesTemplate = (args) => <Rides {...args} />;
 
 export const MainMenu = PageTemplate.bind();

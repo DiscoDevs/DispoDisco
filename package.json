@@ -14,7 +14,7 @@
     "dev": "concurrently \"npm run fakeDB\" \"npm run client\"",
     "build": "cd client && npm run build",
     "lint": "eslint . --ext .js",
-    "start": "cd client && npm run start && npm run storybook"
+    "start": "cd client && concurrently \"npm run start\" \"npm run storybook\""
   },
   "repository": {
     "type": "git",

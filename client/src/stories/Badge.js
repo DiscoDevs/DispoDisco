@@ -46,20 +46,19 @@ const BadgeElement = styled.div`
   padding: ${(props) =>
       props.type === "rider" || props.type === "timer" ? "0.2rem" : "0.7rem"}
     0.8rem;
+
   height: ${(props) =>
     props.type === "rider" || props.type === "timer" ? "30px" : "40px"};
+
   text-align: center;
-
   line-height: ${(props) => props.type === "info" && "1"};
-
   font-weight: ${(props) => (props.type === "timer" ? "normal" : "bold")};
-
   border-radius: var(--border-radius);
+
   box-shadow: ${(props) =>
     props.type === "timer" ? "var(--insetShadow)" : "var(--shadow)"};
 
   color: ${(props) => types[props.type].color || types.default.color};
-
   background-color: ${(props) =>
     types[props.type].background || types.default.background};
 `;
