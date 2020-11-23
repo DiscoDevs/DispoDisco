@@ -47,19 +47,24 @@ const BadgeElement = styled.div`
   box-shadow: var(--shadow);
 `;
 
-export const Badge = ({
-  backgroundColor,
-  color,
-  type,
-  size,
-  label,
-  ...props
-}) => {
-  return (
-    <BadgeElement type={type} {...props}>
-      {label}
-    </BadgeElement>
-  );
+export const Badge = ({ type, label }) => {
+  // let label = "";
+
+  switch (type) {
+    case "cargo":
+      label = "Cargo";
+      break;
+    case "kutsche":
+      label = "Kutsche";
+      break;
+    case "direct":
+      label = "direkt";
+      break;
+    default:
+      break;
+  }
+
+  return <BadgeElement type={type}>{label}</BadgeElement>;
 };
 
 Badge.propTypes = {
@@ -80,6 +85,7 @@ Badge.propTypes = {
    * Button contents
    */
   label: PropTypes.string,
+  cargo: PropTypes.bool,
   /**
    * Button contents
    */

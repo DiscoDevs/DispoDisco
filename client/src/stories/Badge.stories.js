@@ -5,35 +5,38 @@ import { Badge } from "./Badge";
 export default {
   title: "DispoDisco/Badge",
   component: Badge,
-  argTypes: {
-    backgroundColor: { control: "color" },
-  },
 };
 
 const Template = (args) => <Badge {...args} />;
 
+// export const BadgeCargo = <Badge type="cargo" />;
+
 export const Primary = Template.bind({});
 Primary.args = {
-  primary: true,
-  label: "Badge",
+  label: "Standard",
 };
 
-export const Cargo = Template.bind({
-  backgroundColor: "var(--cargo)",
-});
+export const Cargo = Template.bind(0);
 Cargo.args = {
-  label: "Cargo",
+  type: "cargo",
 };
-
-export const Direct = Template.bind({});
-Direct.args = {
-  label: "Direkt",
+export const Kutsche = Template.bind(0);
+Kutsche.args = {
+  type: "kutsche",
+};
+export const Direkt = Template.bind(0);
+Direkt.args = {
   type: "direct",
 };
 
-export const Kutsche = Template.bind({});
-Kutsche.args = {
-  label: "Kutsche",
-  backgroundColor: "var(--kutsche)",
-  color: "var(--black)",
-};
+// export const Direct = Template.bind({});
+// Direct.args = {
+//   label: "Direkt",
+//   type: "direct",
+// };
+
+// export const Kutsche = Template.bind({});
+// Kutsche.args = {
+//   label: "Kutsche",
+//   type: "kutsche",
+// };
