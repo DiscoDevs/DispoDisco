@@ -15,7 +15,7 @@ const types = {
     color: "var(--cargo)",
     label: "Cargo",
   },
-  kutsche: {
+  carriage: {
     color: "var(--black)",
     label: "Kutsche",
   },
@@ -69,7 +69,7 @@ export const Badge = ({ type, label }) => {
 };
 
 Badge.propTypes = {
-  type: PropTypes.oneOf(["direct", "kutsche", "cargo", "cta"]),
+  type: PropTypes.oneOf(["direct", "carriage", "cargo", "onTime"]),
 
   label: PropTypes.string,
 

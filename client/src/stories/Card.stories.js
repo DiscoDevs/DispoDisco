@@ -17,7 +17,7 @@ NormalRide.args = {
     <>
       <Badge type="cargo" label="5-25kg" />
       <Badge type="direct" label="Direct" />
-      <Badge type="kutsche" label="Kutsche" />
+      <Badge type="carriage" label="Kutsche" />
     </>
   ),
 };
@@ -28,7 +28,7 @@ DayRide.args = {
     <>
       <Badge type="cargo" label="5-25kg" />
       <Badge type="direct" label="Direct" />
-      <Badge type="kutsche" label="Kutsche" />
+      <Badge type="carriage" label="Kutsche" />
     </>
   ),
 };
@@ -39,7 +39,7 @@ DirectRide.args = {
     <>
       <Badge type="cargo" label="5-25kg" />
       <Badge type="direct" label="Direct" />
-      <Badge type="kutsche" label="Kutsche" />
+      <Badge type="carriage" label="Kutsche" />
     </>
   ),
 };
@@ -50,7 +50,7 @@ OnTimeRide.args = {
     <>
       <Badge type="cargo" label="5-25kg" />
       <Badge type="direct" label="Direct" />
-      <Badge type="kutsche" label="Kutsche" />
+      <Badge type="carriage" label="Kutsche" />
     </>
   ),
 };
