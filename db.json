@@ -24,7 +24,7 @@
   "plannedTasks": [
     {
       "_ID": 1,
-      "title": "title",
+      "name": "title",
       "concurrency": 0,
       "start-time": "MM-DD-YYYY - 11:30",
       "end-time": "MM-DD-YYYY - 13:00",
@@ -38,7 +38,7 @@
     },
     {
       "_ID": 2,
-      "title": "title",
+      "name": "title",
       "concurrency": 0,
       "start-time": "MM-DD-YYYY - 12:15",
       "end-time": "MM-DD-YYYY - 12:45",
@@ -52,7 +52,7 @@
     },
     {
       "_ID": 3,
-      "title": "title",
+      "name": "title",
       "concurrency": 0,
       "start-time": "MM-DD-YYYY - 09:00",
       "end-time": "MM-DD-YYYY - 10:30",
@@ -68,7 +68,7 @@
   "tasks": [
     {
       "_ID": 1,
-      "title": "title",
+      "name": "title",
       "start-time": "MM-DD-YYYY - 18:00",
       "end-time": "MM-DD-YYYY - 19:30",
       "start": "address",
@@ -81,7 +81,7 @@
     },
     {
       "_ID": 2,
-      "title": "title",
+      "name": "title",
       "start-time": "MM-DD-YYYY - 08:30",
       "end-time": "MM-DD-YYYY - 10:00",
       "start": "address",
@@ -94,7 +94,7 @@
     },
     {
       "_ID": 3,
-      "title": "title",
+      "name": "title",
       "start-time": "MM-DD-YYYY - 14:30",
       "end-time": "MM-DD-YYYY - 16:00",
       "start": "address",

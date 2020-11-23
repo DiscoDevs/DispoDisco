@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const { connectToDb } = require("./lib/database");
-const { getCollection, insertData } = require("./lib/methods");
+const { getCollection, insertData, deleteData } = require("./lib/methods");
 const app = express();
 const port = process.env.PORT || 3600;
 
@@ -27,6 +27,19 @@ app.post("/api/:collectionName", async (req, res) => {
   try {
     await insertData(collectionName, req.body);
     res.send("New Input posted into database.");
+  } catch (e) {
+    console.error(e);
+    res
+      .status(500)
+      .send("An unexpected server error occured. Please try again later.");
+  }
+});
+
+app.delete("/api/:collectionName/:data", async (req, res) => {
+  const { collectionName, data } = req.params;
+  try {
+    deleteData(collectionName, data);
+    res.send("Data deleted.");
   } catch (e) {
     console.error(e);
     res
