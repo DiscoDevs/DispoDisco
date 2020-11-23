@@ -4,16 +4,13 @@ import MirrorBall from "./assets/mirrorBall.svg";
 import FrontCasset from "./assets/frontCassett.svg";
 
 const HeaderElement = styled.header`
-  position: absolute;
-  min-width: 375px;
-  padding: 1rem;
-  height: 200px;
-  background-color: var(--dark-red);
-  color: var(--white);
   position: fixed;
   z-index: 10;
-  text-align: center;
   display: flex;
+  width: 100%;
+  padding: 1rem;
+  /* background: var(--gradient-main); */
+  color: var(--white);
 `;
 
 const Titel = styled.h1`
