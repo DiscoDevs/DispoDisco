@@ -79,11 +79,7 @@ export const HeaderMain = () => (
     <Titel>Fahrt</Titel>
     <Date>27.11.2</Date>
     <Logo src={MirrorBall} alt={"Logo"} />
-    <Infobox>
-      <p>
-        Next: <b>2</b> min 🚀
-      </p>
-    </Infobox>
+    <Infobox>Next: 2 min 🚀</Infobox>
     <Menu>
       <Calendar src={CalendarIcon} alt={"calendar"} />
       <Filter src={FilterIcon} alt={"filter"} />
