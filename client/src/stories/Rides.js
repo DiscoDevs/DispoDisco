@@ -1,11 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { GlobalStyle } from "../App";
-import { Cargo, Direct, Kutsche, Primary } from "./Badge.stories";
+import { Badge } from "./Badge";
+import { Cargo } from "./Badge.stories";
 import { Card } from "./Card";
 import { ConcurrentRide, DayRide, DirectRide } from "./Card.stories";
 
-import { HeaderMenus } from "./Header.stories";
 import { HeaderMain } from "./HeaderMain";
 import "./page.css";
 
@@ -30,9 +30,9 @@ export const Rides = () => (
       <Card
         labels={
           <>
-            <Cargo type="direct" label="5-25kg" />
+            <Badge direct label="5-25kg" />
             <Cargo label="Direct" />
-            <Cargo type="kutsche" label="Kutsche" />
+            <Badge kutsche />
           </>
         }
       />

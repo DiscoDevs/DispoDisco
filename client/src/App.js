@@ -1,5 +1,5 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components/macro";
 
 import { Badge } from "./stories/Badge";
 import { HeaderMain } from "./stories/HeaderMain";

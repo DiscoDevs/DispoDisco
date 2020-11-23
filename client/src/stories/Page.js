@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { GlobalStyle } from "../App";
 import { Cargo, Direct, Kutsche, Primary } from "./Badge.stories";
 import { Card } from "./Card";
