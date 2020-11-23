@@ -7,7 +7,6 @@ import { Card } from "./Card";
 import { ConcurrentRide, DayRide, DirectRide } from "./Card.stories";
 
 import { HeaderMain } from "./HeaderMain";
-import "./page.css";
 
 const Wrapper = styled.div`
   position: relative;
@@ -30,9 +29,9 @@ export const Rides = () => (
       <Card
         labels={
           <>
-            <Badge direct label="5-25kg" />
-            <Cargo label="Direct" />
-            <Badge kutsche />
+            <Badge type="cargo" label="5-25kg" />
+            <Badge type="direkt" label="Direct" />
+            <Badge type="kutsche" label="Kutsche" />
           </>
         }
       />
@@ -40,9 +39,9 @@ export const Rides = () => (
         type="dayRide"
         labels={
           <>
-            <Cargo type="direct" label="5-25kg" />
-            <Cargo label="Direct" />
-            <Cargo type="kutsche" label="Kutsche" />
+            <Badge type="cargo" label="5-25kg" />
+            <Badge type="direkt" label="Direct" />
+            <Badge type="kutsche" label="Kutsche" />
           </>
         }
       />
@@ -50,9 +49,9 @@ export const Rides = () => (
         type="directRide"
         labels={
           <>
-            <Cargo type="direct" label="5-25kg" />
-            <Cargo label="Direct" />
-            <Cargo type="kutsche" label="Kutsche" />
+            <Badge type="cargo" label="5-25kg" />
+            <Badge type="direkt" label="Direct" />
+            <Badge type="kutsche" label="Kutsche" />
           </>
         }
       />
