@@ -24,7 +24,7 @@ const types = {
     label: "Direkt",
   },
   termin: {
-    color: "var(--onPoint)",
+    color: "var(--onTime)",
     label: "Termin",
   },
   rider: {
