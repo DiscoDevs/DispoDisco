@@ -164,11 +164,8 @@ export const Card = ({ labels, type, ...props }) => {
       </Header>
       <LabelContainer>{labels && labels}</LabelContainer>
       <InfoContainer>
-        <Badge type="rider" label="Elena">
-          Elena
-        </Badge>
+        <Badge type="rider" label="Elena" />
         <Badge type="timer" label="1:30h" />
-
         <Badge type="info" label="Info" />
       </InfoContainer>
     </CardContainer>
