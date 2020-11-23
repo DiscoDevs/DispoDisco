@@ -23,7 +23,8 @@ const GlobalStyle = createGlobalStyle`
     /* CSS HSL */
     --white: hsla(0, 0%, 94%, 1);
     --black: hsla(0, 0%, 14%, 1);
-    --black50: hsla(0, 0%, 14%, 0.5);
+    --black50: hsla(0, 0%, 14%, 0.4);
+    --black30: hsla(0, 0%, 14%, 0.15);
 
     --primary: var(--green-crayola);
     --carriage: hsla(48, 82%, 55%, 1);
@@ -36,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
 
     --border-radius: 3px;
     --shadow: 0 3px 6px var(--black50);
-    --insetShadow: inset 2px 0 1px var(--black50), inset -2px 0 1px var(--black50);
+    --insetShadow: inset 2px 0 1px var(--black30),inset 0 2px 1px var(--black30);
 
     --gradient-main: linear-gradient(0deg, rgba(106,48,235,1) 0%, rgba(109,16,126,1) 59%, rgba(106,48,235,1) 100%);
     --gradient-dark: linear-gradient(0deg, rgba(40,18,89,1) 0%, rgba(109,16,126,1) 59%, rgba(20,9,43,1) 100%);
@@ -60,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   #root {
-    min-height: 100vh;
+    /* min-height: 100vh; */
   }
 
   body {
