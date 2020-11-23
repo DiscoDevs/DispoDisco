@@ -5,100 +5,80 @@ import styled from "styled-components/macro";
 /**
  * Primary UI component for user interaction
  */
+const types = {
+  default: {
+    color: "var(--black)",
+    background: "var(--kutsche)",
+    label: "Standard",
+  },
+  cargo: {
+    color: "var(--cargo)",
+    label: "Cargo",
+  },
+  kutsche: {
+    color: "var(--black)",
+    label: "Kutsche",
+  },
+  direkt: {
+    color: "var(--direct)",
+    label: "Direkt",
+  },
+  termin: {
+    color: "var(--onPoint)",
+    label: "Termin",
+  },
+  rider: {
+    color: "var(--white)",
+    background: "var(--primary-color)",
+  },
+  timer: {
+    color: "var(--black)",
+    background: "var(--white)",
+  },
+  info: {
+    color: "var(--black)",
+    background: "var(--white)",
+    label: "Info",
+  },
+};
 
 const BadgeElement = styled.div`
-  padding: 0.7rem 1rem;
-  color: ${(props) => (props.color ? props.color : "var(--white)")};
-  color: ${(props) => {
-    const type = props.type;
-    switch (type) {
-      case "kutsche":
-      case "cta":
-        return "var(--black)";
-      default:
-        return "var(--white)";
-    }
-  }};
-
-  background-color: ${(props) => {
-    const type = props.type;
-    switch (type) {
-      case "cargo":
-        return "var(--cargo)";
-      case "transparent":
-        return "transparent";
-      case "direct":
-        return "var(--direct)";
-      case "kutsche":
-        return "var(--kutsche)";
-      case "cta":
-        return "var(--white)";
-      default:
-        return "var(--primary-color)";
-    }
-  }};
-
+  padding: ${(props) =>
+      props.type === "rider" || props.type === "timer" || props.type === "info"
+        ? "0.2rem"
+        : "0.7rem"}
+    1rem;
+  height: ${(props) =>
+    props.type === "info" || props.type === "rider" || props.type === "timer"
+      ? "30px"
+      : "auto"};
   text-align: center;
-  font-weight: bold;
-
-  border-radius: 50%;
+  line-height: 1.5;
+  font-weight: ${(props) => props.type !== "timer" && " bold"};
   border-radius: var(--border-radius);
+  box-shadow: ${(props) =>
+    props.type === "timer" ? "var(--insetShadow)" : "var(--shadow)"};
 
-  box-shadow: var(--shadow);
+  color: ${(props) => types[props.type].color || types.default.color};
+
+  background-color: ${(props) =>
+    types[props.type].background || types.default.background};
 `;
 
 export const Badge = ({ type, label }) => {
-  // let label = "";
-
-  switch (type) {
-    case "cargo":
-      label = "Cargo";
-      break;
-    case "kutsche":
-      label = "Kutsche";
-      break;
-    case "direct":
-      label = "direkt";
-      break;
-    default:
-      break;
-  }
+  label = types[type].label || label;
 
   return <BadgeElement type={type}>{label}</BadgeElement>;
 };
 
 Badge.propTypes = {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary: PropTypes.bool,
-  /**
-   * What background color to use
-   */
-  backgroundColor: PropTypes.string,
-  /**
-   * How large should the button be?
-   */
-  size: PropTypes.oneOf(["small", "medium", "large"]),
   type: PropTypes.oneOf(["direct", "kutsche", "cargo", "cta"]),
-  /**
-   * Button contents
-   */
+
   label: PropTypes.string,
-  cargo: PropTypes.bool,
-  /**
-   * Button contents
-   */
-  color: PropTypes.string,
-  /**
-   * Optional click handler
-   */
+
   onClick: PropTypes.func,
 };
 
 Badge.defaultProps = {
-  backgroundColor: null,
-  primary: false,
-  size: "medium",
-  onClick: undefined,
+  type: "default",
 };

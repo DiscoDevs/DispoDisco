@@ -9,11 +9,10 @@ export default {
 
 const Template = (args) => <Badge {...args} />;
 
-// export const BadgeCargo = <Badge type="cargo" />;
-
 export const Primary = Template.bind({});
 Primary.args = {
   label: "Standard",
+  type: "default",
 };
 
 export const Cargo = Template.bind(0);
@@ -26,17 +25,23 @@ Kutsche.args = {
 };
 export const Direkt = Template.bind(0);
 Direkt.args = {
-  type: "direct",
+  type: "direkt",
 };
-
-// export const Direct = Template.bind({});
-// Direct.args = {
-//   label: "Direkt",
-//   type: "direct",
-// };
-
-// export const Kutsche = Template.bind({});
-// Kutsche.args = {
-//   label: "Kutsche",
-//   type: "kutsche",
-// };
+export const Termin = Template.bind(0);
+Termin.args = {
+  type: "termin",
+};
+export const Rider = Template.bind(0);
+Rider.args = {
+  type: "rider",
+  label: "🚴‍♀️ Elena",
+};
+export const Timer = Template.bind(0);
+Timer.args = {
+  type: "timer",
+  label: "1:30h",
+};
+export const Info = Template.bind(0);
+Info.args = {
+  type: "info",
+};

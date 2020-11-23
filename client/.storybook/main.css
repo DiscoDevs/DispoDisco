@@ -9,6 +9,7 @@
 
   --white: hsla(0, 0%, 94%, 1);
   --orange-crayola: hsla(17, 98%, 59%, 1);
+  --onPoint: hsla(17, 98%, 59%, 1);
   --shocking-pink: hsla(312, 82%, 55%, 1);
   --cyber-yellow: hsla(50, 99%, 50%, 1);
   --jonquil: hsla(48, 82%, 55%, 1);
@@ -23,6 +24,8 @@
 
   --border-radius: 3px;
   --shadow: 0 3px 6px var(--black50);
+  --insetShadow: inset 2px 0 1px var(--black50), inset -2px 0 1px var(--black50),
+    inset 0 2px 1px var(--black50), inset 0 -2px 1px var(--black50);
 }
 *,
 *::after,
