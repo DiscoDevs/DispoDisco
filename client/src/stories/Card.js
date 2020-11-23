@@ -8,6 +8,13 @@ import { Badge } from "./Badge";
  * Primary UI component for user interaction
  */
 
+const types = {
+  dayRide: "var(--cargo)",
+  concurrentRide: "var(--kutsche)",
+  onTimeRide: "var(--onPoint)",
+  direct: "var(--direct)",
+};
+
 const CardContainer = styled.div`
   position: relative;
   min-width: 300px;
@@ -16,20 +23,7 @@ const CardContainer = styled.div`
   font-weight: bold;
   color: var(--white);
 
-  background-color: ${(props) => {
-    switch (props.type) {
-      case "dayRide":
-        return "var(--cargo)";
-      case "concurrentRide":
-        return "var(--kutsche)";
-      case "onTimeRide":
-        return "var(--onPoint)";
-      case "direct":
-        return "var(--direct)";
-      default:
-        return "var(--black)";
-    }
-  }};
+  background-color: ${(props) => types[props.type] || "var(--black)"};
   border-radius: var(--border-radius);
 `;
 
@@ -38,23 +32,9 @@ const Start = styled.div`
   position: relative;
   color: var(--white);
   border-radius: var(-border-radius);
-  width: ${(props) => {
-    switch (props.type) {
-      case "concurrentRide":
-        return "80%";
-      default:
-        return "40%";
-    }
-  }};
+  width: ${(props) => (props.type === "concurrentRide" ? "80%" : "40%")};
   font-family: ${(props) => props.type === "concurrentRide" && "Goldman"};
-  width: ${(props) => {
-    switch (props.type) {
-      case "concurrentRide":
-        return "80%";
-      default:
-        return "40%";
-    }
-  }};
+  width: ${(props) => (props.type === "concurrentRide" ? "80%" : "40%")};
   min-width: 90px;
   height: 2.5rem;
   padding: 0.25rem 0;
@@ -62,14 +42,8 @@ const Start = styled.div`
     return props.type === "concurrentRide" ? "var(--shadow)" : "none";
   }};
 
-  background-color: ${(props) => {
-    switch (props.type) {
-      case "concurrentRide":
-        return "var(--cargo)";
-      default:
-        return "transparent";
-    }
-  }};
+  background-color: ${(props) =>
+    props.type === "concurrentRide" ? "var(--cargo)" : "transparent"};
 
   & p {
     position: absolute;
