@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
-import MirrorBall from "./assets/mirrorBall.svg";
-import FrontCasset from "./assets/frontCassett.svg";
+import MirrorBall from "../assets/mirrorBall.svg";
+import FrontCasset from "../assets/frontCassett.svg";
 
 const HeaderElement = styled.header`
   position: fixed;

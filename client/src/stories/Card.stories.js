@@ -1,8 +1,7 @@
 import React from "react";
-import { Badge } from "./Badge";
-// import { Cargo as Badge } from "./Badge.stories";
+import { Badge } from "../components/Badge";
 
-import { Card } from "./Card";
+import { Card } from "../components/Card";
 
 export default {
   title: "DispoDisco/Cards",

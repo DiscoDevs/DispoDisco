@@ -1,7 +1,7 @@
 import React from "react";
 
-import { HeaderMain } from "./HeaderMain";
-import { HeaderMenu } from "./HeaderMenu";
+import { HeaderMain } from "../components/HeaderMain";
+import { HeaderMenu } from "../components/HeaderMenu";
 
 export default {
   title: "DispoDisco/Header",

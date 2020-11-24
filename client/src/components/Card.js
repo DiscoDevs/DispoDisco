@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-import ArrowImg from "./assets/arrow.svg";
+import ArrowImg from "../assets/arrow.svg";
 import { Badge } from "./Badge";
 
 /**
@@ -150,7 +150,7 @@ Card.propTypes = {
     "concurrentRide",
     "onTimeRide",
   ]),
-  labels: PropTypes.string,
+  labels: PropTypes.object,
   rider: PropTypes.string,
   onClick: PropTypes.func,
 };
