@@ -1,28 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-import ButtonPlus from "./assets/buttonPlus.svg";
+import ButtonPlusImg from "./assets/buttonPlus.svg";
 /**
  * Primary UI component for user interaction
  */
 
 const ButtonElement = styled.button`
   border-radius: 50%;
-  height: 50px;
   background: none;
   border: none;
+  & > img {
+    height: 50px;
+  }
 `;
 
-export const PlusButton = ({ label }) => {
+export const ButtonPlus = ({ label }) => {
   return (
     <ButtonElement>
-      <img src={ButtonPlus} alt="Add Button" />
+      <img src={ButtonPlusImg} alt="Add Button" />
       {label}
     </ButtonElement>
   );
 };
 
-PlusButton.propTypes = {
+ButtonPlus.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
 };
