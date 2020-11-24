@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import GlobalStyle from "../globalStyles";
+import GlobalStyle from "../GlobalStyles";
 import { HeaderMenu } from "./HeaderMenu";
 
 const PageWrapper = styled.div`

@@ -17,8 +17,12 @@ const types = {
 
 const CardContainer = styled.div`
   position: relative;
+<<<<<<< HEAD
   max-width: 350px;
   margin: auto;
+=======
+  min-width: 300px;
+>>>>>>> AddComponents
   padding: 1rem;
   text-align: center;
   font-weight: bold;
@@ -37,7 +41,10 @@ const Start = styled.div`
   min-width: 90px;
   height: 2.5rem;
   padding: 0.25rem 0;
+<<<<<<< HEAD
   border-radius: 3px;
+=======
+>>>>>>> AddComponents
   box-shadow: ${(props) => {
     return props.type === "concurrentRide" ? "var(--shadow)" : "none";
   }};
