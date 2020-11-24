@@ -83,6 +83,11 @@ app.patch("/api/:collectionName/:dataName", async (req, res) => {
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
+app.use(
+  "/storybook",
+  express.static(path.join(__dirname, "client/storybook-static"))
+);
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
