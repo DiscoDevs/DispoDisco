@@ -11,14 +11,17 @@ const LogoContainer = styled.div`
 const Logo = styled.img`
   animation-duration: 3s;
   animation-name: slidein;
+  animation-transition: ease-out;
 
   @keyframes slidein {
     from {
       margin-top: 60%;
+      transform: rotate(720deg);
     }
 
     to {
       margin-top: 0;
+      transform: rotate(0deg);
     }
   }
 `;
