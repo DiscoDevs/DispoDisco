@@ -1,21 +1,15 @@
-import React from 'react';
-
-import { Page } from './Page';
-import * as HeaderStories from './Header.stories';
+import React from "react";
+import { MainMenu } from "./MainMenu";
+import { Rides } from "./Rides";
 
 export default {
-  title: 'Example/Page',
-  component: Page,
+  title: "DispoDisco/Page",
+  component: MainMenu,
 };
 
-const Template = (args) => <Page {...args} />;
+const MainTemplate = (args) => <MainMenu {...args} />;
+const RidesTemplate = (args) => <Rides {...args} />;
 
-export const LoggedIn = Template.bind({});
-LoggedIn.args = {
-  ...HeaderStories.LoggedIn.args,
-};
+export const MainMenuPage = MainTemplate.bind({});
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {
-  ...HeaderStories.LoggedOut.args,
-};
+export const RidesPage = RidesTemplate.bind({});
