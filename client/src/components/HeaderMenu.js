@@ -9,7 +9,7 @@ const HeaderElement = styled.header`
   display: flex;
   width: 100%;
   padding: 1rem;
-  color: var(--white);
+  color: var(--text-primary);
 `;
 
 const Titel = styled.h1`
@@ -39,7 +39,7 @@ const Logo = styled.img`
   left: 50%;
   height: 160px;
   margin-top: -50px;
-  filter: drop-shadow(0px 3px 6px var(--black));
+  filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
 export const HeaderMenu = () => (
   <HeaderElement>
