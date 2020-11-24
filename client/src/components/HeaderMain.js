@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components/macro";
-import MirrorBall from "./assets/mirrorBall.svg";
-import Backward from "./assets/backward.svg";
-import CalendarIcon from "./assets/calendar.svg";
-import FilterIcon from "./assets/filter.svg";
+import MirrorBall from "../assets/mirrorBall.svg";
+import Backward from "../assets/backward.svg";
+import CalendarIcon from "../assets/calendar.svg";
+import FilterIcon from "../assets/filter.svg";
 
 const HeaderElement = styled.header`
   top: 0;

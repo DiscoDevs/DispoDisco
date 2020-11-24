@@ -1,6 +1,6 @@
 import React from "react";
-import { MainMenu } from "./MainMenu";
-import { Rides } from "./Rides";
+import { MainMenu } from "../components/MainMenu";
+import { Rides } from "../components/Rides";
 
 export default {
   title: "DispoDisco/Page",

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-import ButtonPlusImg from "./assets/buttonPlus.svg";
+import ButtonPlusImg from "../assets/buttonPlus.svg";
 /**
  * Primary UI component for user interaction
  */

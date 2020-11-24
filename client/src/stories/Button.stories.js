@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonPlus } from "./ButtonPlus";
+import { ButtonPlus } from "../components/ButtonPlus";
 export default {
   title: "DispoDisco/Button",
   component: ButtonPlus,
