@@ -1,36 +1,13 @@
-import React from 'react';
-
-import { Button } from './Button';
-
+import React from "react";
+import { ButtonPlusImg } from "./ButtonPlus";
 export default {
-  title: 'Example/Button',
-  component: Button,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  title: "DispoDisco/Button",
+  component: ButtonPlusImg,
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <ButtonPlusImg {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  label: 'Button',
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
+export const PlusButton = Template.bind({});
+ButtonPlusImg.args = {
+  type: "round",
 };
