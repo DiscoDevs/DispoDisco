@@ -39,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
     --insetShadow: inset 2px 0 1px var(--black50), inset -2px 0 1px var(--black50);
 
     --gradient-main: linear-gradient(0deg, rgba(106,48,235,1) 0%, rgba(109,16,126,1) 59%, rgba(106,48,235,1) 100%);
+    --gradient-dark:linear-gradient(0deg, rgba(40,18,89,1) 0%, rgba(109,16,126,1) 59%, rgba(20,9,43,1) 100%);;
 
 
     --green-crayola: hsla(158, 68%, 42%, 1);
@@ -60,8 +61,7 @@ const GlobalStyle = createGlobalStyle`
   }
   #root {
     min-height: 100vh;
-    display: grid;
-    place-content: center;
+
   }
 
   body {
