@@ -1,5 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+<<<<<<< HEAD
+
+import { Button } from "./Button";
+=======
+>>>>>>> AddComponents
 
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
   <header>
