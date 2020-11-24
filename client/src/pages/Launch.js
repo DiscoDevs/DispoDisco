@@ -58,7 +58,7 @@ const Logo = styled.img`
   }
 `;
 
-export default function Launch() {
+export const Launch = () => {
   return (
     <Wrapper>
       <Title>DispoDisco</Title>
@@ -67,4 +67,4 @@ export default function Launch() {
       </LogoContainer>
     </Wrapper>
   );
-}
+};
