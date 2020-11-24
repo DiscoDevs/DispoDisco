@@ -38,6 +38,9 @@ const GlobalStyle = createGlobalStyle`
     --shadow: 0 3px 6px var(--black50);
     --insetShadow: inset 2px 0 1px var(--black50), inset -2px 0 1px var(--black50);
 
+    --gradient-main: linear-gradient(0deg, rgba(106,48,235,1) 0%, rgba(109,16,126,1) 59%, rgba(106,48,235,1) 100%);
+
+
     --green-crayola: hsla(158, 68%, 42%, 1);
     --eerie-black: hsla(0, 0%, 14%, 1);
     --orange-crayola: hsla(17, 98%, 59%, 1);

@@ -1,18 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import { Header } from './Header';
+import { HeaderMain } from "./HeaderMain";
+import { HeaderMenu } from "./HeaderMenu";
 
 export default {
-  title: 'Example/Header',
-  component: Header,
+  title: "DispoDisco/Header",
+  component: HeaderMain,
 };
 
-const Template = (args) => <Header {...args} />;
+const MenuTemplate = (args) => <HeaderMenu {...args} />;
+const MainTemplate = (args) => <HeaderMain {...args} />;
 
-export const LoggedIn = Template.bind({});
-LoggedIn.args = {
-  user: {},
-};
+export const HeaderMenus = MenuTemplate.bind({});
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+export const HeaderMains = MainTemplate.bind({});
