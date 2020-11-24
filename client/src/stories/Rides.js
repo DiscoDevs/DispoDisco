@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import GlobalStyle from "../globalStyles";
+import GlobalStyle from "../GlobalStyles";
 import { Badge } from "./Badge";
 import { Card } from "./Card";
 import { HeaderMain } from "./HeaderMain";

@@ -17,7 +17,7 @@ const HeaderElement = styled.header`
   text-align: center;
   display: grid;
   align-content: center;
-  grid-template-columns: 10% 30% 2s0% 30% 10%;
+  grid-template-columns: 10% 30% 20% 30% 10%;
   grid-template-rows: 50% 50%;
   grid-template-areas:
     "back title logo date date"
