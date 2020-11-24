@@ -20,7 +20,7 @@ const Title = styled.h1`
 
   animation-duration: 3s;
   animation-name: slideleft;
-  animation-transition: ease-out;
+  transition: ease-out;
 
   @keyframes slideleft {
     from {
@@ -43,7 +43,7 @@ const LogoContainer = styled.div`
 const Logo = styled.img`
   animation-duration: 3s;
   animation-name: slidein;
-  animation-transition: ease-out;
+  transition: ease-out;
 
   @keyframes slidein {
     from {
