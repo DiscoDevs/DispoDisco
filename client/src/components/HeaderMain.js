@@ -12,8 +12,8 @@ const HeaderElement = styled.header`
   width: 100%;
   position: fixed;
   z-index: 10;
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--text-secondary);
+  color: var(--text-primary);
   text-align: center;
   display: grid;
   align-content: center;
@@ -56,7 +56,7 @@ const Menu = styled.div`
 const Logo = styled.img`
   height: 56px;
   margin-top: -0.7em;
-  filter: drop-shadow(0px 3px 6px var(--black));
+  filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
 
 const Calendar = styled(Back)`

@@ -23,15 +23,15 @@ const CardContainer = styled.div`
   padding: 1rem;
   text-align: center;
   font-weight: bold;
-  color: var(--white);
-  background-color: ${(props) => types[props.type] || "var(--black)"};
+  color: var(--text-primary);
+  background-color: ${(props) => types[props.type] || "var(--text-secondary)"};
   border-radius: var(--border-radius);
 `;
 
 const Start = styled.div`
   overflow: hidden;
   position: relative;
-  color: var(--white);
+  color: var(--text-primary);
   border-radius: var(-border-radius);
   font-family: ${(props) => props.type === "concurrentRide" && "Goldman"};
   width: ${(props) => (props.type === "concurrentRide" ? "60%" : "40%")};
