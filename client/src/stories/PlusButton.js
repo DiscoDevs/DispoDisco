@@ -6,27 +6,22 @@ import ButtonPlus from "./assets/buttonPlus.svg";
  * Primary UI component for user interaction
  */
 
-const ButtonElement = styled.div`
+const ButtonElement = styled.button`
   border-radius: 50%;
+  background: none;
+  border: none;
 `;
 
-const ButtonImage = styled.img``;
-
-export const Button = ({ label }) => {
+export const PlusButton = ({ label }) => {
   return (
     <ButtonElement>
-      <ButtonImage src={ButtonPlus} />
+      <img src={ButtonPlus} alt="Add Button" />
       {label}
     </ButtonElement>
   );
 };
 
-Button.propTypes = {
-  // type: PropTypes.oneOf(["round"]),
-
+PlusButton.propTypes = {
   label: PropTypes.string,
-
   onClick: PropTypes.func,
 };
-
-Button.defaultProps = {};

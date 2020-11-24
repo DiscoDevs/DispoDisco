@@ -1,13 +1,13 @@
 import React from "react";
-import { Button } from "./Button";
+import { PlusButton } from "./PlusButton";
 export default {
   title: "DispoDisco/Button",
-  component: Button,
+  component: PlusButton,
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <PlusButton {...args} />;
 
-export const PlusButton = Template.bind({});
+export const PlusButtons = Template.bind({});
 PlusButton.args = {
   type: "round",
 };
