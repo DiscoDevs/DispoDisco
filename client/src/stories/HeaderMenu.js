@@ -43,7 +43,6 @@ const Logo = styled.img`
 `;
 export const HeaderMenu = () => (
   <HeaderElement>
-    <Logo src={MirrorBall} alt={"Logo"} />
     <Titel>
       <p>
         Disp
@@ -51,5 +50,6 @@ export const HeaderMenu = () => (
       </p>
       <p>Disco</p>
     </Titel>
+    <Logo src={MirrorBall} alt={"Logo"} />
   </HeaderElement>
 );

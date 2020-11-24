@@ -7,11 +7,13 @@ import { Card } from "./Card";
 import { HeaderMain } from "./HeaderMain";
 
 const PageWrapper = styled.div`
+  position: fixed;
+  overflow: scroll;
   height: 100%;
   width: 100%;
   background: var(--gradient-dark);
   & > *:not(:first-child) {
-    margin: 1rem;
+    margin: 1rem auto;
   }
   & > :nth-child(2) {
     margin-top: 150px;

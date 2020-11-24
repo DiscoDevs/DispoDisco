@@ -18,6 +18,8 @@ const types = {
 const CardContainer = styled.div`
   position: relative;
   min-width: 300px;
+  max-width: 350px;
+  margin: auto;
   padding: 1rem;
   text-align: center;
   font-weight: bold;
@@ -36,6 +38,7 @@ const Start = styled.div`
   min-width: 90px;
   height: 2.5rem;
   padding: 0.25rem 0;
+  border-radius: 3px;
   box-shadow: ${(props) => {
     return props.type === "concurrentRide" ? "var(--shadow)" : "none";
   }};
@@ -131,7 +134,7 @@ export const Card = ({ labels, type, ...props }) => {
       </Header>
       <LabelContainer>{labels && labels}</LabelContainer>
       <InfoContainer>
-        <Badge type="rider" label="Elena" />
+        <Badge type="rider" label="🚴‍♀️ Elena" />
         <Badge type="timer" label="1:30h" />
         <Badge type="info" label="Info" />
       </InfoContainer>
