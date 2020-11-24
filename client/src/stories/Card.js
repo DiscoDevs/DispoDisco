@@ -31,9 +31,8 @@ const Start = styled.div`
   position: relative;
   color: var(--white);
   border-radius: var(-border-radius);
-  width: ${(props) => (props.type === "concurrentRide" ? "80%" : "40%")};
   font-family: ${(props) => props.type === "concurrentRide" && "Goldman"};
-  width: ${(props) => (props.type === "concurrentRide" ? "80%" : "40%")};
+  width: ${(props) => (props.type === "concurrentRide" ? "60%" : "40%")};
   min-width: 90px;
   height: 2.5rem;
   padding: 0.25rem 0;

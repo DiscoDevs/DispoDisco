@@ -9,7 +9,6 @@ const HeaderElement = styled.header`
   display: flex;
   width: 100%;
   padding: 1rem;
-  /* background: var(--gradient-main); */
   color: var(--white);
 `;
 

@@ -17,7 +17,7 @@ const HeaderElement = styled.header`
   text-align: center;
   display: grid;
   align-content: center;
-  grid-template-columns: 10% 30% 2s0% 30% 10%;
+  grid-template-columns: 10% 30% 20% 30% 10%;
   grid-template-rows: 50% 50%;
   grid-template-areas:
     "back title logo date date"
@@ -79,11 +79,7 @@ export const HeaderMain = () => (
     <Titel>Fahrt</Titel>
     <Date>27.11.2</Date>
     <Logo src={MirrorBall} alt={"Logo"} />
-    <Infobox>
-      <p>
-        Next: <b>2</b> min 🚀
-      </p>
-    </Infobox>
+    <Infobox>Next: 2 min 🚀</Infobox>
     <Menu>
       <Calendar src={CalendarIcon} alt={"calendar"} />
       <Filter src={FilterIcon} alt={"filter"} />

@@ -21,7 +21,7 @@ Cargo.args = {
 };
 export const Kutsche = Template.bind(0);
 Kutsche.args = {
-  type: "kutsche",
+  type: "carriage",
 };
 export const Direkt = Template.bind(0);
 Direkt.args = {

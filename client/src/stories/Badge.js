@@ -15,7 +15,7 @@ const types = {
     color: "var(--cargo)",
     label: "Cargo",
   },
-  kutsche: {
+  carriage: {
     color: "var(--black)",
     label: "Kutsche",
   },
