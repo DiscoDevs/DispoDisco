@@ -69,7 +69,14 @@ export const Badge = ({ type, label }) => {
 };
 
 Badge.propTypes = {
-  type: PropTypes.oneOf(["direct", "kutsche", "cargo", "cta"]),
+  type: PropTypes.oneOf([
+    "direct",
+    "carriage",
+    "cargo",
+    "onTime",
+    "timer",
+    "info",
+  ]),
 
   label: PropTypes.string,
 
