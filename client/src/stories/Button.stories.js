@@ -7,7 +7,7 @@ export default {
 
 const Template = (args) => <ButtonPlus {...args} />;
 
-export const PlusButtons = Template.bind({});
+export const PlusButton = Template.bind({});
 ButtonPlus.args = {
   type: "round",
 };
