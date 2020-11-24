@@ -12,4 +12,5 @@ const Template = (args) => <Input {...args} />;
 export const Default = Template.bind(0);
 Default.args = {
   type: "text",
+  placeholder: "default",
 };

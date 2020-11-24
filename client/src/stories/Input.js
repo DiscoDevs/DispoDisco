@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components/macro";
+import PropTypes from "prop-types";
 
-export function Input() {
+export function Input({ placeholder, type }) {
   const Component = styled.input`
     padding: 0.5rem 1rem;
     ::placeholder {
@@ -11,7 +12,12 @@ export function Input() {
 
   return (
     <form>
-      <Component type="text" placeholder="placeholder" />
+      <Component type={type} placeholder={placeholder} />
     </form>
   );
 }
+
+Input.propTypes = {
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+};
