@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import GlobalStyle from "../GlobalStyles";
-import { HeaderMenu } from "./HeaderMenu";
+import { HeaderMenu } from "../components/HeaderMenu";
 
 const PageWrapper = styled.div`
   height: 100%;

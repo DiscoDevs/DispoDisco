@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import GlobalStyle from "../GlobalStyles";
-import { Badge } from "./Badge";
-import { Card } from "./Card";
-import { HeaderMain } from "./HeaderMain";
+import { Badge } from "../components/Badge";
+import { Card } from "../components/Card";
+import { HeaderMain } from "../components/HeaderMain";
 
 const PageWrapper = styled.div`
   position: fixed;
