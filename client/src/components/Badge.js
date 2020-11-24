@@ -7,7 +7,7 @@ import styled from "styled-components/macro";
  */
 const types = {
   default: {
-    color: "var(--black)",
+    color: "var(--text-secondary)",
     background: "var(--carriage)",
     label: "Standard",
   },
@@ -16,7 +16,7 @@ const types = {
     label: "Cargo",
   },
   carriage: {
-    color: "var(--black)",
+    color: "var(--text-secondary)",
     label: "Kutsche",
   },
   direct: {
@@ -28,16 +28,16 @@ const types = {
     label: "Termin",
   },
   rider: {
-    color: "var(--white)",
+    color: "var(--text-primary)",
     background: "var(--primary)",
   },
   timer: {
-    color: "var(--black)",
-    background: "var(--white)",
+    color: "var(--text-secondary)",
+    background: "var(--text-primary)",
   },
   info: {
-    color: "var(--black)",
-    background: "var(--white)",
+    color: "var(--text-secondary)",
+    background: "var(--text-primary)",
     label: "Info",
   },
 };

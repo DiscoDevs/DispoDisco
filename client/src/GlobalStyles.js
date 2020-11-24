@@ -21,10 +21,10 @@ const GlobalStyle = createGlobalStyle`
   }
   :root {
     /* CSS HSL */
-    --white: hsla(0, 0%, 94%, 1);
-    --black: hsla(0, 0%, 14%, 1);
-    --black50: hsla(0, 0%, 14%, 0.5);
-    --black30: hsla(0, 0%, 14%, 0.15);
+    --text-primary: hsla(0, 0%, 94%, 1);
+    --text-secondary: hsla(0, 0%, 14%, 1);
+    --text-secondary50: hsla(0, 0%, 14%, 0.5);
+    --text-secondary30: hsla(0, 0%, 14%, 0.15);
     --primary: var(--green-crayola);
     --carriage: hsla(48, 82%, 55%, 1);
     --direct: var(--dark-red);
@@ -35,8 +35,8 @@ const GlobalStyle = createGlobalStyle`
     --dark-red: hsla(0, 86%, 29%, 1);
 
     --border-radius: 3px;
-    --shadow: 0 3px 6px var(--black50);
-    --insetShadow: inset 2px 0 1px var(--black50), inset -2px 0 1px var(--black50);
+    --shadow: 0 3px 6px var(--text-secondary50);
+    --insetShadow: inset 2px 0 1px var(--text-secondary50), inset -2px 0 1px var(--text-secondary50);
 
     --gradient-main: linear-gradient(0deg, rgba(106,48,235,1) 0%, rgba(109,16,126,1) 59%, rgba(106,48,235,1) 100%);
     --gradient-dark:linear-gradient(0deg, rgba(40,18,89,1) 0%, rgba(109,16,126,1) 59%, rgba(20,9,43,1) 100%);;

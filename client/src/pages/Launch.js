@@ -16,7 +16,7 @@ const Title = styled.h1`
   place-self: end center;
   padding-bottom: 2rem;
   font-size: 3rem;
-  color: var(--white);
+  color: var(--text-primary);
 
   animation-duration: 3s;
   animation-name: slideleft;
