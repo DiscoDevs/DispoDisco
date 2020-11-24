@@ -2,13 +2,13 @@ import { createGlobalStyle } from "styled-components";
 // import GoogleFonts from "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap";
 
 const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family: "Goldman";
-  src: url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap") format('opentype');
-}
-@font-face {
-  font-family: "Open Sans";
-  src: url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap") format('opentype');
+    @font-face {
+      font-family: "Goldman";
+      src: url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap") format('woff2');
+    }
+    @font-face {
+      font-family: "Open Sans";
+      src: url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap") format('woff2');
 }
 
   .sbWrapper {

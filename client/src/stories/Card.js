@@ -143,8 +143,14 @@ export const Card = ({ labels, type, ...props }) => {
 };
 
 Card.propTypes = {
-  type: PropTypes.oneOf(["normal", "daily", "direct", "concurrentRide"]),
-  labels: PropTypes.oneOf(),
-  rider: PropTypes.oneOf(),
+  type: PropTypes.oneOf([
+    "normal",
+    "dayRide",
+    "direct",
+    "concurrentRide",
+    "onTimeRide",
+  ]),
+  labels: PropTypes.string,
+  rider: PropTypes.string,
   onClick: PropTypes.func,
 };

@@ -76,6 +76,7 @@ Badge.propTypes = {
     "onTime",
     "timer",
     "info",
+    "rider",
   ]),
 
   label: PropTypes.string,
