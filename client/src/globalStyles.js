@@ -60,8 +60,6 @@ const GlobalStyle = createGlobalStyle`
   }
   #root {
     min-height: 100vh;
-    display: grid;
-    place-content: center;
   }
 
   body {
