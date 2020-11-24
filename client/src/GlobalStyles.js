@@ -66,6 +66,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: "Open Sans", sans-serif;
+    background: var(--gradient-dark);
   }
 
   h1,
