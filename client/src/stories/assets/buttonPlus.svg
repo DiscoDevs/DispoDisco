@@ -1,27 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
-  <defs>
-    <filter id="schatten" x="0" y="0" width="58" height="58" filterUnits="userSpaceOnUse">
-      <feOffset dy="3" input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feFlood flood-color="#242424"/>
-      <feComposite operator="in" in2="blur"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-    <filter id="plus" x="6" y="3" width="46" height="46" filterUnits="userSpaceOnUse">
-      <feOffset input="SourceAlpha"/>
-      <feGaussianBlur stdDeviation="1" result="blur-2"/>
-      <feFlood flood-color="#242424"/>
-      <feComposite operator="in" in2="blur-2"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
-  </defs>
-  <g id="Plusbutton" transform="translate(9 6)">
-    <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#schatten)">
-      <path id="schatten-2" data-name="schatten" d="M29.321,0C36.121,0,40,3.84,40,10.66h0V29.34C40,36.12,36.141,40,29.341,40H10.661C3.841,40,0,36.12,0,29.34H0V10.66C0,3.84,3.841,0,10.661,0h18.66Zm-9.34,11.02a1.656,1.656,0,0,0-1.66,1.66h0v5.64h-5.66A1.639,1.639,0,0,0,11,19.98a1.686,1.686,0,0,0,1.66,1.68h5.66v5.66a1.66,1.66,0,0,0,3.32,0h0V21.66h5.68a1.686,1.686,0,0,0,1.66-1.68,1.656,1.656,0,0,0-1.66-1.66h-5.68V12.68A1.656,1.656,0,0,0,19.981,11.02Z" transform="translate(9 6)" fill="#efefef"/>
-    </g>
-    <rect id="Rechteck_28" data-name="Rechteck 28" width="27.273" height="28.182" transform="translate(8.182 7.273)" fill="#242424"/>
-    <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#plus)">
-      <path id="plus-2" data-name="plus" d="M29.321,0C36.121,0,40,3.84,40,10.66h0V29.34C40,36.12,36.141,40,29.341,40H10.661C3.841,40,0,36.12,0,29.34H0V10.66C0,3.84,3.841,0,10.661,0h18.66Zm-9.34,11.02a1.656,1.656,0,0,0-1.66,1.66h0v5.64h-5.66A1.639,1.639,0,0,0,11,19.98a1.686,1.686,0,0,0,1.66,1.68h5.66v5.66a1.66,1.66,0,0,0,3.32,0h0V21.66h5.68a1.686,1.686,0,0,0,1.66-1.68,1.656,1.656,0,0,0-1.66-1.66h-5.68V12.68A1.656,1.656,0,0,0,19.981,11.02Z" transform="translate(9 6)" fill="#efefef"/>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="a" x="0" y="0" width="58" height="58" filterUnits="userSpaceOnUse">
+<feOffset dy="3" input="SourceAlpha"/>
+<feGaussianBlur result="blur" stdDeviation="3"/>
+<feFlood flood-color="#242424"/>
+<feComposite in2="blur" operator="in"/>
+<feComposite in="SourceGraphic"/>
+</filter>
+<filter id="b" x="6" y="3" width="46" height="46" filterUnits="userSpaceOnUse">
+<feOffset input="SourceAlpha"/>
+<feGaussianBlur result="blur-2" stdDeviation="1"/>
+<feFlood flood-color="#242424"/>
+<feComposite in2="blur-2" operator="in"/>
+<feComposite in="SourceGraphic"/>
+</filter>
+</defs>
+<g transform="translate(9 6)">
+<g transform="translate(-9 -6)" filter="url(#a)">
+<path transform="translate(9 6)" d="M29.321,0C36.121,0,40,3.84,40,10.66h0V29.34C40,36.12,36.141,40,29.341,40H10.661C3.841,40,0,36.12,0,29.34H0V10.66C0,3.84,3.841,0,10.661,0h18.66Zm-9.34,11.02a1.656,1.656,0,0,0-1.66,1.66h0v5.64h-5.66A1.639,1.639,0,0,0,11,19.98a1.686,1.686,0,0,0,1.66,1.68h5.66v5.66a1.66,1.66,0,0,0,3.32,0h0V21.66h5.68a1.686,1.686,0,0,0,1.66-1.68,1.656,1.656,0,0,0-1.66-1.66h-5.68V12.68A1.656,1.656,0,0,0,19.981,11.02Z" fill="#efefef" data-name="schatten"/>
+</g>
+<rect transform="translate(8.182 7.273)" width="27.273" height="28.182" fill="#242424" data-name="Rechteck 28"/>
+<g transform="translate(-9 -6)" filter="url(#b)">
+<path transform="translate(9 6)" d="M29.321,0C36.121,0,40,3.84,40,10.66h0V29.34C40,36.12,36.141,40,29.341,40H10.661C3.841,40,0,36.12,0,29.34H0V10.66C0,3.84,3.841,0,10.661,0h18.66Zm-9.34,11.02a1.656,1.656,0,0,0-1.66,1.66h0v5.64h-5.66A1.639,1.639,0,0,0,11,19.98a1.686,1.686,0,0,0,1.66,1.68h5.66v5.66a1.66,1.66,0,0,0,3.32,0h0V21.66h5.68a1.686,1.686,0,0,0,1.66-1.68,1.656,1.656,0,0,0-1.66-1.66h-5.68V12.68A1.656,1.656,0,0,0,19.981,11.02Z" fill="#efefef" data-name="plus"/>
+</g>
+</g>
 </svg>

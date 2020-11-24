@@ -8,6 +8,7 @@ import ButtonPlus from "./assets/buttonPlus.svg";
 
 const ButtonElement = styled.button`
   border-radius: 50%;
+  height: 50px;
   background: none;
   border: none;
 `;
