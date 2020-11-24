@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+<<<<<<< HEAD
 
 import { Button } from "./Button";
+=======
+>>>>>>> AddComponents
 
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
   <header>
@@ -30,21 +33,7 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
         </svg>
         <h1>Acme</h1>
       </div>
-      <div>
-        {user ? (
-          <Button size="small" onClick={onLogout} label="Log out" />
-        ) : (
-          <>
-            <Button size="small" onClick={onLogin} label="Log in" />
-            <Button
-              primary
-              size="small"
-              onClick={onCreateAccount}
-              label="Sign up"
-            />
-          </>
-        )}
-      </div>
+      <div></div>
     </div>
   </header>
 );
