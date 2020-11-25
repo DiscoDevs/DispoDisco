@@ -1,12 +1,23 @@
 import React from "react";
 import GlobalStyle from "./GlobalStyles";
 import { Launch } from "./pages/Launch";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { MainMenu } from "./pages/MainMenu";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Launch />
+      <Router>
+        <Switch>
+          <Route path="/menu">
+            <MainMenu />
+          </Route>
+          <Route path="/">
+            <Launch />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }

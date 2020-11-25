@@ -1,6 +1,7 @@
 import React from "react";
 import logoDark from "../assets/ddLogoDark.svg";
 import styled from "styled-components/macro";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -63,7 +64,9 @@ export const Launch = () => {
     <Wrapper>
       <Title>DispoDisco</Title>
       <LogoContainer>
-        <Logo src={logoDark} alt="Logo Dark" />
+        <Link to="/menu">
+          <Logo src={logoDark} alt="Logo Dark" />
+        </Link>
       </LogoContainer>
     </Wrapper>
   );
