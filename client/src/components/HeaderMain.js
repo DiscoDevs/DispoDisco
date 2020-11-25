@@ -24,7 +24,7 @@ const HeaderElement = styled.header`
     "back info info menu  menu";
 `;
 
-const Titel = styled.h1`
+const Title = styled.h1`
   grid-area: title;
   font-size: 2rem;
   font-weight: 400;
@@ -33,7 +33,7 @@ const Titel = styled.h1`
   align-items: flex-start;
   flex-grow: auto;
 `;
-const Date = styled(Titel)`
+const Date = styled(Title)`
   grid-area: date;
   display: flex;
   margin-bottom: 1.5rem;
@@ -76,7 +76,7 @@ const Filter = styled(Back)`
 export const HeaderMain = () => (
   <HeaderElement>
     <Back src={Backward} alt={"backward"} />
-    <Titel>Fahrt</Titel>
+    <Title>Fahrt</Title>
     <Date>27.11.2</Date>
     <Logo src={MirrorBall} alt={"Logo"} />
     <Infobox>Next: 2 min 🚀</Infobox>
