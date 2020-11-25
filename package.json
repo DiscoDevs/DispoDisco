@@ -11,10 +11,10 @@
     "client": "cd client && npm run start",
     "fakeDB": "json-server --watch db.json",
     "server": "nodemon server.js",
-    "dev": "concurrently \"npm run fakeDB\" \"npm run client\"",
     "build": "cd client && npm run build && npm run build-storybook",
     "lint": "eslint . --ext .js",
-    "start": "cd client && concurrently \"npm run start\" \"npm run storybook\""
+    "dev": "cd client && concurrently \"npm run start\" \"npm run storybook\"",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
