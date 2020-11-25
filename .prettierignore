@@ -26,7 +26,10 @@ coverage
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+**/build
 **/storybook-static
+**/coverage
+**/ISSUE_TEMPLATE
 
 # Dependency directories
 node_modules
