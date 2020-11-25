@@ -6,13 +6,14 @@ import styled from "styled-components/macro";
  * Primary UI component for user interaction
  */
 
+type BadgeTypes = {
+  [key: string]: BadgeType;
+};
+
 type BadgeType = {
   color: string;
   background?: string;
   label?: string;
-};
-type BadgeTypes = {
-  [key: string]: BadgeType;
 };
 
 const types: BadgeTypes = {
