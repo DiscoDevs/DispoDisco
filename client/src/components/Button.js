@@ -1,47 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components/macro";
 
-/**
- * Primary UI component for user interaction
- */
-export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
-  const mode = primary
-    ? "storybook-button--primary"
-    : "storybook-button--secondary";
+const types = {
+  menu: {
+    background: "var(--text-secondary)",
+    border: "none",
+  },
+  addRide: {
+    background: "none",
+    border: "1px solid var(--text-primary)",
+  },
+  cta: {
+    background: "red",
+    border: "none",
+  },
+};
+
+const StyledButton = styled.button`
+  background: ${(props) => types[props.type].background};
+  padding: 0.5rem 1rem;
+  border: ${(props) => types[props.type].border};
+  border-radius: 6px;
+  font-family: "Goldman";
+  color: var(--text-primary);
+`;
+
+export const Button = ({ primary, type, label, ...props }) => {
   return (
-    <button
-      type="button"
-      className={["storybook-button", `storybook-button--${size}`, mode].join(
-        " "
-      )}
-      style={backgroundColor && { backgroundColor }}
-      {...props}
-    >
+    <StyledButton type={type} {...props}>
       {label}
-    </button>
+    </StyledButton>
   );
 };
 
 Button.propTypes = {
-  /**
-   * Is this the principal call to action on the page?
-   */
+  type: PropTypes.string,
   primary: PropTypes.bool,
-  /**
-   * What background color to use
-   */
-  backgroundColor: PropTypes.string,
-  /**
-   * How large should the button be?
-   */
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  /**
-   * Button contents
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * Optional click handler
-   */
   onClick: PropTypes.func,
 };
 
