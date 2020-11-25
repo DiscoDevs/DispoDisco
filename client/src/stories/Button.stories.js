@@ -8,6 +8,4 @@ export default {
 const Template = (args) => <ButtonPlus {...args} />;
 
 export const PlusButton = Template.bind({});
-ButtonPlus.args = {
-  type: "round",
-};
+ButtonPlus.args = {};
