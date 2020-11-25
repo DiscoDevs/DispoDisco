@@ -5,7 +5,17 @@ import styled from "styled-components/macro";
 /**
  * Primary UI component for user interaction
  */
-const types = {
+
+type BadgeType = {
+  color: string;
+  background?: string;
+  label?: string;
+};
+type BadgeTypes = {
+  [key: string]: BadgeType;
+};
+
+const types: BadgeTypes = {
   default: {
     color: "var(--text-secondary)",
     background: "var(--carriage)",
@@ -42,7 +52,7 @@ const types = {
   },
 };
 
-const BadgeElement = styled.div`
+const BadgeElement = styled.div<BadgeProps>`
   padding: ${(props) =>
       props.type === "rider" || props.type === "timer" ? "0.2rem" : "0.7rem"}
     0.8rem;
@@ -62,28 +72,42 @@ const BadgeElement = styled.div`
     props.type === "timer" ? "var(--insetShadow)" : "var(--shadow)"};
 `;
 
-export const Badge = ({ type, label }) => {
+type BadgeProps = {
+  type:
+    | "info"
+    | "timer"
+    | "rider"
+    | "termin"
+    | "direct"
+    | "carriage"
+    | "cargo"
+    | "default";
+  label?: string;
+};
+
+export const Badge = ({ type, label }: BadgeProps) => {
   label = types[type].label || label;
 
   return <BadgeElement type={type}>{label}</BadgeElement>;
 };
 
-Badge.propTypes = {
-  type: PropTypes.oneOf([
-    "direct",
-    "carriage",
-    "cargo",
-    "onTime",
-    "timer",
-    "info",
-    "rider",
-  ]),
+// Badge.propTypes = {
+//   type: PropTypes.oneOf([
+//     "direct",
+//     "carriage",
+//     "cargo",
+//     "onTime",
+//     "timer",
+//     "info",
+//     "rider",
+//   ]),
 
-  label: PropTypes.string,
+//   label: PropTypes.string,
 
-  onClick: PropTypes.func,
-};
+//   onClick: PropTypes.func,
+// };
 
-Badge.defaultProps = {
-  type: "default",
-};
+// Badge.defaultProps = {
+
+//   type: "default",
+// };
