@@ -28,6 +28,4 @@ CTA.args = {
 };
 
 export const PlusButton = TemplatePlus.bind({});
-ButtonPlus.args = {
-  type: "round",
-};
+ButtonPlus.args = {};

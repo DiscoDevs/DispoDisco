@@ -1,30 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-import ButtonPlusImg from "../assets/buttonPlus.svg";
 /**
  * Primary UI component for user interaction
  */
 
 const ButtonElement = styled.button`
-  border-radius: 50%;
-  background: none;
+  position: fixed;
+  bottom: 2px;
+  left: calc(50% - 25px);
+  display: grid;
+  align-items: center;
+  border-radius: 6px;
+  background: var(--text-secondary);
+  width: 50px;
+  height: 50px;
   border: none;
-  & > img {
-    height: 50px;
+
+  div {
+    display: grid;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-family: "Goldman";
+    align-items: center;
+    border: 2px solid white;
+    height: 38px;
+    width: 38px;
+    margin: auto;
+    border-radius: inherit;
   }
 `;
 
-export const ButtonPlus = ({ label }) => {
+export const ButtonPlus = ({ onClick }) => {
   return (
-    <ButtonElement>
-      <img src={ButtonPlusImg} alt="Add Button" />
-      {label}
+    <ButtonElement onClick={onClick}>
+      <div>+</div>
     </ButtonElement>
   );
 };
 
 ButtonPlus.propTypes = {
-  label: PropTypes.string,
   onClick: PropTypes.func,
 };
