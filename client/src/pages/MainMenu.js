@@ -39,9 +39,21 @@ export const MainMenu = () => {
       <PageWrapper>
         <HeaderMenu />
         <MenuWrapper>
-          <Button label="settings" type="menu" />
-          <Button label="tours" type="menu" />
-          <Button label="riders" type="menu" />
+          <Button
+            label="settings"
+            type="menu"
+            onCLick={() => history.push("/settings")}
+          />
+          <Button
+            label="tours"
+            type="menu"
+            onClick={() => history.push("/tours")}
+          />
+          <Button
+            label="riders"
+            type="menu"
+            onClick={() => history.push("/riders")}
+          />
           <Button
             label="go"
             type="cta"
