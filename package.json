@@ -7,7 +7,7 @@
   "scripts": {
     "test": "npm run lint && cd client && npm run test",
     "hooksInstall": "husky install",
-    "postinstall": "cd client && npm i",
+    "postinstall": "cd client && npm i ",
     "client": "cd client && npm run start",
     "fakeDB": "json-server --watch db.json",
     "server": "nodemon server.js",
@@ -33,7 +33,7 @@
   "homepage": "https://github.com/DiscoDevs/DispoDisco#readme",
   "devDependencies": {
     "eslint": "^7.13.0",
-    "husky": "^5.0.1",
+    "husky": "^5.0.4",
     "json-server": "^0.16.3",
     "lint-staged": "^10.5.1",
     "nodemon": "^2.0.6",
