@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 
-const types = {
+const designes = {
   menu: {
     background: "var(--text-secondary)",
     border: "none",
@@ -18,17 +18,17 @@ const types = {
 };
 
 const StyledButton = styled.button`
-  background: ${(props) => types[props.type].background};
+  background: ${(props) => designes[props.design].background};
   padding: 0.5rem 1rem;
-  border: ${(props) => types[props.type].border};
+  border: ${(props) => designes[props.design].border};
   border-radius: 6px;
   font-family: "Goldman";
   color: var(--text-primary);
 `;
 
-export const Button = ({ primary, type, label, ...props }) => {
+export const Button = ({ primary, type, design, label, ...props }) => {
   return (
-    <StyledButton type={type} {...props}>
+    <StyledButton type={type} design={design} {...props}>
       {label}
     </StyledButton>
   );
@@ -36,6 +36,7 @@ export const Button = ({ primary, type, label, ...props }) => {
 
 Button.propTypes = {
   type: PropTypes.string,
+  design: PropTypes.string,
   primary: PropTypes.bool,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
