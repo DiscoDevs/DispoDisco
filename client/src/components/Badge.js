@@ -23,7 +23,7 @@ const types = {
     color: "var(--direct)",
     label: "Direkt",
   },
-  termin: {
+  onTime: {
     color: "var(--onTime)",
     label: "Termin",
   },
@@ -62,10 +62,14 @@ const BadgeElement = styled.div`
     props.type === "timer" ? "var(--insetShadow)" : "var(--shadow)"};
 `;
 
-export const Badge = ({ type, label }) => {
+export const Badge = ({ type, label, onClick }) => {
   label = types[type].label || label;
 
-  return <BadgeElement type={type}>{label}</BadgeElement>;
+  return (
+    <BadgeElement type={type} onClick={onClick}>
+      {label}
+    </BadgeElement>
+  );
 };
 
 Badge.propTypes = {
