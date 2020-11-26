@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components/macro";
+import PropTypes from "prop-types";
 import MirrorBall from "../assets/mirrorBall.svg";
 import Backward from "../assets/back.svg";
 
 const HeaderElement = styled.header`
   top: 0;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem;
   min-height: 65px;
   width: 100%;
   position: fixed;
@@ -14,42 +15,47 @@ const HeaderElement = styled.header`
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
+  > :not(:first-child) {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: ${(props) => (props.title ? "center" : "space-between")};
+  }
 `;
-
 const Top = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
 `;
-const Back = styled.img``;
-const Tour = styled.h1`
-  font-size: clamp(1.7rem, 5vw, 5rem);
+const HeaderText = styled.h2`
+  font-size: clamp(1.7rem, 8vw, 5rem);
   font-weight: 400;
 `;
-const Date = styled(Tour)``;
 const Logo = styled.img`
   height: clamp(56px, 10vw, 100px);
   margin-top: -1.5rem;
   filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
-const Bottom = styled.div`
-  text-align: center;
-`;
-
 const Title = styled.h2`
-  padding-top: 1rem;
+  text-align: center;
   font-size: clamp(1.7rem, 5vw, 5rem);
 `;
-export const HeaderMini = () => (
-  <HeaderElement>
+const Children = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+export const Header = ({ title, children }) => (
+  <HeaderElement title={title}>
     <Top>
-      <Back src={Backward} alt={"backward"} />
-      <Tour>Tour</Tour>
+      <img src={Backward} alt={"backward"} />
+      <HeaderText>Tour</HeaderText>
       <Logo src={MirrorBall} alt={"Logo"} />
-      <Date>27.11.20</Date>
+      <HeaderText>27.11.20</HeaderText>
     </Top>
-    <Bottom>
-      <Title>Überschrift</Title>
-    </Bottom>
+    {title && <Title>{title}</Title>}
+    {children && <Children>{children}</Children>}
   </HeaderElement>
 );
+
+Header.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node,
+};

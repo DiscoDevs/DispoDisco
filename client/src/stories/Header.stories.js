@@ -2,7 +2,7 @@ import React from "react";
 
 import { HeaderMain } from "../components/HeaderMain";
 import { HeaderHome } from "../components/HeaderHome";
-import { HeaderMini } from "../components/HeaderMini";
+import { Header } from "../components/Header";
 
 export default {
   title: "DispoDisco/Header",
@@ -11,8 +11,14 @@ export default {
 
 const HomeTemplate = (args) => <HeaderHome {...args} />;
 const MainTemplate = (args) => <HeaderMain {...args} />;
-const MiniTemplate = (args) => <HeaderMini {...args} />;
+const HeaderTemplate = (args) => <Header {...args} />;
+const HeaderTextTemplate = (args) => <Header {...args} />;
 
+export const DefaultHeader = HeaderTemplate.bind({});
+export const HeaderWithHeading = HeaderTextTemplate.bind({});
+export const MainMenuHeader = MainTemplate.bind({});
 export const HomeHeader = HomeTemplate.bind({});
-export const MainHeader = MainTemplate.bind({});
-export const MinimizedHeader = MiniTemplate.bind({});
+
+HeaderWithHeading.args = {
+  title: "Überschrift",
+};
