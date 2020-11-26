@@ -3,7 +3,6 @@ import styled from "styled-components/macro";
 import CalendarIcon from "../assets/calendar.svg";
 import FilterIcon from "../assets/filter.svg";
 import { Header } from "./Header";
-import { useHistory } from "react-router-dom";
 
 const Infobox = styled.p`
   display: flex;
