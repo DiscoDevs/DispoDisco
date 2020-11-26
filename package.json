@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "npm run lint && npm run build && cd client && npm run test",
+    "test": "npm run lint && cd client && npm run test",
     "hooksInstall": "husky install",
     "postinstall": "cd client && npm i",
     "client": "cd client && npm run start",

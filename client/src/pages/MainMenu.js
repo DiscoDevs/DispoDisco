@@ -34,7 +34,6 @@ const MenuWrapper = styled.div`
 
 export const MainMenu = () => {
   const history = useHistory();
-
   return (
     <>
       <GlobalStyle />
