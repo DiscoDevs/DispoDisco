@@ -5,59 +5,51 @@ import Backward from "../assets/back.svg";
 
 const HeaderElement = styled.header`
   top: 0;
-  padding: 0.5rem 1.5rem;
+  padding: 1rem;
   min-height: 65px;
   width: 100%;
   position: fixed;
   z-index: 10;
   background-color: var(--text-secondary);
   color: var(--text-primary);
-  text-align: center;
-  display: grid;
-  align-content: center;
-  grid-template-columns: 10% auto auto auto;
-  grid-template-rows: 40% 60%;
-  grid-template-areas:
-    "back tour logo date"
-    "back tour title date";
+  display: flex;
+  flex-direction: column;
 `;
 
-const Back = styled.img`
-  grid-area: back;
-  align-self: center;
-`;
-const Tour = styled.h1`
-  grid-area: tour;
-  font-size: 2rem;
-  font-weight: 400;
+const Top = styled.div`
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  /* margin-top: 1rem; */
-  padding-left: 1rem;
+  justify-content: space-between;
 `;
+const Back = styled.img``;
+const Tour = styled.h1`
+  font-size: clamp(1.7rem, 5vw, 5rem);
+  font-weight: 400;
+`;
+const Date = styled(Tour)``;
 const Logo = styled.img`
-  height: 56px;
-  margin-top: -0.7em;
-  place-self: center;
+  height: clamp(56px, 10vw, 100px);
+  margin-top: -1.5rem;
   filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
-const Date = styled(Tour)`
-  grid-area: date;
-  padding-right: 1rem;
-  padding-left: 0;
+const Bottom = styled.div`
+  text-align: center;
 `;
 
 const Title = styled.h2`
-  grid-area: title;
-  place-self: end;
+  padding-top: 1rem;
+  font-size: clamp(1.7rem, 5vw, 5rem);
 `;
 export const HeaderMini = () => (
   <HeaderElement>
-    <Back src={Backward} alt={"backward"} />
-    <Tour>Tour</Tour>
-    <Date>27.11.20</Date>
-    <Logo src={MirrorBall} alt={"Logo"} />
-    <Title>Überschrift</Title>
+    <Top>
+      <Back src={Backward} alt={"backward"} />
+      <Tour>Tour</Tour>
+      <Logo src={MirrorBall} alt={"Logo"} />
+      <Date>27.11.20</Date>
+    </Top>
+    <Bottom>
+      <Title>Überschrift</Title>
+    </Bottom>
   </HeaderElement>
 );
