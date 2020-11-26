@@ -5,6 +5,7 @@ import { Card } from "../components/Card";
 import { HeaderMini } from "../components/HeaderMini";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
+import { addRide } from "../utils/api";
 
 const PageWrapper = styled.div`
   height: 100%;
@@ -53,7 +54,22 @@ export default function AddRide() {
             </>
           }
         />
-        <Form>
+        <Form
+          onSubmit={(event) => {
+            event.preventDefault();
+            addRide({
+              title: "Test",
+              start: start,
+              dest: dest,
+              "start-time": date,
+              "end-time": date,
+              weight: "light",
+              priority: 0,
+              type: "normal",
+              assignment: rider,
+            });
+          }}
+        >
           <Input
             type="text"
             placeholder="Von"
