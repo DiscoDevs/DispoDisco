@@ -4,7 +4,7 @@ import MirrorBall from "../assets/mirrorBall.svg";
 import Backward from "../assets/backward.svg";
 import CalendarIcon from "../assets/calendar.svg";
 import FilterIcon from "../assets/filter.svg";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const HeaderElement = styled.header`
   top: 0;
