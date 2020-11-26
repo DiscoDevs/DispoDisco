@@ -47,9 +47,10 @@ export default function AddRide() {
   const [title, setTitle] = useState("");
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [date, setDate] = useState("");
   const [rider, setRider] = useState("");
+  const [priority, setPriority] = useState("normal");
+  const [cargo, setCargo] = useState("s");
 
   return (
     <PageWrapper>
@@ -72,12 +73,10 @@ export default function AddRide() {
               title: title,
               start: start,
               dest: dest,
-              startDate: startDate,
-              endDate: endDate,
-              weight: "light",
-              priority: 0,
-              type: "normal",
+              date: date,
               assignment: rider,
+              priority: priority,
+              cargo: cargo,
             });
           }}
         >
@@ -101,8 +100,8 @@ export default function AddRide() {
           />
           <Input
             type="datetime-local"
-            value={startDate}
-            onChange={(event) => setStartDate(event.target.value)}
+            value={date}
+            onChange={(event) => setDate(event.target.value)}
           />
           <Input
             type="text"
@@ -111,10 +110,11 @@ export default function AddRide() {
             onChange={(event) => setRider(event.target.value)}
           />
           <div>
-            <Badge type="direct" />
-            <Badge type="carriage" />
-            <Badge type="cargo" />
-            <Badge type="onTime" />
+            <Badge type="direct" onClick={() => setPriority("direct")} />
+            <Badge type="onTime" onClick={() => setPriority("onTime")} />
+            <Badge type="carriage" onClick={() => setCargo("carriage")} />
+            <Badge type="cargo" label="m" onClick={() => setCargo("m")} />
+            <Badge type="cargo" label="l" onClick={() => setCargo("l")} />
           </div>
           <Button type="submit" design="addRide" label="Fahrt hinzufügen" />
         </Form>
