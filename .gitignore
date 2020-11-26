@@ -51,7 +51,8 @@ jspm_packages
 /coverage
 
 # production
-/build
+**/build
+**/storybook-static
 
 # misc
 .DS_Store

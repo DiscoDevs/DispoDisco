@@ -6,7 +6,7 @@ import jockey from "../assets/jockey.svg";
 import packages from "../assets/packages.svg";
 import shuttle from "../assets/shuttle.svg";
 
-const labels = {
+const categories = {
   settings: {
     src: settingsIcon,
     alt: "settings",
@@ -64,16 +64,26 @@ const Icons = styled.img`
   height: 25px;
 `;
 
-export const Button = ({ primary, type, design, label, ...props }) => {
+export const Button = ({
+  primary,
+  type,
+  design,
+  category,
+  label,
+  ...props
+}) => {
   return (
-    <StyledButton type={type} {...props}>
-      <Icons src={labels[label].src} alt={labels[label].alt} />
-      {labels[label].title}
+    <StyledButton type={type} design={design} {...props}>
+      {categories[category] && (
+        <Icons src={categories[category].src} alt={categories[category].alt} />
+      )}
+      {label}
     </StyledButton>
   );
 };
 
 Button.propTypes = {
+  category: PropTypes.string,
   type: PropTypes.string,
   design: PropTypes.string,
   primary: PropTypes.bool,

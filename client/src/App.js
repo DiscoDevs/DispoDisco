@@ -1,21 +1,20 @@
 import React from "react";
 import GlobalStyle from "./GlobalStyles";
-import AddRide from "./pages/AddRide";
 import { Launch } from "./pages/Launch";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MainMenu } from "./pages/MainMenu";
 import { Rides } from "./pages/Rides";
+import AddRide from "./pages/AddRide";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-<<<<<<< HEAD
-      <Launch />
-      <AddRide />
-=======
       <Router>
         <Switch>
+          <Route path="/addRide">
+            <AddRide />
+          </Route>
           <Route path="/menu">
             <MainMenu />
           </Route>
@@ -27,7 +26,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
->>>>>>> develop
     </>
   );
 }
