@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import GlobalStyle from "../GlobalStyles";
+<<<<<<< HEAD
+import { HeaderHome } from "../components/HeaderHome";
+=======
 import { HeaderMenu } from "../components/HeaderMenu";
 import { Button } from "../components/Button";
 import { useHistory } from "react-router-dom";
+>>>>>>> develop
 
 const PageWrapper = styled.div`
   display: flex;
@@ -37,6 +41,9 @@ export const MainMenu = () => {
     <>
       <GlobalStyle />
       <PageWrapper>
+<<<<<<< HEAD
+        <HeaderHome />
+=======
         <HeaderMenu />
         <MenuWrapper>
           <Button
@@ -60,6 +67,7 @@ export const MainMenu = () => {
             onClick={() => history.push("/rides")}
           />
         </MenuWrapper>
+>>>>>>> develop
       </PageWrapper>
     </>
   );
