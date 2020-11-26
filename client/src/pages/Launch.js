@@ -1,6 +1,7 @@
 import React from "react";
 import logoDark from "../assets/ddLogoDark.svg";
 import styled from "styled-components/macro";
+import { useHistory } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -47,7 +48,7 @@ const Logo = styled.img`
 
   @keyframes slidein {
     from {
-      margin-top: 60%;
+      margin-top: 100%;
       transform: rotate(720deg);
     }
 
@@ -59,11 +60,16 @@ const Logo = styled.img`
 `;
 
 export const Launch = () => {
+  const history = useHistory();
   return (
     <Wrapper>
       <Title>DispoDisco</Title>
       <LogoContainer>
-        <Logo src={logoDark} alt="Logo Dark" />
+        <Logo
+          src={logoDark}
+          alt="Logo Dark"
+          onClick={() => history.push("/menu")}
+        />
       </LogoContainer>
     </Wrapper>
   );

@@ -28,7 +28,7 @@ Direkt.args = {
 };
 export const Termin = Template.bind(0);
 Termin.args = {
-  type: "termin",
+  type: "onTime",
 };
 export const Rider = Template.bind(0);
 Rider.args = {

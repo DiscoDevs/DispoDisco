@@ -1,10 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
+import settingsIcon from "../assets/settingsIcon.svg";
+import jockey from "../assets/jockey.svg";
+import packages from "../assets/packages.svg";
+import shuttle from "../assets/shuttle.svg";
+
+const labels = {
+  settings: {
+    src: settingsIcon,
+    alt: "settings",
+    title: "Einstellungen",
+  },
+  tours: {
+    src: packages,
+    alt: "tours",
+    title: "Touren",
+  },
+  riders: {
+    src: jockey,
+    alt: "riders",
+    title: "Fahrer",
+  },
+  go: {
+    src: shuttle,
+    alt: "go",
+    title: "Lets Fetz",
+  },
+};
 
 const designes = {
   menu: {
-    background: "var(--text-secondary)",
+    background: "var(--gradient-menu)",
     border: "none",
   },
   addRide: {
@@ -12,7 +39,7 @@ const designes = {
     border: "1px solid var(--text-primary)",
   },
   cta: {
-    background: "red",
+    background: "var(--gradient-direct)",
     border: "none",
   },
 };
@@ -23,13 +50,25 @@ const StyledButton = styled.button`
   border: ${(props) => designes[props.design].border};
   border-radius: 6px;
   font-family: "Goldman";
+  font-size: 2rem;
   color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > :first-child {
+    margin-right: 10px;
+  }
+`;
+
+const Icons = styled.img`
+  height: 25px;
 `;
 
 export const Button = ({ primary, type, design, label, ...props }) => {
   return (
-    <StyledButton type={type} design={design} {...props}>
-      {label}
+    <StyledButton type={type} {...props}>
+      <Icons src={labels[label].src} alt={labels[label].alt} />
+      {labels[label].title}
     </StyledButton>
   );
 };
