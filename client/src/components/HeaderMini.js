@@ -5,7 +5,7 @@ import Backward from "../assets/back.svg";
 
 const HeaderElement = styled.header`
   top: 0;
-  padding: 0.1rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   min-height: 65px;
   width: 100%;
   position: fixed;
@@ -16,40 +16,48 @@ const HeaderElement = styled.header`
   display: grid;
   align-content: center;
   grid-template-columns: 10% auto auto auto;
-  grid-template-areas: "back title logo date";
-`;
-
-const Title = styled.h1`
-  grid-area: title;
-  font-size: 2rem;
-  font-weight: 400;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 1rem;
-`;
-const Date = styled(Title)`
-  grid-area: date;
-  padding-right: 1rem;
-  padding-left: 0;
+  grid-template-rows: 40% 60%;
+  grid-template-areas:
+    "back tour logo date"
+    "back tour title date";
 `;
 
 const Back = styled.img`
   grid-area: back;
   align-self: center;
 `;
-
+const Tour = styled.h1`
+  grid-area: tour;
+  font-size: 2rem;
+  font-weight: 400;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* margin-top: 1rem; */
+  padding-left: 1rem;
+`;
 const Logo = styled.img`
   height: 56px;
   margin-top: -0.7em;
+  place-self: center;
   filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
+const Date = styled(Tour)`
+  grid-area: date;
+  padding-right: 1rem;
+  padding-left: 0;
+`;
 
+const Title = styled.h2`
+  grid-area: title;
+  place-self: end;
+`;
 export const HeaderMini = () => (
   <HeaderElement>
     <Back src={Backward} alt={"backward"} />
-    <Title>Tour</Title>
-    <Date>27.11.2</Date>
+    <Tour>Tour</Tour>
+    <Date>27.11.20</Date>
     <Logo src={MirrorBall} alt={"Logo"} />
+    <Title>Überschrift</Title>
   </HeaderElement>
 );

@@ -37,7 +37,7 @@ const Logo = styled.img`
   margin-top: -50px;
   filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
-export const HeaderMenu = () => (
+export const HeaderHome = () => (
   <HeaderElement>
     <First>Disp</First>
     <Logo src={MirrorBall} alt={"Logo"} />

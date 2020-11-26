@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import GlobalStyle from "../GlobalStyles";
-import { HeaderMenu } from "../components/HeaderMenu";
+import { HeaderHome } from "../components/HeaderHome";
 
 const PageWrapper = styled.div`
   height: 100%;
@@ -15,7 +15,7 @@ export const MainMenu = () => {
     <>
       <GlobalStyle />
       <PageWrapper>
-        <HeaderMenu />
+        <HeaderHome />
       </PageWrapper>
     </>
   );

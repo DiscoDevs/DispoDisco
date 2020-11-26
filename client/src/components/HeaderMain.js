@@ -76,8 +76,8 @@ const Filter = styled(Back)`
 export const HeaderMain = () => (
   <HeaderElement>
     <Back src={Backward} alt={"backward"} />
-    <Title>Fahrt</Title>
-    <Date>27.11.2</Date>
+    <Title>Tour</Title>
+    <Date>27.11.20</Date>
     <Logo src={MirrorBall} alt={"Logo"} />
     <Infobox>Next: 2 min 🚀</Infobox>
     <Menu>
