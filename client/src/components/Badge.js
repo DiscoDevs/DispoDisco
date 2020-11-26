@@ -23,7 +23,7 @@ const types = {
     color: "var(--direct)",
     label: "Direkt",
   },
-  termin: {
+  onTime: {
     color: "var(--onTime)",
     label: "Termin",
   },

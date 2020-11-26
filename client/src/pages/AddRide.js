@@ -32,6 +32,15 @@ const Form = styled.form`
   > :last-child {
     margin-top: 1.5rem;
   }
+  > div {
+    display: flex;
+    > * {
+      margin-right: 0.5rem;
+    }
+    > :last-child {
+      margin-right: 0;
+    }
+  }
 `;
 
 export default function AddRide() {
@@ -39,6 +48,7 @@ export default function AddRide() {
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [rider, setRider] = useState("");
 
   return (
@@ -63,7 +73,7 @@ export default function AddRide() {
               start: start,
               dest: dest,
               startDate: startDate,
-              endDate: "2020-11-26T16:30",
+              endDate: endDate,
               weight: "light",
               priority: 0,
               type: "normal",
@@ -100,6 +110,12 @@ export default function AddRide() {
             value={rider}
             onChange={(event) => setRider(event.target.value)}
           />
+          <div>
+            <Badge type="direct" />
+            <Badge type="carriage" />
+            <Badge type="cargo" />
+            <Badge type="onTime" />
+          </div>
           <Button type="submit" design="addRide" label="Fahrt hinzufügen" />
         </Form>
       </ContentWrapper>
