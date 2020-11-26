@@ -42,23 +42,27 @@ export const MainMenu = () => {
         <HeaderHome />
         <MenuWrapper>
           <Button
-            label="settings"
-            type="menu"
+            category="settings"
+            design="menu"
+            label="Einstellungen"
             onClick={() => history.push("/settings")}
           />
           <Button
-            label="tours"
-            type="menu"
+            category="tours"
+            design="menu"
+            label="Touren"
             onClick={() => history.push("/tours")}
           />
           <Button
-            label="riders"
-            type="menu"
+            category="riders"
+            design="menu"
+            label="Riders"
             onClick={() => history.push("/riders")}
           />
           <Button
-            label="go"
-            type="cta"
+            category="go"
+            design="cta"
+            label="Lets Fetz"
             onClick={() => history.push("/rides")}
           />
         </MenuWrapper>

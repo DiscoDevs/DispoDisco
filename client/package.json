@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3600/",
   "dependencies": {
     "@babel/core": "^7.12.3",
     "@storybook/addon-actions": "^6.1.1",

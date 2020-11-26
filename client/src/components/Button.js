@@ -6,7 +6,7 @@ import jockey from "../assets/jockey.svg";
 import packages from "../assets/packages.svg";
 import shuttle from "../assets/shuttle.svg";
 
-const labels = {
+const categories = {
   settings: {
     src: settingsIcon,
     alt: "settings",
@@ -29,7 +29,7 @@ const labels = {
   },
 };
 
-const types = {
+const designes = {
   menu: {
     background: "var(--gradient-menu)",
     border: "none",
@@ -45,9 +45,9 @@ const types = {
 };
 
 const StyledButton = styled.button`
-  background: ${(props) => types[props.type].background};
+  background: ${(props) => designes[props.design].background};
   padding: 0.5rem 1rem;
-  border: ${(props) => types[props.type].border};
+  border: ${(props) => designes[props.design].border};
   border-radius: 6px;
   font-family: "Goldman";
   font-size: 2rem;
@@ -64,17 +64,28 @@ const Icons = styled.img`
   height: 25px;
 `;
 
-export const Button = ({ primary, type, label, ...props }) => {
+export const Button = ({
+  primary,
+  type,
+  design,
+  category,
+  label,
+  ...props
+}) => {
   return (
-    <StyledButton type={type} {...props}>
-      <Icons src={labels[label].src} alt={labels[label].alt} />
-      {labels[label].title}
+    <StyledButton type={type} design={design} {...props}>
+      {categories[category] && (
+        <Icons src={categories[category].src} alt={categories[category].alt} />
+      )}
+      {label}
     </StyledButton>
   );
 };
 
 Button.propTypes = {
+  category: PropTypes.string,
   type: PropTypes.string,
+  design: PropTypes.string,
   primary: PropTypes.bool,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,

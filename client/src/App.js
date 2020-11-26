@@ -4,6 +4,7 @@ import { Launch } from "./pages/Launch";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MainMenu } from "./pages/MainMenu";
 import { Rides } from "./pages/Rides";
+import AddRide from "./pages/AddRide";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
+          <Route path="/addRide">
+            <AddRide />
+          </Route>
           <Route path="/menu">
             <MainMenu />
           </Route>
