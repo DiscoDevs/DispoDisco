@@ -13,8 +13,8 @@ export async function addRide({
     method: "POST",
     body: JSON.stringify({
       name: title,
-      "start-time": startDate,
-      "end-time": endDate,
+      startTime: startDate,
+      endTime: endDate,
       start: start,
       dest: dest,
       done: false,
@@ -23,5 +23,8 @@ export async function addRide({
       type: type,
       assignment: rider,
     }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 }

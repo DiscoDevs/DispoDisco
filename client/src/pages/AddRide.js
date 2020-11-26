@@ -35,9 +35,10 @@ const Form = styled.form`
 `;
 
 export default function AddRide() {
+  const [title, setTitle] = useState("");
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
   const [rider, setRider] = useState("");
 
   return (
@@ -58,11 +59,11 @@ export default function AddRide() {
           onSubmit={(event) => {
             event.preventDefault();
             addRide({
-              title: "Test",
+              title: title,
               start: start,
               dest: dest,
-              "start-time": date,
-              "end-time": date,
+              startDate: startDate,
+              endDate: "2020-11-26T16:30",
               weight: "light",
               priority: 0,
               type: "normal",
@@ -70,6 +71,12 @@ export default function AddRide() {
             });
           }}
         >
+          <Input
+            type="text"
+            placeholder="Titel"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
           <Input
             type="text"
             placeholder="Von"
@@ -83,10 +90,9 @@ export default function AddRide() {
             onChange={(event) => setDest(event.target.value)}
           />
           <Input
-            type="date"
-            placeholder="Datum"
-            value={date}
-            onChange={(event) => setDate(event.taget.value)}
+            type="datetime-local"
+            value={startDate}
+            onChange={(event) => setStartDate(event.target.value)}
           />
           <Input
             type="text"
