@@ -4,6 +4,7 @@ import MirrorBall from "../assets/mirrorBall.svg";
 import Backward from "../assets/backward.svg";
 import CalendarIcon from "../assets/calendar.svg";
 import FilterIcon from "../assets/filter.svg";
+import { Link } from "react-router-dom";
 
 const HeaderElement = styled.header`
   top: 0;
@@ -75,7 +76,9 @@ const Filter = styled(Back)`
 
 export const HeaderMain = () => (
   <HeaderElement>
-    <Back src={Backward} alt={"backward"} />
+    <Link to="/menu">
+      <Back src={Backward} alt={"backward"} />
+    </Link>
     <Titel>Fahrt</Titel>
     <Date>27.11.2</Date>
     <Logo src={MirrorBall} alt={"Logo"} />
