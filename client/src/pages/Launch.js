@@ -48,7 +48,7 @@ const Logo = styled.img`
 
   @keyframes slidein {
     from {
-      margin-top: 60%;
+      margin-bottom: 0;
       transform: rotate(720deg);
     }
 
