@@ -42,7 +42,7 @@ export const MainMenu = () => {
           <Button
             label="settings"
             type="menu"
-            onCLick={() => history.push("/settings")}
+            onClick={() => history.push("/settings")}
           />
           <Button
             label="tours"

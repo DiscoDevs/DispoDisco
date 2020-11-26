@@ -4,7 +4,7 @@ import MirrorBall from "../assets/mirrorBall.svg";
 import Backward from "../assets/backward.svg";
 import CalendarIcon from "../assets/calendar.svg";
 import FilterIcon from "../assets/filter.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const HeaderElement = styled.header`
   top: 0;
@@ -74,18 +74,24 @@ const Filter = styled(Back)`
   grid-area: filter;
 `;
 
-export const HeaderMain = () => (
-  <HeaderElement>
-    <Link to="/menu">
-      <Back src={Backward} alt={"backward"} />
-    </Link>
-    <Titel>Fahrt</Titel>
-    <Date>27.11.2</Date>
-    <Logo src={MirrorBall} alt={"Logo"} />
-    <Infobox>Next: 2 min 🚀</Infobox>
-    <Menu>
-      <Calendar src={CalendarIcon} alt={"calendar"} />
-      <Filter src={FilterIcon} alt={"filter"} />
-    </Menu>
-  </HeaderElement>
-);
+export const HeaderMain = () => {
+  const history = useHistory();
+
+  return (
+    <HeaderElement>
+      <Back
+        src={Backward}
+        alt={"backward"}
+        onClick={() => history.push("/menu")}
+      />
+      <Titel>Fahrt</Titel>
+      <Date>27.11.2</Date>
+      <Logo src={MirrorBall} alt={"Logo"} />
+      <Infobox>Next: 2 min 🚀</Infobox>
+      <Menu>
+        <Calendar src={CalendarIcon} alt={"calendar"} />
+        <Filter src={FilterIcon} alt={"filter"} />
+      </Menu>
+    </HeaderElement>
+  );
+};
