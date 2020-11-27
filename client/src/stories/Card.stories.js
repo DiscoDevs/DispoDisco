@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge } from "../components/Badge";
+import Badge from "../components/Badge";
 
 import { Card } from "../components/Card";
 import { CardButton } from "../components/CardButton";

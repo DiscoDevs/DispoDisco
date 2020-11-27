@@ -38,7 +38,7 @@ const BadgeElement = styled.div`
   }
 `;
 
-export const Badge = ({ type, onClick }) => {
+const Badge = ({ type, onClick }) => {
   return (
     <BadgeElement type={type} onClick={onClick}>
       <img src={types[type].img} alt="Button" />
@@ -65,3 +65,5 @@ Badge.propTypes = {
 Badge.defaultProps = {
   type: "default",
 };
+
+export default Badge;
