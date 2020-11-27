@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory } from "react-router-dom";
+import { addRide } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import addRide from "../utils/api";
 
 const PageWrapper = styled.div`
   position: fixed;
