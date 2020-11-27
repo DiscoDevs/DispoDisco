@@ -59,7 +59,7 @@ const Logo = styled.img`
   }
 `;
 
-export const Launch = () => {
+const Launch = () => {
   const history = useHistory();
   return (
     <Wrapper>
@@ -74,3 +74,4 @@ export const Launch = () => {
     </Wrapper>
   );
 };
+export default Launch;

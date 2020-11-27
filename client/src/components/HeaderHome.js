@@ -24,10 +24,12 @@ const Logo = styled.img`
   margin-top: -50px;
   filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
-export const HeaderHome = () => (
+const HeaderHome = () => (
   <HeaderElement>
     <First>Disp</First>
     <Logo src={MirrorBall} alt={"Logo"} />
     <Second>Disco</Second>
   </HeaderElement>
 );
+
+export default HeaderHome;

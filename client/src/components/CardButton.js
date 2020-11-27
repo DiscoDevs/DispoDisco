@@ -44,7 +44,7 @@ const ButtonElement = styled.div`
     props.type === "timer" ? "var(--insetShadow)" : "var(--shadow)"};
 `;
 
-export const CardButton = ({ type, label, onClick }) => {
+const CardButton = ({ type, label, onClick }) => {
   const buttonLabel = types[type].label || label;
   return (
     <ButtonElement type={type} onClick={onClick}>
@@ -64,3 +64,4 @@ CardButton.propTypes = {
 CardButton.defaultProps = {
   type: "info",
 };
+export default CardButton;

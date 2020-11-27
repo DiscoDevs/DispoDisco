@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
-import { CardButton } from "./CardButton";
+import CardButton from "./CardButton";
 
 /**
  * Primary UI component for user interaction
@@ -116,7 +116,7 @@ const InfoContainer = styled.div`
   padding: 0rem 0 0.2rem;
 `;
 
-export const Card = ({ labels, type, ...props }) => {
+const Card = ({ labels, type, ...props }) => {
   return (
     <CardContainer type={type} {...props}>
       <Header>
@@ -154,3 +154,4 @@ Card.propTypes = {
   rider: PropTypes.string,
   onClick: PropTypes.func,
 };
+export default Card;

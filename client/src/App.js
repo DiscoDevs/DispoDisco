@@ -1,9 +1,10 @@
 import React from "react";
 import GlobalStyle from "./GlobalStyles";
-import { Launch } from "./pages/Launch";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { MainMenu } from "./pages/MainMenu";
-import { Rides } from "./pages/Rides";
+
+import Launch from "./pages/Launch";
+import MainMenu from "./pages/MainMenu";
+import Rides from "./pages/Rides";
 import AddRide from "./pages/AddRide";
 
 function App() {

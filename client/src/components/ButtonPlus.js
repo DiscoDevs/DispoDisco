@@ -31,7 +31,7 @@ const ButtonElement = styled.button`
   }
 `;
 
-export const ButtonPlus = ({ onClick }) => {
+const ButtonPlus = ({ onClick }) => {
   return (
     <ButtonElement onClick={onClick}>
       <div>+</div>
@@ -42,3 +42,4 @@ export const ButtonPlus = ({ onClick }) => {
 ButtonPlus.propTypes = {
   onClick: PropTypes.func,
 };
+export default ButtonPlus;

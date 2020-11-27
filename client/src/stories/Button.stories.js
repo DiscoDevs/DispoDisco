@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "../components/Button";
-import { ButtonPlus } from "../components/ButtonPlus";
+import Button from "../components/Button";
+import ButtonPlus from "../components/ButtonPlus";
 export default {
   title: "DispoDisco/Button",
   component: ButtonPlus,
