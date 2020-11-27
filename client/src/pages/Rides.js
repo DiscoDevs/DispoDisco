@@ -31,6 +31,7 @@ const Rides = () => {
         <HeaderMain />
         <Card type="concurrentRide" />
         <Card
+          type="normal"
           labels={
             <>
               <Badge type="cargo" label="5-25kg" />
