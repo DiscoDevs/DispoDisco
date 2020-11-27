@@ -1,73 +1,47 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-
+import CargoImg from "../assets/cargoBox.svg";
+import CarriageImg from "../assets/carriage.svg";
+import DirectImg from "../assets/shuttle.svg";
+import OnTimeImg from "../assets/stopwatch.svg";
 /**
  * Primary UI component for user interaction
  */
 const types = {
-  default: {
-    color: "var(--text-secondary)",
-    background: "var(--carriage)",
-    label: "Standard",
-  },
   cargo: {
-    color: "var(--cargo)",
-    label: "Cargo",
+    img: CargoImg,
   },
   carriage: {
-    color: "var(--text-secondary)",
-    label: "Kutsche",
+    img: CarriageImg,
   },
   direct: {
-    color: "var(--direct)",
-    label: "Direkt",
+    img: DirectImg,
   },
   onTime: {
-    color: "var(--onTime)",
-    label: "Termin",
-  },
-  rider: {
-    color: "var(--text-primary)",
-    background: "var(--primary)",
-  },
-  timer: {
-    color: "var(--text-secondary)",
-    background: "var(--text-primary)",
-  },
-  info: {
-    color: "var(--text-secondary)",
-    background: "var(--text-primary)",
-    label: "Info",
+    img: OnTimeImg,
   },
 };
 
 const BadgeElement = styled.div`
-  padding: ${(props) =>
-      props.type === "rider" || props.type === "timer" ? "0.2rem" : "0.7rem"}
-    0.8rem;
-  height: ${(props) =>
-    props.type === "rider" || props.type === "timer" ? "30px" : "40px"};
+  display: grid;
+  align-content: center;
+  height: 40px;
+  width: 40px;
 
-  line-height: ${(props) =>
-    props.type === "rider" || props.type === "timer" ? "1.5" : "1"};
-
-  color: ${(props) => types[props.type].color || types.default.color};
-  background-color: ${(props) =>
-    types[props.type].background || types.default.background};
-  font-weight: ${(props) => (props.type === "timer" ? "normal" : "bold")};
-
-  border-radius: var(--border-radius);
-  box-shadow: ${(props) =>
-    props.type === "timer" ? "var(--insetShadow)" : "var(--shadow)"};
+  background-color: var(--text-secondary30);
+  border-radius: 3px;
+  box-shadow: var(--shadow), 3px 0 6px rgba(100, 100, 100, 0.5);
+  img {
+    width: 28px;
+    margin: auto;
+  }
 `;
 
-export const Badge = ({ type, label, onClick }) => {
-  label = types[type].label || label;
-
+const Badge = ({ type, onClick }) => {
   return (
     <BadgeElement type={type} onClick={onClick}>
-      {label}
+      <img src={types[type].img} alt="Button" />
     </BadgeElement>
   );
 };
@@ -91,3 +65,5 @@ Badge.propTypes = {
 Badge.defaultProps = {
   type: "default",
 };
+
+export default Badge;
