@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import { Badge } from "../components/Badge";
+import Badge from "../components/Badge";
 import { Card } from "../components/Card";
 import { HeaderMini } from "../components/HeaderMini";
 import { Input } from "../components/Input";
