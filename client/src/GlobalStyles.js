@@ -15,7 +15,8 @@ const GlobalStyle = createGlobalStyle`
     --text-primary: hsla(0, 0%, 94%, 1);
     --text-secondary: hsla(0, 0%, 14%, 1);
     --text-secondary50: hsla(0, 0%, 14%, 0.5);
-    --text-secondary30: hsla(0, 0%, 14%, 0.15);
+    --text-secondary30: hsla(0, 0%, 14%, 0.3);
+    --text-secondary15: hsla(0, 0%, 14%, 0.15);
     --primary: var(--green-crayola);
     --carriage: hsla(48, 82%, 55%, 1);
     --direct: var(--dark-red);
@@ -37,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
     --gradient-direct:linear-gradient(0deg, rgba(178,26,26,1) 0%, rgba(216,17,17,1) 100%);
     --gradient-dayRide:linear-gradient(0deg, rgba(40,62,86,1) 0%, rgba(46,167,65,1) 100%);
     --gradient-onTime:linear-gradient(0deg, rgba(53,24,118,1) 0%, rgba(106,48,235,1) 100%);
-    --gradient-menu: linear-gradient(0deg, rgba(36,36,36,1) 0%, rgba(36,36,36,1) 72%, rgba(70,59,94,1) 100%); 
+    --gradient-menu: linear-gradient(0deg, rgba(36,36,36,1) 0%, rgba(36,36,36,1) 72%, rgba(70,59,94,1) 100%);
 
     --green-crayola: hsla(158, 68%, 42%, 1);
     --eerie-black: hsla(0, 0%, 14%, 1);

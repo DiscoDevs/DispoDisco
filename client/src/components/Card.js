@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
-import { Badge } from "./Badge";
+import { CardButton } from "./CardButton";
 
 /**
  * Primary UI component for user interaction
@@ -134,9 +134,9 @@ export const Card = ({ labels, type, ...props }) => {
       </Header>
       <LabelContainer>{labels && labels}</LabelContainer>
       <InfoContainer>
-        <Badge type="rider" label="🚴‍♀️ Elena" />
-        <Badge type="timer" label="1:30h" />
-        <Badge type="info" label="Info" />
+        <CardButton type="rider" label="🚴‍♀️ Elena" />
+        <CardButton type="timer" label="1:30h" />
+        <CardButton type="info" label="Info" />
       </InfoContainer>
     </CardContainer>
   );
