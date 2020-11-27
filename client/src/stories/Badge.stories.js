@@ -1,35 +1,32 @@
 import React from "react";
 
 import { Badge } from "../components/Badge";
+import { NewBadge } from "../components/NewBadge";
 export default {
   title: "DispoDisco/Badge",
   component: Badge,
 };
 
 const Template = (args) => <Badge {...args} />;
+const NewTemplate = (args) => <NewBadge {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  label: "Standard",
-  type: "default",
-};
-
-export const Cargo = Template.bind(0);
+export const Cargo = NewTemplate.bind({});
 Cargo.args = {
   type: "cargo",
 };
-export const Kutsche = Template.bind(0);
-Kutsche.args = {
+export const Carriage = NewTemplate.bind({});
+Carriage.args = {
   type: "carriage",
 };
-export const Direkt = Template.bind(0);
+export const Direkt = NewTemplate.bind({});
 Direkt.args = {
   type: "direct",
 };
-export const Termin = Template.bind(0);
-Termin.args = {
+export const OnTime = NewTemplate.bind({});
+OnTime.args = {
   type: "onTime",
 };
+
 export const Rider = Template.bind(0);
 Rider.args = {
   type: "rider",
