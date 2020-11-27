@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 import CalendarIcon from "../assets/calendar.svg";
 import FilterIcon from "../assets/filter.svg";
-import { Header } from "./Header";
+import Header from "./Header";
 
 const Infobox = styled.p`
   display: flex;
@@ -15,7 +15,7 @@ const IconContainer = styled.div`
   }
 `;
 
-export const HeaderMain = () => (
+const HeaderMain = () => (
   <Header>
     <Infobox>Next Stop 1:30h</Infobox>
     <IconContainer>
@@ -24,3 +24,5 @@ export const HeaderMain = () => (
     </IconContainer>
   </Header>
 );
+
+export default HeaderMain;

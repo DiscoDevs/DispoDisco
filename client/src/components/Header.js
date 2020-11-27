@@ -43,7 +43,7 @@ const Children = styled.div`
   display: flex;
   justify-content: center;
 `;
-export const Header = ({ title, children }) => {
+const Header = ({ title, children }) => {
   const history = useHistory();
   return (
     <HeaderElement title={title}>
@@ -67,3 +67,4 @@ Header.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
 };
+export default Header;

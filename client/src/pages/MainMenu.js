@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import GlobalStyle from "../GlobalStyles";
-import { HeaderHome } from "../components/HeaderHome";
-import { Button } from "../components/Button";
+import HeaderHome from "../components/HeaderHome";
+import Button from "../components/Button";
 import { useHistory } from "react-router-dom";
 
 const PageWrapper = styled.div`
@@ -32,7 +32,7 @@ const MenuWrapper = styled.div`
   }
 `;
 
-export const MainMenu = () => {
+const MainMenu = () => {
   const history = useHistory();
   return (
     <>
@@ -69,3 +69,5 @@ export const MainMenu = () => {
     </>
   );
 };
+
+export default MainMenu;

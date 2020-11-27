@@ -1,8 +1,8 @@
 import React from "react";
 
-import { HeaderMain } from "../components/HeaderMain";
-import { HeaderHome } from "../components/HeaderHome";
-import { Header } from "../components/Header";
+import HeaderMain from "../components/HeaderMain";
+import HeaderHome from "../components/HeaderHome";
+import Header from "../components/Header";
 
 export default {
   title: "DispoDisco/Header",

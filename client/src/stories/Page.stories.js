@@ -1,7 +1,7 @@
 import React from "react";
-import { MainMenu } from "../pages/MainMenu";
-import { Rides } from "../pages/Rides";
-import { Launch } from "../pages/Launch";
+import MainMenu from "../pages/MainMenu";
+import Rides from "../pages/Rides";
+import Launch from "../pages/Launch";
 import AddRide from "../pages/AddRide";
 
 export default {
@@ -9,9 +9,9 @@ export default {
   component: MainMenu,
 };
 
+const LaunchTemplate = (args) => <Launch {...args} />;
 const MainTemplate = (args) => <MainMenu {...args} />;
 const RidesTemplate = (args) => <Rides {...args} />;
-const LaunchTemplate = (args) => <Launch {...args} />;
 const AddRideTemplate = (args) => <AddRide {...args} />;
 
 export const MainMenuPage = MainTemplate.bind({});

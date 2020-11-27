@@ -1,8 +1,8 @@
 import React from "react";
 import Badge from "../components/Badge";
 
-import { Card } from "../components/Card";
-import { CardButton } from "../components/CardButton";
+import Card from "../components/Card";
+import CardButton from "../components/CardButton";
 
 export default {
   title: "DispoDisco/Cards",

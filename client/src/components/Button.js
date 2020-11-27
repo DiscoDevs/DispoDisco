@@ -64,14 +64,7 @@ const Icons = styled.img`
   height: 25px;
 `;
 
-export const Button = ({
-  primary,
-  type,
-  design,
-  category,
-  label,
-  ...props
-}) => {
+const Button = ({ primary, type, design, category, label, ...props }) => {
   return (
     <StyledButton type={type} design={design} {...props}>
       {categories[category] && (
@@ -97,3 +90,4 @@ Button.defaultProps = {
   size: "medium",
   onClick: undefined,
 };
+export default Button;
