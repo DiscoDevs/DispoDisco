@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import GlobalStyle from "../GlobalStyles";
-import { Badge } from "../components/Badge";
+import Badge from "../components/Badge";
 import { Card } from "../components/Card";
 import { HeaderMain } from "../components/HeaderMain";
 import { ButtonPlus } from "../components/ButtonPlus";
