@@ -9,10 +9,11 @@ import CardButton from "./CardButton";
  */
 
 const types = {
-  dayRide: "var(--cargo)",
-  concurrentRide: "var(--carriage)",
-  onTimeRide: "var(--onTime)",
-  direct: "var(--direct)",
+  normal: "var(--gradient-normal)",
+  dayRide: "var(--gradient-dayRide)",
+  concurrentRide: "var(--gradient-concurrent)",
+  onTimeRide: "var(--gradient-onTime)",
+  direct: "var(--gradient-direct)",
 };
 
 const CardContainer = styled.div`
@@ -24,7 +25,8 @@ const CardContainer = styled.div`
   text-align: center;
   font-weight: bold;
   color: var(--text-primary);
-  background-color: ${(props) => types[props.type] || "var(--text-secondary)"};
+  background: ${(props) => types[props.type]};
+
   border-radius: var(--border-radius);
 `;
 

@@ -14,6 +14,7 @@ const CardButtonTemplate = (args) => <CardButton {...args} />;
 
 export const NormalRide = Template.bind();
 NormalRide.args = {
+  type: "normal",
   labels: (
     <>
       <Badge type="cargo" label="5-25kg" />
