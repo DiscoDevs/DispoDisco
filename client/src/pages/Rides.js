@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 const PageWrapper = styled.div`
   position: fixed;
-  overflow: scroll;
+  overflow: auto;
   height: 100%;
   width: 100%;
   background: var(--gradient-dark);
