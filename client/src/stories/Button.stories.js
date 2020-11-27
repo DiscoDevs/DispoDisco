@@ -12,19 +12,19 @@ const TemplatePlus = (args) => <ButtonPlus {...args} />;
 export const PrimaryButton = Template.bind({});
 PrimaryButton.args = {
   label: "Menu",
-  type: "menu",
+  design: "menu",
 };
 
 export const AddRide = Template.bind({});
 AddRide.args = {
   label: "Fahrt hinzufügen",
-  type: "addRide",
+  design: "addRide",
 };
 
 export const CTA = Template.bind({});
 CTA.args = {
   label: "Lets Fetz",
-  type: "cta",
+  design: "cta",
 };
 
 export const PlusButton = TemplatePlus.bind({});

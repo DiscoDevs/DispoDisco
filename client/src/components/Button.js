@@ -29,7 +29,7 @@ const categories = {
   },
 };
 
-const designes = {
+const designs = {
   menu: {
     background: "var(--gradient-menu)",
     border: "none",
@@ -45,9 +45,9 @@ const designes = {
 };
 
 const StyledButton = styled.button`
-  background: ${(props) => designes[props.design].background};
+  background: ${(props) => designs[props.design].background};
   padding: 0.5rem 1rem;
-  border: ${(props) => designes[props.design].border};
+  border: ${(props) => designs[props.design].border};
   border-radius: 6px;
   font-family: "Goldman";
   font-size: 2rem;
