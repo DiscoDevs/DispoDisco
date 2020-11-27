@@ -14,8 +14,7 @@ const MainTemplate = (args) => <MainMenu {...args} />;
 const RidesTemplate = (args) => <Rides {...args} />;
 const AddRideTemplate = (args) => <AddRide {...args} />;
 
-export const MainMenuPage = MainTemplate.bind({});
-
-export const RidesPage = RidesTemplate.bind({});
 export const LaunchPage = LaunchTemplate.bind({});
+export const MainMenuPage = MainTemplate.bind({});
+export const RidesPage = RidesTemplate.bind({});
 export const AddRidePage = AddRideTemplate.bind({});
