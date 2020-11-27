@@ -45,10 +45,10 @@ const ButtonElement = styled.div`
 `;
 
 export const CardButton = ({ type, label, onClick }) => {
-  label = types[type].label || label;
+  const buttonLabel = types[type].label || label;
   return (
     <ButtonElement type={type} onClick={onClick}>
-      {label}
+      {buttonLabel}
     </ButtonElement>
   );
 };
