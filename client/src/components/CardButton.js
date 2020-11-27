@@ -41,7 +41,11 @@ const ButtonElement = styled.div`
 
   border-radius: var(--border-radius);
   box-shadow: ${(props) =>
-    props.type === "timer" ? "var(--insetShadow)" : "var(--shadow)"};
+    props.type === "timer"
+      ? "var(--insetShadow)"
+      : props.type === "info"
+      ? "var(--shadow)"
+      : "none"};
 `;
 
 const CardButton = ({ type, label, onClick }) => {
