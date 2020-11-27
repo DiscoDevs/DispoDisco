@@ -2,19 +2,22 @@ import React, { useState } from "react";
 import styled from "styled-components/macro";
 import { Badge } from "../components/Badge";
 import { Card } from "../components/Card";
-import { HeaderMini } from "../components/HeaderMini";
+import { HeaderMain } from "../components/HeaderMain";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { addRide } from "../utils/api";
+import { useHistory } from "react-router-dom";
 
 const PageWrapper = styled.div`
+  position: fixed;
   height: 100%;
   width: 100%;
   background: var(--text-secondary);
+  overflow: auto;
 `;
 
 const ContentWrapper = styled.div`
-  margin-top: 6rem;
+  padding-top: 12rem;
 `;
 
 const Form = styled.form`
@@ -51,10 +54,11 @@ export default function AddRide() {
   const [rider, setRider] = useState("");
   const [priority, setPriority] = useState("normal");
   const [cargo, setCargo] = useState("s");
+  const history = useHistory();
 
   return (
     <PageWrapper>
-      <HeaderMini />
+      <HeaderMain />
       <ContentWrapper>
         <Card
           type="dayRide"
@@ -78,6 +82,7 @@ export default function AddRide() {
               priority: priority,
               cargo: cargo,
             });
+            history.push("/rides");
           }}
         >
           <Input
@@ -88,13 +93,13 @@ export default function AddRide() {
           />
           <Input
             type="text"
-            placeholder="Von"
+            placeholder="Start"
             value={start}
             onChange={(event) => setStart(event.target.value)}
           />
           <Input
             type="text"
-            placeholder="Zu"
+            placeholder="Ziel"
             value={dest}
             onChange={(event) => setDest(event.target.value)}
           />

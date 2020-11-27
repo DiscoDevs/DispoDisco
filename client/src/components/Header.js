@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import PropTypes from "prop-types";
 import MirrorBall from "../assets/mirrorBall.svg";
 import Backward from "../assets/back.svg";
+import { useHistory } from "react-router-dom";
 
 const HeaderElement = styled.header`
   top: 0;
@@ -42,18 +43,25 @@ const Children = styled.div`
   display: flex;
   justify-content: center;
 `;
-export const Header = ({ title, children }) => (
-  <HeaderElement title={title}>
-    <Top>
-      <img src={Backward} alt={"backward"} />
-      <HeaderText>Tour</HeaderText>
-      <Logo src={MirrorBall} alt={"Logo"} />
-      <HeaderText>27.11.20</HeaderText>
-    </Top>
-    {title && <Title>{title}</Title>}
-    {children && <Children>{children}</Children>}
-  </HeaderElement>
-);
+export const Header = ({ title, children }) => {
+  const history = useHistory();
+  return (
+    <HeaderElement title={title}>
+      <Top>
+        <img
+          src={Backward}
+          alt={"backward"}
+          onClick={() => history.push("/menu")}
+        />
+        <HeaderText>Tour</HeaderText>
+        <Logo src={MirrorBall} alt={"Logo"} />
+        <HeaderText>27.11.20</HeaderText>
+      </Top>
+      {title && <Title>{title}</Title>}
+      {children && <Children>{children}</Children>}
+    </HeaderElement>
+  );
+};
 
 Header.propTypes = {
   title: PropTypes.string,
