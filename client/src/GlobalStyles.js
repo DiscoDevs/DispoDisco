@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components/macro";
 // import GoogleFonts from "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap";
 
 const GlobalStyle = createGlobalStyle`
