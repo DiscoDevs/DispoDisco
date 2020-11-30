@@ -18,8 +18,7 @@ const types = {
 
 const CardContainer = styled.div`
   position: relative;
-  min-width: 300px;
-  max-width: 350px;
+  width: 300px;
   margin: auto;
   padding: 1rem;
   text-align: center;
