@@ -108,7 +108,19 @@ const InfoContainer = styled.div`
   padding: 0rem 0 0.2rem;
 `;
 
-const Card = ({ type, ...props }) => {
+const LabelContainer = styled.div`
+  display: flex;
+  /* justify-content: space-evenly; */
+  margin: 0.75rem auto;
+  & > :not(:first-child) {
+    margin-left: 0.5rem;
+  }
+  & > * {
+    font-size: 0.8rem;
+  }
+`;
+
+const Card = ({ type, labels, info = true, ...props }) => {
   return (
     <CardContainer type={type} {...props}>
       <Header>
@@ -124,10 +136,15 @@ const Card = ({ type, ...props }) => {
           </>
         )}
       </Header>
+      <LabelContainer>{labels && labels}</LabelContainer>
       <InfoContainer>
         <CardButton type="rider" label="🚴‍♀️ Elena" />
         <CardButton type="timer" label="1:30h" />
-        <CardButton type="info" label="Info" />
+        {info ? (
+          <CardButton type="info" label="Info" />
+        ) : (
+          <div style={{ width: "70px" }} />
+        )}
       </InfoContainer>
     </CardContainer>
   );
@@ -141,6 +158,8 @@ Card.propTypes = {
     "concurrentRide",
     "onTimeRide",
   ]),
+  labels: PropTypes.object,
+  info: PropTypes.bool,
   rider: PropTypes.string,
   onClick: PropTypes.func,
 };
