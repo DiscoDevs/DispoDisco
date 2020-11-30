@@ -6,7 +6,6 @@ const TodoElement = styled.div`
   color: var(--text-primary);
   display: flex;
   align-items: center;
-  justify-content: center;
   input {
     height: 2rem;
     margin-right: 1rem;
