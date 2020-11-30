@@ -16,12 +16,12 @@ const port = process.env.PORT || 3600;
 
 app.use(express.json());
 
-app.get("/api/:collectionName/:operatorName/:data", async (req, res) => {
-  const { collectionName, operatorName, data } = req.params;
+app.get("/api/:collectionName/:dataName/:data", async (req, res) => {
+  const { collectionName, dataName, data } = req.params;
   try {
     const collectionData = await getDataByOperator(
       collectionName,
-      operatorName,
+      dataName,
       data
     );
     res.send(collectionData);
