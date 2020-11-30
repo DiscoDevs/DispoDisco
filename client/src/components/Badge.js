@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-import CargoImg from "../assets/cargoBox.svg";
+import CargoS from "../assets/cargoBox.svg";
+import CargoM from "../assets/packages.svg";
+import CargoL from "../assets/container.svg";
 import CarriageImg from "../assets/carriage.svg";
 import DirectImg from "../assets/shuttle.svg";
 import OnTimeImg from "../assets/stopwatch.svg";
@@ -9,8 +11,14 @@ import OnTimeImg from "../assets/stopwatch.svg";
  * Primary UI component for user interaction
  */
 const types = {
-  cargo: {
-    img: CargoImg,
+  cargoS: {
+    img: CargoS,
+  },
+  cargoM: {
+    img: CargoM,
+  },
+  cargoL: {
+    img: CargoL,
   },
   carriage: {
     img: CarriageImg,
@@ -50,7 +58,9 @@ Badge.propTypes = {
   type: PropTypes.oneOf([
     "direct",
     "carriage",
-    "cargo",
+    "cargoS",
+    "cargoM",
+    "cargoL",
     "onTime",
     "timer",
     "info",
