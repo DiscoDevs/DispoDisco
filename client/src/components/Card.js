@@ -109,7 +109,6 @@ const InfoContainer = styled.div`
 
 const LabelContainer = styled.div`
   display: flex;
-  /* justify-content: space-evenly; */
   margin: 0.75rem auto;
   & > :not(:first-child) {
     margin-left: 0.5rem;
