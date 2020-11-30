@@ -24,6 +24,11 @@ const PageWrapper = styled.div`
 
 const Rides = () => {
   const history = useHistory();
+  const currentDate = new Date();
+  const today = `${currentDate.getFullYear()}-${
+    currentDate.getMonth() + 1
+  }-${currentDate.getDate()}`;
+  console.log(today);
   return (
     <>
       <GlobalStyle />
