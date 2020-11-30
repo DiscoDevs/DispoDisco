@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const TodoElement = styled.div`
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
