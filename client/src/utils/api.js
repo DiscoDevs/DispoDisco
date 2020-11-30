@@ -9,6 +9,7 @@ export async function addRide(props) {
 }
 
 export async function getRidesByDate(date) {
-  const promises = await fetch(`/api/tasks/date/${date}`);
-  console.log(promises);
+  const result = await fetch(`/api/tasks/date/${date}`);
+  const data = await result.json();
+  return data;
 }
