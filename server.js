@@ -9,11 +9,31 @@ const {
   deleteData,
   updateData,
   getDataByName,
+  getDataByOperator,
 } = require("./lib/serverMethods");
 const app = express();
 const port = process.env.PORT || 3600;
 
 app.use(express.json());
+
+app.get("/api/:collectionName/:dataName/:data", async (req, res) => {
+  const { collectionName, dataName, data } = req.params;
+  try {
+    const collectionData = await getDataByOperator(
+      collectionName,
+      dataName,
+      data
+    );
+    res.send(collectionData);
+  } catch (e) {
+    console.error(e);
+    res
+      .status(500)
+      .send(
+        "An unexpected server error occured. Please call the Coder of your Trust."
+      );
+  }
+});
 
 app.get("/api/:collectionName", async (req, res) => {
   const { collectionName } = req.params;

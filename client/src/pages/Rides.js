@@ -8,6 +8,8 @@ import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
 import { useHistory } from "react-router-dom";
 import { getCurrentDate } from "../utils/date";
+import { getDataByQuery } from "../utils/api";
+import { useEffect } from "react";
 
 const PageWrapper = styled.div`
   position: fixed;
@@ -25,8 +27,26 @@ const PageWrapper = styled.div`
 
 const Rides = () => {
   const history = useHistory();
-  const today = getCurrentDate();
-  console.log(today);
+  useEffect(() => {
+    const doFetch = async () => {
+      const today = getCurrentDate();
+      const todaysRides = await getDataByQuery({
+        collectionName: "tasks",
+        dataName: "date",
+        query: today,
+      });
+      console.log(todaysRides);
+      console.log(
+        await getDataByQuery({
+          collectionName: "tasks",
+          dataName: "date",
+          query: "2020-12-01",
+        })
+      );
+      return todaysRides;
+    };
+    doFetch();
+  }, []);
   return (
     <>
       <GlobalStyle />
