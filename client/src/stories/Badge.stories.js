@@ -8,9 +8,17 @@ export default {
 
 const Template = (args) => <Badge {...args} />;
 
-export const Cargo = Template.bind({});
-Cargo.args = {
-  type: "cargo",
+export const CargoS = Template.bind({});
+CargoS.args = {
+  type: "cargoS",
+};
+export const CargoM = Template.bind({});
+CargoM.args = {
+  type: "cargoM",
+};
+export const CargoL = Template.bind({});
+CargoL.args = {
+  type: "cargoL",
 };
 export const Carriage = Template.bind({});
 Carriage.args = {
