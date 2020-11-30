@@ -37,7 +37,7 @@ export default function RideInfo() {
           info={false}
           labels={
             <>
-              <Badge type="cargo" label="5-25kg" />
+              <Badge type="cargoS" label="5-25kg" />
               <Badge type="direct" label="Direct" />
               <Badge type="carriage" label="Kutsche" />
             </>
