@@ -75,7 +75,7 @@ export default function AddRide() {
         type="dayRide"
         labels={
           <>
-            <Badge type="cargo" />
+            <Badge type="cargoS" />
             <Badge type="direct" />
             <Badge type="carriage" />
           </>
@@ -144,9 +144,10 @@ export default function AddRide() {
         <div>
           <Badge type="direct" onClick={() => setPriority("direct")} />
           <Badge type="onTime" onClick={() => setPriority("onTime")} />
+          <Badge type="cargoS" label="s" onClick={() => setCargo("s")} />
+          <Badge type="cargoM" label="m" onClick={() => setCargo("m")} />
+          <Badge type="cargoL" label="l" onClick={() => setCargo("l")} />
           <Badge type="carriage" onClick={() => setCargo("carriage")} />
-          <Badge type="cargo" label="m" onClick={() => setCargo("m")} />
-          <Badge type="cargo" label="l" onClick={() => setCargo("l")} />
         </div>
         <Button type="submit" design="addRide" label="Fahrt hinzufügen" />
       </Form>
