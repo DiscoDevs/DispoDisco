@@ -2,6 +2,7 @@ import React from "react";
 import logoDark from "../assets/ddLogoDark.svg";
 import styled from "styled-components/macro";
 import { useHistory } from "react-router-dom";
+import { getRidesByDate } from "../utils/api";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -61,6 +62,7 @@ const Logo = styled.img`
 
 const Launch = () => {
   const history = useHistory();
+  getRidesByDate("2020-11-30");
   return (
     <Wrapper>
       <Title>DispoDisco</Title>
