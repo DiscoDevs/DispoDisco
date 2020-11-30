@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
 import { useHistory } from "react-router-dom";
+import { getCurrentDate } from "../utils/date";
 
 const PageWrapper = styled.div`
   position: fixed;
@@ -24,10 +25,7 @@ const PageWrapper = styled.div`
 
 const Rides = () => {
   const history = useHistory();
-  const currentDate = new Date();
-  const today = `${currentDate.getFullYear()}-${
-    currentDate.getMonth() + 1
-  }-${currentDate.getDate()}`;
+  const today = getCurrentDate();
   console.log(today);
   return (
     <>
