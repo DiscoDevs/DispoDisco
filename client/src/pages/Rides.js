@@ -36,13 +36,6 @@ const Rides = () => {
         query: today,
       });
       console.log(todaysRides);
-      console.log(
-        await getDataByQuery({
-          collectionName: "tasks",
-          dataName: "date",
-          query: "2020-12-01",
-        })
-      );
       return todaysRides;
     };
     doFetch();
