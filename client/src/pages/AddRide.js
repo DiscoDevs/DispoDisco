@@ -98,7 +98,7 @@ export default function AddRide() {
   const [date, setDate] = useState("");
   const [rider, setRider] = useState("");
   const [priority, setPriority] = useState("normal");
-  const [cargo, setCargo] = useState("s");
+  const [cargo, setCargo] = useState(null);
   // const [info, setInfo] = useState("");
   const [checkbox, setCheckbox] = useState("");
   const [checkboxes, setCheckboxes] = useState([]);
