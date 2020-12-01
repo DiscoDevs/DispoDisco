@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import CargoS from "../assets/cargoBox.svg";
@@ -43,12 +43,18 @@ const BadgeElement = styled.div`
   img {
     width: 28px;
     margin: auto;
+    filter: grayscale(${(props) => (props.isActive === true ? "0" : "1")});
   }
 `;
 
-const Badge = ({ type, onClick }) => {
+const Badge = ({ type, status, onClick }) => {
+  const [isActive, setIsActive] = useState(status);
+
+  function changeStatus() {
+    setIsActive(!isActive);
+  }
   return (
-    <BadgeElement type={type} onClick={onClick}>
+    <BadgeElement isActive={isActive} type={type} onClick={changeStatus}>
       <img src={types[type].img} alt="Button" />
     </BadgeElement>
   );
@@ -67,13 +73,13 @@ Badge.propTypes = {
     "rider",
   ]),
 
-  label: PropTypes.string,
-
+  status: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 Badge.defaultProps = {
   type: "default",
+  status: false,
 };
 
 export default Badge;
