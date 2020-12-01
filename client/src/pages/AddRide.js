@@ -65,7 +65,7 @@ export default function AddRide() {
           type="dayRide"
           labels={
             <>
-              <Badge type="cargo" />
+              <Badge type="cargoS" />
               <Badge type="direct" />
               <Badge type="carriage" />
             </>
