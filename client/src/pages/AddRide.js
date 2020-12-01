@@ -119,8 +119,8 @@ export default function AddRide() {
             <Badge type="direct" onClick={() => setPriority("direct")} />
             <Badge type="onTime" onClick={() => setPriority("onTime")} />
             <Badge type="carriage" onClick={() => setCargo("carriage")} />
-            <Badge type="cargoS" label="m" onClick={() => setCargo("m")} />
-            <Badge type="cargoS" label="l" onClick={() => setCargo("l")} />
+            <Badge type="cargoM" onClick={() => setCargo("m")} />
+            <Badge type="cargoL" onClick={() => setCargo("l")} />
           </div>
           <Button type="submit" design="addRide" label="Fahrt hinzufügen" />
         </Form>
