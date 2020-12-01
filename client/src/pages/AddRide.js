@@ -100,12 +100,12 @@ export default function AddRide() {
   const [priority, setPriority] = useState("normal");
   const [cargo, setCargo] = useState("s");
   // const [info, setInfo] = useState("");
-  const [checkBox, setCheckbox] = useState("");
-  const [checkBoxes, setCheckboxes] = useState([]);
+  const [checkbox, setCheckbox] = useState("");
+  const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
 
   const handleRemove = (entry) => {
-    const filteredCheckboxes = checkBoxes.filter((cb) => cb !== entry);
+    const filteredCheckboxes = checkboxes.filter((cb) => cb !== entry);
     setCheckboxes(filteredCheckboxes);
   };
 
@@ -175,9 +175,9 @@ export default function AddRide() {
           <textarea name="InfoInput" cols="30" rows="10" />
 
           <h3>Todo-Liste</h3>
-          {checkBoxes && (
+          {checkboxes && (
             <OutputContainer>
-              {checkBoxes.map((entry, index) => (
+              {checkboxes.map((entry, index) => (
                 <CheckboxEntry key={index}>
                   <Todo>{entry} </Todo>
                   <button onClick={() => handleRemove(entry)}>X</button>
@@ -189,12 +189,14 @@ export default function AddRide() {
           <InputContainer
             onSubmit={(event) => {
               event.preventDefault();
-              setCheckboxes([...checkBoxes, checkBox]);
+              setCheckboxes([...checkboxes, checkbox]);
+              setCheckbox("");
             }}
           >
             <input type="checkbox" />
             <input
               type="text"
+              value={checkbox}
               onChange={(event) => setCheckbox(event.target.value)}
             />
             <button type="submit">Yes!</button>
