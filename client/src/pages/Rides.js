@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
-import { getCurrentDate } from "../utils/date";
+import { getCurrentDateString } from "../utils/date";
 import { getDataByQuery } from "../utils/api";
 
 import Badge from "../components/Badge";
@@ -28,16 +28,17 @@ const PageWrapper = styled.div`
 `;
 
 const Rides = () => {
+  const [rides, setRides] = useState([]);
   const history = useHistory();
   useEffect(() => {
     const doFetch = async () => {
-      const today = getCurrentDate();
+      const today = getCurrentDateString();
       const todaysRides = await getDataByQuery({
         collectionName: "tasks",
         dataName: "date",
         query: today,
       });
-      return todaysRides;
+      setRides(todaysRides);
     };
     doFetch();
   }, []);
