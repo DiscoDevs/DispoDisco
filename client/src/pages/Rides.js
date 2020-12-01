@@ -47,6 +47,10 @@ const Rides = () => {
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
+        {rides &&
+          rides.map((ride, i) => {
+            return <p key={i}>{ride.start}</p>;
+          })}
         <Card type="concurrentRide" />
         <Card
           type="normal"
