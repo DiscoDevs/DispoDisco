@@ -54,7 +54,14 @@ const Badge = ({ type, status, onClick }) => {
     setIsActive(!isActive);
   }
   return (
-    <BadgeElement isActive={isActive} type={type} onClick={changeStatus}>
+    <BadgeElement
+      isActive={isActive}
+      type={type}
+      onClick={() => {
+        onClick();
+        changeStatus();
+      }}
+    >
       <img src={types[type].img} alt="Button" />
     </BadgeElement>
   );
