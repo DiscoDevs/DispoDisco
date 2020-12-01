@@ -49,9 +49,30 @@ const Rides = () => {
         <HeaderMain />
         {rides &&
           rides.map((ride, i) => {
-            return <p key={i}>{ride.start}</p>;
+            return (
+              <Card
+                key={i}
+                type={ride.priority}
+                start={ride.start}
+                dest={ride.dest}
+                rider={ride.assignment}
+                labels={
+                  <>
+                    {ride.cargo && <Badge type={ride.cargo} status={true} />}
+                    {ride.priority !== "normal" ? (
+                      <Badge type={ride.priority} status={true} />
+                    ) : (
+                      <></>
+                    )}
+                    {ride.carriage && (
+                      <Badge type={ride.carriage} status={true} />
+                    )}
+                  </>
+                }
+              />
+            );
           })}
-        <Card type="concurrentRide" />
+        {/* <Card type="concurrentRide" />
         <Card
           type="normal"
           labels={
@@ -91,7 +112,7 @@ const Rides = () => {
               <Badge type="carriage" label="Kutsche" />
             </>
           }
-        />
+        /> */}
         <ButtonPlus onClick={() => history.push("/addRide")} />
       </PageWrapper>
     </>

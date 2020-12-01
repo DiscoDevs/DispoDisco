@@ -15,6 +15,9 @@ const CardButtonTemplate = (args) => <CardButton {...args} />;
 export const NormalRide = Template.bind();
 NormalRide.args = {
   type: "normal",
+  start: "Alex-Dental",
+  dest: "Anzag",
+  rider: "Lazer",
   labels: (
     <>
       <Badge type="cargoS" label="5-25kg" />
@@ -26,6 +29,9 @@ NormalRide.args = {
 export const DayRide = Template.bind();
 DayRide.args = {
   type: "dayRide",
+  start: "Rewe",
+  dest: "L. Machens",
+  rider: "Philipp G",
   labels: (
     <>
       <Badge type="cargoM" label="5-25kg" />
@@ -37,6 +43,9 @@ DayRide.args = {
 export const DirectRide = Template.bind();
 DirectRide.args = {
   type: "direct",
+  start: "neuefische",
+  dest: "IT-Firma",
+  rider: "Elena",
   labels: (
     <>
       <Badge type="cargoL" label="5-25kg" />
@@ -48,6 +57,9 @@ DirectRide.args = {
 export const OnTimeRide = Template.bind();
 OnTimeRide.args = {
   type: "onTimeRide",
+  start: "Postfiliale",
+  dest: "Empfänger",
+  rider: "Benji",
   labels: (
     <>
       <Badge type="cargoL" label="5-25kg" />
@@ -59,6 +71,7 @@ OnTimeRide.args = {
 export const ConcurrentRide = Template.bind();
 ConcurrentRide.args = {
   type: "concurrentRide",
+  start: "Rathaus",
 };
 
 export const Rider = CardButtonTemplate.bind(0);

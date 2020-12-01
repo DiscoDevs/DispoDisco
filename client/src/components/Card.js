@@ -118,25 +118,25 @@ const LabelContainer = styled.div`
   }
 `;
 
-const Card = ({ type, labels, info = true, ...props }) => {
+const Card = ({ type, labels, info = true, start, dest, rider, ...props }) => {
   return (
     <CardContainer type={type} {...props}>
       <Header>
         <Start type={type}>
-          <p>Alex-Dental</p>
+          <p>{start}</p>
         </Start>
         {type !== "concurrentRide" && (
           <>
             <Arrow src={ArrowImg} />
             <Destination>
-              <p>Anzag</p>
+              <p>{dest}</p>
             </Destination>
           </>
         )}
       </Header>
       <LabelContainer>{labels && labels}</LabelContainer>
       <InfoContainer>
-        <CardButton type="rider" label="🚴‍♀️ Elena" />
+        <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         <CardButton type="timer" label="1:30h" />
         {info ? (
           <CardButton type="info" label="Info" />
@@ -160,5 +160,7 @@ Card.propTypes = {
   info: PropTypes.bool,
   rider: PropTypes.string,
   onClick: PropTypes.func,
+  start: PropTypes.string,
+  dest: PropTypes.string,
 };
 export default Card;
