@@ -1,15 +1,17 @@
 import React from "react";
-import styled from "styled-components/macro";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
+import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
+
+import { getCurrentDate } from "../utils/date";
+import { getDataByQuery } from "../utils/api";
+
 import Badge from "../components/Badge";
 import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
-import { useHistory } from "react-router-dom";
-import { getCurrentDate } from "../utils/date";
-import { getDataByQuery } from "../utils/api";
-import { useEffect } from "react";
 
 const PageWrapper = styled.div`
   position: fixed;
@@ -35,7 +37,6 @@ const Rides = () => {
         dataName: "date",
         query: today,
       });
-      console.log(todaysRides);
       return todaysRides;
     };
     doFetch();
