@@ -1,12 +1,17 @@
-import React from "react";
-import styled from "styled-components/macro";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
+import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
+
+import { getCurrentDateString } from "../utils/date";
+import { getDataByQuery } from "../utils/api";
+
 import Badge from "../components/Badge";
 import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
-import { useHistory } from "react-router-dom";
 
 const PageWrapper = styled.div`
   position: fixed;
@@ -23,12 +28,29 @@ const PageWrapper = styled.div`
 `;
 
 const Rides = () => {
+  const [rides, setRides] = useState([]);
   const history = useHistory();
+  useEffect(() => {
+    const doFetch = async () => {
+      const today = getCurrentDateString();
+      const todaysRides = await getDataByQuery({
+        collectionName: "tasks",
+        dataName: "date",
+        query: today,
+      });
+      setRides(todaysRides);
+    };
+    doFetch();
+  }, []);
   return (
     <>
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
+        {rides &&
+          rides.map((ride, i) => {
+            return <p key={i}>{ride.start}</p>;
+          })}
         <Card type="concurrentRide" />
         <Card
           type="normal"
