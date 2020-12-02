@@ -28,7 +28,7 @@ const PageWrapper = styled.div`
 `;
 
 const Tours = () => {
-  const [Tours, setTours] = useState([]);
+  const [tours, setTours] = useState([]);
   const history = useHistory();
   useEffect(() => {
     const doFetch = async () => {
@@ -47,8 +47,8 @@ const Tours = () => {
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
-        {Tours &&
-          Tours.map((ride) => {
+        {tours &&
+          tours.map((ride) => {
             return (
               <Card
                 key={ride._id}
