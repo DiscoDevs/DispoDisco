@@ -64,9 +64,7 @@ const Tours = () => {
                     ) : (
                       ""
                     )}
-                    {ride.carriage && (
-                      <Badge type={ride.carriage} status={true} />
-                    )}
+                    {ride.carriage && <Badge type="carriage" status={true} />}
                   </>
                 }
               />
