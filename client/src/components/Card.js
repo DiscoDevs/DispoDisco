@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
+import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
 
 /**
@@ -15,6 +16,66 @@ const types = {
   onTimeRide: "var(--gradient-onTime)",
   direct: "var(--gradient-direct)",
 };
+
+const Card = ({
+  type,
+  labels,
+  info = true,
+  settings = false,
+  start,
+  dest,
+  rider,
+  ...props
+}) => {
+  return (
+    <CardContainer type={type} {...props}>
+      <Header>
+        <Start type={type}>
+          <p>{start}</p>
+        </Start>
+        {type !== "concurrentRide" && (
+          <>
+            <img src={ArrowImg} alt="Arrow" />
+            <Destination>
+              <p>{dest}</p>
+            </Destination>
+          </>
+        )}
+      </Header>
+      <DivInTheMiddle>
+        <LabelContainer>{labels && labels}</LabelContainer>
+        <div>{settings && <img src={SettingsImg} alt="Change Ride" />}</div>
+      </DivInTheMiddle>
+      <InfoContainer>
+        <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
+        <CardButton type="timer" label="1:30h" />
+        {info ? (
+          <CardButton type="info" label="Info" />
+        ) : (
+          <div style={{ width: "70px" }} />
+        )}
+      </InfoContainer>
+    </CardContainer>
+  );
+};
+
+Card.propTypes = {
+  type: PropTypes.oneOf([
+    "normal",
+    "dayRide",
+    "direct",
+    "concurrentRide",
+    "onTimeRide",
+  ]),
+  labels: PropTypes.object,
+  info: PropTypes.bool,
+  settings: PropTypes.bool,
+  rider: PropTypes.string,
+  onClick: PropTypes.func,
+  start: PropTypes.string,
+  dest: PropTypes.string,
+};
+export default Card;
 
 const CardContainer = styled.div`
   position: relative;
@@ -89,7 +150,16 @@ const Start = styled.div`
     }
   }
 `;
-const Arrow = styled.img``;
+
+const DivInTheMiddle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  > div > img {
+    height: 30px;
+    margin: 1rem;
+  }
+`;
 const Destination = styled(Start)``;
 const Header = styled.div`
   display: flex;
@@ -109,7 +179,7 @@ const InfoContainer = styled.div`
 
 const LabelContainer = styled.div`
   display: flex;
-  margin: 0.75rem auto;
+  margin: 0.75rem 0;
   & > :not(:first-child) {
     margin-left: 0.5rem;
   }
@@ -117,60 +187,3 @@ const LabelContainer = styled.div`
     font-size: 0.8rem;
   }
 `;
-
-const Card = ({
-  type,
-  labels,
-  info = true,
-  settings = false,
-  start,
-  dest,
-  rider,
-  ...props
-}) => {
-  return (
-    <CardContainer type={type} {...props}>
-      <Header>
-        <Start type={type}>
-          <p>{start}</p>
-        </Start>
-        {type !== "concurrentRide" && (
-          <>
-            <Arrow src={ArrowImg} />
-            <Destination>
-              <p>{dest}</p>
-            </Destination>
-          </>
-        )}
-      </Header>
-      <LabelContainer>{labels && labels}</LabelContainer>
-      <InfoContainer>
-        <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
-        <CardButton type="timer" label="1:30h" />
-        {info ? (
-          <CardButton type="info" label="Info" />
-        ) : (
-          <div style={{ width: "70px" }} />
-        )}
-      </InfoContainer>
-    </CardContainer>
-  );
-};
-
-Card.propTypes = {
-  type: PropTypes.oneOf([
-    "normal",
-    "dayRide",
-    "direct",
-    "concurrentRide",
-    "onTimeRide",
-  ]),
-  labels: PropTypes.object,
-  info: PropTypes.bool,
-  settings: PropTypes.bool,
-  rider: PropTypes.string,
-  onClick: PropTypes.func,
-  start: PropTypes.string,
-  dest: PropTypes.string,
-};
-export default Card;
