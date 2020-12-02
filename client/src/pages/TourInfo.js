@@ -27,7 +27,7 @@ const InfoContainer = styled.div`
   padding: 0.5rem;
   text-align: left;
 `;
-export default function RideInfo() {
+export default function TourInfo() {
   return (
     <Background>
       <Header title="Info" />

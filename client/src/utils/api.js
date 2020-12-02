@@ -1,4 +1,4 @@
-export async function addRide(props) {
+export async function addTour(props) {
   await fetch("/api/tasks", {
     method: "POST",
     body: JSON.stringify(props),
