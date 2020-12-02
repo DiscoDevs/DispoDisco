@@ -20,8 +20,14 @@ export async function getSortedDataByQuery({
   query,
 }) {
   const result = await fetch(
-    `/api/${collectionName}/${dataName}/${query}/sorted`
+    `/api/${collectionName}/${dataName}/${query}?sortBy=${dataName}`
   );
+  const returnedData = await result.json();
+  return returnedData;
+}
+
+export async function getSortedData({ collectionName, dataName }) {
+  const result = await fetch(`/api/${collectionName}?sortBy=${dataName}`);
   const returnedData = await result.json();
   return returnedData;
 }
