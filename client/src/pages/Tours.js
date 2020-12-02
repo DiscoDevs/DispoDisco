@@ -6,7 +6,7 @@ import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
 import { getCurrentDateString } from "../utils/date";
-import { getDataByQuery } from "../utils/api";
+import { getSortedDataByQuery } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -33,7 +33,7 @@ const Tours = () => {
   useEffect(() => {
     const doFetch = async () => {
       const today = getCurrentDateString();
-      const todaysTours = await getDataByQuery({
+      const todaysTours = await getSortedDataByQuery({
         collectionName: "tasks",
         dataName: "date",
         query: today,
