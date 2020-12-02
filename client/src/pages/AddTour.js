@@ -30,13 +30,13 @@ export default function AddTour() {
     priority !== "onTime" ? setPriority("onTime") : setPriority("normal");
   };
   const cargoSClick = () => {
-    cargo !== "S" ? setCargo("S") : setCargo(null);
+    cargo !== "cargoS" ? setCargo("cargoS") : setCargo(null);
   };
   const cargoMClick = () => {
-    cargo !== "M" ? setCargo("M") : setCargo(null);
+    cargo !== "cargoM" ? setCargo("cargoM") : setCargo(null);
   };
   const cargoLClick = () => {
-    cargo !== "L" ? setCargo("L") : setCargo(null);
+    cargo !== "cargoL" ? setCargo("cargoL") : setCargo(null);
   };
   const carriageClick = () => {
     carriage !== true ? setCarriage(true) : setCarriage(false);
