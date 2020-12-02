@@ -27,7 +27,9 @@ export default function AddTour() {
     priority !== "direct" ? setPriority("direct") : setPriority("normal");
   };
   const onTimeClick = () => {
-    priority !== "onTime" ? setPriority("onTime") : setPriority("normal");
+    priority !== "onTimeRide"
+      ? setPriority("onTimeRide")
+      : setPriority("normal");
   };
   const cargoSClick = () => {
     cargo !== "cargoS" ? setCargo("cargoS") : setCargo(null);
@@ -88,12 +90,19 @@ export default function AddTour() {
       <HeaderMain />
       <Wrapper>
         <Card
-          type="dayRide"
+          type={priority}
+          start={start}
+          dest={dest}
+          rider={assignment}
           labels={
             <>
-              <Badge type="cargoS" />
-              <Badge type="direct" />
-              <Badge type="carriage" />
+              {cargo && <Badge type={cargo} status={true} />}
+              {priority !== "normal" ? (
+                <Badge type={priority} status={true} />
+              ) : (
+                ""
+              )}
+              {carriage && <Badge type="carriage" status={true} />}
             </>
           }
         />
