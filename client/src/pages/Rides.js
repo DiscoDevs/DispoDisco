@@ -48,50 +48,30 @@ const Rides = () => {
       <PageWrapper>
         <HeaderMain />
         {rides &&
-          rides.map((ride, i) => {
-            return <p key={i}>{ride.start}</p>;
+          rides.map((ride) => {
+            return (
+              <Card
+                key={ride._id}
+                type={ride.priority}
+                start={ride.start}
+                dest={ride.dest}
+                rider={ride.assignment}
+                labels={
+                  <>
+                    {ride.cargo && <Badge type={ride.cargo} status={true} />}
+                    {ride.priority !== "normal" ? (
+                      <Badge type={ride.priority} status={true} />
+                    ) : (
+                      ""
+                    )}
+                    {ride.carriage && (
+                      <Badge type={ride.carriage} status={true} />
+                    )}
+                  </>
+                }
+              />
+            );
           })}
-        <Card type="concurrentRide" />
-        <Card
-          type="normal"
-          labels={
-            <>
-              <Badge type="cargoS" label="5-25kg" />
-              <Badge type="direct" label="Direct" />
-              <Badge type="carriage" label="Kutsche" />
-            </>
-          }
-        />
-        <Card
-          type="dayRide"
-          labels={
-            <>
-              <Badge type="cargoS" label="5-25kg" />
-              <Badge type="direct" label="Direct" />
-              <Badge type="carriage" label="Kutsche" />
-            </>
-          }
-        />
-        <Card
-          type="direct"
-          labels={
-            <>
-              <Badge type="cargoS" label="5-25kg" />
-              <Badge type="direct" label="Direct" />
-              <Badge type="carriage" label="Kutsche" />
-            </>
-          }
-        />
-        <Card
-          type="onTimeRide"
-          labels={
-            <>
-              <Badge type="cargoS" label="5-25kg" />
-              <Badge type="direct" label="Direct" />
-              <Badge type="carriage" label="Kutsche" />
-            </>
-          }
-        />
         <ButtonPlus onClick={() => history.push("/addRide")} />
       </PageWrapper>
     </>

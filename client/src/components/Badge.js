@@ -26,7 +26,7 @@ const types = {
   direct: {
     img: DirectImg,
   },
-  onTime: {
+  onTimeRide: {
     img: OnTimeImg,
   },
 };
@@ -47,7 +47,7 @@ const BadgeElement = styled.div`
   }
 `;
 
-const Badge = ({ type, status, onClick }) => {
+const Badge = ({ type, status, onClick = false }) => {
   const [isActive, setIsActive] = useState(status);
 
   function changeStatus() {
@@ -74,7 +74,7 @@ Badge.propTypes = {
     "cargoS",
     "cargoM",
     "cargoL",
-    "onTime",
+    "onTimeRide",
     "timer",
     "info",
     "rider",
