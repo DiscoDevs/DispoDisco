@@ -118,7 +118,16 @@ const LabelContainer = styled.div`
   }
 `;
 
-const Card = ({ type, labels, info = true, start, dest, rider, ...props }) => {
+const Card = ({
+  type,
+  labels,
+  info = true,
+  settings = false,
+  start,
+  dest,
+  rider,
+  ...props
+}) => {
   return (
     <CardContainer type={type} {...props}>
       <Header>
@@ -158,6 +167,7 @@ Card.propTypes = {
   ]),
   labels: PropTypes.object,
   info: PropTypes.bool,
+  settings: PropTypes.bool,
   rider: PropTypes.string,
   onClick: PropTypes.func,
   start: PropTypes.string,
