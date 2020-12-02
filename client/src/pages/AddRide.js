@@ -44,7 +44,7 @@ export default function AddRide() {
 
   const Badges = [
     { name: "direct", func: direktClick },
-    { name: "onTime", func: onTimeClick },
+    { name: "onTimeRide", func: onTimeClick },
     { name: "cargoS", func: cargoSClick },
     { name: "cargoM", func: cargoMClick },
     { name: "cargoL", func: cargoLClick },
