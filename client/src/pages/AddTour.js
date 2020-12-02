@@ -11,7 +11,7 @@ import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 
 export default function AddTour() {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
   const [date, setDate] = useState("");
@@ -54,8 +54,8 @@ export default function AddTour() {
     {
       name: "Titel",
       type: "text",
-      value: title,
-      func: (event) => setTitle(event.target.value),
+      value: name,
+      func: (event) => setName(event.target.value),
     },
     {
       name: "Start",
@@ -101,7 +101,7 @@ export default function AddTour() {
           onSubmit={(event) => {
             event.preventDefault();
             addTour({
-              title,
+              name,
               start,
               dest,
               date,

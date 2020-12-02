@@ -8,56 +8,27 @@ const {
   insertData,
   deleteData,
   updateData,
-  getDataByName,
-  getDataByOperator,
-  // getSortedDataByOperator,
 } = require("./lib/serverMethods");
 const app = express();
 const port = process.env.PORT || 3600;
 
 app.use(express.json());
 
-app.get("/api/:collectionName/:dataName/:data", async (req, res) => {
-  let sortBy = req.query.sortBy;
-  const { collectionName, dataName, data } = req.params;
-  try {
-    const collectionData = await getDataByOperator({
-      collectionName,
-      dataName,
-      data,
-      sortBy,
-    });
-    res.send(collectionData);
-  } catch (e) {
-    console.error(e);
-    res
-      .status(500)
-      .send(
-        "An unexpected server error occured. Please call the Coder of your Trust."
-      );
-  }
-});
-
 app.get("/api/:collectionName", async (req, res) => {
+  let dataName = req.query.name;
+  let dataValue = req.query.value;
   let sortBy = req.query.sortBy;
+  let order = req.query.order === "desc" ? -1 : 1;
   const { collectionName } = req.params;
   try {
-    const collectionData = await getCollection({ collectionName, sortBy });
+    const collectionData = await getCollection({
+      collectionName,
+      dataName,
+      dataValue,
+      sortBy,
+      order,
+    });
     res.send(collectionData);
-  } catch (e) {
-    console.error(e);
-    res
-      .status(500)
-      .send("An unexpected server error occured. Please try again later.");
-  }
-});
-
-app.get("/api/:collectionName/:dataName", async (req, res) => {
-  const { collectionName, dataName } = req.params;
-  console.log({ collectionName, dataName });
-  try {
-    const data = await getDataByName(collectionName, dataName);
-    res.send(data);
   } catch (e) {
     console.error(e);
     res
