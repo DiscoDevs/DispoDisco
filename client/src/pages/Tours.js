@@ -27,18 +27,18 @@ const PageWrapper = styled.div`
   }
 `;
 
-const Rides = () => {
-  const [rides, setRides] = useState([]);
+const Tours = () => {
+  const [Tours, setTours] = useState([]);
   const history = useHistory();
   useEffect(() => {
     const doFetch = async () => {
       const today = getCurrentDateString();
-      const todaysRides = await getDataByQuery({
+      const todaysTours = await getDataByQuery({
         collectionName: "tasks",
         dataName: "date",
         query: today,
       });
-      setRides(todaysRides);
+      setTours(todaysTours);
     };
     doFetch();
   }, []);
@@ -47,8 +47,8 @@ const Rides = () => {
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
-        {rides &&
-          rides.map((ride) => {
+        {Tours &&
+          Tours.map((ride) => {
             return (
               <Card
                 key={ride._id}
@@ -72,10 +72,10 @@ const Rides = () => {
               />
             );
           })}
-        <ButtonPlus onClick={() => history.push("/addRide")} />
+        <ButtonPlus onClick={() => history.push("/addTour")} />
       </PageWrapper>
     </>
   );
 };
 
-export default Rides;
+export default Tours;

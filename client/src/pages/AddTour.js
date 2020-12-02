@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory } from "react-router-dom";
-import { addRide } from "../utils/api";
+import { addTour } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -10,7 +10,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 
-export default function AddRide() {
+export default function AddTour() {
   const [title, setTitle] = useState("");
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
@@ -100,7 +100,7 @@ export default function AddRide() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
-            addRide({
+            addTour({
               title,
               start,
               dest,
@@ -111,7 +111,7 @@ export default function AddRide() {
               info,
               checkboxes,
             });
-            history.push("/rides");
+            history.push("/Tours");
           }}
         >
           {inputArray.map((inputObj) => (

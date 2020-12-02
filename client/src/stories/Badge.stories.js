@@ -30,5 +30,5 @@ Direkt.args = {
 };
 export const OnTime = Template.bind({});
 OnTime.args = {
-  type: "onTime",
+  type: "onTimeRide",
 };
