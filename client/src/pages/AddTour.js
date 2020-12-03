@@ -9,6 +9,7 @@ import HeaderMain from "../components/HeaderMain";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
+import WeekDaysSelector from "../components/WeekDaysSelector";
 
 export default function AddTour() {
   const [name, setName] = useState("");
@@ -22,6 +23,7 @@ export default function AddTour() {
   const [info, setInfo] = useState("");
   const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
+  let weekDays = [];
 
   const direktClick = () => {
     priority !== "direct" ? setPriority("direct") : setPriority("normal");
@@ -88,6 +90,7 @@ export default function AddTour() {
     ...todayArray,
   ];
   const arrayToMap = concurrentTour ? concurrentArray : todayArray;
+
   return (
     <PageWrapper>
       <HeaderMain />
@@ -135,6 +138,8 @@ export default function AddTour() {
               onChange={inputObj.func}
             />
           ))}
+
+          {concurrentTour && <WeekDaysSelector weekDays={weekDays} />}
 
           <InfoInput
             info={info}
