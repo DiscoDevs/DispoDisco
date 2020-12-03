@@ -54,5 +54,4 @@ export async function updateData({ collectionName, id }, props) {
       "Content-Type": "application/json",
     },
   });
-  console.log({ props });
 }

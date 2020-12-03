@@ -150,38 +150,28 @@ export default function AddTour() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            const data = {
+              name,
+              start,
+              dest,
+              date,
+              assignment,
+              priority,
+              cargo,
+              info,
+              checkboxes,
+              weekDays,
+            };
             if (id) {
               updateData(
                 {
                   collectionName: "tasks",
                   id,
                 },
-                {
-                  name,
-                  start,
-                  dest,
-                  date,
-                  assignment,
-                  priority,
-                  cargo,
-                  info,
-                  checkboxes,
-                  weekDays,
-                }
+                data
               );
             } else {
-              addTour({
-                name,
-                start,
-                dest,
-                date,
-                assignment,
-                priority,
-                cargo,
-                info,
-                checkboxes,
-                weekDays,
-              });
+              addTour(data);
             }
             history.push("/Tours");
           }}

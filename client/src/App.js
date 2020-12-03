@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/tours/:id/edit">
-            <AddTour concurrentTour />
+            <AddTour />
           </Route>
           <Route path="/tours/new">
             <AddTour />
