@@ -57,7 +57,7 @@ export default function AddTour() {
       };
       doFetch();
     }
-  }, []);
+  }, [id]);
 
   const direktClick = () => {
     priority !== "direct" ? setPriority("direct") : setPriority("normal");
