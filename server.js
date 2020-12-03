@@ -82,10 +82,10 @@ app.delete("/api/:collectionName", async (req, res) => {
 });
 
 app.patch("/api/:collectionName/", async (req, res) => {
-  const dataName = req.query.data;
+  const { id } = req.query;
   const { collectionName } = req.params;
   try {
-    updateData(collectionName, dataName, req.body);
+    updateData(collectionName, id, req.body);
     res.send("Data edited.");
   } catch (e) {
     console.error(e);

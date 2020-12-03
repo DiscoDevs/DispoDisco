@@ -14,6 +14,9 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
+          <Route path="/tours/:id/edit">
+            <AddTour />
+          </Route>
           <Route path="/tours/new">
             <AddTour />
           </Route>

@@ -46,6 +46,7 @@ const designs = {
 
 const StyledButton = styled.button`
   background: ${(props) => designs[props.design].background};
+  margin: auto;
   padding: 0.5rem 1rem;
   border: ${(props) => designs[props.design].border};
   border-radius: 6px;
