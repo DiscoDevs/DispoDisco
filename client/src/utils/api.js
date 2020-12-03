@@ -34,6 +34,12 @@ export async function getSortedData({ collectionName, dataName }) {
   return returnedData;
 }
 
+export async function getDataByID({ collectionName, id }) {
+  const result = await fetch(`/api/${collectionName}/${id}`);
+  const data = await result.json();
+  return data;
+}
+
 export async function deleteData({ collectionName, dataName }) {
   await fetch(`/api/${collectionName}?data=${dataName}`, {
     method: "DELETE",
