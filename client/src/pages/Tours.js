@@ -22,7 +22,7 @@ const PageWrapper = styled.div`
     margin: 1rem auto;
   }
   & > :nth-child(2) {
-    margin-top: clamp(160px, 30vw, 250px);
+    margin-top: clamp(9rem, 25vw, 200px);
   }
 `;
 
