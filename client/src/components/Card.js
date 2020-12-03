@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
 import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
+import { useHistory } from "react-router-dom";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -21,9 +22,9 @@ const Card = ({
   start,
   dest,
   rider,
-  id,
   ...props
 }) => {
+  const history = useHistory();
   return (
     <CardContainer type={type} {...props}>
       <Header>
@@ -42,7 +43,9 @@ const Card = ({
           <SettingsIcon
             src={SettingsImg}
             alt="Change Ride"
-            onClick={() => {}}
+            onClick={() => {
+              history.push(`/tours/${settings}/edit?type=concurrent`);
+            }}
           />
         ) : (
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
@@ -68,12 +71,11 @@ Card.propTypes = {
   ]),
   labels: PropTypes.object,
   info: PropTypes.bool,
-  settings: PropTypes.bool,
+  settings: PropTypes.string,
   rider: PropTypes.string,
   onClick: PropTypes.func,
   start: PropTypes.string,
   dest: PropTypes.string,
-  id: PropTypes.string,
 };
 export default Card;
 

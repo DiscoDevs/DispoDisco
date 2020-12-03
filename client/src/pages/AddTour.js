@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
-import { useHistory, useLocation } from "react-router-dom";
-import { addTour } from "../utils/api";
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import { addTour, getDataByID } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -16,6 +16,7 @@ function useQuery() {
 }
 
 export default function AddTour() {
+  const { id } = useParams();
   const query = useQuery();
   const [name, setName] = useState("");
   const [start, setStart] = useState("");
@@ -31,6 +32,32 @@ export default function AddTour() {
   const [weekDays, setWeekDays] = useState([]);
 
   const concurrentTour = query.get("type") === "concurrent";
+
+  useEffect(() => {
+    if (id) {
+      const doFetch = async () => {
+        try {
+          const data = await getDataByID({
+            collectionName: "tasks",
+            id: id,
+          });
+          setName(data.name);
+          setStart(data.start);
+          setDest(data.dest);
+          setDate(data.date);
+          setAssignment(data.assignment);
+          setCargo(data.cargo);
+          setPriority(data.priority);
+          setInfo(data.info);
+          setCheckboxes(data.checkboxes);
+          setWeekDays(data.weekDays);
+        } catch (e) {
+          console.error(e);
+        }
+      };
+      doFetch();
+    }
+  }, []);
 
   const direktClick = () => {
     priority !== "direct" ? setPriority("direct") : setPriority("normal");
