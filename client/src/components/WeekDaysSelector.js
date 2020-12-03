@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const WeekDaysSelector = ({ weekDays }) => {
+const WeekDaysSelector = ({ weekDays, onWeekDayChange }) => {
   function setWeekday(dayNumber) {
     weekDays.includes(dayNumber)
-      ? (weekDays = weekDays.filter((day) => day !== dayNumber))
-      : weekDays.push(dayNumber);
+      ? onWeekDayChange(weekDays.filter((day) => day !== dayNumber))
+      : onWeekDayChange([...weekDays, dayNumber]);
   }
 
   const daysArray = [
@@ -47,9 +47,7 @@ const WeekDaysSelector = ({ weekDays }) => {
                 type="checkbox"
                 name={day.name}
                 id={day.name}
-                onChange={(event) => {
-                  setWeekday(day.id);
-                }}
+                onClick={() => setWeekday(day.id)}
               />
             </Day>
           );
@@ -81,6 +79,7 @@ const Day = styled.div`
 
 WeekDaysSelector.propTypes = {
   weekDays: PropTypes.array,
+  onWeekDayChange: PropTypes.func,
 };
 
 export default WeekDaysSelector;

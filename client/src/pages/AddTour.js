@@ -23,7 +23,7 @@ export default function AddTour() {
   const [info, setInfo] = useState("");
   const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
-  let weekDays = [];
+  const [weekDays, setWeekDays] = useState([]);
 
   const direktClick = () => {
     priority !== "direct" ? setPriority("direct") : setPriority("normal");
@@ -45,6 +45,7 @@ export default function AddTour() {
   const carriageClick = () => {
     carriage !== true ? setCarriage(true) : setCarriage(false);
   };
+  const onWeekDayChange = (day) => setWeekDays(day);
 
   const Badges = [
     { name: "direct", func: direktClick },
@@ -139,7 +140,12 @@ export default function AddTour() {
             />
           ))}
 
-          {concurrentTour && <WeekDaysSelector weekDays={weekDays} />}
+          {concurrentTour && (
+            <WeekDaysSelector
+              weekDays={weekDays}
+              onWeekDayChange={onWeekDayChange}
+            />
+          )}
 
           <InfoInput
             info={info}
