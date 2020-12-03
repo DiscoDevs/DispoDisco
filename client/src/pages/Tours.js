@@ -5,12 +5,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
-<<<<<<< HEAD
-import { getCurrentDateString } from "../utils/date";
 import { getSortedDataByQuery } from "../utils/api";
-=======
-import { getDataByQuery } from "../utils/api";
->>>>>>> :construction: Add Tour and rename old Tour to ToursToday
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -37,7 +32,6 @@ const Tours = () => {
 
   useEffect(() => {
     const doFetch = async () => {
-      const today = getCurrentDateString();
       const todaysTours = await getSortedDataByQuery({
         collectionName: "tasks",
         dataName: "date",
