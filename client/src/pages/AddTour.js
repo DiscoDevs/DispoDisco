@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { addTour } from "../utils/api";
 
 import Badge from "../components/Badge";
@@ -11,7 +11,12 @@ import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
 
-export default function AddTour({ concurrentTour = false }) {
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+export default function AddTour() {
+  const query = useQuery();
   const [name, setName] = useState("");
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
@@ -24,6 +29,8 @@ export default function AddTour({ concurrentTour = false }) {
   const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
+
+  const concurrentTour = query.get("type") === "concurrent";
 
   const direktClick = () => {
     priority !== "direct" ? setPriority("direct") : setPriority("normal");
