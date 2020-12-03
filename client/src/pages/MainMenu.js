@@ -50,7 +50,7 @@ const MainMenu = () => {
             category="tours"
             design="menu"
             label="Touren"
-            onClick={() => history.push("/addTour")}
+            onClick={() => history.push("/tours")}
           />
           <Button
             category="riders"
@@ -62,7 +62,7 @@ const MainMenu = () => {
             category="go"
             design="cta"
             label="Lets Fetz"
-            onClick={() => history.push("/tours")}
+            onClick={() => history.push("/tours/today")}
           />
         </MenuWrapper>
       </PageWrapper>

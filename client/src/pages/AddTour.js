@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { addTour } from "../utils/api";
 
 import Badge from "../components/Badge";
@@ -9,8 +9,14 @@ import HeaderMain from "../components/HeaderMain";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
+import WeekDaysSelector from "../components/WeekDaysSelector";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 export default function AddTour() {
+  const query = useQuery();
   const [name, setName] = useState("");
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
@@ -22,6 +28,9 @@ export default function AddTour() {
   const [info, setInfo] = useState("");
   const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
+  const [weekDays, setWeekDays] = useState([]);
+
+  const concurrentTour = query.get("type") === "concurrent";
 
   const direktClick = () => {
     priority !== "direct" ? setPriority("direct") : setPriority("normal");
@@ -43,6 +52,7 @@ export default function AddTour() {
   const carriageClick = () => {
     carriage !== true ? setCarriage(true) : setCarriage(false);
   };
+  const onWeekDayChange = (day) => setWeekDays(day);
 
   const Badges = [
     { name: "direct", func: direktClick },
@@ -52,13 +62,7 @@ export default function AddTour() {
     { name: "cargoL", func: cargoLClick },
     { name: "carriage", func: carriageClick },
   ];
-  const inputArray = [
-    {
-      name: "Titel",
-      type: "text",
-      value: name,
-      func: (event) => setName(event.target.value),
-    },
+  const todayArray = [
     {
       name: "Start",
       type: "text",
@@ -84,6 +88,16 @@ export default function AddTour() {
       func: (event) => setAssignment(event.target.value),
     },
   ];
+  const concurrentArray = [
+    {
+      name: "Titel",
+      type: "text",
+      value: name,
+      func: (event) => setName(event.target.value),
+    },
+    ...todayArray,
+  ];
+  const arrayToMap = concurrentTour ? concurrentArray : todayArray;
 
   return (
     <PageWrapper>
@@ -119,11 +133,12 @@ export default function AddTour() {
               cargo,
               info,
               checkboxes,
+              weekDays,
             });
             history.push("/Tours");
           }}
         >
-          {inputArray.map((inputObj) => (
+          {arrayToMap.map((inputObj) => (
             <Input
               key={inputObj.name}
               type={inputObj.type}
@@ -132,6 +147,13 @@ export default function AddTour() {
               onChange={inputObj.func}
             />
           ))}
+
+          {concurrentTour && (
+            <WeekDaysSelector
+              weekDays={weekDays}
+              onWeekDayChange={onWeekDayChange}
+            />
+          )}
 
           <InfoInput
             info={info}

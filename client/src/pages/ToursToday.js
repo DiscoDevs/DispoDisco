@@ -5,12 +5,13 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
-import { getSortedDataByQuery } from "../utils/api";
+import { getCurrentDateString } from "../utils/date";
+import { getDataByQuery } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
+import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
-import Header from "../components/Header";
 
 const PageWrapper = styled.div`
   position: fixed;
@@ -22,20 +23,20 @@ const PageWrapper = styled.div`
     margin: 1rem auto;
   }
   & > :nth-child(2) {
-    margin-top: clamp(160px, 30vw, 250px);
+    margin-top: clamp(260px, 40vw, 400px);
   }
 `;
 
-const Tours = () => {
-  const [tours, setTours] = useState([]);
+const ToursToday = () => {
+  const [Tours, setTours] = useState([]);
   const history = useHistory();
-
   useEffect(() => {
     const doFetch = async () => {
-      const todaysTours = await getSortedDataByQuery({
+      const today = getCurrentDateString();
+      const todaysTours = await getDataByQuery({
         collectionName: "tasks",
         dataName: "date",
-        query: {},
+        query: today,
       });
       setTours(todaysTours);
     };
@@ -45,9 +46,9 @@ const Tours = () => {
     <>
       <GlobalStyle />
       <PageWrapper>
-        <Header title="Geplante Touren" />
-        {tours &&
-          tours.map((ride) => {
+        <HeaderMain />
+        {Tours &&
+          Tours.map((ride) => {
             return (
               <Card
                 key={ride._id}
@@ -55,7 +56,6 @@ const Tours = () => {
                 start={ride.start}
                 dest={ride.dest}
                 rider={ride.assignment}
-                settings={true}
                 labels={
                   <>
                     {ride.cargo && <Badge type={ride.cargo} status={true} />}
@@ -64,18 +64,18 @@ const Tours = () => {
                     ) : (
                       ""
                     )}
-                    {ride.carriage && <Badge type="carriage" status={true} />}
+                    {ride.carriage && (
+                      <Badge type={ride.carriage} status={true} />
+                    )}
                   </>
                 }
               />
             );
           })}
-        <ButtonPlus
-          onClick={() => history.push("/tours/new?type=concurrent")}
-        />
+        <ButtonPlus onClick={() => history.push("/tours/new")} />
       </PageWrapper>
     </>
   );
 };
 
-export default Tours;
+export default ToursToday;

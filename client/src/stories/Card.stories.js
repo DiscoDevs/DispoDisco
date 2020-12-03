@@ -56,10 +56,10 @@ DirectRide.args = {
 };
 export const OnTimeRide = Template.bind();
 OnTimeRide.args = {
-  type: "onTimeRide",
-  start: "Postfiliale",
-  dest: "Empfänger",
-  rider: "Benji",
+  type: "dayRide",
+  start: "Rewe",
+  dest: "L. Machens",
+  rider: "Philipp G",
   labels: (
     <>
       <Badge type="cargoL" label="5-25kg" />
@@ -72,6 +72,21 @@ export const ConcurrentRide = Template.bind();
 ConcurrentRide.args = {
   type: "concurrentRide",
   start: "Rathaus",
+};
+export const RideWithSettings = Template.bind();
+RideWithSettings.args = {
+  type: "normal",
+  start: "Alex-Dental",
+  dest: "Anzag",
+  rider: "Lazer",
+  settings: true,
+  labels: (
+    <>
+      <Badge type="cargoS" label="5-25kg" />
+      <Badge type="direct" label="Direct" />
+      <Badge type="carriage" label="Kutsche" />
+    </>
+  ),
 };
 
 export const Rider = CardButtonTemplate.bind(0);
