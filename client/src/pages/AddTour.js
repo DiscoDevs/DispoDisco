@@ -37,20 +37,20 @@ export default function AddTour() {
     if (id) {
       const doFetch = async () => {
         try {
-          const data = await getDataByID({
+          const task = await getDataByID({
             collectionName: "tasks",
             id: id,
           });
-          setName(data.name);
-          setStart(data.start);
-          setDest(data.dest);
-          setDate(data.date);
-          setAssignment(data.assignment);
-          setCargo(data.cargo);
-          setPriority(data.priority);
-          setInfo(data.info);
-          setCheckboxes(data.checkboxes);
-          setWeekDays(data.weekDays);
+          setName(task.name);
+          setStart(task.start);
+          setDest(task.dest);
+          setDate(task.date);
+          setAssignment(task.assignment);
+          setCargo(task.cargo);
+          setPriority(task.priority);
+          setInfo(task.info);
+          setCheckboxes(task.checkboxes);
+          setWeekDays(task.weekDays);
         } catch (e) {
           console.error(e);
         }
