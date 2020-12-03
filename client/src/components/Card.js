@@ -5,10 +5,6 @@ import ArrowImg from "../assets/arrow.svg";
 import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
 
-/**
- * Primary UI component for user interaction
- */
-
 const types = {
   normal: "var(--gradient-normal)",
   dayRide: "var(--gradient-dayRide)",

@@ -59,7 +59,6 @@ const Tours = () => {
                 labels={
                   <>
                     {ride.cargo && <Badge type={ride.cargo} status={true} />}
-                    {console.log(ride._id)}
                     {ride.priority !== "normal" ? (
                       <Badge type={ride.priority} status={true} />
                     ) : (
