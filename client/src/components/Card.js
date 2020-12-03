@@ -42,12 +42,14 @@ const Card = ({
           </>
         )}
       </Header>
-      <DivInTheMiddle>
-        <LabelContainer>{labels && labels}</LabelContainer>
-        <div>{settings && <img src={SettingsImg} alt="Change Ride" />}</div>
-      </DivInTheMiddle>
+      <LabelContainer>{labels && labels}</LabelContainer>
+
       <InfoContainer>
-        <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
+        {settings ? (
+          <SettingsIcon src={SettingsImg} alt="Change Ride" />
+        ) : (
+          <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
+        )}
         <CardButton type="timer" label="1:30h" />
         {info ? (
           <CardButton type="info" label="Info" />
@@ -151,14 +153,8 @@ const Start = styled.div`
   }
 `;
 
-const DivInTheMiddle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  > div > img {
-    height: 30px;
-    margin: 1rem;
-  }
+const SettingsIcon = styled.img`
+  height: 30px;
 `;
 const Destination = styled(Start)``;
 const Header = styled.div`
