@@ -50,8 +50,9 @@ app.post("/api/:collectionName", async (req, res) => {
   }
 });
 
-app.delete("/api/:collectionName/:data", async (req, res) => {
-  const { collectionName, data } = req.params;
+app.delete("/api/:collectionName", async (req, res) => {
+  let data = req.query.data;
+  const { collectionName } = req.params;
   try {
     deleteData(collectionName, data);
     res.send("Data deleted.");
@@ -63,8 +64,9 @@ app.delete("/api/:collectionName/:data", async (req, res) => {
   }
 });
 
-app.patch("/api/:collectionName/:dataName", async (req, res) => {
-  const { collectionName, dataName } = req.params;
+app.patch("/api/:collectionName/", async (req, res) => {
+  let dataName = req.query.data;
+  const { collectionName } = req.params;
   try {
     updateData(collectionName, dataName, req.body);
     res.send("Data edited.");
