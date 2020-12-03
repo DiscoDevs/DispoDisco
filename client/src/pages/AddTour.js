@@ -52,13 +52,7 @@ export default function AddTour() {
     { name: "cargoL", func: cargoLClick },
     { name: "carriage", func: carriageClick },
   ];
-  const inputArray = [
-    {
-      name: "Titel",
-      type: "text",
-      value: name,
-      func: (event) => setName(event.target.value),
-    },
+  const todayArray = [
     {
       name: "Start",
       type: "text",
@@ -84,7 +78,16 @@ export default function AddTour() {
       func: (event) => setAssignment(event.target.value),
     },
   ];
-
+  const concurrentArray = [
+    {
+      name: "Titel",
+      type: "text",
+      value: title,
+      func: (event) => setTitle(event.target.value),
+    },
+    ...todayArray,
+  ];
+  const arrayToMap = concurrentTour ? concurrentArray : todayArray;
   return (
     <PageWrapper>
       <HeaderMain />
@@ -123,7 +126,7 @@ export default function AddTour() {
             history.push("/Tours");
           }}
         >
-          {inputArray.map((inputObj) => (
+          {arrayToMap.map((inputObj) => (
             <Input
               key={inputObj.name}
               type={inputObj.type}

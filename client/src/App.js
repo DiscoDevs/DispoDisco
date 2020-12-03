@@ -17,6 +17,9 @@ function App() {
           <Route path="/addTour">
             <AddTour />
           </Route>
+          <Route path="/addConcurrentTour">
+            <AddTour concurrentTour={true} />
+          </Route>
           <Route path="/menu">
             <MainMenu />
           </Route>

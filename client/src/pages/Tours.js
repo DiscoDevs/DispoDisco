@@ -76,7 +76,7 @@ const Tours = () => {
               />
             );
           })}
-        <ButtonPlus onClick={() => history.push("/addTour")} />
+        <ButtonPlus onClick={() => history.push("/addConcurrentTour")} />
       </PageWrapper>
     </>
   );
