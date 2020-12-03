@@ -6,7 +6,7 @@ import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
 import { getCurrentDateString } from "../utils/date";
-import { getDataByQuery } from "../utils/api";
+import { getSortedDataByQuery } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -28,12 +28,12 @@ const PageWrapper = styled.div`
 `;
 
 const Tours = () => {
-  const [Tours, setTours] = useState([]);
+  const [tours, setTours] = useState([]);
   const history = useHistory();
   useEffect(() => {
     const doFetch = async () => {
       const today = getCurrentDateString();
-      const todaysTours = await getDataByQuery({
+      const todaysTours = await getSortedDataByQuery({
         collectionName: "tasks",
         dataName: "date",
         query: today,
@@ -47,8 +47,8 @@ const Tours = () => {
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
-        {Tours &&
-          Tours.map((ride) => {
+        {tours &&
+          tours.map((ride) => {
             return (
               <Card
                 key={ride._id}
