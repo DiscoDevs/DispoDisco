@@ -72,7 +72,7 @@ const ToursToday = () => {
               />
             );
           })}
-        <ButtonPlus onClick={() => history.push("/addTour")} />
+        <ButtonPlus onClick={() => history.push("/tours/new")} />
       </PageWrapper>
     </>
   );

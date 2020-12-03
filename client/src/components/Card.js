@@ -25,20 +25,17 @@ const Card = ({
   start,
   dest,
   rider,
+  id,
   ...props
 }) => {
   return (
     <CardContainer type={type} {...props}>
       <Header>
-        <Start type={type}>
-          <p>{start}</p>
-        </Start>
+        <Start type={type}>{start}</Start>
         {type !== "concurrentRide" && (
           <>
             <img src={ArrowImg} alt="Arrow" />
-            <Destination>
-              <p>{dest}</p>
-            </Destination>
+            <Destination>{dest}</Destination>
           </>
         )}
       </Header>
@@ -46,7 +43,11 @@ const Card = ({
 
       <InfoContainer>
         {settings ? (
-          <SettingsIcon src={SettingsImg} alt="Change Ride" />
+          <SettingsIcon
+            src={SettingsImg}
+            alt="Change Ride"
+            onClick={() => {}}
+          />
         ) : (
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         )}
@@ -76,6 +77,7 @@ Card.propTypes = {
   onClick: PropTypes.func,
   start: PropTypes.string,
   dest: PropTypes.string,
+  id: PropTypes.string,
 };
 export default Card;
 
@@ -92,7 +94,7 @@ const CardContainer = styled.div`
   border-radius: var(--border-radius);
 `;
 
-const Start = styled.div`
+const Start = styled.p`
   overflow: hidden;
   position: relative;
   color: var(--text-primary);

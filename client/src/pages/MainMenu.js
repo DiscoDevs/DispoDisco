@@ -62,7 +62,7 @@ const MainMenu = () => {
             category="go"
             design="cta"
             label="Lets Fetz"
-            onClick={() => history.push("/toursToday")}
+            onClick={() => history.push("/tours/today")}
           />
         </MenuWrapper>
       </PageWrapper>

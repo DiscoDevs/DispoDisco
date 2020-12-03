@@ -14,16 +14,16 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
-          <Route path="/addTour">
+          <Route path="/tours/new">
             <AddTour />
           </Route>
-          <Route path="/addConcurrentTour">
-            <AddTour concurrentTour={true} />
+          <Route path="/tours/new?type=concurrent">
+            <AddTour concurrentTour />
           </Route>
           <Route path="/menu">
             <MainMenu />
           </Route>
-          <Route path="/toursToday">
+          <Route path="/tours/today">
             <ToursToday />
           </Route>
           <Route path="/tours">
