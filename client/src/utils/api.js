@@ -9,7 +9,9 @@ export async function addTour(props) {
 }
 
 export async function getDataByQuery({ collectionName, dataName, query }) {
-  const result = await fetch(`/api/${collectionName}/${dataName}/${query}`);
+  const result = await fetch(
+    `/api/${collectionName}?name=${dataName}&value=${query}`
+  );
   const returnedData = await result.json();
   return returnedData;
 }
