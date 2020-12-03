@@ -46,12 +46,13 @@ export async function deleteData({ collectionName, dataName }) {
   });
 }
 
-export async function updateData({ collectionName, dataName }, props) {
-  await fetch(`/api/${collectionName}?data=${dataName}`, {
+export async function updateData({ collectionName, id }, props) {
+  await fetch(`/api/${collectionName}?id=${id}`, {
     method: "PATCH",
     body: JSON.stringify(props),
     headers: {
       "Content-Type": "application/json",
     },
   });
+  console.log({ props });
 }

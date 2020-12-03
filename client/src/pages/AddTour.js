@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addTour, getDataByID } from "../utils/api";
+import { addTour, getDataByID, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -150,18 +150,39 @@ export default function AddTour() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
-            addTour({
-              name,
-              start,
-              dest,
-              date,
-              assignment,
-              priority,
-              cargo,
-              info,
-              checkboxes,
-              weekDays,
-            });
+            if (id) {
+              updateData(
+                {
+                  collectionName: "tasks",
+                  id,
+                },
+                {
+                  name,
+                  start,
+                  dest,
+                  date,
+                  assignment,
+                  priority,
+                  cargo,
+                  info,
+                  checkboxes,
+                  weekDays,
+                }
+              );
+            } else {
+              addTour({
+                name,
+                start,
+                dest,
+                date,
+                assignment,
+                priority,
+                cargo,
+                info,
+                checkboxes,
+                weekDays,
+              });
+            }
             history.push("/Tours");
           }}
         >
@@ -200,7 +221,11 @@ export default function AddTour() {
               );
             })}
           </BadgeContainer>
-          <Button type="submit" design="addRide" label="Fahrt hinzufügen" />
+          <Button
+            type="submit"
+            design="addRide"
+            label={id ? "Fahrt ändern" : "Fahrt hinzufügen"}
+          />
         </Form>
       </Wrapper>
     </PageWrapper>
