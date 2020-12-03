@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
       margin: auto;
   }
   :root {
-    /* CSS HSL */
     --text-primary: hsla(0, 0%, 94%, 1);
     --text-secondary: hsla(0, 0%, 14%, 1);
     --text-secondary50: hsla(0, 0%, 14%, 0.5);
