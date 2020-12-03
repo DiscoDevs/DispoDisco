@@ -11,7 +11,7 @@ import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
 
-export default function AddTour() {
+export default function AddTour({ concurrentTour = false }) {
   const [name, setName] = useState("");
   const [start, setStart] = useState("");
   const [dest, setDest] = useState("");
@@ -85,8 +85,8 @@ export default function AddTour() {
     {
       name: "Titel",
       type: "text",
-      value: title,
-      func: (event) => setTitle(event.target.value),
+      value: name,
+      func: (event) => setName(event.target.value),
     },
     ...todayArray,
   ];
@@ -126,6 +126,7 @@ export default function AddTour() {
               cargo,
               info,
               checkboxes,
+              weekDays,
             });
             history.push("/Tours");
           }}
