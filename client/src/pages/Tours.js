@@ -36,8 +36,8 @@ const Tours = () => {
     const doFetch = async () => {
       const todaysTours = await getSortedDataByQuery({
         collectionName: "tasks",
-        dataName: "date",
-        query: {},
+        dataName: "priority",
+        query: "concurrentRide",
       });
       setTours(todaysTours);
     };
