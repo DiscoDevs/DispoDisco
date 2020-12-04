@@ -54,6 +54,7 @@ const Tours = () => {
               return (
                 <Card
                   key={ride._id}
+                  name={ride.name}
                   type={ride.priority}
                   start={ride.start}
                   dest={ride.dest}
