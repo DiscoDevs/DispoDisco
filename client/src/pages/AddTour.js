@@ -91,12 +91,14 @@ export default function AddTour() {
       name: "Start",
       type: "text",
       value: task.start,
+      required: true,
       func: (event) => setTask({ ...task, start: event.target.value }),
     },
     {
       name: "Ziel",
       type: "text",
       value: task.dest,
+      required: true,
       func: (event) => setTask({ ...task, dest: event.target.value }),
     },
     {
