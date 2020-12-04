@@ -62,9 +62,10 @@ const Tours = () => {
                   labels={
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
-                      {ride.priority !== "normal" && (
-                        <Badge type={ride.priority} active />
-                      )}
+                      {ride.priority !== "normal" &&
+                        ride.priority !== "concurrentRide" && (
+                          <Badge type={ride.priority} active />
+                        )}
                       {ride.carriage && <Badge type="carriage" active />}
                     </>
                   }

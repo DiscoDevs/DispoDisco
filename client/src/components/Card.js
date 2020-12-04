@@ -16,6 +16,7 @@ const types = {
 
 const Card = ({
   type,
+  name,
   labels,
   info = true,
   settings = false,
@@ -28,7 +29,7 @@ const Card = ({
   return (
     <CardContainer type={type} {...props}>
       <Header>
-        <Start type={type}>{start}</Start>
+        <Start type={type}>{type !== "concurrentRide" ? start : name}</Start>
         {type !== "concurrentRide" && (
           <>
             <img src={ArrowImg} alt="Arrow" />
@@ -51,11 +52,8 @@ const Card = ({
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         )}
         <CardButton type="timer" label="1:30h" />
-        {info ? (
-          <CardButton type="info" label="Info" />
-        ) : (
-          <div style={{ width: "70px" }} />
-        )}
+        {info && <CardButton type="info" label="Info" />}
+        {info && <CardButton type="info" label="Abgabe" />}
       </InfoContainer>
     </CardContainer>
   );
@@ -72,6 +70,7 @@ Card.propTypes = {
   labels: PropTypes.object,
   info: PropTypes.bool,
   settings: PropTypes.string,
+  name: PropTypes.string,
   rider: PropTypes.string,
   onClick: PropTypes.func,
   start: PropTypes.string,
@@ -82,7 +81,6 @@ export default Card;
 const CardContainer = styled.div`
   position: relative;
   min-width: 300px;
-  /* min-height: 180px; */
   margin: auto;
   padding: 1rem;
   text-align: center;
@@ -166,9 +164,12 @@ const Header = styled.div`
 
 const InfoContainer = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: flex-end; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-gap: 0.5rem;
   bottom: 1rem;
   left: 0;
   padding: 0rem 0 0.2rem;
