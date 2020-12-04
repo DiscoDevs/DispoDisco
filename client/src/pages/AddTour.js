@@ -149,6 +149,9 @@ export default function AddTour() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            if (!task.date) {
+              task.date = new Date();
+            }
             if (id) {
               updateData(
                 {
