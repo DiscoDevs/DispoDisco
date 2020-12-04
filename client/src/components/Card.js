@@ -29,11 +29,15 @@ const Card = ({
   return (
     <CardContainer type={type} {...props}>
       <Header>
-        <Start type={type}>{type !== "concurrentRide" ? start : name}</Start>
+        <Start type={type}>
+          <p>{type !== "concurrentRide" ? start : name}</p>
+        </Start>
         {type !== "concurrentRide" && (
           <>
             <img src={ArrowImg} alt="Arrow" />
-            <Destination>{dest}</Destination>
+            <Destination>
+              <p>{dest}</p>
+            </Destination>
           </>
         )}
       </Header>
@@ -91,7 +95,7 @@ const CardContainer = styled.div`
   border-radius: var(--border-radius);
 `;
 
-const Start = styled.p`
+const Start = styled.div`
   overflow: hidden;
   position: relative;
   color: var(--text-primary);
