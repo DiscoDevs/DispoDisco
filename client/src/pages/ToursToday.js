@@ -61,16 +61,14 @@ const ToursToday = () => {
                   rider={ride.assignment}
                   labels={
                     <>
-                      {ride.cargo && <Badge type={ride.cargo} status={true} />}
+                      {ride.cargo && <Badge type={ride.cargo} active />}
                       {ride.priority !== "normal" &&
                       ride.priority !== "concurrentRide" ? (
-                        <Badge type={ride.priority} status={true} />
+                        <Badge type={ride.priority} active />
                       ) : (
                         ""
                       )}
-                      {ride.carriage && (
-                        <Badge type={ride.carriage} status={true} />
-                      )}
+                      {ride.carriage && <Badge type={ride.carriage} active />}
                     </>
                   }
                 />
