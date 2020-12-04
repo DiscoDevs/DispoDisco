@@ -11,12 +11,14 @@ import Badge from "../components/Badge";
 import Card from "../components/Card";
 import ButtonPlus from "../components/ButtonPlus";
 import Header from "../components/Header";
+import ToursGrid from "../components/helpers/ToursGrid";
 
 const PageWrapper = styled.div`
   position: fixed;
   overflow: auto;
   height: 100%;
   width: 100%;
+
   background: var(--gradient-dark);
   & > *:not(:first-child) {
     margin: 1rem auto;
@@ -46,30 +48,30 @@ const Tours = () => {
       <GlobalStyle />
       <PageWrapper>
         <Header title="Geplante Touren" />
-        {tours &&
-          tours.map((ride) => {
-            return (
-              <Card
-                key={ride._id}
-                type={ride.priority}
-                start={ride.start}
-                dest={ride.dest}
-                rider={ride.assignment}
-                settings={ride._id}
-                labels={
-                  <>
-                    {ride.cargo && <Badge type={ride.cargo} status={true} />}
-                    {ride.priority !== "normal" ? (
-                      <Badge type={ride.priority} status={true} />
-                    ) : (
-                      ""
-                    )}
-                    {ride.carriage && <Badge type="carriage" status={true} />}
-                  </>
-                }
-              />
-            );
-          })}
+        <ToursGrid>
+          {tours &&
+            tours.map((ride) => {
+              return (
+                <Card
+                  key={ride._id}
+                  type={ride.priority}
+                  start={ride.start}
+                  dest={ride.dest}
+                  rider={ride.assignment}
+                  settings={ride._id}
+                  labels={
+                    <>
+                      {ride.cargo && <Badge type={ride.cargo} active />}
+                      {ride.priority !== "normal" && (
+                        <Badge type={ride.priority} active />
+                      )}
+                      {ride.carriage && <Badge type="carriage" active />}
+                    </>
+                  }
+                />
+              );
+            })}
+        </ToursGrid>
         <ButtonPlus
           onClick={() => history.push("/tours/new?type=concurrent")}
         />

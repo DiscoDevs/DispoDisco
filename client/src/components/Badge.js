@@ -47,8 +47,8 @@ const BadgeElement = styled.div`
   }
 `;
 
-const Badge = ({ type, status, onClick = false }) => {
-  const [isActive, setIsActive] = useState(status);
+const Badge = ({ type, active, onClick = false }) => {
+  const [isActive, setIsActive] = useState(active);
 
   function changeStatus() {
     setIsActive(!isActive);
@@ -80,13 +80,13 @@ Badge.propTypes = {
     "rider",
   ]),
 
-  status: PropTypes.bool,
+  active: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 Badge.defaultProps = {
   type: "default",
-  status: false,
+  active: false,
 };
 
 export default Badge;

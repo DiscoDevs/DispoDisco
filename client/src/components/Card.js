@@ -36,7 +36,7 @@ const Card = ({
           </>
         )}
       </Header>
-      <LabelContainer>{labels && labels}</LabelContainer>
+      {labels && <LabelContainer>{labels}</LabelContainer>}
 
       <InfoContainer>
         {settings ? (
@@ -81,7 +81,8 @@ export default Card;
 
 const CardContainer = styled.div`
   position: relative;
-  width: 300px;
+  min-width: 300px;
+  /* min-height: 180px; */
   margin: auto;
   padding: 1rem;
   text-align: center;
