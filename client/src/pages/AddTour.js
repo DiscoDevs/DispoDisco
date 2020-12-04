@@ -168,6 +168,7 @@ export default function AddTour() {
             }
             if (concurrentTour) {
               history.push("/tours");
+              return;
             }
             history.push("/tours/today");
           }}
