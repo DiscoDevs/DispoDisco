@@ -15,9 +15,12 @@ const CardButtonTemplate = (args) => <CardButton {...args} />;
 export const NormalRide = Template.bind();
 NormalRide.args = {
   type: "normal",
+  start: "Alex-Dental",
+  dest: "Anzag",
+  rider: "Lazer",
   labels: (
     <>
-      <Badge type="cargo" label="5-25kg" />
+      <Badge type="cargoS" label="5-25kg" />
       <Badge type="direct" label="Direct" />
       <Badge type="carriage" label="Kutsche" />
     </>
@@ -26,9 +29,12 @@ NormalRide.args = {
 export const DayRide = Template.bind();
 DayRide.args = {
   type: "dayRide",
+  start: "Rewe",
+  dest: "L. Machens",
+  rider: "Philipp G",
   labels: (
     <>
-      <Badge type="cargo" label="5-25kg" />
+      <Badge type="cargoM" label="5-25kg" />
       <Badge type="direct" label="Direct" />
       <Badge type="carriage" label="Kutsche" />
     </>
@@ -37,9 +43,12 @@ DayRide.args = {
 export const DirectRide = Template.bind();
 DirectRide.args = {
   type: "direct",
+  start: "neuefische",
+  dest: "IT-Firma",
+  rider: "Elena",
   labels: (
     <>
-      <Badge type="cargo" label="5-25kg" />
+      <Badge type="cargoL" label="5-25kg" />
       <Badge type="direct" label="Direct" />
       <Badge type="carriage" label="Kutsche" />
     </>
@@ -47,10 +56,13 @@ DirectRide.args = {
 };
 export const OnTimeRide = Template.bind();
 OnTimeRide.args = {
-  type: "onTimeRide",
+  type: "dayRide",
+  start: "Rewe",
+  dest: "L. Machens",
+  rider: "Philipp G",
   labels: (
     <>
-      <Badge type="cargo" label="5-25kg" />
+      <Badge type="cargoL" label="5-25kg" />
       <Badge type="direct" label="Direct" />
       <Badge type="carriage" label="Kutsche" />
     </>
@@ -59,6 +71,22 @@ OnTimeRide.args = {
 export const ConcurrentRide = Template.bind();
 ConcurrentRide.args = {
   type: "concurrentRide",
+  start: "Rathaus",
+};
+export const RideWithSettings = Template.bind();
+RideWithSettings.args = {
+  type: "normal",
+  start: "Alex-Dental",
+  dest: "Anzag",
+  rider: "Lazer",
+  settings: true,
+  labels: (
+    <>
+      <Badge type="cargoS" label="5-25kg" />
+      <Badge type="direct" label="Direct" />
+      <Badge type="carriage" label="Kutsche" />
+    </>
+  ),
 };
 
 export const Rider = CardButtonTemplate.bind(0);

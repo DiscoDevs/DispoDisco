@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-import CargoImg from "../assets/cargoBox.svg";
+import CargoS from "../assets/cargoBox.svg";
+import CargoM from "../assets/packages.svg";
+import CargoL from "../assets/container.svg";
 import CarriageImg from "../assets/carriage.svg";
 import DirectImg from "../assets/shuttle.svg";
 import OnTimeImg from "../assets/stopwatch.svg";
@@ -9,8 +11,14 @@ import OnTimeImg from "../assets/stopwatch.svg";
  * Primary UI component for user interaction
  */
 const types = {
-  cargo: {
-    img: CargoImg,
+  cargoS: {
+    img: CargoS,
+  },
+  cargoM: {
+    img: CargoM,
+  },
+  cargoL: {
+    img: CargoL,
   },
   carriage: {
     img: CarriageImg,
@@ -18,7 +26,7 @@ const types = {
   direct: {
     img: DirectImg,
   },
-  onTime: {
+  onTimeRide: {
     img: OnTimeImg,
   },
 };
@@ -35,12 +43,25 @@ const BadgeElement = styled.div`
   img {
     width: 28px;
     margin: auto;
+    filter: grayscale(${(props) => (props.isActive === true ? "0" : "1")});
   }
 `;
 
-const Badge = ({ type, onClick }) => {
+const Badge = ({ type, active, onClick = false }) => {
+  const [isActive, setIsActive] = useState(active);
+
+  function changeStatus() {
+    setIsActive(!isActive);
+  }
   return (
-    <BadgeElement type={type} onClick={onClick}>
+    <BadgeElement
+      isActive={isActive}
+      type={type}
+      onClick={() => {
+        onClick();
+        changeStatus();
+      }}
+    >
       <img src={types[type].img} alt="Button" />
     </BadgeElement>
   );
@@ -50,20 +71,22 @@ Badge.propTypes = {
   type: PropTypes.oneOf([
     "direct",
     "carriage",
-    "cargo",
-    "onTime",
+    "cargoS",
+    "cargoM",
+    "cargoL",
+    "onTimeRide",
     "timer",
     "info",
     "rider",
   ]),
 
-  label: PropTypes.string,
-
+  active: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 Badge.defaultProps = {
   type: "default",
+  active: false,
 };
 
 export default Badge;

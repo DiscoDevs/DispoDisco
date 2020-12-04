@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import GlobalStyle from "../GlobalStyles";
 import HeaderHome from "../components/HeaderHome";
@@ -62,7 +62,7 @@ const MainMenu = () => {
             category="go"
             design="cta"
             label="Lets Fetz"
-            onClick={() => history.push("/rides")}
+            onClick={() => history.push("/tours/today")}
           />
         </MenuWrapper>
       </PageWrapper>

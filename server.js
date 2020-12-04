@@ -8,7 +8,7 @@ const {
   insertData,
   deleteData,
   updateData,
-  getDataByName,
+  getByID,
 } = require("./lib/serverMethods");
 const app = express();
 const port = process.env.PORT || 3600;
@@ -16,9 +16,19 @@ const port = process.env.PORT || 3600;
 app.use(express.json());
 
 app.get("/api/:collectionName", async (req, res) => {
+  const dataName = req.query.name;
+  const dataValue = req.query.value;
+  const { sortBy } = req.query;
+  const order = req.query.order === "desc" ? -1 : 1;
   const { collectionName } = req.params;
   try {
-    const collectionData = await getCollection(collectionName);
+    const collectionData = await getCollection({
+      collectionName,
+      dataName,
+      dataValue,
+      sortBy,
+      order,
+    });
     res.send(collectionData);
   } catch (e) {
     console.error(e);
@@ -28,11 +38,13 @@ app.get("/api/:collectionName", async (req, res) => {
   }
 });
 
-app.get("/api/:collectionName/:dataName", async (req, res) => {
-  const { collectionName, dataName } = req.params;
-  console.log({ collectionName, dataName });
+app.get("/api/:collectionName/:id", async (req, res) => {
+  const { collectionName, id } = req.params;
   try {
-    const data = await getDataByName(collectionName, dataName);
+    const data = await getByID({
+      collectionName,
+      id,
+    });
     res.send(data);
   } catch (e) {
     console.error(e);
@@ -55,8 +67,9 @@ app.post("/api/:collectionName", async (req, res) => {
   }
 });
 
-app.delete("/api/:collectionName/:data", async (req, res) => {
-  const { collectionName, data } = req.params;
+app.delete("/api/:collectionName", async (req, res) => {
+  const { data } = req.query;
+  const { collectionName } = req.params;
   try {
     deleteData(collectionName, data);
     res.send("Data deleted.");
@@ -68,10 +81,11 @@ app.delete("/api/:collectionName/:data", async (req, res) => {
   }
 });
 
-app.patch("/api/:collectionName/:dataName", async (req, res) => {
-  const { collectionName, dataName } = req.params;
+app.patch("/api/:collectionName/", async (req, res) => {
+  const { id } = req.query;
+  const { collectionName } = req.params;
   try {
-    updateData(collectionName, dataName, req.body);
+    updateData(collectionName, id, req.body);
     res.send("Data edited.");
   } catch (e) {
     console.error(e);
