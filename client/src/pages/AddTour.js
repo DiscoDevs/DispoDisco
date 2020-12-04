@@ -48,33 +48,33 @@ export default function AddTour() {
 
   const direktClick = () => {
     task.priority !== "direct"
-      ? setTask({ priority: "direct" })
-      : setTask({ priority: "normal" });
+      ? setTask({ ...task, priority: "direct" })
+      : setTask({ ...task, priority: "normal" });
   };
   const onTimeClick = () => {
     task.priority !== "onTimeRide"
-      ? setTask({ priority: "onTimeRide" })
-      : setTask({ priority: "normal" });
+      ? setTask({ ...task, priority: "onTimeRide" })
+      : setTask({ ...task, priority: "normal" });
   };
   const cargoSClick = () => {
     task.cargo !== "cargoS"
-      ? setTask({ cargo: "cargoS" })
-      : setTask({ cargo: null });
+      ? setTask({ ...task, cargo: "cargoS" })
+      : setTask({ ...task, cargo: null });
   };
   const cargoMClick = () => {
     task.cargo !== "cargoM"
-      ? setTask({ cargo: "cargoM" })
-      : setTask({ cargo: null });
+      ? setTask({ ...task, cargo: "cargoM" })
+      : setTask({ ...task, cargo: null });
   };
   const cargoLClick = () => {
     task.cargo !== "cargoL"
-      ? setTask({ cargo: "cargoL" })
-      : setTask({ cargo: null });
+      ? setTask({ ...task, cargo: "cargoL" })
+      : setTask({ ...task, cargo: null });
   };
   const carriageClick = () => {
     task.carriage !== true
-      ? setTask({ carriage: true })
-      : setTask({ carriage: false });
+      ? setTask({ ...task, carriage: true })
+      : setTask({ ...task, carriage: false });
   };
   const onWeekDayChange = (day) => setWeekDays(day);
 
@@ -97,19 +97,19 @@ export default function AddTour() {
       name: "Ziel",
       type: "text",
       value: task.dest,
-      func: (event) => setTask({ dest: event.target.value }),
+      func: (event) => setTask({ ...task, dest: event.target.value }),
     },
     {
       name: "Datum",
       type: "datetime-local",
       value: task.date,
-      func: (event) => setTask({ date: event.target.value }),
+      func: (event) => setTask({ ...task, date: event.target.value }),
     },
     {
       name: "Fahrer",
       type: "text",
       value: task.assignment,
-      func: (event) => setTask({ assignment: event.target.value }),
+      func: (event) => setTask({ ...task, assignment: event.target.value }),
     },
   ];
   const concurrentArray = [
@@ -117,7 +117,7 @@ export default function AddTour() {
       name: "Titel",
       type: "text",
       value: task.name,
-      func: (event) => setTask({ name: event.target.value }),
+      func: (event) => setTask({ ...task, name: event.target.value }),
     },
     ...todayArray,
   ];
@@ -183,7 +183,9 @@ export default function AddTour() {
             info={task.info}
             checkboxes={checkboxes}
             onCheckboxesChange={setCheckboxes}
-            onInfoChange={(event) => setTask({ info: event.target.value })}
+            onInfoChange={(event) =>
+              setTask({ ...task, info: event.target.value })
+            }
           />
 
           <BadgeContainer>
