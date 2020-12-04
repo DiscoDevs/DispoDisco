@@ -82,7 +82,7 @@ export default Card;
 const CardContainer = styled.div`
   position: relative;
   min-width: 300px;
-  min-height: 180px;
+  /* min-height: 180px; */
   margin: auto;
   padding: 1rem;
   text-align: center;
