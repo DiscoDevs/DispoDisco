@@ -18,15 +18,11 @@ function useQuery() {
 export default function AddTour() {
   const { id } = useParams();
   const query = useQuery();
-  const [name, setName] = useState("");
-  const [start, setStart] = useState("");
-  const [dest, setDest] = useState("");
-  const [date, setDate] = useState("");
-  const [assignment, setAssignment] = useState("");
-  const [priority, setPriority] = useState("normal");
-  const [cargo, setCargo] = useState(null);
-  const [carriage, setCarriage] = useState(false);
-  const [info, setInfo] = useState("");
+  const [task, setTask] = useState({
+    priority: "normal",
+    cargo: null,
+    carriage: false,
+  });
   const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
@@ -37,20 +33,11 @@ export default function AddTour() {
     if (id) {
       const doFetch = async () => {
         try {
-          const task = await getDataByID({
+          const data = await getDataByID({
             collectionName: "tasks",
             id: id,
           });
-          setName(task.name);
-          setStart(task.start);
-          setDest(task.dest);
-          setDate(task.date);
-          setAssignment(task.assignment);
-          setCargo(task.cargo);
-          setPriority(task.priority);
-          setInfo(task.info);
-          setCheckboxes(task.checkboxes);
-          setWeekDays(task.weekDays);
+          setTask(data);
         } catch (e) {
           console.error(e);
         }
@@ -60,24 +47,34 @@ export default function AddTour() {
   }, [id]);
 
   const direktClick = () => {
-    priority !== "direct" ? setPriority("direct") : setPriority("normal");
+    task.priority !== "direct"
+      ? setTask({ ...task, priority: "direct" })
+      : setTask({ ...task, priority: "normal" });
   };
   const onTimeClick = () => {
-    priority !== "onTimeRide"
-      ? setPriority("onTimeRide")
-      : setPriority("normal");
+    task.priority !== "onTimeRide"
+      ? setTask({ ...task, priority: "onTimeRide" })
+      : setTask({ ...task, priority: "normal" });
   };
   const cargoSClick = () => {
-    cargo !== "cargoS" ? setCargo("cargoS") : setCargo(null);
+    task.cargo !== "cargoS"
+      ? setTask({ ...task, cargo: "cargoS" })
+      : setTask({ ...task, cargo: null });
   };
   const cargoMClick = () => {
-    cargo !== "cargoM" ? setCargo("cargoM") : setCargo(null);
+    task.cargo !== "cargoM"
+      ? setTask({ ...task, cargo: "cargoM" })
+      : setTask({ ...task, cargo: null });
   };
   const cargoLClick = () => {
-    cargo !== "cargoL" ? setCargo("cargoL") : setCargo(null);
+    task.cargo !== "cargoL"
+      ? setTask({ ...task, cargo: "cargoL" })
+      : setTask({ ...task, cargo: null });
   };
   const carriageClick = () => {
-    carriage !== true ? setCarriage(true) : setCarriage(false);
+    task.carriage !== true
+      ? setTask({ ...task, carriage: true })
+      : setTask({ ...task, carriage: false });
   };
   const onWeekDayChange = (day) => setWeekDays(day);
 
@@ -93,34 +90,36 @@ export default function AddTour() {
     {
       name: "Start",
       type: "text",
-      value: start,
-      func: (event) => setStart(event.target.value),
+      value: task.start,
+      required: true,
+      func: (event) => setTask({ ...task, start: event.target.value }),
     },
     {
       name: "Ziel",
       type: "text",
-      value: dest,
-      func: (event) => setDest(event.target.value),
+      value: task.dest,
+      required: true,
+      func: (event) => setTask({ ...task, dest: event.target.value }),
     },
     {
       name: "Datum",
       type: "datetime-local",
-      value: date,
-      func: (event) => setDate(event.target.value),
+      value: task.date,
+      func: (event) => setTask({ ...task, date: event.target.value }),
     },
     {
       name: "Fahrer",
       type: "text",
-      value: assignment,
-      func: (event) => setAssignment(event.target.value),
+      value: task.assignment,
+      func: (event) => setTask({ ...task, assignment: event.target.value }),
     },
   ];
   const concurrentArray = [
     {
       name: "Titel",
       type: "text",
-      value: name,
-      func: (event) => setName(event.target.value),
+      value: task.name,
+      func: (event) => setTask({ ...task, name: event.target.value }),
     },
     ...todayArray,
   ];
@@ -131,47 +130,38 @@ export default function AddTour() {
       <HeaderMain />
       <Wrapper>
         <Card
-          type={priority}
-          start={start}
-          dest={dest}
-          rider={assignment}
+          type={task.priority}
+          start={task.start}
+          dest={task.dest}
+          rider={task.assignment}
           labels={
             <>
-              {cargo && <Badge type={cargo} status={true} />}
-              {priority !== "normal" ? (
-                <Badge type={priority} status={true} />
+              {task.cargo && <Badge type={task.cargo} status={true} />}
+              {task.priority !== "normal" ? (
+                <Badge type={task.priority} status={true} />
               ) : (
                 ""
               )}
-              {carriage && <Badge type="carriage" status={true} />}
+              {task.carriage && <Badge type="carriage" status={true} />}
             </>
           }
         />
         <Form
           onSubmit={(event) => {
             event.preventDefault();
-            const data = {
-              name,
-              start,
-              dest,
-              date,
-              assignment,
-              priority,
-              cargo,
-              info,
-              checkboxes,
-              weekDays,
-            };
+            if (!task.date) {
+              task.date = new Date();
+            }
             if (id) {
               updateData(
                 {
                   collectionName: "tasks",
                   id,
                 },
-                data
+                task
               );
             } else {
-              addTour(data);
+              addTour(task);
             }
             history.push("/Tours");
           }}
@@ -194,10 +184,12 @@ export default function AddTour() {
           )}
 
           <InfoInput
-            info={info}
+            info={task.info}
             checkboxes={checkboxes}
             onCheckboxesChange={setCheckboxes}
-            onInfoChange={(event) => setInfo(event.target.value)}
+            onInfoChange={(event) =>
+              setTask({ ...task, info: event.target.value })
+            }
           />
 
           <BadgeContainer>
