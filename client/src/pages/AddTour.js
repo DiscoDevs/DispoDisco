@@ -138,14 +138,14 @@ export default function AddTour() {
           name={task.name}
           labels={
             <>
-              {task.cargo && <Badge type={task.cargo} status={true} />}
+              {task.cargo && <Badge type={task.cargo} active />}
               {task.priority !== "normal" &&
               task.priority !== "concurrentRide" ? (
-                <Badge type={task.priority} status={true} />
+                <Badge type={task.priority} active />
               ) : (
                 ""
               )}
-              {task.carriage && <Badge type="carriage" status={true} />}
+              {task.carriage && <Badge type="carriage" active />}
             </>
           }
         />
