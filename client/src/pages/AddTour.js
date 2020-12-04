@@ -18,16 +18,17 @@ function useQuery() {
 export default function AddTour() {
   const { id } = useParams();
   const query = useQuery();
+  const concurrentTour = query.get("type") === "concurrent";
+  const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
-    priority: "normal",
+    priority: priSwitch,
     cargo: null,
     carriage: false,
+    assignment: "",
   });
   const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
-
-  const concurrentTour = query.get("type") === "concurrent";
 
   useEffect(() => {
     if (id) {
@@ -134,10 +135,12 @@ export default function AddTour() {
           start={task.start}
           dest={task.dest}
           rider={task.assignment}
+          name={task.name}
           labels={
             <>
               {task.cargo && <Badge type={task.cargo} status={true} />}
-              {task.priority !== "normal" ? (
+              {task.priority !== "normal" &&
+              task.priority !== "concurrentRide" ? (
                 <Badge type={task.priority} status={true} />
               ) : (
                 ""
