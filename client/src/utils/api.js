@@ -40,8 +40,8 @@ export async function getDataByID({ collectionName, id }) {
   return data;
 }
 
-export async function deleteData({ collectionName, dataName }) {
-  await fetch(`/api/${collectionName}?data=${dataName}`, {
+export async function deleteData({ collectionName, id }) {
+  await fetch(`/api/${collectionName}?id=${id}`, {
     method: "DELETE",
   });
 }
