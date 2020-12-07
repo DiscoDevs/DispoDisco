@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Todo from "./Todo";
 
-const TodoList = ({ checkboxes, onCheckboxesChange }) => {
+const TodoList = ({ checkboxes, onCheckboxesChange, task }) => {
   const [checkbox, setCheckbox] = useState("");
 
   const handleRemove = (entry) => {
@@ -34,7 +34,10 @@ const TodoList = ({ checkboxes, onCheckboxesChange }) => {
         <button
           type="button"
           onClick={() => {
-            onCheckboxesChange([...checkboxes, checkbox]);
+            onCheckboxesChange({
+              ...task,
+              checkboxes: [...checkboxes, checkbox],
+            });
             setCheckbox("");
           }}
         >
@@ -78,6 +81,7 @@ const InputContainer = styled.div`
 `;
 
 TodoList.propTypes = {
+  task: PropTypes.object,
   checkboxes: PropTypes.array,
   onCheckboxesChange: PropTypes.func,
 };

@@ -102,4 +102,10 @@ Timer.args = {
 export const Info = CardButtonTemplate.bind(0);
 Info.args = {
   type: "info",
+  label: "info",
+};
+export const Remove = CardButtonTemplate.bind(0);
+Remove.args = {
+  type: "remove",
+  label: "X",
 };

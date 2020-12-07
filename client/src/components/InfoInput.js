@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import TodoList from "./TodoList";
 
-const InfoInput = ({ checkboxes, info, onCheckboxesChange, onInfoChange }) => {
+const InfoInput = ({
+  checkboxes,
+  info,
+  onCheckboxesChange,
+  onInfoChange,
+  task,
+}) => {
   return (
     <Details>
       <summary>Info & Todo-Liste</summary>
@@ -20,6 +26,7 @@ const InfoInput = ({ checkboxes, info, onCheckboxesChange, onInfoChange }) => {
       <h3>Todo-Liste</h3>
 
       <TodoList
+        task={task}
         checkboxes={checkboxes}
         onCheckboxesChange={onCheckboxesChange}
       />
@@ -43,6 +50,7 @@ const Details = styled.details`
 InfoInput.propTypes = {
   checkboxes: PropTypes.array,
   info: PropTypes.string,
+  task: PropTypes.object,
   onCheckboxesChange: PropTypes.func,
   onInfoChange: PropTypes.func,
 };

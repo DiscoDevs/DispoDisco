@@ -25,8 +25,9 @@ export default function AddTour() {
     cargo: null,
     carriage: false,
     assignment: "",
+    checkboxes: [],
   });
-  const [checkboxes, setCheckboxes] = useState([]);
+  // const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
 
@@ -192,8 +193,9 @@ export default function AddTour() {
 
           <InfoInput
             info={task.info}
-            checkboxes={checkboxes}
-            onCheckboxesChange={setCheckboxes}
+            checkboxes={task.checkboxes}
+            task={task}
+            onCheckboxesChange={setTask}
             onInfoChange={(event) =>
               setTask({ ...task, info: event.target.value })
             }

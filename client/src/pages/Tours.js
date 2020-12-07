@@ -60,6 +60,7 @@ const Tours = () => {
                   dest={ride.dest}
                   rider={ride.assignment}
                   settings={ride._id}
+                  rideID={ride._id}
                   labels={
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
