@@ -25,8 +25,8 @@ export default function AddTour() {
     cargo: null,
     carriage: false,
     assignment: "",
+    checkboxes: [],
   });
-  const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
 
@@ -47,45 +47,34 @@ export default function AddTour() {
     }
   }, [id]);
 
-  const direktClick = () => {
-    task.priority !== "direct"
-      ? setTask({ ...task, priority: "direct" })
-      : setTask({ ...task, priority: "normal" });
+  const handlePriorityClick = (badgeName) => () => {
+    setTask({
+      ...task,
+      priority: task.priority !== badgeName ? badgeName : "normal",
+    });
   };
-  const onTimeClick = () => {
-    task.priority !== "onTimeRide"
-      ? setTask({ ...task, priority: "onTimeRide" })
-      : setTask({ ...task, priority: "normal" });
+  const handleCargoClick = (badgeName) => () => {
+    setTask({
+      ...task,
+      cargo: task.cargo !== badgeName ? badgeName : null,
+    });
   };
-  const cargoSClick = () => {
-    task.cargo !== "cargoS"
-      ? setTask({ ...task, cargo: "cargoS" })
-      : setTask({ ...task, cargo: null });
+  const handleCarriageClick = () => {
+    setTask({
+      ...task,
+      carriage: !task.carriage,
+    });
   };
-  const cargoMClick = () => {
-    task.cargo !== "cargoM"
-      ? setTask({ ...task, cargo: "cargoM" })
-      : setTask({ ...task, cargo: null });
-  };
-  const cargoLClick = () => {
-    task.cargo !== "cargoL"
-      ? setTask({ ...task, cargo: "cargoL" })
-      : setTask({ ...task, cargo: null });
-  };
-  const carriageClick = () => {
-    task.carriage !== true
-      ? setTask({ ...task, carriage: true })
-      : setTask({ ...task, carriage: false });
-  };
+
   const onWeekDayChange = (day) => setWeekDays(day);
 
   const Badges = [
-    { name: "direct", func: direktClick },
-    { name: "onTimeRide", func: onTimeClick },
-    { name: "cargoS", func: cargoSClick },
-    { name: "cargoM", func: cargoMClick },
-    { name: "cargoL", func: cargoLClick },
-    { name: "carriage", func: carriageClick },
+    { name: "direct", func: handlePriorityClick("direct") },
+    { name: "onTimeRide", func: handlePriorityClick("onTimeRide") },
+    { name: "cargoS", func: handleCargoClick("cargoS") },
+    { name: "cargoM", func: handleCargoClick("cargoM") },
+    { name: "cargoL", func: handleCargoClick("cargoL") },
+    { name: "carriage", func: handleCarriageClick },
   ];
   const todayArray = [
     {
@@ -167,10 +156,10 @@ export default function AddTour() {
               addTour(task);
             }
             if (concurrentTour) {
-              history.push("/tours");
+              history.goBack();
               return;
             }
-            history.push("/tours/today");
+            history.goBack();
           }}
         >
           {arrayToMap.map((inputObj) => (
@@ -192,8 +181,9 @@ export default function AddTour() {
 
           <InfoInput
             info={task.info}
-            checkboxes={checkboxes}
-            onCheckboxesChange={setCheckboxes}
+            checkboxes={task.checkboxes}
+            task={task}
+            onCheckboxesChange={setTask}
             onInfoChange={(event) =>
               setTask({ ...task, info: event.target.value })
             }
