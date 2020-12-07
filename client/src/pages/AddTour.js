@@ -168,10 +168,10 @@ export default function AddTour() {
               addTour(task);
             }
             if (concurrentTour) {
-              history.push("/tours");
+              history.goBack();
               return;
             }
-            history.push("/tours/today");
+            history.goBack();
           }}
         >
           {arrayToMap.map((inputObj) => (

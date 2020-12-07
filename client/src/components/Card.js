@@ -78,7 +78,7 @@ const Card = ({
                 collectionName: "tasks",
                 id: rideID,
               });
-              console.log(`Tour ID ${rideID} deleted!`);
+              history.goBack();
             }}
           />
         )}
