@@ -68,10 +68,10 @@ app.post("/api/:collectionName", async (req, res) => {
 });
 
 app.delete("/api/:collectionName", async (req, res) => {
-  const { data } = req.query;
+  const { id } = req.query;
   const { collectionName } = req.params;
   try {
-    deleteData(collectionName, data);
+    deleteData(collectionName, id);
     res.send("Data deleted.");
   } catch (e) {
     console.error(e);
