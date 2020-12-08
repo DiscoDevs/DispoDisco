@@ -44,6 +44,7 @@ export async function deleteData({ collectionName, id }) {
   await fetch(`/api/${collectionName}?id=${id}`, {
     method: "DELETE",
   });
+  console.log(`/api/${collectionName}?id=${id}`);
 }
 
 export async function updateData({ collectionName, id }, props) {

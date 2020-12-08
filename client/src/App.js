@@ -7,6 +7,7 @@ import MainMenu from "./pages/MainMenu";
 import Tours from "./pages/Tours";
 import ToursToday from "./pages/ToursToday";
 import AddTour from "./pages/AddTour";
+import TourInfo from "./pages/TourInfo";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/tours/today">
             <ToursToday />
+          </Route>
+          <Route path="/tours/:id/">
+            <TourInfo />
           </Route>
           <Route path="/tours">
             <Tours />

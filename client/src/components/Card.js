@@ -5,6 +5,7 @@ import ArrowImg from "../assets/arrow.svg";
 import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
+import { deleteData } from "../utils/api";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -19,15 +20,16 @@ const Card = ({
   name,
   labels,
   info = true,
+  removeButton = false,
   settings = false,
   start,
   dest,
   rider,
-  ...props
+  rideID,
 }) => {
   const history = useHistory();
   return (
-    <CardContainer type={type} {...props}>
+    <CardContainer type={type}>
       <Header>
         <Start type={type}>
           <p>{type !== "concurrentRide" ? start : name}</p>
@@ -56,8 +58,30 @@ const Card = ({
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         )}
         <CardButton type="timer" label="1:30h" />
-        {info && <CardButton type="info" label="Info" />}
+        {info && (
+          <CardButton
+            type="info"
+            label="Info"
+            onClick={() => {
+              console.log(rideID);
+              history.push(`/tours/${rideID}`);
+            }}
+          />
+        )}
         {info && <CardButton type="info" label="Abgabe" />}
+        {removeButton && (
+          <CardButton
+            type="remove"
+            label="X"
+            onClick={() => {
+              deleteData({
+                collectionName: "tasks",
+                id: rideID,
+              });
+              history.goBack();
+            }}
+          />
+        )}
       </InfoContainer>
     </CardContainer>
   );
@@ -70,10 +94,13 @@ Card.propTypes = {
     "direct",
     "concurrentRide",
     "onTimeRide",
+    "removeButton",
   ]),
   labels: PropTypes.object,
   info: PropTypes.bool,
+  removeButton: PropTypes.bool,
   settings: PropTypes.string,
+  rideID: PropTypes.string,
   name: PropTypes.string,
   rider: PropTypes.string,
   onClick: PropTypes.func,

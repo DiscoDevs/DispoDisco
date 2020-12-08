@@ -6,6 +6,23 @@ import Backward from "../assets/back.svg";
 import { useHistory } from "react-router-dom";
 import { getCurrentDateShort } from "../utils/date";
 
+const date = getCurrentDateShort();
+const Header = ({ title, children }) => {
+  const history = useHistory();
+  return (
+    <HeaderElement title={title}>
+      <Top>
+        <img src={Backward} alt={"backward"} onClick={() => history.goBack()} />
+        <HeaderText>Tour</HeaderText>
+        <Logo src={MirrorBall} alt={"Logo"} />
+        <HeaderText>{date}</HeaderText>
+      </Top>
+      {title && <Title>{title}</Title>}
+      {children && <Children>{children}</Children>}
+    </HeaderElement>
+  );
+};
+
 const HeaderElement = styled.header`
   z-index: 10;
   display: flex;
@@ -52,28 +69,6 @@ const Children = styled.div`
   display: flex;
   justify-content: center;
 `;
-const date = getCurrentDateShort();
-console.log(date);
-const Header = ({ title, children }) => {
-  const history = useHistory();
-  return (
-    <HeaderElement title={title}>
-      <Top>
-        <img
-          src={Backward}
-          alt={"backward"}
-          onClick={() => history.push("/menu")}
-        />
-        <HeaderText>Tour</HeaderText>
-        <Logo src={MirrorBall} alt={"Logo"} />
-        <HeaderText>{date}</HeaderText>
-      </Top>
-      {title && <Title>{title}</Title>}
-      {children && <Children>{children}</Children>}
-    </HeaderElement>
-  );
-};
-
 Header.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,

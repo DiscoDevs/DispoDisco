@@ -21,13 +21,17 @@ const types = {
     background: "var(--text-primary)",
     padding: "0.7rem 0.8rem",
   },
+  remove: {
+    color: "var(--text-secondary)",
+    background: "var(--text-primary)",
+    padding: "0.7rem 0.8rem",
+  },
 };
 
 const CardButton = ({ type, label, onClick }) => {
-  const buttonLabel = types[type].label || label;
   return (
     <ButtonElement type={type} onClick={onClick}>
-      {buttonLabel}
+      {label}
     </ButtonElement>
   );
 };
@@ -65,7 +69,7 @@ const ButtonElement = styled.div`
 `;
 
 CardButton.propTypes = {
-  type: PropTypes.oneOf(["timer", "info", "rider"]),
+  type: PropTypes.oneOf(["timer", "info", "rider", "remove"]),
 
   label: PropTypes.string,
 
