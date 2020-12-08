@@ -8,7 +8,7 @@ import Tours from "./pages/Tours";
 import ToursToday from "./pages/ToursToday";
 import AddTour from "./pages/AddTour";
 import TourInfo from "./pages/TourInfo";
-import Rider from "./pages/Rider";
+import Riders from "./pages/Riders";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/riders">
-            <Rider />
+            <Riders />
           </Route>
           <Route path="/tours/:id/edit">
             <AddTour />

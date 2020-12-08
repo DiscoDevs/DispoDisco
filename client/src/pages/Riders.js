@@ -22,7 +22,7 @@ const PageWrapper = styled.div`
   }
 `;
 
-const Rider = () => {
+const Riders = () => {
   const [riders, setRiders] = useState([]);
   const history = useHistory();
 
@@ -32,7 +32,6 @@ const Rider = () => {
         collectionName: "riders",
         dataName: "alias",
       });
-      console.log({ data });
       setRiders(data);
     };
     doFetch();
@@ -44,19 +43,11 @@ const Rider = () => {
       <Header title="Fahrer hinzufügen" />
       <ToursGrid>
         {riders?.map((rider) => (
-          <CardRider
-            key={rider._id}
-            name={rider.name}
-            alias={rider.alias}
-            dateOfBirth={rider.dateOfBirth}
-            phone={rider.phone}
-            picture={rider.picture}
-            color={rider.color}
-          />
+          <CardRider key={rider._id} {...rider} />
         ))}
       </ToursGrid>
       <ButtonPlus onClick={() => history.push("/riders/new")} />
     </PageWrapper>
   );
 };
-export default Rider;
+export default Riders;
