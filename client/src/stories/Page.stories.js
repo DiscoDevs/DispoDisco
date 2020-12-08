@@ -5,7 +5,7 @@ import ToursToday from "../pages/ToursToday";
 import Launch from "../pages/Launch";
 import AddTour from "../pages/AddTour";
 import TourInfo from "../pages/TourInfo";
-import Rider from "../pages/Rider";
+import Rider from "../pages/Riders";
 
 export default {
   title: "DispoDisco/Page",
