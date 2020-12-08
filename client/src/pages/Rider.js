@@ -4,6 +4,8 @@ import { getSortedData } from "../utils/api";
 import Header from "../components/Header";
 import styled from "styled-components";
 import ToursGrid from "../components/helpers/ToursGrid";
+import { useHistory } from "react-router-dom";
+import ButtonPlus from "../components/ButtonPlus";
 
 const PageWrapper = styled.div`
   position: fixed;
@@ -22,6 +24,7 @@ const PageWrapper = styled.div`
 
 const Rider = () => {
   const [riders, setRiders] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const doFetch = async () => {
@@ -52,6 +55,7 @@ const Rider = () => {
           />
         ))}
       </ToursGrid>
+      <ButtonPlus onClick={() => history.push("/riders/new")} />
     </PageWrapper>
   );
 };
