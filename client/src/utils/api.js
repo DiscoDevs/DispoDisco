@@ -1,5 +1,5 @@
-export async function addData(collection, data) {
-  await fetch(`/api/${collection}`, {
+export async function addData({ collectionName, data }) {
+  await fetch(`/api/${collectionName}`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {

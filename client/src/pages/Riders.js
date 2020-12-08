@@ -43,7 +43,7 @@ const Riders = () => {
       <Header title="Fahrer hinzufügen" />
       <ToursGrid>
         {riders?.map((rider) => (
-          <CardRider key={rider._id} {...rider} />
+          <CardRider key={rider._id} id={rider._id} {...rider} />
         ))}
       </ToursGrid>
       <ButtonPlus onClick={() => history.push("/riders/new")} />

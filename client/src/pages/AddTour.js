@@ -153,7 +153,7 @@ export default function AddTour() {
                 task
               );
             } else {
-              addData("tasks", task);
+              addData({ collectionName: "tasks", data: task });
             }
             if (concurrentTour) {
               history.goBack();

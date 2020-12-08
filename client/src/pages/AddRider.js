@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addTour, getDataByID, getSortedData, updateData } from "../utils/api";
+import {
+  addData,
+  addTour,
+  getDataByID,
+  getSortedData,
+  updateData,
+} from "../utils/api";
+import DefaultAvatar from "../assets/defaultAvatar.svg";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -12,56 +19,34 @@ import InfoInput from "../components/InfoInput";
 import CardRider from "../components/CardRider";
 
 export default function AddRider() {
-  // const { id } = useParams();
+  const { id } = useParams();
 
-  const [rider, setRider] = useState({ color: "var(--gradient-direct)" });
+  const [rider, setRider] = useState({
+    picture: DefaultAvatar,
+    color: "var(--gradient-direct)",
+  });
 
   const history = useHistory();
 
   useEffect(() => {
-    const doFetch = async () => {
-      try {
-        const data = await getSortedData({
-          collectionName: "riders",
-          dataName: "alias",
-        });
-        setRiders(data);
-        console.log(data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    doFetch();
-  }, []);
+    if (id) {
+      const doFetch = async () => {
+        try {
+          const data = await getDataByID({
+            collectionName: "riders",
+            id,
+          });
+          setRider(data);
+          console.log(data);
+        } catch (e) {
+          console.error(e);
+        }
+      };
+      doFetch();
+    }
+  }, [id]);
 
-  // const handlePriorityClick = (badgeName) => () => {
-  //   setRiders({
-  //     ...riders,
-  //     priority: riders.priority !== badgeName ? badgeName : "normal",
-  //   });
-  // };
-  // const handleCargoClick = (badgeName) => () => {
-  //   setRiders({
-  //     ...riders,
-  //     cargo: riders.cargo !== badgeName ? badgeName : null,
-  //   });
-  // };
-  // const handleCarriageClick = () => {
-  //   setRiders({
-  //     ...riders,
-  //     carriage: !riders.carriage,
-  //   });
-  // };
-
-  // const Badges = [
-  //   { name: "direct", func: handlePriorityClick("direct") },
-  //   { name: "onTimeRide", func: handlePriorityClick("onTimeRide") },
-  //   { name: "cargoS", func: handleCargoClick("cargoS") },
-  //   { name: "cargoM", func: handleCargoClick("cargoM") },
-  //   { name: "cargoL", func: handleCargoClick("cargoL") },
-  //   { name: "carriage", func: handleCarriageClick },
-  // ];
-  const arrayToMap = [
+  const inputArray = [
     {
       name: "Name",
       type: "text",
@@ -98,10 +83,24 @@ export default function AddRider() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            if (id) {
+              updateData(
+                {
+                  collectionName: "riders",
+                  id,
+                },
+                rider
+              );
+            } else {
+              addData({
+                collectionName: "riders",
+                data: rider,
+              });
+            }
             history.goBack();
           }}
         >
-          {arrayToMap.map((inputObj) => (
+          {inputArray.map((inputObj) => (
             <Input
               key={inputObj.name}
               type={inputObj.type}
@@ -110,29 +109,11 @@ export default function AddRider() {
               onChange={inputObj.func}
             />
           ))}
-
-          {/* <InfoInput
-            info={riders.info}
-            checkboxes={riders.checkboxes}
-            task={riders}
-            onCheckboxesChange={setRiders}
-            onInfoChange={(event) =>
-              setRiders({ ...riders, info: event.target.value })
-            }
-          /> */}
-
-          {/* <BadgeContainer>
-            {Badges.map((BadgeObj) => {
-              return (
-                <Badge
-                  key={BadgeObj.name}
-                  type={BadgeObj.name}
-                  onClick={BadgeObj.func}
-                />
-              );
-            })}
-          </BadgeContainer> */}
-          <Button type="submit" design="addRide" label={"Rider hinzufügen"} />
+          <Button
+            type="submit"
+            design="addRide"
+            label={id ? "Rider ändern" : "Rider hinzufügen"}
+          />
         </Form>
       </Wrapper>
     </PageWrapper>
@@ -164,17 +145,5 @@ const Form = styled.form`
   }
   > :first-child {
     margin-top: 0;
-  }
-`;
-
-const BadgeContainer = styled.div`
-  margin: 1rem auto;
-
-  display: flex;
-  > * {
-    margin-right: 0.5rem;
-  }
-  > :last-child {
-    margin-right: 0;
   }
 `;
