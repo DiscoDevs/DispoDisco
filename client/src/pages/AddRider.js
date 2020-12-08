@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
-import { useHistory, useLocation, useParams } from "react-router-dom";
-import {
-  addData,
-  addTour,
-  getDataByID,
-  getSortedData,
-  updateData,
-} from "../utils/api";
+import { useHistory, useParams } from "react-router-dom";
+import { addData, getDataByID, updateData } from "../utils/api";
 import DefaultAvatar from "../assets/defaultAvatar.svg";
 
-import Badge from "../components/Badge";
-import Card from "../components/Card";
-import HeaderMain from "../components/HeaderMain";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import InfoInput from "../components/InfoInput";
 import CardRider from "../components/CardRider";
 import Header from "../components/Header";
 
