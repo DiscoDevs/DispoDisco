@@ -41,7 +41,7 @@ const CardContainer = styled.div`
   padding: 1rem;
   text-align: left;
   font-weight: bold;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   background: ${(props) => props.color};
   border-radius: var(--border-radius);
   img {
