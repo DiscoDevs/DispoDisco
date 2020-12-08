@@ -28,6 +28,20 @@ const Card = ({
   rideID,
 }) => {
   const history = useHistory();
+
+  let i = 0;
+
+  const changeTourStatus = () => {
+    const status = ["open", "fetched", "delivered", "done"];
+
+    console.log(status[i]);
+
+    i++;
+    if (i >= status.length) {
+      i = 0;
+    }
+  };
+
   return (
     <CardContainer type={type}>
       <Header>
@@ -68,7 +82,15 @@ const Card = ({
             }}
           />
         )}
-        {info && <CardButton type="info" label="Abgabe" />}
+        {info && (
+          <CardButton
+            type="info"
+            label="Abgabe"
+            onClick={() => {
+              changeTourStatus();
+            }}
+          />
+        )}
         {removeButton && (
           <CardButton
             type="remove"
