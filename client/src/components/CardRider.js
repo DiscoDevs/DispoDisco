@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CardButton from "./CardButton";
 
 const CardRider = ({ name, alias, dateOfBirth, phone, picture, color }) => {
+  const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
   return (
     <CardContainer color={color}>
       <div>
@@ -12,7 +13,7 @@ const CardRider = ({ name, alias, dateOfBirth, phone, picture, color }) => {
       </div>
       <img src={picture} alt="Profilbild" />
       <div>
-        <p>{dateOfBirth}</p>
+        {dateOfBirth && <p>{dateOfBirthOrdered}</p>}
         <b>📞{phone}</b>
       </div>
       <CardButton label="ändern" />

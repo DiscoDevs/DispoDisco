@@ -6,6 +6,7 @@ import Launch from "../pages/Launch";
 import AddTour from "../pages/AddTour";
 import TourInfo from "../pages/TourInfo";
 import Rider from "../pages/Riders";
+import AddRider from "../pages/AddRider";
 
 export default {
   title: "DispoDisco/Page",
@@ -19,6 +20,7 @@ const ToursTodayTemplate = (args) => <ToursToday {...args} />;
 const AddRideTemplate = (args) => <AddTour {...args} />;
 const RideInfoTemplate = (args) => <TourInfo {...args} />;
 const RiderTemplate = (args) => <Rider {...args} />;
+const AddRiderTemplate = (args) => <AddRider {...args} />;
 
 export const LaunchPage = LaunchTemplate.bind({});
 export const MainMenuPage = MainTemplate.bind({});
@@ -27,3 +29,4 @@ export const ToursTodayPage = ToursTodayTemplate.bind({});
 export const AddRidePage = AddRideTemplate.bind({});
 export const RideInfoPage = RideInfoTemplate.bind({});
 export const RiderPage = RiderTemplate.bind({});
+export const AddRiderPage = AddRiderTemplate.bind({});
