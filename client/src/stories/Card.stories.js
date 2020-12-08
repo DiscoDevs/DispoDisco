@@ -3,6 +3,7 @@ import Badge from "../components/Badge";
 
 import Card from "../components/Card";
 import CardButton from "../components/CardButton";
+import CardRider from "../components/CardRider";
 
 export default {
   title: "DispoDisco/Cards",
@@ -11,6 +12,7 @@ export default {
 
 const Template = (args) => <Card {...args} />;
 const CardButtonTemplate = (args) => <CardButton {...args} />;
+const CardRiderTemplate = (args) => <CardRider {...args} />;
 
 export const NormalRide = Template.bind();
 NormalRide.args = {
@@ -89,8 +91,8 @@ RideWithSettings.args = {
   ),
 };
 
-export const Rider = CardButtonTemplate.bind(0);
-Rider.args = {
+export const RiderBadge = CardButtonTemplate.bind(0);
+RiderBadge.args = {
   type: "rider",
   label: "🚴‍♀️ Elena",
 };
@@ -108,4 +110,14 @@ export const Remove = CardButtonTemplate.bind(0);
 Remove.args = {
   type: "remove",
   label: "X",
+};
+
+export const RiderCard = CardRiderTemplate.bind();
+RiderCard.args = {
+  name: "Darth Vader",
+  alias: "Vader",
+  dateOfBirth: "1970-01-01",
+  phone: "0123/4567890",
+  picture: "Enter URL",
+  color: "red",
 };
