@@ -40,7 +40,7 @@ const Riders = () => {
   console.log({ riders });
   return (
     <PageWrapper>
-      <Header title="Fahrer hinzufügen" />
+      <Header title="🚴‍♀️ Riders 🚴‍♀️" />
       <ToursGrid>
         {riders?.map((rider) => (
           <CardRider key={rider._id} id={rider._id} {...rider} />

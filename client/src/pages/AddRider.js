@@ -17,6 +17,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 import CardRider from "../components/CardRider";
+import Header from "../components/Header";
 
 export default function AddRider() {
   const { id } = useParams();
@@ -77,7 +78,7 @@ export default function AddRider() {
 
   return (
     <PageWrapper>
-      <HeaderMain />
+      <Header title={id ? "Rider ändern" : "Rider hinzufügen"} />
       <Wrapper>
         <CardRider {...rider} />
         <Form
