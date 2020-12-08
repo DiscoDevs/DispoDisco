@@ -1,7 +1,7 @@
-export async function addTour(props) {
-  await fetch("/api/tasks", {
+export async function addData({ collectionName, data }) {
+  await fetch(`/api/${collectionName}`, {
     method: "POST",
-    body: JSON.stringify(props),
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },

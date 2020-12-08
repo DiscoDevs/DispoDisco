@@ -9,6 +9,7 @@ import ToursToday from "./pages/ToursToday";
 import AddTour from "./pages/AddTour";
 import TourInfo from "./pages/TourInfo";
 import Riders from "./pages/Riders";
+import AddRider from "./pages/AddRider";
 
 function App() {
   return (
@@ -16,6 +17,12 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
+          <Route path="/riders/:id/edit">
+            <AddRider />
+          </Route>
+          <Route path="/riders/new">
+            <AddRider />
+          </Route>
           <Route path="/riders">
             <Riders />
           </Route>

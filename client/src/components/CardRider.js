@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import CardButton from "./CardButton";
+import { useHistory } from "react-router-dom";
 
-const CardRider = ({ name, alias, dateOfBirth, phone, picture, color }) => {
+const CardRider = ({ name, alias, dateOfBirth, phone, picture, color, id }) => {
+  const history = useHistory();
+  const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
   return (
     <CardContainer color={color}>
       <div>
@@ -12,17 +15,24 @@ const CardRider = ({ name, alias, dateOfBirth, phone, picture, color }) => {
       </div>
       <img src={picture} alt="Profilbild" />
       <div>
-        <p>{dateOfBirth}</p>
+        {dateOfBirth && <p>{dateOfBirthOrdered}</p>}
         <b>📞{phone}</b>
       </div>
-      <CardButton label="ändern" />
+      <CardButton
+        label="ändern"
+        onClick={() => {
+          history.push(`/riders/${id}/edit`);
+        }}
+      />
     </CardContainer>
   );
 };
 
+// !Verkürzbar ??
 CardRider.propTypes = {
   name: PropTypes.string,
   alias: PropTypes.string,
+  id: PropTypes.string,
   dateOfBirth: PropTypes.string,
   phone: PropTypes.string,
   picture: PropTypes.string,
