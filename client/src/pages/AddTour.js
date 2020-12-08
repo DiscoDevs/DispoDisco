@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addTour, getDataByID, updateData } from "../utils/api";
+import { addData, getDataByID, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -153,7 +153,7 @@ export default function AddTour() {
                 task
               );
             } else {
-              addTour(task);
+              addData("tasks", task);
             }
             if (concurrentTour) {
               history.goBack();
