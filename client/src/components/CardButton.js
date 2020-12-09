@@ -28,13 +28,15 @@ const types = {
   },
 };
 
-const CardButton = ({ type, label, onClick }) => {
+const CardButton = ({ type, label, status, onClick }) => {
   return (
-    <ButtonElement type={type} onClick={onClick}>
+    <ButtonElement type={type} status={status} onClick={onClick}>
       {label}
     </ButtonElement>
   );
 };
+
+const statusColor = { open: "green", fetched: "orange", delivered: "grey" };
 
 const ButtonElement = styled.div`
   padding: ${(props) => types[props.type].padding};
@@ -55,7 +57,9 @@ const ButtonElement = styled.div`
   color: ${(props) => types[props.type].color || types.default.color};
 
   background-color: ${(props) =>
-    types[props.type].background || types.default.background};
+    statusColor[props.status] ||
+    types[props.type].background ||
+    types.default.background};
 
   ${(props) => props.type === "timer" && "justify-self: center;"}
 
@@ -72,6 +76,7 @@ CardButton.propTypes = {
   type: PropTypes.oneOf(["timer", "info", "rider", "remove"]),
 
   label: PropTypes.string,
+  status: PropTypes.string,
 
   onClick: PropTypes.func,
 };

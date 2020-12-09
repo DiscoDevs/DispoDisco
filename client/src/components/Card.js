@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
@@ -27,21 +27,31 @@ const Card = ({
   rider,
   rideID,
 }) => {
+  const [status, setStatus] = useState("open");
+  const [counter, setCounter] = useState(0);
+
   const history = useHistory();
 
-  let i = 0;
+  const progress = ["fetched", "delivered", "open"];
 
   const changeTourStatus = () => {
-    const status = ["open", "fetched", "delivered", "done"];
-
-    console.log(status[i]);
-
-    i++;
-    if (i >= status.length) {
-      i = 0;
+    setStatus(progress[counter]);
+    setCounter(counter + 1);
+    if (counter >= progress.length - 1) {
+      setCounter(0);
     }
   };
-
+  const handleLabel = () => {
+    if (status === progress[2]) {
+      return "offen";
+    }
+    if (status === progress[1]) {
+      return "abgegeben";
+    }
+    if (status === progress[0]) {
+      return "abgeholt";
+    }
+  };
   return (
     <CardContainer type={type}>
       <Header>
@@ -84,10 +94,12 @@ const Card = ({
         )}
         {info && (
           <CardButton
+            status={status}
             type="info"
-            label="Abgabe"
+            label={handleLabel()}
             onClick={() => {
               changeTourStatus();
+              console.log("click");
             }}
           />
         )}
