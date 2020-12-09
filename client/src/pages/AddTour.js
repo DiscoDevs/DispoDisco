@@ -26,6 +26,7 @@ export default function AddTour() {
     carriage: false,
     assignment: "",
     checkboxes: [],
+    name: "",
   });
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
