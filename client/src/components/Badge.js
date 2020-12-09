@@ -29,6 +29,9 @@ const types = {
   onTimeRide: {
     img: OnTimeImg,
   },
+  dayRide: {
+    img: OnTimeImg,
+  },
 };
 
 const BadgeElement = styled.div`
