@@ -14,23 +14,10 @@ import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
 
-const PageWrapper = styled.div`
-  position: fixed;
-  overflow: auto;
-  height: 100%;
-  width: 100%;
-  background: var(--gradient-dark);
-  & > *:not(:first-child) {
-    margin: 1rem auto;
-  }
-  & > :nth-child(2) {
-    margin-top: clamp(10rem, 25vw, 12rem);
-  }
-`;
-
 const ToursToday = () => {
   const [Tours, setTours] = useState([]);
   const history = useHistory();
+
   useEffect(() => {
     const doFetch = async () => {
       const today = getCurrentDateString();
@@ -53,6 +40,8 @@ const ToursToday = () => {
             Tours.map((ride) => {
               return (
                 <Card
+                  {...ride}
+                  rideID={ride._id}
                   key={ride._id}
                   type={ride.priority}
                   rider={ride.assignment}
@@ -79,5 +68,19 @@ const ToursToday = () => {
     </>
   );
 };
+
+const PageWrapper = styled.div`
+  position: fixed;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  background: var(--gradient-dark);
+  & > *:not(:first-child) {
+    margin: 1rem auto;
+  }
+  & > :nth-child(2) {
+    margin-top: clamp(10rem, 25vw, 12rem);
+  }
+`;
 
 export default ToursToday;

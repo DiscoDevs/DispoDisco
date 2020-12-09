@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
 import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
-import { deleteData } from "../utils/api";
+import { deleteData, updateData } from "../utils/api";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -16,6 +16,7 @@ const types = {
 };
 
 const Card = ({
+  status = false,
   type,
   name,
   labels,
@@ -27,7 +28,35 @@ const Card = ({
   rider,
   rideID,
 }) => {
+  const progressBar = ["fetched", "delivered", "open"];
+  const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
   const history = useHistory();
+  const [progress, setProgress] = useState(status || "open");
+  const [counter, setCounter] = useState(initalCount);
+
+  useEffect(() => {
+    updateData({ collectionName: "tasks", id: rideID }, { status: progress });
+  }, [progress, rideID]);
+
+  const changeTourStatus = () => {
+    setProgress(progressBar[counter]);
+    setCounter(counter + 1);
+    if (counter >= progressBar.length - 1) {
+      setCounter(0);
+    }
+  };
+  const handleLabel = () => {
+    switch (progress) {
+      case progressBar[2]:
+        return "offen";
+      case progressBar[1]:
+        return "abgegeben";
+      case progressBar[0]:
+        return "abgeholt";
+      default:
+        return "offen";
+    }
+  };
   return (
     <CardContainer type={type}>
       <Header>
@@ -68,7 +97,16 @@ const Card = ({
             }}
           />
         )}
-        {info && <CardButton type="info" label="Abgabe" />}
+        {info && (
+          <CardButton
+            status={progress}
+            type="info"
+            label={handleLabel()}
+            onClick={() => {
+              changeTourStatus();
+            }}
+          />
+        )}
         {removeButton && (
           <CardButton
             type="remove"
@@ -98,6 +136,7 @@ Card.propTypes = {
   ]),
   labels: PropTypes.object,
   info: PropTypes.bool,
+  status: PropTypes.string,
   removeButton: PropTypes.bool,
   settings: PropTypes.string,
   rideID: PropTypes.string,
