@@ -70,6 +70,8 @@ const Background = styled.div`
   padding-top: 200px;
 `;
 const Wrapper = styled.div`
+  min-height: 100vh;
+  height: 100%;
   max-width: 500px;
   margin: auto;
   text-align: center;
@@ -83,5 +85,7 @@ const Wrapper = styled.div`
 
 const InfoContainer = styled.div`
   padding: 0.5rem;
+  margin: auto;
+  width: 80%;
   text-align: left;
 `;
