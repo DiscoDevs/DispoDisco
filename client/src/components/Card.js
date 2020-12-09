@@ -207,6 +207,7 @@ const InfoContainer = styled.div`
 `;
 
 const LabelContainer = styled.div`
+  pointer-events: none;
   display: flex;
   margin: 0.75rem 0;
   & > :not(:first-child) {

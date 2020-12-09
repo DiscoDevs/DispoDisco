@@ -7,6 +7,7 @@ import CargoL from "../assets/container.svg";
 import CarriageImg from "../assets/carriage.svg";
 import DirectImg from "../assets/shuttle.svg";
 import OnTimeImg from "../assets/stopwatch.svg";
+import DayRideImg from "../assets/dayRide.svg";
 /**
  * Primary UI component for user interaction
  */
@@ -30,7 +31,7 @@ const types = {
     img: OnTimeImg,
   },
   dayRide: {
-    img: OnTimeImg,
+    img: DayRideImg,
   },
 };
 
