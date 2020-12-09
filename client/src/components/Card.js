@@ -28,35 +28,33 @@ const Card = ({
   rider,
   rideID,
 }) => {
-  const [progress, setProgress] = useState(status || "open");
-  const [counter, setCounter] = useState(0);
-
+  const progressBar = ["fetched", "delivered", "open"];
+  const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
   const history = useHistory();
+  const [progress, setProgress] = useState(status || "open");
+  const [counter, setCounter] = useState(initalCount);
+
   useEffect(() => {
     updateData({ collectionName: "tasks", id: rideID }, { status: progress });
   }, [progress, rideID]);
 
-  const progressBar = ["fetched", "delivered", "open"];
-
   const changeTourStatus = () => {
     setProgress(progressBar[counter]);
-
     setCounter(counter + 1);
     if (counter >= progressBar.length - 1) {
       setCounter(0);
     }
   };
   const handleLabel = () => {
-    console.log({ progress });
-    console.log({ status });
-    if (progress === progressBar[2]) {
-      return "offen";
-    }
-    if (progress === progressBar[1]) {
-      return "abgegeben";
-    }
-    if (progress === progressBar[0]) {
-      return "abgeholt";
+    switch (progress) {
+      case progressBar[2]:
+        return "offen";
+      case progressBar[1]:
+        return "abgegeben";
+      case progressBar[0]:
+        return "abgeholt";
+      default:
+        return "offen";
     }
   };
   return (
