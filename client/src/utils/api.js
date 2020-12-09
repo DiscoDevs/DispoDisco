@@ -16,6 +16,12 @@ export async function getDataByQuery({ collectionName, dataName, query }) {
   return returnedData;
 }
 
+export async function getSortedData({ collectionName, dataName }) {
+  const result = await fetch(`/api/${collectionName}?sortBy=${dataName}`);
+  const returnedData = await result.json();
+  return returnedData;
+}
+
 export async function getSortedDataByQuery({
   collectionName,
   dataName,
@@ -28,10 +34,18 @@ export async function getSortedDataByQuery({
   return returnedData;
 }
 
-export async function getSortedData({ collectionName, dataName }) {
-  const result = await fetch(`/api/${collectionName}?sortBy=${dataName}`);
-  const returnedData = await result.json();
-  return returnedData;
+export async function getFilteredDataByQuery({
+  collectionName,
+  dataName,
+  dataValue,
+  filterBy,
+  filterValue,
+}) {
+  const results = await fetch(
+    `/api/${collectionName}?name=${dataName}&value=${dataValue}&filterBy=${filterBy}&filterValue=${filterValue}`
+  );
+  const data = await results.json();
+  return data;
 }
 
 export async function getDataByID({ collectionName, id }) {
