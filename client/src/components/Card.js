@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
@@ -32,12 +32,14 @@ const Card = ({
   const [counter, setCounter] = useState(0);
 
   const history = useHistory();
+  useEffect(() => {
+    updateData({ collectionName: "tasks", id: rideID }, { status: progress });
+  }, [progress, rideID]);
 
   const progressBar = ["fetched", "delivered", "open"];
 
   const changeTourStatus = () => {
     setProgress(progressBar[counter]);
-    updateData({ collectionName: "tasks", id: rideID }, { status: progress });
 
     setCounter(counter + 1);
     if (counter >= progressBar.length - 1) {
@@ -45,6 +47,8 @@ const Card = ({
     }
   };
   const handleLabel = () => {
+    console.log({ progress });
+    console.log({ status });
     if (progress === progressBar[2]) {
       return "offen";
     }
