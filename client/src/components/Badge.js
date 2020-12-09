@@ -79,6 +79,7 @@ Badge.propTypes = {
     "cargoM",
     "cargoL",
     "onTimeRide",
+    "dayRide",
     "timer",
     "info",
     "rider",
