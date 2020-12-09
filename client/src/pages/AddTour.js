@@ -21,6 +21,7 @@ export default function AddTour() {
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
+    // status: "open",
     priority: priSwitch,
     cargo: null,
     carriage: false,
@@ -143,6 +144,9 @@ export default function AddTour() {
             event.preventDefault();
             if (!task.date) {
               task.date = new Date();
+            }
+            if (!task.status) {
+              task.status = "open";
             }
             if (id) {
               updateData(

@@ -5,7 +5,7 @@ import ArrowImg from "../assets/arrow.svg";
 import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
-import { deleteData } from "../utils/api";
+import { deleteData, updateData } from "../utils/api";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -16,6 +16,7 @@ const types = {
 };
 
 const Card = ({
+  status = false,
   type,
   name,
   labels,
@@ -27,28 +28,30 @@ const Card = ({
   rider,
   rideID,
 }) => {
-  const [status, setStatus] = useState("open");
+  const [progress, setProgress] = useState(status || "open");
   const [counter, setCounter] = useState(0);
 
   const history = useHistory();
 
-  const progress = ["fetched", "delivered", "open"];
+  const progressBar = ["fetched", "delivered", "open"];
 
   const changeTourStatus = () => {
-    setStatus(progress[counter]);
+    setProgress(progressBar[counter]);
+    updateData({ collectionName: "tasks", id: rideID }, { status: progress });
+
     setCounter(counter + 1);
-    if (counter >= progress.length - 1) {
+    if (counter >= progressBar.length - 1) {
       setCounter(0);
     }
   };
   const handleLabel = () => {
-    if (status === progress[2]) {
+    if (progress === progressBar[2]) {
       return "offen";
     }
-    if (status === progress[1]) {
+    if (progress === progressBar[1]) {
       return "abgegeben";
     }
-    if (status === progress[0]) {
+    if (progress === progressBar[0]) {
       return "abgeholt";
     }
   };
@@ -94,12 +97,11 @@ const Card = ({
         )}
         {info && (
           <CardButton
-            status={status}
+            status={progress}
             type="info"
             label={handleLabel()}
             onClick={() => {
               changeTourStatus();
-              console.log("click");
             }}
           />
         )}
@@ -132,6 +134,7 @@ Card.propTypes = {
   ]),
   labels: PropTypes.object,
   info: PropTypes.bool,
+  status: PropTypes.string,
   removeButton: PropTypes.bool,
   settings: PropTypes.string,
   rideID: PropTypes.string,
