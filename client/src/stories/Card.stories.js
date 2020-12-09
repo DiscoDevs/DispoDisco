@@ -3,6 +3,7 @@ import Badge from "../components/Badge";
 
 import Card from "../components/Card";
 import CardButton from "../components/CardButton";
+import CardCustomer from "../components/CardCustomer";
 import CardRider from "../components/CardRider";
 
 export default {
@@ -13,6 +14,7 @@ export default {
 const Template = (args) => <Card {...args} />;
 const CardButtonTemplate = (args) => <CardButton {...args} />;
 const CardRiderTemplate = (args) => <CardRider {...args} />;
+const CardCustomerTemplate = (args) => <CardCustomer {...args} />;
 
 export const NormalRide = Template.bind();
 NormalRide.args = {
@@ -119,5 +121,15 @@ RiderCard.args = {
   dateOfBirth: "1970-01-01",
   phone: "0123/4567890",
   picture: "Enter URL",
-  color: "red",
+  color: "var(--gradient-direct)",
+};
+
+export const CustomerCard = CardCustomerTemplate.bind();
+CustomerCard.args = {
+  name: "Darth Vader",
+  company: "The Empire",
+  address: "In the Galaxy 5, 00000 Death Star",
+  alias: "Emp",
+  counter: "0",
+  phone: "0123/4567890",
 };
