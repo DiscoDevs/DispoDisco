@@ -72,6 +72,7 @@ export default function AddTour() {
   const Badges = [
     { name: "direct", func: handlePriorityClick("direct") },
     { name: "onTimeRide", func: handlePriorityClick("onTimeRide") },
+    { name: "dayRide", func: handlePriorityClick("dayRide") },
     { name: "cargoS", func: handleCargoClick("cargoS") },
     { name: "cargoM", func: handleCargoClick("cargoM") },
     { name: "cargoL", func: handleCargoClick("cargoL") },
