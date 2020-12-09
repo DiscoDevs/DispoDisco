@@ -70,15 +70,21 @@ export default function AddTour() {
 
   const onWeekDayChange = (day) => setWeekDays(day);
 
-  const Badges = [
-    { name: "direct", func: handlePriorityClick("direct") },
-    { name: "onTimeRide", func: handlePriorityClick("onTimeRide") },
-    { name: "dayRide", func: handlePriorityClick("dayRide") },
+  const ConcurrentBadges = [
     { name: "cargoS", func: handleCargoClick("cargoS") },
     { name: "cargoM", func: handleCargoClick("cargoM") },
     { name: "cargoL", func: handleCargoClick("cargoL") },
     { name: "carriage", func: handleCarriageClick },
   ];
+  const Badges = [
+    ...ConcurrentBadges,
+    { name: "direct", func: handlePriorityClick("direct") },
+    { name: "onTimeRide", func: handlePriorityClick("onTimeRide") },
+    { name: "dayRide", func: handlePriorityClick("dayRide") },
+  ];
+
+  const BadgesToMap = concurrentTour ? ConcurrentBadges : Badges;
+
   const todayArray = [
     {
       name: "Start",
@@ -196,7 +202,7 @@ export default function AddTour() {
           />
 
           <BadgeContainer>
-            {Badges.map((BadgeObj) => {
+            {BadgesToMap.map((BadgeObj) => {
               return (
                 <Badge
                   key={BadgeObj.name}
@@ -221,7 +227,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   margin: auto;
-  padding: 8rem 0;
+  padding: 9rem 0;
 
   background: var(--text-secondary);
 `;
