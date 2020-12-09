@@ -21,6 +21,7 @@ const Second = styled(First)`
 `;
 
 const Logo = styled.img`
+  height: 150px;
   margin-top: -50px;
   filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;

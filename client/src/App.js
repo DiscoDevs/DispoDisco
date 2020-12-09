@@ -7,6 +7,11 @@ import MainMenu from "./pages/MainMenu";
 import Tours from "./pages/Tours";
 import ToursToday from "./pages/ToursToday";
 import AddTour from "./pages/AddTour";
+import TourInfo from "./pages/TourInfo";
+import Riders from "./pages/Riders";
+import AddRider from "./pages/AddRider";
+import Customers from "./pages/Customers";
+import AddCustomer from "./pages/AddCustomer";
 
 function App() {
   return (
@@ -14,6 +19,24 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
+          <Route path="/customers/:id/edit">
+            <AddCustomer />
+          </Route>
+          <Route path="/customers/new">
+            <AddCustomer />
+          </Route>
+          <Route path="/customers">
+            <Customers />
+          </Route>
+          <Route path="/riders/:id/edit">
+            <AddRider />
+          </Route>
+          <Route path="/riders/new">
+            <AddRider />
+          </Route>
+          <Route path="/riders">
+            <Riders />
+          </Route>
           <Route path="/tours/:id/edit">
             <AddTour />
           </Route>
@@ -28,6 +51,9 @@ function App() {
           </Route>
           <Route path="/tours/today">
             <ToursToday />
+          </Route>
+          <Route path="/tours/:id/">
+            <TourInfo />
           </Route>
           <Route path="/tours">
             <Tours />

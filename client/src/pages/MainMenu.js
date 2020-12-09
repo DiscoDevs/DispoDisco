@@ -34,36 +34,51 @@ const MenuWrapper = styled.div`
 
 const MainMenu = () => {
   const history = useHistory();
+  const buttons = [
+    {
+      category: "settings",
+      design: "menu",
+      label: "Einstellungen",
+      route: "/settings",
+    },
+    {
+      category: "tours",
+      design: "menu",
+      label: "Touren",
+      route: "/tours",
+    },
+    {
+      category: "riders",
+      design: "menu",
+      label: "Riders",
+      route: "/riders",
+    },
+    {
+      category: "customers",
+      design: "menu",
+      label: "Kunden",
+      route: "/customers",
+    },
+    {
+      category: "go",
+      design: "cta",
+      label: "Lets Fetz",
+      route: "/tours/today",
+    },
+  ];
   return (
     <>
       <GlobalStyle />
       <PageWrapper>
         <HeaderHome />
         <MenuWrapper>
-          <Button
-            category="settings"
-            design="menu"
-            label="Einstellungen"
-            onClick={() => history.push("/settings")}
-          />
-          <Button
-            category="tours"
-            design="menu"
-            label="Touren"
-            onClick={() => history.push("/tours")}
-          />
-          <Button
-            category="riders"
-            design="menu"
-            label="Riders"
-            onClick={() => history.push("/riders")}
-          />
-          <Button
-            category="go"
-            design="cta"
-            label="Lets Fetz"
-            onClick={() => history.push("/tours/today")}
-          />
+          {buttons.map((button) => (
+            <Button
+              key={button.label}
+              onClick={() => history.push(button.route)}
+              {...button}
+            />
+          ))}
         </MenuWrapper>
       </PageWrapper>
     </>

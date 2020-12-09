@@ -5,27 +5,28 @@ import settingsIcon from "../assets/settingsIcon.svg";
 import jockey from "../assets/jockey.svg";
 import packages from "../assets/packages.svg";
 import shuttle from "../assets/shuttle.svg";
+// import customer from "../assets/customer.svg";
 
 const categories = {
   settings: {
     src: settingsIcon,
     alt: "settings",
-    title: "Einstellungen",
   },
   tours: {
     src: packages,
     alt: "tours",
-    title: "Touren",
   },
   riders: {
     src: jockey,
     alt: "riders",
-    title: "Fahrer",
   },
+  // customers: {
+  //   src: customer,
+  //   alt: "customers",
+  // },
   go: {
     src: shuttle,
     alt: "go",
-    title: "Lets Fetz",
   },
 };
 

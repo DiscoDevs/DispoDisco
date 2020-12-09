@@ -1,9 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
 import Badge from "../components/Badge";
 import Card from "../components/Card";
 import Header from "../components/Header";
 import Todo from "../components/Todo";
+import { getDataByID } from "../utils/api";
+
+export default function TourInfo() {
+  const { id } = useParams();
+  const [task, setTask] = useState([]);
+
+  useEffect(() => {
+    const doFetch = async () => {
+      const data = await getDataByID({
+        collectionName: "tasks",
+        id,
+      });
+      setTask(data);
+    };
+
+    doFetch();
+  }, [id]);
+  return (
+    <Background>
+      <Header title="Info" />
+      <Wrapper>
+        <Card
+          type={task.priority}
+          name={task.name}
+          start={task.start}
+          dest={task.dest}
+          rider={task.assignment}
+          rideID={id}
+          info={false}
+          removeButton
+          labels={
+            <>
+              {task.priority !== "normal" &&
+              task.priority !== "concurrentRide" ? (
+                <Badge type="carriage" active />
+              ) : (
+                ""
+              )}
+              {task.cargo && <Badge type={task.cargo} active />}
+              {task.carriage && <Badge type="carriage" active />}
+            </>
+          }
+        />
+        <InfoContainer>
+          <h2>Checkliste</h2>
+          {console.log(task.checkboxes)}
+          {task.checkboxes &&
+            task.checkboxes.map((checkbox) => (
+              <Todo key={checkbox}>{checkbox} </Todo>
+            ))}
+          <h2>Infos</h2>
+          <p>{task.info}</p>
+        </InfoContainer>
+      </Wrapper>
+    </Background>
+  );
+}
 
 const Background = styled.div`
   background-color: var(--text-secondary);
@@ -12,6 +70,8 @@ const Background = styled.div`
   padding-top: 200px;
 `;
 const Wrapper = styled.div`
+  min-height: 100vh;
+  height: 100%;
   max-width: 500px;
   margin: auto;
   text-align: center;
@@ -25,40 +85,7 @@ const Wrapper = styled.div`
 
 const InfoContainer = styled.div`
   padding: 0.5rem;
+  margin: auto;
+  width: 80%;
   text-align: left;
 `;
-export default function TourInfo() {
-  return (
-    <Background>
-      <Header title="Info" />
-      <Wrapper>
-        <Card
-          type="direct"
-          info={false}
-          labels={
-            <>
-              <Badge type="cargoS" label="5-25kg" />
-              <Badge type="direct" label="Direct" />
-              <Badge type="carriage" label="Kutsche" />
-            </>
-          }
-        />
-        <InfoContainer>
-          <h2>Checkliste</h2>
-          <Todo>Test Todo</Todo>
-          <Todo>Test Todo</Todo>
-          <Todo>Test Todo</Todo>
-          <Todo>Test Todo</Todo>
-          <Todo>Test Todo</Todo>
-          <h2>Infos</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem est
-            iusto, asperiores sapiente obcaecati illum nostrum, placeat nemo
-            totam hic ratione quas pariatur animi dignissimos cupiditate unde
-            ipsa modi eum fuga temporibus quo
-          </p>
-        </InfoContainer>
-      </Wrapper>
-    </Background>
-  );
-}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addTour, getDataByID, updateData } from "../utils/api";
+import { addData, getDataByID, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -21,12 +21,14 @@ export default function AddTour() {
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
+    // status: "open",
     priority: priSwitch,
     cargo: null,
     carriage: false,
     assignment: "",
+    checkboxes: [],
+    name: "",
   });
-  const [checkboxes, setCheckboxes] = useState([]);
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
 
@@ -47,46 +49,42 @@ export default function AddTour() {
     }
   }, [id]);
 
-  const direktClick = () => {
-    task.priority !== "direct"
-      ? setTask({ ...task, priority: "direct" })
-      : setTask({ ...task, priority: "normal" });
+  const handlePriorityClick = (badgeName) => () => {
+    setTask({
+      ...task,
+      priority: task.priority !== badgeName ? badgeName : "normal",
+    });
   };
-  const onTimeClick = () => {
-    task.priority !== "onTimeRide"
-      ? setTask({ ...task, priority: "onTimeRide" })
-      : setTask({ ...task, priority: "normal" });
+  const handleCargoClick = (badgeName) => () => {
+    setTask({
+      ...task,
+      cargo: task.cargo !== badgeName ? badgeName : null,
+    });
   };
-  const cargoSClick = () => {
-    task.cargo !== "cargoS"
-      ? setTask({ ...task, cargo: "cargoS" })
-      : setTask({ ...task, cargo: null });
+  const handleCarriageClick = () => {
+    setTask({
+      ...task,
+      carriage: !task.carriage,
+    });
   };
-  const cargoMClick = () => {
-    task.cargo !== "cargoM"
-      ? setTask({ ...task, cargo: "cargoM" })
-      : setTask({ ...task, cargo: null });
-  };
-  const cargoLClick = () => {
-    task.cargo !== "cargoL"
-      ? setTask({ ...task, cargo: "cargoL" })
-      : setTask({ ...task, cargo: null });
-  };
-  const carriageClick = () => {
-    task.carriage !== true
-      ? setTask({ ...task, carriage: true })
-      : setTask({ ...task, carriage: false });
-  };
+
   const onWeekDayChange = (day) => setWeekDays(day);
 
-  const Badges = [
-    { name: "direct", func: direktClick },
-    { name: "onTimeRide", func: onTimeClick },
-    { name: "cargoS", func: cargoSClick },
-    { name: "cargoM", func: cargoMClick },
-    { name: "cargoL", func: cargoLClick },
-    { name: "carriage", func: carriageClick },
+  const ConcurrentBadges = [
+    { name: "cargoS", func: handleCargoClick("cargoS") },
+    { name: "cargoM", func: handleCargoClick("cargoM") },
+    { name: "cargoL", func: handleCargoClick("cargoL") },
+    { name: "carriage", func: handleCarriageClick },
   ];
+  const Badges = [
+    ...ConcurrentBadges,
+    { name: "direct", func: handlePriorityClick("direct") },
+    { name: "onTimeRide", func: handlePriorityClick("onTimeRide") },
+    { name: "dayRide", func: handlePriorityClick("dayRide") },
+  ];
+
+  const BadgesToMap = concurrentTour ? ConcurrentBadges : Badges;
+
   const todayArray = [
     {
       name: "Start",
@@ -155,6 +153,9 @@ export default function AddTour() {
             if (!task.date) {
               task.date = new Date();
             }
+            if (!task.status) {
+              task.status = "open";
+            }
             if (id) {
               updateData(
                 {
@@ -164,13 +165,13 @@ export default function AddTour() {
                 task
               );
             } else {
-              addTour(task);
+              addData({ collectionName: "tasks", data: task });
             }
             if (concurrentTour) {
-              history.push("/tours");
+              history.goBack();
               return;
             }
-            history.push("/tours/today");
+            history.goBack();
           }}
         >
           {arrayToMap.map((inputObj) => (
@@ -192,15 +193,16 @@ export default function AddTour() {
 
           <InfoInput
             info={task.info}
-            checkboxes={checkboxes}
-            onCheckboxesChange={setCheckboxes}
+            checkboxes={task.checkboxes}
+            task={task}
+            onCheckboxesChange={setTask}
             onInfoChange={(event) =>
               setTask({ ...task, info: event.target.value })
             }
           />
 
           <BadgeContainer>
-            {Badges.map((BadgeObj) => {
+            {BadgesToMap.map((BadgeObj) => {
               return (
                 <Badge
                   key={BadgeObj.name}
@@ -225,7 +227,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   margin: auto;
-  padding: 8rem 0;
+  padding: 9rem 0;
 
   background: var(--text-secondary);
 `;

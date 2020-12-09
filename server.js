@@ -15,28 +15,68 @@ const port = process.env.PORT || 3600;
 
 app.use(express.json());
 
-app.get("/api/:collectionName", async (req, res) => {
-  const dataName = req.query.name;
-  const dataValue = req.query.value;
-  const { sortBy } = req.query;
-  const order = req.query.order === "desc" ? -1 : 1;
-  const { collectionName } = req.params;
-  try {
-    const collectionData = await getCollection({
-      collectionName,
-      dataName,
-      dataValue,
-      sortBy,
-      order,
-    });
-    res.send(collectionData);
-  } catch (e) {
-    console.error(e);
-    res
-      .status(500)
-      .send("An unexpected server error occured. Please try again later.");
-  }
-});
+app
+  .route("/api/:collectionName")
+  .get(async (req, res) => {
+    const { name, value, sortBy, filterBy, filterValue } = req.query;
+    const order = req.query.order === "desc" ? -1 : 1;
+    const { collectionName } = req.params;
+    try {
+      const collectionData = await getCollection({
+        collectionName,
+        name,
+        value,
+        sortBy,
+        filterBy,
+        filterValue,
+        order,
+      });
+      res.send(collectionData);
+    } catch (e) {
+      console.error(e);
+      res
+        .status(500)
+        .send("An unexpected server error occured. Please try again later.");
+    }
+  })
+  .post(async (req, res) => {
+    const { collectionName } = req.params;
+    try {
+      await insertData(collectionName, req.body);
+      res.send("New Input posted into database.");
+    } catch (e) {
+      console.error(e);
+      res
+        .status(500)
+        .send("An unexpected server error occured. Please try again later.");
+    }
+  })
+  .delete(async (req, res) => {
+    const { id } = req.query;
+    const { collectionName } = req.params;
+    try {
+      deleteData(collectionName, id);
+      res.send("Data deleted.");
+    } catch (e) {
+      console.error(e);
+      res
+        .status(500)
+        .send("An unexpected server error occured. Please try again later.");
+    }
+  })
+  .patch(async (req, res) => {
+    const { id } = req.query;
+    const { collectionName } = req.params;
+    try {
+      updateData(collectionName, id, req.body);
+      res.send("Data edited.");
+    } catch (e) {
+      console.error(e);
+      res
+        .status(500)
+        .send("An unexpected server error occured. Please try again later.");
+    }
+  });
 
 app.get("/api/:collectionName/:id", async (req, res) => {
   const { collectionName, id } = req.params;
@@ -46,47 +86,6 @@ app.get("/api/:collectionName/:id", async (req, res) => {
       id,
     });
     res.send(data);
-  } catch (e) {
-    console.error(e);
-    res
-      .status(500)
-      .send("An unexpected server error occured. Please try again later.");
-  }
-});
-
-app.post("/api/:collectionName", async (req, res) => {
-  const { collectionName } = req.params;
-  try {
-    await insertData(collectionName, req.body);
-    res.send("New Input posted into database.");
-  } catch (e) {
-    console.error(e);
-    res
-      .status(500)
-      .send("An unexpected server error occured. Please try again later.");
-  }
-});
-
-app.delete("/api/:collectionName", async (req, res) => {
-  const { data } = req.query;
-  const { collectionName } = req.params;
-  try {
-    deleteData(collectionName, data);
-    res.send("Data deleted.");
-  } catch (e) {
-    console.error(e);
-    res
-      .status(500)
-      .send("An unexpected server error occured. Please try again later.");
-  }
-});
-
-app.patch("/api/:collectionName/", async (req, res) => {
-  const { id } = req.query;
-  const { collectionName } = req.params;
-  try {
-    updateData(collectionName, id, req.body);
-    res.send("Data edited.");
   } catch (e) {
     console.error(e);
     res

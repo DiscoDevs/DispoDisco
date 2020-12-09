@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
 import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
+import { deleteData, updateData } from "../utils/api";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -15,23 +16,51 @@ const types = {
 };
 
 const Card = ({
+  status = false,
   type,
   name,
   labels,
   info = true,
+  removeButton = false,
   settings = false,
   start,
   dest,
   rider,
-  ...props
+  rideID,
 }) => {
+  const progressBar = ["fetched", "delivered", "open"];
+  const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
   const history = useHistory();
+  const [progress, setProgress] = useState(status || "open");
+  const [counter, setCounter] = useState(initalCount);
+
+  useEffect(() => {
+    updateData({ collectionName: "tasks", id: rideID }, { status: progress });
+  }, [progress, rideID]);
+
+  const changeTourStatus = () => {
+    setProgress(progressBar[counter]);
+    setCounter(counter + 1);
+    if (counter >= progressBar.length - 1) {
+      setCounter(0);
+    }
+  };
+  const handleLabel = () => {
+    switch (progress) {
+      case progressBar[2]:
+        return "offen";
+      case progressBar[1]:
+        return "abgegeben";
+      case progressBar[0]:
+        return "abgeholt";
+      default:
+        return "offen";
+    }
+  };
   return (
-    <CardContainer type={type} {...props}>
+    <CardContainer type={type}>
       <Header>
-        <Start type={type}>
-          <p>{type !== "concurrentRide" ? start : name}</p>
-        </Start>
+        <Start type={type}>{type !== "concurrentRide" ? start : name}</Start>
         {type !== "concurrentRide" && (
           <>
             <img src={ArrowImg} alt="Arrow" />
@@ -56,8 +85,39 @@ const Card = ({
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         )}
         <CardButton type="timer" label="1:30h" />
-        {info && <CardButton type="info" label="Info" />}
-        {info && <CardButton type="info" label="Abgabe" />}
+        {info && (
+          <CardButton
+            type="info"
+            label="Info"
+            onClick={() => {
+              console.log(rideID);
+              history.push(`/tours/${rideID}`);
+            }}
+          />
+        )}
+        {info && (
+          <CardButton
+            status={progress}
+            type="info"
+            label={handleLabel()}
+            onClick={() => {
+              changeTourStatus();
+            }}
+          />
+        )}
+        {removeButton && (
+          <CardButton
+            type="remove"
+            label="X"
+            onClick={() => {
+              deleteData({
+                collectionName: "tasks",
+                id: rideID,
+              });
+              history.goBack();
+            }}
+          />
+        )}
       </InfoContainer>
     </CardContainer>
   );
@@ -70,10 +130,14 @@ Card.propTypes = {
     "direct",
     "concurrentRide",
     "onTimeRide",
+    "removeButton",
   ]),
   labels: PropTypes.object,
-  info: PropTypes.bool,
+  info: PropTypes.string,
+  status: PropTypes.string,
+  removeButton: PropTypes.bool,
   settings: PropTypes.string,
+  rideID: PropTypes.string,
   name: PropTypes.string,
   rider: PropTypes.string,
   onClick: PropTypes.func,
@@ -85,6 +149,7 @@ export default Card;
 const CardContainer = styled.div`
   position: relative;
   min-width: 300px;
+  max-width: 350px;
   margin: auto;
   padding: 1rem;
   text-align: center;
@@ -96,12 +161,12 @@ const CardContainer = styled.div`
 `;
 
 const Start = styled.div`
-  overflow: hidden;
-  position: relative;
+  text-align: center;
   color: var(--text-primary);
   border-radius: var(-border-radius);
   font-family: ${(props) => props.type === "concurrentRide" && "Goldman"};
   width: ${(props) => (props.type === "concurrentRide" ? "60%" : "40%")};
+  line-height: 2;
   min-width: 90px;
   height: 2.5rem;
   padding: 0.25rem 0;
@@ -111,49 +176,6 @@ const Start = styled.div`
   }};
   background-color: ${(props) =>
     props.type === "concurrentRide" ? "var(--cargo)" : "transparent"};
-  & p {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    line-height: 2;
-    text-align: center;
-    -moz-transform: translateX(50%);
-    -webkit-transform: translateX(50%);
-    transform: translateX(50%);
-    -moz-animation: bouncing-text 5s linear infinite alternate;
-    -webkit-animation: bouncing-text 5s linear infinite alternate;
-    animation: bouncing-text 10s linear infinite alternate;
-  }
-  @-moz-keyframes bouncing-text {
-    0% {
-      -moz-transform: translateX(50%);
-    }
-    100% {
-      -moz-transform: translateX(-50%);
-    }
-  }
-  @-webkit-keyframes bouncing-text {
-    0% {
-      -webkit-transform: translateX(50%);
-    }
-    100% {
-      -webkit-transform: translateX(-50%);
-    }
-  }
-  @keyframes bouncing-text {
-    0% {
-      -moz-transform: translateX(50%);
-      -webkit-transform: translateX(50%);
-      transform: translateX(50%);
-    }
-    100% {
-      -moz-transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
-      transform: translateX(-50%);
-    }
-  }
 `;
 
 const SettingsIcon = styled.img`
@@ -168,9 +190,6 @@ const Header = styled.div`
 
 const InfoContainer = styled.div`
   width: 100%;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: flex-end; */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-gap: 0.5rem;
@@ -180,6 +199,8 @@ const InfoContainer = styled.div`
 `;
 
 const LabelContainer = styled.div`
+  pointer-events: none;
+  height: 40px;
   display: flex;
   margin: 0.75rem 0;
   & > :not(:first-child) {

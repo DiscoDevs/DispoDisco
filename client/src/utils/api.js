@@ -1,7 +1,7 @@
-export async function addTour(props) {
-  await fetch("/api/tasks", {
+export async function addData({ collectionName, data }) {
+  await fetch(`/api/${collectionName}`, {
     method: "POST",
-    body: JSON.stringify(props),
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
@@ -12,6 +12,12 @@ export async function getDataByQuery({ collectionName, dataName, query }) {
   const result = await fetch(
     `/api/${collectionName}?name=${dataName}&value=${query}`
   );
+  const returnedData = await result.json();
+  return returnedData;
+}
+
+export async function getSortedData({ collectionName, dataName }) {
+  const result = await fetch(`/api/${collectionName}?sortBy=${dataName}`);
   const returnedData = await result.json();
   return returnedData;
 }
@@ -28,10 +34,18 @@ export async function getSortedDataByQuery({
   return returnedData;
 }
 
-export async function getSortedData({ collectionName, dataName }) {
-  const result = await fetch(`/api/${collectionName}?sortBy=${dataName}`);
-  const returnedData = await result.json();
-  return returnedData;
+export async function getFilteredDataByQuery({
+  collectionName,
+  dataName,
+  dataValue,
+  filterBy,
+  filterValue,
+}) {
+  const results = await fetch(
+    `/api/${collectionName}?name=${dataName}&value=${dataValue}&filterBy=${filterBy}&filterValue=${filterValue}`
+  );
+  const data = await results.json();
+  return data;
 }
 
 export async function getDataByID({ collectionName, id }) {
@@ -40,10 +54,11 @@ export async function getDataByID({ collectionName, id }) {
   return data;
 }
 
-export async function deleteData({ collectionName, dataName }) {
-  await fetch(`/api/${collectionName}?data=${dataName}`, {
+export async function deleteData({ collectionName, id }) {
+  await fetch(`/api/${collectionName}?id=${id}`, {
     method: "DELETE",
   });
+  console.log(`/api/${collectionName}?id=${id}`);
 }
 
 export async function updateData({ collectionName, id }, props) {
