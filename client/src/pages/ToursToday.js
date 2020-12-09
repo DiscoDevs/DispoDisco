@@ -45,7 +45,6 @@ const ToursToday = () => {
                   key={ride._id}
                   type={ride.priority}
                   rider={ride.assignment}
-                  rideID={ride._id}
                   {...ride}
                   labels={
                     <>
