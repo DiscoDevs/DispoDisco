@@ -45,7 +45,7 @@ CardCustomer.propTypes = {
   company: PropTypes.string,
   address: PropTypes.string,
   alias: PropTypes.string,
-  counter: PropTypes.string,
+  counter: PropTypes.number,
   phone: PropTypes.string,
   id: PropTypes.string,
 };

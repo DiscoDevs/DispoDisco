@@ -133,7 +133,7 @@ Card.propTypes = {
     "removeButton",
   ]),
   labels: PropTypes.object,
-  info: PropTypes.bool,
+  info: PropTypes.string,
   status: PropTypes.string,
   removeButton: PropTypes.bool,
   settings: PropTypes.string,
@@ -190,9 +190,6 @@ const Header = styled.div`
 
 const InfoContainer = styled.div`
   width: 100%;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: flex-end; */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-gap: 0.5rem;

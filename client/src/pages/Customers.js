@@ -44,5 +44,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   margin: auto;
-  padding: 8rem 0;
+  & > :nth-child(2) {
+    margin-top: clamp(9rem, 25vw, 200px);
+  }
 `;
