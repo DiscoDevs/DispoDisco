@@ -10,6 +10,8 @@ import AddTour from "./pages/AddTour";
 import TourInfo from "./pages/TourInfo";
 import Riders from "./pages/Riders";
 import AddRider from "./pages/AddRider";
+import Customers from "./pages/Customers";
+import AddCustomer from "./pages/AddCustomer";
 
 function App() {
   return (
@@ -17,6 +19,15 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
+          <Route path="/customers/:id/edit">
+            <AddCustomer />
+          </Route>
+          <Route path="/customers/new">
+            <AddCustomer />
+          </Route>
+          <Route path="/customers">
+            <Customers />
+          </Route>
           <Route path="/riders/:id/edit">
             <AddRider />
           </Route>
