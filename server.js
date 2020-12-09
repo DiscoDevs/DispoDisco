@@ -18,17 +18,17 @@ app.use(express.json());
 app
   .route("/api/:collectionName")
   .get(async (req, res) => {
-    const dataName = req.query.name;
-    const dataValue = req.query.value;
-    const { sortBy } = req.query;
+    const { name, value, sortBy, filterBy, filterValue } = req.query;
     const order = req.query.order === "desc" ? -1 : 1;
     const { collectionName } = req.params;
     try {
       const collectionData = await getCollection({
         collectionName,
-        dataName,
-        dataValue,
+        name,
+        value,
         sortBy,
+        filterBy,
+        filterValue,
         order,
       });
       res.send(collectionData);
