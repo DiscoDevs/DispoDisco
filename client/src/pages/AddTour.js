@@ -209,7 +209,6 @@ export default function AddTour() {
               onWeekDayChange={onWeekDayChange}
             />
           )}
-
           <InfoInput
             info={task.info}
             checkboxes={task.checkboxes}

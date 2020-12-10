@@ -7,7 +7,7 @@ const {
   getCollection,
   insertData,
   deleteData,
-  updateData,
+  patchData,
   getByID,
   getDataByQuery,
 } = require("./lib/serverMethods");
@@ -69,7 +69,7 @@ app
     const { id } = req.query;
     const { collectionName } = req.params;
     try {
-      await updateData(collectionName, id, req.body);
+      await patchData(collectionName, id, req.body);
       res.send("Data edited.");
     } catch (e) {
       console.error(e);
