@@ -56,7 +56,7 @@ app
     const { id } = req.query;
     const { collectionName } = req.params;
     try {
-      deleteData(collectionName, id);
+      await deleteData(collectionName, id);
       res.send("Data deleted.");
     } catch (e) {
       console.error(e);
@@ -69,7 +69,7 @@ app
     const { id } = req.query;
     const { collectionName } = req.params;
     try {
-      updateData(collectionName, id, req.body);
+      await updateData(collectionName, id, req.body);
       res.send("Data edited.");
     } catch (e) {
       console.error(e);

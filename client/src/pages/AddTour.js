@@ -21,7 +21,6 @@ export default function AddTour() {
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
-    // status: "open",
     priority: priSwitch,
     cargo: null,
     carriage: false,
@@ -119,12 +118,6 @@ export default function AddTour() {
       value: task.date,
       func: (event) => setTask({ ...task, date: event.target.value }),
     },
-    // {
-    //   name: "Fahrer",
-    //   type: "text",
-    //   value: task.assignment,
-    //   func: (event) => setTask({ ...task, assignment: event.target.value }),
-    // },
   ];
   const concurrentArray = [
     {
