@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addData, getDataByID, updateData } from "../utils/api";
+import { addData, getDataByID, getEntryList, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -31,8 +31,17 @@ export default function AddTour() {
   });
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
+  const [riders, setRiders] = useState([]);
 
   useEffect(() => {
+    const fetchList = async () => {
+      const list = await getEntryList({
+        collectionName: "riders",
+        key: "alias",
+      });
+      setRiders(list);
+    };
+    fetchList();
     if (id) {
       const doFetch = async () => {
         try {
@@ -106,12 +115,6 @@ export default function AddTour() {
       value: task.date,
       func: (event) => setTask({ ...task, date: event.target.value }),
     },
-    {
-      name: "Fahrer",
-      type: "text",
-      value: task.assignment,
-      func: (event) => setTask({ ...task, assignment: event.target.value }),
-    },
   ];
   const concurrentArray = [
     {
@@ -183,6 +186,19 @@ export default function AddTour() {
               onChange={inputObj.func}
             />
           ))}
+
+          <select
+            onChange={(event) =>
+              setTask({ ...task, assignment: event.target.value })
+            }
+          >
+            <option value={null}>Offen</option>
+            {riders.map((rider) => (
+              <option key={rider._id} value={rider.alias}>
+                {rider.alias}
+              </option>
+            ))}
+          </select>
 
           {concurrentTour && (
             <WeekDaysSelector

@@ -9,6 +9,7 @@ const {
   deleteData,
   updateData,
   getByID,
+  getListByKey,
 } = require("./lib/serverMethods");
 const app = express();
 const port = process.env.PORT || 3600;
@@ -91,6 +92,17 @@ app.get("/api/:collectionName/:id", async (req, res) => {
     res
       .status(500)
       .send("An unexpected server error occured. Please try again later.");
+  }
+});
+
+app.get("/api/:collectionName/filter/:key", async (req, res) => {
+  const { collectionName, key } = req.params;
+  try {
+    const data = await getListByKey({ collectionName, key });
+    res.send(data);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("An unexpected tea pot exploded.");
   }
 });
 
