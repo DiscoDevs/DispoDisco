@@ -54,6 +54,12 @@ export async function getDataByID({ collectionName, id }) {
   return data;
 }
 
+export async function getEntryList({ collectionName, key }) {
+  const results = await fetch(`/api/${collectionName}/filter/${key}`);
+  const data = await results.json();
+  return data;
+}
+
 export async function deleteData({ collectionName, id }) {
   await fetch(`/api/${collectionName}?id=${id}`, {
     method: "DELETE",
