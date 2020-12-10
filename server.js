@@ -102,7 +102,9 @@ app.get("/api/:collectionName/filter/:key", async (req, res) => {
     res.send(data);
   } catch (e) {
     console.error(e);
-    res.status(500).send("An unexpected tea pot exploded.");
+    res
+      .status(500)
+      .send("An unexpected server error occured. Please try again later.");
   }
 });
 
