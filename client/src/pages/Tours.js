@@ -13,21 +13,6 @@ import ButtonPlus from "../components/ButtonPlus";
 import Header from "../components/Header";
 import ToursGrid from "../components/helpers/ToursGrid";
 
-const PageWrapper = styled.div`
-  position: fixed;
-  overflow: auto;
-  height: 100%;
-  width: 100%;
-
-  background: var(--gradient-dark);
-  & > *:not(:first-child) {
-    margin: 1rem auto;
-  }
-  & > :nth-child(2) {
-    margin-top: clamp(9rem, 25vw, 200px);
-  }
-`;
-
 const Tours = () => {
   const [tours, setTours] = useState([]);
   const history = useHistory();
@@ -82,5 +67,20 @@ const Tours = () => {
     </>
   );
 };
+
+const PageWrapper = styled.div`
+  position: fixed;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+
+  background: var(--gradient-dark);
+  & > *:not(:first-child) {
+    margin: 1rem auto;
+  }
+  & > :nth-child(2) {
+    margin-top: clamp(9rem, 25vw, 200px);
+  }
+`;
 
 export default Tours;

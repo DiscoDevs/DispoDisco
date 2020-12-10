@@ -13,54 +13,57 @@ import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
+import { useQuery } from "react-query";
 
 const ToursToday = () => {
-  const [Tours, setTours] = useState([]);
   const history = useHistory();
+  const today = getCurrentDateString();
 
-  useEffect(() => {
-    const doFetch = async () => {
-      const today = getCurrentDateString();
-      const todaysTours = await getDataByQuery({
-        collectionName: "tasks",
-        dataName: "date",
-        query: today,
-      });
-      setTours(todaysTours);
-    };
-    doFetch();
-  }, []);
+  const { isLoading, isError, data, error } = useQuery("tours", () =>
+    getDataByQuery({
+      collectionName: "tasks",
+      dataName: "date",
+      query: today,
+    })
+  );
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
   return (
     <>
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
         <ToursGrid>
-          {Tours &&
-            Tours.map((ride) => {
-              return (
-                <Card
-                  {...ride}
-                  rideID={ride._id}
-                  key={ride._id}
-                  type={ride.priority}
-                  rider={ride.assignment}
-                  {...ride}
-                  labels={
-                    <>
-                      {ride.cargo && <Badge type={ride.cargo} active />}
-                      {ride.priority !== "normal" &&
-                      ride.priority !== "concurrentRide" ? (
-                        <Badge type={ride.priority} active />
-                      ) : (
-                        ""
-                      )}
-                      {ride.carriage && <Badge type="carriage" active />}
-                    </>
-                  }
-                />
-              );
-            })}
+          {data.map((ride) => {
+            return (
+              <Card
+                {...ride}
+                rideID={ride._id}
+                key={ride._id}
+                type={ride.priority}
+                rider={ride.assignment}
+                {...ride}
+                labels={
+                  <>
+                    {ride.cargo && <Badge type={ride.cargo} active />}
+                    {ride.priority !== "normal" &&
+                    ride.priority !== "concurrentRide" ? (
+                      <Badge type={ride.priority} active />
+                    ) : (
+                      ""
+                    )}
+                    {ride.carriage && <Badge type="carriage" active />}
+                  </>
+                }
+              />
+            );
+          })}
         </ToursGrid>
         <ButtonPlus onClick={() => history.push("/tours/new")} />
       </PageWrapper>
