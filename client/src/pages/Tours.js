@@ -54,13 +54,9 @@ const Tours = () => {
               return (
                 <Card
                   key={ride._id}
-                  name={ride.name}
-                  type={ride.priority}
-                  start={ride.start}
-                  dest={ride.dest}
                   rider={ride.assignment}
-                  settings={ride._id}
-                  rideID={ride._id}
+                  type={ride.priority}
+                  {...ride}
                   labels={
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
