@@ -197,9 +197,16 @@ export default function AddTour() {
             />
           ))}
 
-          <select>
+          <select
+            onChange={(event) => {
+              setTask({ ...task, assignment: event.target.value });
+            }}
+          >
+            <option value={null}>Offen</option>
             {riders?.map((rider) => (
-              <option key={rider._id}>{rider.alias}</option>
+              <option key={rider._id} value={rider.alias}>
+                {rider.alias}
+              </option>
             ))}
           </select>
 
