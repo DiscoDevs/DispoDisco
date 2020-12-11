@@ -10,6 +10,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
+import { add30Minutes, add90Minutes } from "../utils/time";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -112,7 +113,11 @@ export default function AddTour() {
       name: "Datum",
       type: "datetime-local",
       value: task.date,
-      func: (event) => setTask({ ...task, date: event.target.value }),
+      func: (event) =>
+        setTask({
+          ...task,
+          date: event.target.value,
+        }),
     },
   ];
   const concurrentArray = [
@@ -155,6 +160,15 @@ export default function AddTour() {
             }
             if (!task.status) {
               task.status = "open";
+            }
+            if (!task.finish) {
+              if (task.priority === "normal") {
+                task.finish = add90Minutes(task.date);
+              } else if (task.priority === "direct") {
+                task.finish = add30Minutes(task.date);
+              } else {
+                task.finish = task.date;
+              }
             }
             if (id) {
               updateData(

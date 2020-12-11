@@ -28,7 +28,7 @@ const Card = ({
   dest,
   rider,
   rideID,
-  date,
+  finish,
 }) => {
   const progressBar = ["fetched", "delivered", "open"];
   const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
@@ -87,7 +87,7 @@ const Card = ({
         ) : (
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         )}
-        <CardButton type="timer" label={<Countdown finish={date} />} />
+        <CardButton type="timer" label={<Countdown finish={finish} />} />
         {info && (
           <CardButton
             type="info"
@@ -146,7 +146,7 @@ Card.propTypes = {
   onClick: PropTypes.func,
   start: PropTypes.string,
   dest: PropTypes.string,
-  date: PropTypes.string,
+  finish: PropTypes.string,
 };
 export default Card;
 
