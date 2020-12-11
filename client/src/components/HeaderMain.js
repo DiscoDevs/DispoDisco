@@ -15,7 +15,7 @@ const IconContainer = styled.div`
   }
 `;
 
-const HeaderMain = () => {
+const HeaderMain = (handleDateChange) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [datePicker, setDatePicker] = useState(<></>);
   const [date, setDate] = useState("");
@@ -27,6 +27,7 @@ const HeaderMain = () => {
           type="date"
           onChange={(event) => {
             setDate(event.target.value);
+            handleDateChange(date);
           }}
         />
       );
