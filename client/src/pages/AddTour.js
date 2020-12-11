@@ -32,6 +32,7 @@ export default function AddTour() {
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
   const [riders, setRiders] = useState([]);
+  const [arrayToMap, setArrayToMap] = useState([]);
 
   useEffect(() => {
     const fetchList = async () => {
@@ -94,42 +95,63 @@ export default function AddTour() {
 
   const BadgesToMap = concurrentTour ? ConcurrentBadges : Badges;
 
-  const todayArray = [
-    {
-      name: "Start",
-      type: "text",
-      value: task.start,
-      required: true,
-      func: (event) => setTask({ ...task, start: event.target.value }),
-    },
-    {
-      name: "Ziel",
-      type: "text",
-      value: task.dest,
-      required: true,
-      func: (event) => setTask({ ...task, dest: event.target.value }),
-    },
-    {
-      name: "Datum",
-      type: "datetime-local",
-      value: task.date,
-      func: (event) =>
-        setTask({
-          ...task,
-          date: event.target.value,
-        }),
-    },
-  ];
-  const concurrentArray = [
-    {
-      name: "Titel",
-      type: "text",
-      value: task.name,
-      func: (event) => setTask({ ...task, name: event.target.value }),
-    },
-    ...todayArray,
-  ];
-  const arrayToMap = concurrentTour ? concurrentArray : todayArray;
+  useEffect(() => {
+    const todayArray = [
+      {
+        name: "Start",
+        type: "text",
+        value: task.start,
+        required: true,
+        func: (event) => setTask({ ...task, start: event.target.value }),
+      },
+      {
+        name: "Ziel",
+        type: "text",
+        value: task.dest,
+        required: true,
+        func: (event) => setTask({ ...task, dest: event.target.value }),
+      },
+      {
+        name: "Datum",
+        type: "datetime-local",
+        value: task.date,
+        func: (event) =>
+          setTask({
+            ...task,
+            date: event.target.value,
+          }),
+      },
+    ];
+    const concurrentArray = [
+      {
+        name: "Titel",
+        type: "text",
+        value: task.name,
+        func: (event) => setTask({ ...task, name: event.target.value }),
+      },
+      ...todayArray,
+    ];
+    const onTimeArray = [
+      ...todayArray,
+      {
+        name: "Abgabe",
+        type: "datetime-local",
+        value: task.finish,
+        func: (event) =>
+          setTask({
+            ...task,
+            finish: event.target.value,
+          }),
+      },
+    ];
+    if (concurrentTour) {
+      setArrayToMap(concurrentArray);
+    } else if (task.priority === "onTimeRide") {
+      setArrayToMap(onTimeArray);
+    } else {
+      setArrayToMap(todayArray);
+    }
+  }, [task.priority, concurrentTour, task]);
 
   return (
     <PageWrapper>
