@@ -10,6 +10,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
+import { add30Minutes, add90Minutes } from "../utils/time";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -21,7 +22,6 @@ export default function AddTour() {
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
-    // status: "open",
     priority: priSwitch,
     cargo: null,
     carriage: false,
@@ -32,6 +32,7 @@ export default function AddTour() {
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
   const [riders, setRiders] = useState([]);
+  const [arrayToMap, setArrayToMap] = useState([]);
 
   useEffect(() => {
     const fetchList = async () => {
@@ -94,38 +95,63 @@ export default function AddTour() {
 
   const BadgesToMap = concurrentTour ? ConcurrentBadges : Badges;
 
-  const todayArray = [
-    {
-      name: "Start",
-      type: "text",
-      value: task.start,
-      required: true,
-      func: (event) => setTask({ ...task, start: event.target.value }),
-    },
-    {
-      name: "Ziel",
-      type: "text",
-      value: task.dest,
-      required: true,
-      func: (event) => setTask({ ...task, dest: event.target.value }),
-    },
-    {
-      name: "Datum",
-      type: "datetime-local",
-      value: task.date,
-      func: (event) => setTask({ ...task, date: event.target.value }),
-    },
-  ];
-  const concurrentArray = [
-    {
-      name: "Titel",
-      type: "text",
-      value: task.name,
-      func: (event) => setTask({ ...task, name: event.target.value }),
-    },
-    ...todayArray,
-  ];
-  const arrayToMap = concurrentTour ? concurrentArray : todayArray;
+  useEffect(() => {
+    const todayArray = [
+      {
+        name: "Start",
+        type: "text",
+        value: task.start,
+        required: true,
+        func: (event) => setTask({ ...task, start: event.target.value }),
+      },
+      {
+        name: "Ziel",
+        type: "text",
+        value: task.dest,
+        required: true,
+        func: (event) => setTask({ ...task, dest: event.target.value }),
+      },
+      {
+        name: "Datum",
+        type: "datetime-local",
+        value: task.date,
+        func: (event) =>
+          setTask({
+            ...task,
+            date: event.target.value,
+          }),
+      },
+    ];
+    const concurrentArray = [
+      {
+        name: "Titel",
+        type: "text",
+        value: task.name,
+        func: (event) => setTask({ ...task, name: event.target.value }),
+      },
+      ...todayArray,
+    ];
+    const onTimeArray = [
+      ...todayArray,
+      {
+        name: "Abgabe",
+        type: "datetime-local",
+        value: task.finish,
+        func: (event) =>
+          setTask({
+            ...task,
+            finish: event.target.value,
+          }),
+      },
+    ];
+    if (concurrentTour) {
+      setArrayToMap(concurrentArray);
+    } else if (task.priority === "onTimeRide") {
+      setArrayToMap(onTimeArray);
+    } else {
+      setArrayToMap(todayArray);
+    }
+  }, [task.priority, concurrentTour, task]);
 
   return (
     <PageWrapper>
@@ -133,10 +159,8 @@ export default function AddTour() {
       <Wrapper>
         <Card
           type={task.priority}
-          start={task.start}
-          dest={task.dest}
           rider={task.assignment}
-          name={task.name}
+          {...task}
           labels={
             <>
               {task.cargo && <Badge type={task.cargo} active />}
@@ -158,6 +182,15 @@ export default function AddTour() {
             }
             if (!task.status) {
               task.status = "open";
+            }
+            if (!task.finish) {
+              if (task.priority === "normal") {
+                task.finish = add90Minutes(task.date);
+              } else if (task.priority === "direct") {
+                task.finish = add30Minutes(task.date);
+              } else {
+                task.finish = task.date;
+              }
             }
             if (id) {
               updateData(
