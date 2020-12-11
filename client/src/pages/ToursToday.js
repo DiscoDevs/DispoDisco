@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQuery } from "react-query";
@@ -6,7 +6,7 @@ import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
 import { getCurrentDateString } from "../utils/date";
-import { getDataByQuery } from "../utils/api";
+import { getSortedDataByQuery } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -15,13 +15,18 @@ import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
 
 const ToursToday = () => {
-  const history = useHistory();
-  const today = getCurrentDateString();
+  const [today, setToday] = useState(getCurrentDateString());
 
-  const { isLoading, isError, data, error } = useQuery("tours", () =>
-    getDataByQuery({
+  const history = useHistory();
+
+  const handleDateChange = (date) => {
+    setToday(date !== "" ? date : getCurrentDateString());
+  };
+
+  const { isLoading, isError, data, error } = useQuery(["tours", today], () =>
+    getSortedDataByQuery({
       collectionName: "tasks",
-      dataName: "date",
+      dataName: "finish",
       query: today,
     })
   );
@@ -30,7 +35,7 @@ const ToursToday = () => {
     <>
       <GlobalStyle />
       <PageWrapper>
-        <HeaderMain />
+        <HeaderMain handleChange={handleDateChange} />
         <ToursGrid>
           {isLoading && <span>Loading...</span>}
           {isError && <span>Error: {error.message}</span>}
