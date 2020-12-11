@@ -21,7 +21,6 @@ export default function AddTour() {
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
-    // status: "open",
     priority: priSwitch,
     cargo: null,
     carriage: false,
@@ -133,10 +132,8 @@ export default function AddTour() {
       <Wrapper>
         <Card
           type={task.priority}
-          start={task.start}
-          dest={task.dest}
           rider={task.assignment}
-          name={task.name}
+          {...task}
           labels={
             <>
               {task.cargo && <Badge type={task.cargo} active />}

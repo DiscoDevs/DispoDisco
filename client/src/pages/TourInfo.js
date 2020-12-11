@@ -28,11 +28,9 @@ export default function TourInfo() {
       <Wrapper>
         <Card
           type={task.priority}
-          name={task.name}
-          start={task.start}
-          dest={task.dest}
           rider={task.assignment}
           rideID={id}
+          {...task}
           info={false}
           removeButton
           labels={
