@@ -18,11 +18,11 @@ const ToursToday = () => {
   const [chosenDate, setChosenDate] = useState("");
 
   const history = useHistory();
-  const today = chosenDate !== "" ? chosenDate : getCurrentDateString();
 
   const handleDateChange = (date) => {
     setChosenDate(date);
   };
+  const today = chosenDate !== "" ? chosenDate : getCurrentDateString();
 
   const { isLoading, isError, data, error } = useQuery("tours", () =>
     getDataByQuery({
