@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addData, getDataByID, updateData } from "../utils/api";
+import { addData, getDataByID, getEntryList, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
-import HeaderMain from "../components/HeaderMain";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
+import { add30Minutes, add90Minutes } from "../utils/time";
+import Header from "../components/Header";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -21,7 +22,6 @@ export default function AddTour() {
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
-    // status: "open",
     priority: priSwitch,
     cargo: null,
     carriage: false,
@@ -31,8 +31,18 @@ export default function AddTour() {
   });
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
+  const [riders, setRiders] = useState([]);
+  const [arrayToMap, setArrayToMap] = useState([]);
 
   useEffect(() => {
+    const fetchList = async () => {
+      const list = await getEntryList({
+        collectionName: "riders",
+        key: "alias",
+      });
+      setRiders(list);
+    };
+    fetchList();
     if (id) {
       const doFetch = async () => {
         try {
@@ -85,55 +95,85 @@ export default function AddTour() {
 
   const BadgesToMap = concurrentTour ? ConcurrentBadges : Badges;
 
-  const todayArray = [
-    {
-      name: "Start",
-      type: "text",
-      value: task.start,
-      required: true,
-      func: (event) => setTask({ ...task, start: event.target.value }),
-    },
-    {
-      name: "Ziel",
-      type: "text",
-      value: task.dest,
-      required: true,
-      func: (event) => setTask({ ...task, dest: event.target.value }),
-    },
-    {
-      name: "Datum",
-      type: "datetime-local",
-      value: task.date,
-      func: (event) => setTask({ ...task, date: event.target.value }),
-    },
-    {
-      name: "Fahrer",
-      type: "text",
-      value: task.assignment,
-      func: (event) => setTask({ ...task, assignment: event.target.value }),
-    },
-  ];
-  const concurrentArray = [
-    {
-      name: "Titel",
-      type: "text",
-      value: task.name,
-      func: (event) => setTask({ ...task, name: event.target.value }),
-    },
-    ...todayArray,
-  ];
-  const arrayToMap = concurrentTour ? concurrentArray : todayArray;
+  useEffect(() => {
+    const todayArray = [
+      {
+        name: "Start",
+        type: "text",
+        value: task.start,
+        required: true,
+        func: (event) => setTask({ ...task, start: event.target.value }),
+      },
+      {
+        name: "Ziel",
+        type: "text",
+        value: task.dest,
+        required: true,
+        func: (event) => setTask({ ...task, dest: event.target.value }),
+      },
+      {
+        name: "Datum",
+        type: "datetime-local",
+        value: task.date,
+        required: false,
+        func: (event) =>
+          setTask({
+            ...task,
+            date: event.target.value,
+          }),
+      },
+    ];
+    const concurrentArray = [
+      {
+        name: "Titel",
+        type: "text",
+        value: task.name,
+        required: false,
+        func: (event) => setTask({ ...task, name: event.target.value }),
+      },
+      ...todayArray,
+      {
+        name: "Abgabe",
+        type: "datetime-local",
+        value: task.finish,
+        func: (event) =>
+          setTask({
+            ...task,
+            finish: event.target.value,
+          }),
+      },
+    ];
+    const onTimeArray = [
+      ...todayArray,
+      {
+        name: "Abgabe",
+        type: "datetime-local",
+        value: task.finish,
+        required: false,
+        func: (event) =>
+          setTask({
+            ...task,
+            finish: event.target.value,
+          }),
+      },
+    ];
+    if (concurrentTour) {
+      setArrayToMap(concurrentArray);
+    } else if (task.priority === "onTimeRide") {
+      setArrayToMap(onTimeArray);
+    } else {
+      setArrayToMap(todayArray);
+    }
+  }, [task.priority, concurrentTour, task]);
 
   return (
     <PageWrapper>
-      <HeaderMain />
+      <Header title="Fahrt" />
       <Wrapper>
         <Card
           type={task.priority}
-          start={task.start}
-          dest={task.dest}
           rider={task.assignment}
-          name={task.name}
+          {...task}
           labels={
             <>
               {task.cargo && <Badge type={task.cargo} active />}
@@ -152,9 +192,20 @@ export default function AddTour() {
             event.preventDefault();
             if (!task.date) {
               task.date = new Date();
+            } else {
+              task.date = new Date(task.date);
             }
             if (!task.status) {
               task.status = "open";
+            }
+            if (!task.finish) {
+              if (task.priority === "normal") {
+                task.finish = add90Minutes(task.date);
+              } else if (task.priority === "direct") {
+                task.finish = add30Minutes(task.date);
+              } else {
+                task.finish = task.date;
+              }
             }
             if (id) {
               updateData(
@@ -181,8 +232,22 @@ export default function AddTour() {
               placeholder={inputObj.name}
               value={inputObj.value}
               onChange={inputObj.func}
+              required={inputObj.required}
             />
           ))}
+
+          <select
+            onChange={(event) =>
+              setTask({ ...task, assignment: event.target.value })
+            }
+          >
+            <option value={null}>Offen</option>
+            {riders.map((rider) => (
+              <option key={rider._id} value={rider.alias}>
+                {rider.alias}
+              </option>
+            ))}
+          </select>
 
           {concurrentTour && (
             <WeekDaysSelector

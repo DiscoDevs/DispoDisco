@@ -1,33 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import styled from "styled-components/macro";
+import { useQuery } from "react-query";
+import { useHistory } from "react-router-dom";
+
+import { getSortedData } from "../utils/api";
+
 import ButtonPlus from "../components/ButtonPlus";
 import CardCustomer from "../components/CardCustomer";
 import Header from "../components/Header";
 import ToursGrid from "../components/helpers/ToursGrid";
-import { getSortedData } from "../utils/api";
 
 const Customers = () => {
   const history = useHistory();
-  const [customers, setCustomers] = useState([]);
 
-  useEffect(() => {
-    const doFetch = async () => {
-      const data = await getSortedData({
-        collectionName: "customers",
-        dataName: "name",
-      });
-      setCustomers(data);
-    };
-    doFetch();
-  }, []);
+  const { isLoading, isError, data, error } = useQuery("customers", () =>
+    getSortedData({
+      collectionName: "customers",
+      dataName: "name",
+    })
+  );
+
   return (
     <PageWrapper>
       <Header title="Kunden" />
       <ToursGrid>
-        {customers?.map((customer) => (
-          <CardCustomer key={customer._id} id={customer._id} {...customer} />
-        ))}
+        {" "}
+        {isLoading && <span>Loading...</span>}
+        {isError && <span>Error: {error.message}</span>}
+        {!isError &&
+          data?.map((customer) => (
+            <CardCustomer key={customer._id} id={customer._id} {...customer} />
+          ))}
       </ToursGrid>
       <ButtonPlus
         onClick={() => {

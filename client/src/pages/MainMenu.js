@@ -6,32 +6,6 @@ import HeaderHome from "../components/HeaderHome";
 import Button from "../components/Button";
 import { useHistory } from "react-router-dom";
 
-const PageWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  background: var(--gradient-dark);
-`;
-
-const MenuWrapper = styled.div`
-  align-self: flex-end;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.5rem 2rem;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  Button {
-    margin-top: 1rem;
-  }
-  > :last-child {
-    margin-top: 1.5rem;
-  }
-`;
-
 const MainMenu = () => {
   const history = useHistory();
   const buttons = [
@@ -84,5 +58,31 @@ const MainMenu = () => {
     </>
   );
 };
+
+const PageWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: var(--gradient-dark);
+`;
+
+const MenuWrapper = styled.div`
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  Button {
+    margin-top: 1rem;
+  }
+  > :last-child {
+    margin-top: 1.5rem;
+  }
+`;
 
 export default MainMenu;

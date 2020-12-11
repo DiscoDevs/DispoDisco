@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
 import ArrowImg from "../assets/arrow.svg";
@@ -6,6 +6,7 @@ import SettingsImg from "../assets/settingsIcon.svg";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import { deleteData, updateData } from "../utils/api";
+import Countdown from "./Countdown";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -27,6 +28,7 @@ const Card = ({
   dest,
   rider,
   rideID,
+  finish,
 }) => {
   const progressBar = ["fetched", "delivered", "open"];
   const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
@@ -34,13 +36,14 @@ const Card = ({
   const [progress, setProgress] = useState(status || "open");
   const [counter, setCounter] = useState(initalCount);
 
-  useEffect(() => {
-    updateData({ collectionName: "tasks", id: rideID }, { status: progress });
-  }, [progress, rideID]);
-
   const changeTourStatus = () => {
-    setProgress(progressBar[counter]);
+    const newProgress = progressBar[counter];
+    setProgress(newProgress);
     setCounter(counter + 1);
+    updateData(
+      { collectionName: "tasks", id: rideID },
+      { status: newProgress }
+    );
     if (counter >= progressBar.length - 1) {
       setCounter(0);
     }
@@ -84,7 +87,7 @@ const Card = ({
         ) : (
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         )}
-        <CardButton type="timer" label="1:30h" />
+        <CardButton type="timer" label={<Countdown finish={finish} />} />
         {info && (
           <CardButton
             type="info"
@@ -143,6 +146,7 @@ Card.propTypes = {
   onClick: PropTypes.func,
   start: PropTypes.string,
   dest: PropTypes.string,
+  finish: PropTypes.string,
 };
 export default Card;
 
