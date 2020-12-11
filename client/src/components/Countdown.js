@@ -7,10 +7,10 @@ export default function Countdown({ finish }) {
 
   useEffect(() => {
     setCounter(timer(finish));
-    if (timer(finish) !== "00:00") {
-      setTimeout(() => setCounter(timer(finish)), 60000);
+    if (timer(finish) !== "00:00:00") {
+      setTimeout(() => setCounter(timer(finish)), 1000);
     } else {
-      setCounter("00:00");
+      setCounter("00:00:00");
     }
   }, [counter, finish]);
 
@@ -20,6 +20,7 @@ export default function Countdown({ finish }) {
     ).toLocaleTimeString("de-DE", {
       hour: "numeric",
       minute: "numeric",
+      second: "numeric",
       timeZone: "UTC",
     });
     return time;
@@ -27,7 +28,7 @@ export default function Countdown({ finish }) {
 
   return (
     <CountDown>
-      <h3>{counter}</h3>
+      <h3>{counter.substr(0, 5)}</h3>
     </CountDown>
   );
 }
