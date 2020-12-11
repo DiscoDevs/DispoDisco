@@ -42,11 +42,9 @@ const HeaderMain = ({ handleChange }) => {
           <button type="submit">Go!</button>
         </form>
       );
-      localStorage.setItem("currentDate", date);
     } else {
       setDatePicker(<></>);
       handleChange(today);
-      localStorage.clear();
     }
   }, [showDatePicker, date, handleChange, today]);
 
