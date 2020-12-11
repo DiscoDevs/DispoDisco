@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
+import { useQuery } from "react-query";
 import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
@@ -14,28 +14,27 @@ import Header from "../components/Header";
 import ToursGrid from "../components/helpers/ToursGrid";
 
 const Tours = () => {
-  const [tours, setTours] = useState([]);
   const history = useHistory();
 
-  useEffect(() => {
-    const doFetch = async () => {
-      const todaysTours = await getSortedDataByQuery({
-        collectionName: "tasks",
-        dataName: "priority",
-        query: "concurrentRide",
-      });
-      setTours(todaysTours);
-    };
-    doFetch();
-  }, []);
+  const { isLoading, isError, data, error } = useQuery("concurrenctTours", () =>
+    getSortedDataByQuery({
+      collectionName: "tasks",
+      dataName: "priority",
+      query: "concurrentRide",
+    })
+  );
+
   return (
     <>
       <GlobalStyle />
       <PageWrapper>
         <Header title="Geplante Touren" />
         <ToursGrid>
-          {tours &&
-            tours.map((ride) => {
+          {isLoading && <span>Loading...</span>}
+          {isError && <span>Error: {error.message}</span>}
+          {!isError &&
+            !isLoading &&
+            data.map((ride) => {
               return (
                 <Card
                   key={ride._id}

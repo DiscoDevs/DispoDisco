@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
+import { useQuery } from "react-query";
 import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
@@ -13,7 +13,6 @@ import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
-import { useQuery } from "react-query";
 
 const ToursToday = () => {
   const history = useHistory();
@@ -27,43 +26,40 @@ const ToursToday = () => {
     })
   );
 
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
   return (
     <>
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
         <ToursGrid>
-          {data.map((ride) => {
-            return (
-              <Card
-                {...ride}
-                rideID={ride._id}
-                key={ride._id}
-                type={ride.priority}
-                rider={ride.assignment}
-                {...ride}
-                labels={
-                  <>
-                    {ride.cargo && <Badge type={ride.cargo} active />}
-                    {ride.priority !== "normal" &&
-                    ride.priority !== "concurrentRide" ? (
-                      <Badge type={ride.priority} active />
-                    ) : (
-                      ""
-                    )}
-                    {ride.carriage && <Badge type="carriage" active />}
-                  </>
-                }
-              />
-            );
-          })}
+          {isLoading && <span>Loading...</span>}
+          {isError && <span>Error: {error.message}</span>}
+          {!isError &&
+            !isLoading &&
+            data.map((ride) => {
+              return (
+                <Card
+                  {...ride}
+                  rideID={ride._id}
+                  key={ride._id}
+                  type={ride.priority}
+                  rider={ride.assignment}
+                  {...ride}
+                  labels={
+                    <>
+                      {ride.cargo && <Badge type={ride.cargo} active />}
+                      {ride.priority !== "normal" &&
+                      ride.priority !== "concurrentRide" ? (
+                        <Badge type={ride.priority} active />
+                      ) : (
+                        ""
+                      )}
+                      {ride.carriage && <Badge type="carriage" active />}
+                    </>
+                  }
+                />
+              );
+            })}
         </ToursGrid>
         <ButtonPlus onClick={() => history.push("/tours/new")} />
       </PageWrapper>
