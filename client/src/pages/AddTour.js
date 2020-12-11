@@ -182,6 +182,8 @@ export default function AddTour() {
             event.preventDefault();
             if (!task.date) {
               task.date = new Date();
+            } else {
+              task.date = new Date(task.date);
             }
             if (!task.status) {
               task.status = "open";
