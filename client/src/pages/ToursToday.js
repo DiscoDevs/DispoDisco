@@ -15,16 +15,15 @@ import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
 
 const ToursToday = () => {
-  const [chosenDate, setChosenDate] = useState("");
+  const [today, setToday] = useState(getCurrentDateString());
 
   const history = useHistory();
 
   const handleDateChange = (date) => {
-    setChosenDate(date);
+    setToday(date !== "" ? date : getCurrentDateString());
   };
-  const today = chosenDate !== "" ? chosenDate : getCurrentDateString();
 
-  const { isLoading, isError, data, error } = useQuery("tours", () =>
+  const { isLoading, isError, data, error } = useQuery(["tours", today], () =>
     getDataByQuery({
       collectionName: "tasks",
       dataName: "date",
