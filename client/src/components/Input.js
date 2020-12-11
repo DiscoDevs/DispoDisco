@@ -7,4 +7,5 @@ const Input = styled.input`
     font-style: italic;
   }
 `;
+
 export default Input;

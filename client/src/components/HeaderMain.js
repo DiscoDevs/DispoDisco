@@ -3,6 +3,8 @@ import styled from "styled-components/macro";
 import CalendarIcon from "../assets/calendar.svg";
 import FilterIcon from "../assets/filter.svg";
 import Header from "./Header";
+import PropTypes from "prop-types";
+import { getCurrentDateString } from "../utils/date";
 
 const Infobox = styled.p`
   display: flex;
@@ -15,28 +17,38 @@ const IconContainer = styled.div`
   }
 `;
 
-const HeaderMain = (handleDateChange) => {
+const HeaderMain = ({ handleChange }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [datePicker, setDatePicker] = useState(<></>);
   const [date, setDate] = useState("");
 
+  const today = getCurrentDateString();
+
   useEffect(() => {
     if (showDatePicker) {
       setDatePicker(
-        <input
-          type="date"
-          onChange={(event) => {
-            setDate(event.target.value);
-            handleDateChange(date);
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            handleChange(date);
           }}
-        />
+        >
+          <input
+            type="date"
+            onChange={(event) => {
+              setDate(event.target.value);
+            }}
+          />
+          <button type="submit">Go!</button>
+        </form>
       );
       localStorage.setItem("currentDate", date);
     } else {
       setDatePicker(<></>);
+      handleChange(today);
       localStorage.clear();
     }
-  }, [showDatePicker, date]);
+  }, [showDatePicker, date, handleChange, today]);
 
   return (
     <Header>
@@ -59,3 +71,7 @@ const HeaderMain = (handleDateChange) => {
 };
 
 export default HeaderMain;
+
+HeaderMain.propTypes = {
+  handleChange: PropTypes.func,
+};

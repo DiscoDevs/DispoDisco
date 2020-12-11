@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQuery } from "react-query";
@@ -15,8 +15,14 @@ import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
 
 const ToursToday = () => {
+  const [chosenDate, setChosenDate] = useState("");
+
   const history = useHistory();
-  const today = getCurrentDateString();
+  const today = chosenDate !== "" ? chosenDate : getCurrentDateString();
+
+  const handleDateChange = (date) => {
+    setChosenDate(date);
+  };
 
   const { isLoading, isError, data, error } = useQuery("tours", () =>
     getDataByQuery({
@@ -30,7 +36,7 @@ const ToursToday = () => {
     <>
       <GlobalStyle />
       <PageWrapper>
-        <HeaderMain />
+        <HeaderMain handleChange={handleDateChange} />
         <ToursGrid>
           {isLoading && <span>Loading...</span>}
           {isError && <span>Error: {error.message}</span>}

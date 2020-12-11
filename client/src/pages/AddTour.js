@@ -5,12 +5,12 @@ import { addData, getDataByID, getEntryList, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
-import HeaderMain from "../components/HeaderMain";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
 import { add30Minutes, add90Minutes } from "../utils/time";
+import Header from "../components/Header";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -115,6 +115,7 @@ export default function AddTour() {
         name: "Datum",
         type: "datetime-local",
         value: task.date,
+        required: false,
         func: (event) =>
           setTask({
             ...task,
@@ -127,6 +128,7 @@ export default function AddTour() {
         name: "Titel",
         type: "text",
         value: task.name,
+        required: false,
         func: (event) => setTask({ ...task, name: event.target.value }),
       },
       ...todayArray,
@@ -137,6 +139,7 @@ export default function AddTour() {
         name: "Abgabe",
         type: "datetime-local",
         value: task.finish,
+        required: false,
         func: (event) =>
           setTask({
             ...task,
@@ -155,7 +158,7 @@ export default function AddTour() {
 
   return (
     <PageWrapper>
-      <HeaderMain />
+      <Header title="Fahrt" />
       <Wrapper>
         <Card
           type={task.priority}
@@ -217,6 +220,7 @@ export default function AddTour() {
               placeholder={inputObj.name}
               value={inputObj.value}
               onChange={inputObj.func}
+              required={inputObj.required}
             />
           ))}
 
