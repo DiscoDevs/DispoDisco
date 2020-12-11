@@ -7,7 +7,7 @@ export default function Countdown({ finish }) {
 
   useEffect(() => {
     setCounter(timer(finish));
-    if (timer(finish) !== "00:00:00") {
+    if (new Date(finish) > new Date()) {
       setTimeout(() => setCounter(timer(finish)), 1000);
     } else {
       setCounter("00:00:00");
