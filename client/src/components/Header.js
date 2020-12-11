@@ -14,7 +14,11 @@ const Header = ({ title, children }) => {
       <Top>
         <img src={Backward} alt={"backward"} onClick={() => history.goBack()} />
         <HeaderText>Tour</HeaderText>
-        <Logo src={MirrorBall} alt={"Logo"} />
+        <Logo
+          src={MirrorBall}
+          alt={"Logo"}
+          onClick={() => history.push("/menu")}
+        />
         <HeaderText>{date}</HeaderText>
       </Top>
       {title && <Title>{title}</Title>}

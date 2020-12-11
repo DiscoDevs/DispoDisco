@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
+import { useQuery } from "react-query";
 import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
@@ -15,29 +15,28 @@ import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
 
 const ToursToday = () => {
-  const [Tours, setTours] = useState([]);
   const history = useHistory();
+  const today = getCurrentDateString();
 
-  useEffect(() => {
-    const doFetch = async () => {
-      const today = getCurrentDateString();
-      const todaysTours = await getDataByQuery({
-        collectionName: "tasks",
-        dataName: "date",
-        query: today,
-      });
-      setTours(todaysTours);
-    };
-    doFetch();
-  }, []);
+  const { isLoading, isError, data, error } = useQuery("tours", () =>
+    getDataByQuery({
+      collectionName: "tasks",
+      dataName: "date",
+      query: today,
+    })
+  );
+
   return (
     <>
       <GlobalStyle />
       <PageWrapper>
         <HeaderMain />
         <ToursGrid>
-          {Tours &&
-            Tours.map((ride) => {
+          {isLoading && <span>Loading...</span>}
+          {isError && <span>Error: {error.message}</span>}
+          {!isError &&
+            !isLoading &&
+            data.map((ride) => {
               return (
                 <Card
                   {...ride}

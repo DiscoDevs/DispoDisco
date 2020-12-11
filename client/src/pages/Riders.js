@@ -1,11 +1,40 @@
-import React, { useEffect, useState } from "react";
-import CardRider from "../components/CardRider";
-import { getSortedData } from "../utils/api";
-import Header from "../components/Header";
+import React from "react";
 import styled from "styled-components";
-import ToursGrid from "../components/helpers/ToursGrid";
+import { useQuery } from "react-query";
+
+import { getSortedData } from "../utils/api";
 import { useHistory } from "react-router-dom";
+
+import Header from "../components/Header";
+import ToursGrid from "../components/helpers/ToursGrid";
+import CardRider from "../components/CardRider";
 import ButtonPlus from "../components/ButtonPlus";
+
+const Riders = () => {
+  const history = useHistory();
+
+  const { isLoading, isError, data, error } = useQuery("riders", () =>
+    getSortedData({
+      collectionName: "riders",
+      dataName: "alias",
+    })
+  );
+
+  return (
+    <PageWrapper>
+      <Header title="🚴‍♀️ Riders 🚴‍♀️" />
+      <ToursGrid>
+        {isLoading && <span>Loading...</span>}
+        {isError && <span>Error: {error.message}</span>}
+        {!isError &&
+          data?.map((rider) => (
+            <CardRider key={rider._id} id={rider._id} {...rider} />
+          ))}
+      </ToursGrid>
+      <ButtonPlus onClick={() => history.push("/riders/new")} />
+    </PageWrapper>
+  );
+};
 
 const PageWrapper = styled.div`
   position: fixed;
@@ -22,32 +51,4 @@ const PageWrapper = styled.div`
   }
 `;
 
-const Riders = () => {
-  const [riders, setRiders] = useState([]);
-  const history = useHistory();
-
-  useEffect(() => {
-    const doFetch = async () => {
-      const data = await getSortedData({
-        collectionName: "riders",
-        dataName: "alias",
-      });
-      setRiders(data);
-    };
-    doFetch();
-  }, []);
-
-  console.log({ riders });
-  return (
-    <PageWrapper>
-      <Header title="🚴‍♀️ Riders 🚴‍♀️" />
-      <ToursGrid>
-        {riders?.map((rider) => (
-          <CardRider key={rider._id} id={rider._id} {...rider} />
-        ))}
-      </ToursGrid>
-      <ButtonPlus onClick={() => history.push("/riders/new")} />
-    </PageWrapper>
-  );
-};
 export default Riders;

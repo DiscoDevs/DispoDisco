@@ -5,7 +5,7 @@ import settingsIcon from "../assets/settingsIcon.svg";
 import jockey from "../assets/jockey.svg";
 import packages from "../assets/packages.svg";
 import shuttle from "../assets/shuttle.svg";
-// import customer from "../assets/customer.svg";
+import customer from "../assets/customers.svg";
 
 const categories = {
   settings: {
@@ -20,10 +20,10 @@ const categories = {
     src: jockey,
     alt: "riders",
   },
-  // customers: {
-  //   src: customer,
-  //   alt: "customers",
-  // },
+  customers: {
+    src: customer,
+    alt: "customers",
+  },
   go: {
     src: shuttle,
     alt: "go",
@@ -43,6 +43,17 @@ const designs = {
     background: "var(--gradient-direct)",
     border: "none",
   },
+};
+
+const Button = ({ primary, type, design, category, label, ...props }) => {
+  return (
+    <StyledButton type={type} design={design} {...props}>
+      {categories[category] && (
+        <Icons src={categories[category].src} alt={categories[category].alt} />
+      )}
+      {label}
+    </StyledButton>
+  );
 };
 
 const StyledButton = styled.button`
@@ -65,17 +76,6 @@ const StyledButton = styled.button`
 const Icons = styled.img`
   height: 25px;
 `;
-
-const Button = ({ primary, type, design, category, label, ...props }) => {
-  return (
-    <StyledButton type={type} design={design} {...props}>
-      {categories[category] && (
-        <Icons src={categories[category].src} alt={categories[category].alt} />
-      )}
-      {label}
-    </StyledButton>
-  );
-};
 
 Button.propTypes = {
   category: PropTypes.string,
