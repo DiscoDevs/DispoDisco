@@ -16,16 +16,26 @@ const IconContainer = styled.div`
 `;
 
 const HeaderMain = () => {
-  const [date, setDate] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const [datePicker, setDatePicker] = useState(<></>);
+  const [date, setDate] = useState("");
 
   useEffect(() => {
-    if (date) {
-      setDatePicker(<input type="date" />);
+    if (showDatePicker) {
+      setDatePicker(
+        <input
+          type="date"
+          onChange={(event) => {
+            setDate(event.target.value);
+          }}
+        />
+      );
+      localStorage.setItem("currentDate", date);
     } else {
       setDatePicker(<></>);
+      localStorage.clear();
     }
-  }, [date]);
+  }, [showDatePicker, date]);
 
   return (
     <Header>
@@ -35,7 +45,11 @@ const HeaderMain = () => {
         <img
           src={CalendarIcon}
           alt="Calendar"
-          onClick={() => (date === false ? setDate(true) : setDate(false))}
+          onClick={() =>
+            showDatePicker === false
+              ? setShowDatePicker(true)
+              : setShowDatePicker(false)
+          }
         />
         <img src={FilterIcon} alt="Filter" />
       </IconContainer>
