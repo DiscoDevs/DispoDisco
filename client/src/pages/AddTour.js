@@ -130,6 +130,16 @@ export default function AddTour() {
         func: (event) => setTask({ ...task, name: event.target.value }),
       },
       ...todayArray,
+      {
+        name: "Abgabe",
+        type: "datetime-local",
+        value: task.finish,
+        func: (event) =>
+          setTask({
+            ...task,
+            finish: event.target.value,
+          }),
+      },
     ];
     const onTimeArray = [
       ...todayArray,
