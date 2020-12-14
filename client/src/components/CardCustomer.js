@@ -5,6 +5,7 @@ import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import { deleteData } from "../utils/api";
 import SettingsImg from "../assets/settingsIcon.svg";
+import CardContainer from "./helpers/CardContainer";
 
 const CardCustomer = ({
   id,
@@ -21,7 +22,7 @@ const CardCustomer = ({
   const history = useHistory();
   const addressSplitted = address?.split(",");
   return (
-    <CardContainer>
+    <CustomerCard>
       <div>
         <h3>{company}</h3>
         <p>{name}</p>
@@ -68,7 +69,7 @@ const CardCustomer = ({
           />
         )}
       </InfoContainer>
-    </CardContainer>
+    </CustomerCard>
   );
 };
 
@@ -87,23 +88,11 @@ CardCustomer.propTypes = {
   removeButton: PropTypes.string,
 };
 
-const CardContainer = styled.div`
-  position: relative;
-  min-width: 300px;
-  max-width: 350px;
-  margin: auto;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
-  color: var(--text-primary);
-  background: var(--gradient-normal);
+const CustomerCard = styled(CardContainer)`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
-  border-radius: var(--border-radius);
 `;
-
 const InfoContainer = styled.div`
   width: 100%;
   display: flex;

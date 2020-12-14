@@ -14,6 +14,7 @@ import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
 import LoadingData from "../components/LoadingData";
+import Wrapper from "../components/helpers/Wrapper";
 
 const ToursToday = () => {
   const [today, setToday] = useState(getCurrentDateString());
@@ -37,7 +38,7 @@ const ToursToday = () => {
   return (
     <>
       <GlobalStyle />
-      <PageWrapper>
+      <Wrapper>
         <HeaderMain handleChange={handleDateChange} />
         <ToursGrid>
           {isLoading && <LoadingData>Loading...</LoadingData>}
@@ -68,7 +69,7 @@ const ToursToday = () => {
             })}
         </ToursGrid>
         <ButtonPlus onClick={() => history.push("/tours/new")} />
-      </PageWrapper>
+      </Wrapper>
     </>
   );
 };
@@ -77,19 +78,5 @@ const statusPriorities = ["open", "fetched", "delivered"];
 
 const sortByPriority = (a, b) =>
   statusPriorities.indexOf(a.status) - statusPriorities.indexOf(b.status);
-
-const PageWrapper = styled.div`
-  position: fixed;
-  overflow: auto;
-  height: 100%;
-  width: 100%;
-  background: var(--gradient-dark);
-  & > *:not(:first-child) {
-    margin: 1rem auto;
-  }
-  & > :nth-child(2) {
-    margin-top: clamp(10rem, 25vw, 12rem);
-  }
-`;
 
 export default ToursToday;

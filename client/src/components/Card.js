@@ -7,6 +7,7 @@ import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import { deleteData, updateData } from "../utils/api";
 import Countdown from "./Countdown";
+import CardContainer from "./helpers/CardContainer";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -65,7 +66,7 @@ const Card = ({
     }
   };
   return (
-    <CardContainer progress={progress} type={type}>
+    <CardWrapper progress={progress} type={type}>
       <Header>
         <Start type={type}>{type !== "concurrentRide" ? start : name}</Start>
         {type !== "concurrentRide" && (
@@ -154,7 +155,7 @@ const Card = ({
           />
         )}
       </InfoContainer>
-    </CardContainer>
+    </CardWrapper>
   );
 };
 
@@ -184,10 +185,9 @@ Card.propTypes = {
 };
 export default Card;
 
-const CardContainer = styled.div`
+const CardWrapper = styled(CardContainer)`
   position: relative;
-  min-width: 300px;
-  max-width: 350px;
+
   margin: auto;
   padding: 1rem;
   text-align: center;

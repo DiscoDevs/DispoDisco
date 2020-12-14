@@ -1,6 +1,6 @@
 const { default: styled } = require("styled-components");
 
-const ToursGrid = styled.div`
+const CardGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -11,4 +11,4 @@ const ToursGrid = styled.div`
   margin: auto;
 `;
 
-export default ToursGrid;
+export default CardGrid;

@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQuery } from "react-query";
-import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
 import { getSortedDataByQuery } from "../utils/api";
@@ -11,7 +10,8 @@ import Badge from "../components/Badge";
 import Card from "../components/Card";
 import ButtonPlus from "../components/ButtonPlus";
 import Header from "../components/Header";
-import ToursGrid from "../components/helpers/ToursGrid";
+import CardGrid from "../components/helpers/ToursGrid";
+import Wrapper from "../components/helpers/Wrapper";
 
 const Tours = () => {
   const history = useHistory();
@@ -27,9 +27,9 @@ const Tours = () => {
   return (
     <>
       <GlobalStyle />
-      <PageWrapper>
+      <Wrapper>
         <Header title="Geplante Touren" />
-        <ToursGrid>
+        <CardGrid>
           {isLoading && <span>Loading...</span>}
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
@@ -55,28 +55,13 @@ const Tours = () => {
                 />
               );
             })}
-        </ToursGrid>
+        </CardGrid>
         <ButtonPlus
           onClick={() => history.push("/tours/new?type=concurrent")}
         />
-      </PageWrapper>
+      </Wrapper>
     </>
   );
 };
-
-const PageWrapper = styled.div`
-  position: fixed;
-  overflow: auto;
-  height: 100%;
-  width: 100%;
-
-  background: var(--gradient-dark);
-  & > *:not(:first-child) {
-    margin: 1rem auto;
-  }
-  & > :nth-child(2) {
-    margin-top: clamp(9rem, 25vw, 200px);
-  }
-`;
 
 export default Tours;

@@ -16,7 +16,5 @@ const Wrapper = styled.div`
   width: 100%;
   margin: auto;
   padding-top: clamp(9rem, 25vw, 200px);
-
-  background: var(--text-secondary);
 `;
 export default Wrapper;
