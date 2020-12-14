@@ -96,7 +96,7 @@ const CardContainer = styled.div`
   text-align: center;
   font-weight: bold;
   color: var(--text-primary);
-  background: var(--gradient-direct);
+  background: var(--gradient-normal);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
