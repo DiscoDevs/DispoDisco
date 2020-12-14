@@ -31,6 +31,7 @@ const Card = ({
   rideID,
   finish,
   date,
+  onChange,
 }) => {
   const progressBar = ["fetched", "delivered", "open"];
   const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
@@ -38,17 +39,18 @@ const Card = ({
   const [progress, setProgress] = useState(status || "open");
   const [counter, setCounter] = useState(initalCount);
 
-  const changeTourStatus = () => {
+  const changeTourStatus = async () => {
     const newProgress = progressBar[counter];
     setProgress(newProgress);
     setCounter(counter + 1);
-    updateData(
+    await updateData(
       { collectionName: "tasks", id: rideID },
       { status: newProgress }
     );
     if (counter >= progressBar.length - 1) {
       setCounter(0);
     }
+    onChange();
   };
   const handleLabel = () => {
     switch (progress) {
@@ -175,6 +177,7 @@ Card.propTypes = {
   rider: PropTypes.string,
   onClick: PropTypes.func,
   start: PropTypes.string,
+  onChange: PropTypes.func,
   dest: PropTypes.string,
   finish: PropTypes.string,
   date: PropTypes.string,

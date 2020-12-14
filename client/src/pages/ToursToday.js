@@ -23,12 +23,14 @@ const ToursToday = () => {
     setToday(date !== "" ? date : getCurrentDateString());
   };
 
-  const { isLoading, isError, data, error } = useQuery(["tours", today], () =>
-    getSortedDataByQuery({
-      collectionName: "tasks",
-      dataName: "finish",
-      query: today,
-    })
+  const { isLoading, isError, data, error, refetch } = useQuery(
+    ["tours", today],
+    () =>
+      getSortedDataByQuery({
+        collectionName: "tasks",
+        dataName: "finish",
+        query: today,
+      })
   );
 
   return (
@@ -44,7 +46,7 @@ const ToursToday = () => {
             data.sort(sortByPriority).map((ride) => {
               return (
                 <Card
-                  {...ride}
+                  onChange={refetch}
                   rideID={ride._id}
                   key={ride._id}
                   type={ride.priority}
