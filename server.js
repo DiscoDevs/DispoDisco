@@ -13,8 +13,11 @@ const {
 } = require("./lib/serverMethods");
 const app = express();
 const port = process.env.PORT || 3600;
+const tours = require("./routes/tours");
 
 app.use(express.json());
+
+app.use("/api/tours", tours);
 
 app
   .route("/api/:collectionName")
