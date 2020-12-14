@@ -10,7 +10,7 @@ import Badge from "../components/Badge";
 import Card from "../components/Card";
 import ButtonPlus from "../components/ButtonPlus";
 import Header from "../components/Header";
-import CardGrid from "../components/helpers/ToursGrid";
+import CardGrid from "../components/helpers/CardGrid";
 import Wrapper from "../components/helpers/Wrapper";
 
 const Tours = () => {

@@ -34,6 +34,31 @@ const Card = ({
   date,
   onChange,
 }) => {
+  Card.propTypes = {
+    type: PropTypes.oneOf([
+      "normal",
+      "dayRide",
+      "direct",
+      "concurrentRide",
+      "onTimeRide",
+      "removeButton",
+    ]),
+    labels: PropTypes.object,
+    info: PropTypes.bool,
+    status: PropTypes.string,
+    removeButton: PropTypes.bool,
+    settings: PropTypes.string,
+    rideID: PropTypes.string,
+    name: PropTypes.string,
+    rider: PropTypes.string,
+    onClick: PropTypes.func,
+    start: PropTypes.string,
+    onChange: PropTypes.func,
+    dest: PropTypes.string,
+    finish: PropTypes.string,
+    date: PropTypes.string,
+  };
+
   const progressBar = ["fetched", "delivered", "open"];
   const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
   const history = useHistory();
@@ -126,7 +151,6 @@ const Card = ({
             type="info"
             label="Info"
             onClick={() => {
-              console.log(rideID);
               history.push(`/tours/${rideID}`);
             }}
           />
@@ -159,30 +183,6 @@ const Card = ({
   );
 };
 
-Card.propTypes = {
-  type: PropTypes.oneOf([
-    "normal",
-    "dayRide",
-    "direct",
-    "concurrentRide",
-    "onTimeRide",
-    "removeButton",
-  ]),
-  labels: PropTypes.object,
-  info: PropTypes.string,
-  status: PropTypes.string,
-  removeButton: PropTypes.bool,
-  settings: PropTypes.string,
-  rideID: PropTypes.string,
-  name: PropTypes.string,
-  rider: PropTypes.string,
-  onClick: PropTypes.func,
-  start: PropTypes.string,
-  onChange: PropTypes.func,
-  dest: PropTypes.string,
-  finish: PropTypes.string,
-  date: PropTypes.string,
-};
 export default Card;
 
 const CardWrapper = styled(CardContainer)`
@@ -216,11 +216,12 @@ const Start = styled.div`
     props.type === "concurrentRide" ? "var(--cargo)" : "transparent"};
 `;
 
+const Destination = styled(Start)``;
+
 const SettingsIcon = styled.img`
   height: 30px;
   margin: auto;
 `;
-const Destination = styled(Start)``;
 const Header = styled.div`
   display: flex;
   align-items: center;

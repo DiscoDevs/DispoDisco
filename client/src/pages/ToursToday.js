@@ -11,7 +11,7 @@ import Badge from "../components/Badge";
 import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
-import ToursGrid from "../components/helpers/ToursGrid";
+import CardGrid from "../components/helpers/CardGrid";
 import LoadingData from "../components/LoadingData";
 import Wrapper from "../components/helpers/Wrapper";
 
@@ -39,12 +39,13 @@ const ToursToday = () => {
       <GlobalStyle />
       <Wrapper>
         <HeaderMain handleChange={handleDateChange} />
-        <ToursGrid>
+        <CardGrid>
           {isLoading && <LoadingData>Loading...</LoadingData>}
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
             !isLoading &&
             data.sort(sortByPriority).map((ride) => {
+              // console.log({ ...ride });
               return (
                 <Card
                   onChange={refetch}
@@ -53,6 +54,7 @@ const ToursToday = () => {
                   type={ride.priority}
                   rider={ride.assignment}
                   {...ride}
+                  info={true}
                   labels={
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
@@ -66,7 +68,7 @@ const ToursToday = () => {
                 />
               );
             })}
-        </ToursGrid>
+        </CardGrid>
         <ButtonPlus onClick={() => history.push("/tours/new")} />
       </Wrapper>
     </>

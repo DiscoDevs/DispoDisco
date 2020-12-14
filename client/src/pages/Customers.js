@@ -7,7 +7,7 @@ import { getSortedData } from "../utils/api";
 import ButtonPlus from "../components/ButtonPlus";
 import CardCustomer from "../components/CardCustomer";
 import Header from "../components/Header";
-import CardGrid from "../components/helpers/ToursGrid";
+import CardGrid from "../components/helpers/CardGrid";
 import Wrapper from "../components/helpers/Wrapper";
 
 const Customers = () => {

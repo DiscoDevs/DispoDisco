@@ -5,7 +5,7 @@ import { getSortedData } from "../utils/api";
 import { useHistory } from "react-router-dom";
 
 import Header from "../components/Header";
-import CardGrid from "../components/helpers/ToursGrid";
+import CardGrid from "../components/helpers/CardGrid";
 import CardRider from "../components/CardRider";
 import ButtonPlus from "../components/ButtonPlus";
 import Wrapper from "../components/helpers/Wrapper";
