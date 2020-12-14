@@ -73,33 +73,10 @@ const ToursToday = () => {
   );
 };
 
-const sortByPriority = (a, b) => {
-  let indexA = null;
-  let indexB = null;
-  switch (a.status) {
-    case "delivered":
-      indexA = 2;
-      break;
-    case "fetched":
-      indexA = 1;
-      break;
-    default:
-      indexA = 0;
-      break;
-  }
-  switch (b.status) {
-    case "delivered":
-      indexB = 2;
-      break;
-    case "fetched":
-      indexB = 1;
-      break;
-    default:
-      indexB = 0;
-      break;
-  }
-  return indexA - indexB;
-};
+const statusPriorities = ["open", "fetched", "delivered"];
+
+const sortByPriority = (a, b) =>
+  statusPriorities.indexOf(a.status) - statusPriorities.indexOf(b.status);
 
 const PageWrapper = styled.div`
   position: fixed;
