@@ -75,7 +75,7 @@ const ButtonElement = styled.div`
 CardButton.propTypes = {
   type: PropTypes.oneOf(["timer", "info", "rider", "remove"]),
 
-  label: PropTypes.string,
+  label: PropTypes.node,
   status: PropTypes.string,
 
   onClick: PropTypes.func,
