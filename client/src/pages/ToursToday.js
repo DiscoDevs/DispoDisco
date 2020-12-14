@@ -41,7 +41,7 @@ const ToursToday = () => {
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
             !isLoading &&
-            data.map((ride) => {
+            data.sort(sortByPriority).map((ride) => {
               return (
                 <Card
                   {...ride}
@@ -54,11 +54,9 @@ const ToursToday = () => {
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
                       {ride.priority !== "normal" &&
-                      ride.priority !== "concurrentRide" ? (
-                        <Badge type={ride.priority} active />
-                      ) : (
-                        ""
-                      )}
+                        ride.priority !== "concurrentRide" && (
+                          <Badge type={ride.priority} active />
+                        )}
                       {ride.carriage && <Badge type="carriage" active />}
                     </>
                   }
@@ -70,6 +68,34 @@ const ToursToday = () => {
       </PageWrapper>
     </>
   );
+};
+
+const sortByPriority = (a, b) => {
+  let indexA = null;
+  let indexB = null;
+  switch (a.status) {
+    case "delivered":
+      indexA = 2;
+      break;
+    case "fetched":
+      indexA = 1;
+      break;
+    default:
+      indexA = 0;
+      break;
+  }
+  switch (b.status) {
+    case "delivered":
+      indexB = 2;
+      break;
+    case "fetched":
+      indexB = 1;
+      break;
+    default:
+      indexB = 0;
+      break;
+  }
+  return indexA - indexB;
 };
 
 const PageWrapper = styled.div`

@@ -14,6 +14,7 @@ const types = {
   concurrentRide: "var(--gradient-concurrent)",
   onTimeRide: "var(--gradient-onTime)",
   direct: "var(--gradient-direct)",
+  delivered: "var(--gradient-direct)",
 };
 
 const Card = ({
@@ -61,7 +62,7 @@ const Card = ({
     }
   };
   return (
-    <CardContainer type={type}>
+    <CardContainer progress={progress} type={type}>
       <Header>
         <Start type={type}>{type !== "concurrentRide" ? start : name}</Start>
         {type !== "concurrentRide" && (
@@ -159,9 +160,9 @@ const CardContainer = styled.div`
   text-align: center;
   font-weight: bold;
   color: var(--text-primary);
-  background: ${(props) => types[props.type]};
-
   border-radius: var(--border-radius);
+  background: ${(props) => types[props.type]};
+  filter: ${(props) => props.progress === "delivered" && "grayscale(1)"};
 `;
 
 const Start = styled.div`
