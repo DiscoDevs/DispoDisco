@@ -29,6 +29,7 @@ const Card = ({
   rider,
   rideID,
   finish,
+  date,
 }) => {
   const progressBar = ["fetched", "delivered", "open"];
   const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
@@ -75,6 +76,26 @@ const Card = ({
       </Header>
       {labels && <LabelContainer>{labels}</LabelContainer>}
 
+      {!info && (
+        <InfoContainer>
+          <CardButton
+            type="timer"
+            label={new Date(date).toLocaleTimeString("de-DE", {
+              hour: "numeric",
+              minute: "numeric",
+            })}
+          />
+          <CardButton type="timer" label={<Countdown finish={finish} />} />
+          <CardButton
+            type="timer"
+            label={new Date(finish).toLocaleTimeString("de-DE", {
+              hour: "numeric",
+              minute: "numeric",
+            })}
+          />
+        </InfoContainer>
+      )}
+
       <InfoContainer>
         {settings ? (
           <SettingsIcon
@@ -87,7 +108,15 @@ const Card = ({
         ) : (
           <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
         )}
-        <CardButton type="timer" label={<Countdown finish={finish} />} />
+        {info ? (
+          <CardButton type="timer" label={<Countdown finish={finish} />} />
+        ) : (
+          <SettingsIcon
+            src={SettingsImg}
+            alt="Change Ride"
+            onClick={() => history.push(`/tours/${rideID}/edit`)}
+          />
+        )}
         {info && (
           <CardButton
             type="info"
@@ -147,6 +176,7 @@ Card.propTypes = {
   start: PropTypes.string,
   dest: PropTypes.string,
   finish: PropTypes.string,
+  date: PropTypes.string,
 };
 export default Card;
 
@@ -184,6 +214,7 @@ const Start = styled.div`
 
 const SettingsIcon = styled.img`
   height: 30px;
+  margin: auto;
 `;
 const Destination = styled(Start)``;
 const Header = styled.div`
