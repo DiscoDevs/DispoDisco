@@ -14,7 +14,7 @@ export default function AddRider() {
 
   const [rider, setRider] = useState({
     picture: DefaultAvatar,
-    color: "var(--gradient-direct)",
+    color: "var(--gradient-menu)",
   });
 
   const history = useHistory();
@@ -115,7 +115,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   margin: auto;
-  padding: 8rem 0;
+  padding: 12rem 0;
 
   background: var(--text-secondary);
 `;

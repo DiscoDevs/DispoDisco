@@ -11,6 +11,7 @@ import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
 import { add30Minutes, add90Minutes } from "../utils/time";
 import Header from "../components/Header";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -168,8 +169,9 @@ export default function AddTour() {
 
   return (
     <PageWrapper>
-      <Header title="Fahrt" />
-      <Wrapper>
+      <ContentWrapper>
+        <Header title="Fahrt" />
+
         <Card
           type={task.priority}
           rider={task.assignment}
@@ -283,30 +285,25 @@ export default function AddTour() {
             label={id ? "Fahrt ändern" : "Fahrt hinzufügen"}
           />
         </Form>
-      </Wrapper>
+      </ContentWrapper>
     </PageWrapper>
   );
 }
 
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  margin: auto;
-  padding: 9rem 0;
-
+const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  max-width: 400px;
-  > :first-child {
-    margin-bottom: 2rem;
-  }
-`;
+// const ContentWrapper = styled.div`
+//   max-width: 400px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   margin: 2rem auto;
+//   padding: 0 1rem;
+//   > :first-child {
+//     margin-bottom: 2rem;
+//   }
+// `;
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
