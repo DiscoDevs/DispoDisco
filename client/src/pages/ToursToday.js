@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQuery } from "react-query";
-import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
 import { getCurrentDateString } from "../utils/date";
