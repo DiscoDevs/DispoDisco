@@ -38,6 +38,7 @@ const Tours = () => {
               return (
                 <Card
                   key={ride._id}
+                  rideID={ride._id}
                   rider={ride.assignment}
                   type={ride.priority}
                   {...ride}
