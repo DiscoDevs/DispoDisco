@@ -13,6 +13,7 @@ import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
 import ToursGrid from "../components/helpers/ToursGrid";
+import LoadingData from "../components/LoadingData";
 
 const ToursToday = () => {
   const [today, setToday] = useState(getCurrentDateString());
@@ -39,7 +40,7 @@ const ToursToday = () => {
       <PageWrapper>
         <HeaderMain handleChange={handleDateChange} />
         <ToursGrid>
-          {isLoading && <span>Loading...</span>}
+          {isLoading && <LoadingData>Loading...</LoadingData>}
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
             !isLoading &&
