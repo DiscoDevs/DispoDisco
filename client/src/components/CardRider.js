@@ -3,8 +3,21 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
+import SettingsImg from "../assets/settingsIcon.svg";
+import { deleteData } from "../utils/api";
 
-const CardRider = ({ name, alias, dateOfBirth, phone, picture, color, id }) => {
+const CardRider = ({
+  name,
+  alias,
+  dateOfBirth,
+  phone,
+  picture,
+  color,
+  id,
+  info = true,
+  settings = false,
+  removeButton = false,
+}) => {
   const history = useHistory();
   const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
   return (
@@ -14,16 +27,43 @@ const CardRider = ({ name, alias, dateOfBirth, phone, picture, color, id }) => {
         <p>{name}</p>
       </div>
       <img src={picture} alt="Profilbild" />
-      <div>
-        {dateOfBirth && <p>{dateOfBirthOrdered}</p>}
-        <b>📞{phone}</b>
-      </div>
-      <CardButton
-        label="ändern"
-        onClick={() => {
-          history.push(`/riders/${id}/edit`);
-        }}
-      />
+      <InfoContainer>
+        <div>
+          {dateOfBirth && <p>{dateOfBirthOrdered}</p>}
+          <b>📞{phone}</b>
+        </div>
+        {settings && (
+          <SettingsIcon
+            src={SettingsImg}
+            alt="Fahrer ändern"
+            onClick={() => {
+              history.push(`/riders/${id}`);
+            }}
+          />
+        )}
+        {info && (
+          <CardButton
+            type="info"
+            label="Info"
+            onClick={() => {
+              history.push(`/riders/${id}`);
+            }}
+          />
+        )}
+        {removeButton && (
+          <CardButton
+            type="remove"
+            label="X"
+            onClick={() => {
+              deleteData({
+                collectionName: "riders",
+                id,
+              });
+              history.goBack();
+            }}
+          />
+        )}
+      </InfoContainer>
     </CardContainer>
   );
 };
@@ -37,25 +77,45 @@ CardRider.propTypes = {
   phone: PropTypes.string,
   picture: PropTypes.string,
   color: PropTypes.string,
+  info: PropTypes.string,
+  settings: PropTypes.string,
+  removeButton: PropTypes.string,
 };
 
 export default CardRider;
 
 const CardContainer = styled.div`
-  display: grid;
-  grid-template-rows: 2fr 1fr;
-  grid-template-columns: 2fr 1fr;
   position: relative;
   min-width: 300px;
+  max-width: 350px;
   margin: auto;
   padding: 1rem;
-  text-align: left;
+  text-align: center;
   font-weight: bold;
   color: var(--text-primary);
-  background: ${(props) => props.color};
+  background: var(--gradient-direct);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
   border-radius: var(--border-radius);
-  img {
+
+  > img {
     height: 75px;
     width: 75px;
   }
+`;
+
+const InfoContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  bottom: 1rem;
+  left: 0;
+  padding: 1rem 0 0.2rem;
+`;
+
+const SettingsIcon = styled.img`
+  height: 30px;
+  margin: auto;
 `;

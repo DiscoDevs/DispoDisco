@@ -12,6 +12,8 @@ import Riders from "./pages/Riders";
 import AddRider from "./pages/AddRider";
 import Customers from "./pages/Customers";
 import AddCustomer from "./pages/AddCustomer";
+import CustomerInfo from "./pages/CustomerInfo";
+import RiderInfo from "./pages/RiderInfo";
 
 function App() {
   return (
@@ -19,20 +21,26 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
+          <Route path="/customers/new">
+            <AddCustomer />
+          </Route>
           <Route path="/customers/:id/edit">
             <AddCustomer />
           </Route>
-          <Route path="/customers/new">
-            <AddCustomer />
+          <Route path="/customers/:id/">
+            <CustomerInfo />
           </Route>
           <Route path="/customers">
             <Customers />
           </Route>
+          <Route path="/riders/new">
+            <AddRider />
+          </Route>
           <Route path="/riders/:id/edit">
             <AddRider />
           </Route>
-          <Route path="/riders/new">
-            <AddRider />
+          <Route path="/riders/:id">
+            <RiderInfo />
           </Route>
           <Route path="/riders">
             <Riders />
