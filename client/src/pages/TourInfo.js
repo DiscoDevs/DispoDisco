@@ -63,7 +63,8 @@ const MainWrapper = styled(Wrapper)`
 `;
 const TourInfoWrapper = styled(ContentWrapper)`
   h2 {
-    margin-top: 1.5rem;
+    margin: 1.5rem auto 0.5rem;
+
     text-align: center;
   }
 `;
