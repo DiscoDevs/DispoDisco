@@ -24,9 +24,9 @@ const Login = () => {
             </Illustrations>
             <Subtitle>You are about to get on your bike...</Subtitle>
             <Form>
-              <label htmlFor="userName">Login</label>
+              <label htmlFor="userName">userName</label>
               <Input id="userName" placeholder="userName" />
-              <label htmlFor="password">Login</label>
+              <label htmlFor="password">Password</label>
               <Input id="password" placeholder="password" />
               <Button design="menu">Login</Button>
             </Form>
@@ -48,11 +48,38 @@ const Title = styled.h1`
 `;
 const Illustrations = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin: 2rem auto 1rem;
   > * {
+    animation-duration: 3s;
+    animation-name: slideOutRight;
+    transition: ease-out;
     height: clamp(30px, 5vw, 70px);
-    margin: auto 1rem;
+    margin: auto 1fr;
+    padding: 0 1rem;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      margin-right: 200%;
+      /* transform: rotate(720deg); */
+    }
+
+    to {
+      margin-right: 0;
+      /* transform: rotate(0deg); */
+    }
+  }
+  @keyframes slideOutRight {
+    from {
+      padding-left: 1;
+      /* transform: rotate(720deg); */
+    }
+
+    to {
+      padding-left: 70%;
+      /* transform: rotate(0deg); */
+    }
   }
 `;
 const Subtitle = styled.h2`

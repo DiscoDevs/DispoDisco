@@ -79,6 +79,7 @@ const GlobalStyle = createGlobalStyle`
     --carnelian: hsla(0, 75%, 40%, 1);
     --red-pigment: hsla(0, 82%, 55%, 1);
     --electric-indigo: hsla(259, 82%, 55%, 1);
+
   }
   *,
   *::after,
@@ -94,6 +95,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Open Sans", sans-serif;
     background: var(--gradient-dark);
+    color: var(--text-primary)
   }
 
   h1,
