@@ -293,7 +293,6 @@ export default function AddTour() {
 const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
-
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
