@@ -1,20 +1,13 @@
 const express = require("express");
 const {
-  getListByKey,
-  getByID,
   getCollection,
   insertData,
   deleteData,
   updateData,
+  getByID,
 } = require("../lib/serverMethods");
-
 const router = express.Router();
-const collectionName = "riders";
-
-router.get("/list", async (req, res) => {
-  const data = await getListByKey({ collectionName, key: "alias" });
-  res.send(data);
-});
+const collectionName = "customers";
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -23,25 +16,25 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const data = await getCollection({ collectionName, sortBy: "name" });
+  const data = getCollection({ collectionName, sortBy: "company" });
   res.send(data);
 });
 
 router.post("/", async (req, res) => {
   await insertData({ collectionName, data: req.body });
-  res.send("Rider added.");
+  res.send("Tour added.");
 });
 
 router.delete("/", async (req, res) => {
   const { id } = req.query;
   await deleteData({ collectionName, id });
-  res.send("Rider deleted");
+  res.send("Tour deleted");
 });
 
 router.patch("/", async (req, res) => {
   const { id } = req.query;
   await updateData({ collectionName, id, data: req.body });
-  res.send("Rider updated");
+  res.send("Tour updated");
 });
 
 module.exports = router;
