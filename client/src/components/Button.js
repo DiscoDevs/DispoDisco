@@ -73,7 +73,6 @@ const Button = ({ primary, type, design, category, label, ...props }) => {
 const StyledButton = styled.button`
   background: ${(props) => designs[props.design].background};
   margin: auto;
-  width: clamp(300px, 50vw, 400px);
   padding: 0.5rem 1rem;
   border: ${(props) => designs[props.design].border};
   border-radius: 6px;

@@ -293,17 +293,6 @@ export default function AddTour() {
 const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
-// const ContentWrapper = styled.div`
-//   max-width: 400px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   margin: 2rem auto;
-//   padding: 0 1rem;
-//   > :first-child {
-//     margin-bottom: 2rem;
-//   }
-// `;
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
