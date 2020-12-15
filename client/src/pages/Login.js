@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import Header from "../components/Header";
@@ -12,6 +12,10 @@ import SexyBikeRider2 from "../assets/sexyBikeRider2.svg";
 import Micha from "../assets/micha.svg";
 
 const Login = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div>
       <Wrapper>
@@ -19,18 +23,55 @@ const Login = () => {
         <CenterContent>
           <ContentWrapper>
             <Title>Login</Title>
-            <Illustrations>
+            <Illustrations loggedIn={loggedIn}>
               <img src={SexyBike} alt="sexy Bike" />
             </Illustrations>
             <Subtitle>You are about to get on your bike...</Subtitle>
-            <Form>
+            <Form
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
+            >
               <label htmlFor="userName">userName</label>
-              <Input id="userName" placeholder="userName" />
+              <Input
+                required
+                id="userName"
+                placeholder="userName"
+                value={userName}
+                onChange={(event) => {
+                  setUserName(event.target.value);
+                }}
+              />
               <label htmlFor="password">Password</label>
-              <Input id="password" placeholder="password" />
-              <Button design="menu">Login</Button>
+              <Input
+                required
+                id="password"
+                placeholder="password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+              {userName && (
+                <p>
+                  <b>UserName: </b> {userName}
+                </p>
+              )}
+              {password && (
+                <p>
+                  <b>Kennwort: </b> {password}
+                </p>
+              )}
+              <Button
+                design="menu"
+                onClick={() => {
+                  setLoggedIn(!loggedIn);
+                }}
+              >
+                Login
+              </Button>
             </Form>
-            <Illustrations>
+            <Illustrations loggedIn={loggedIn}>
               <img src={SexyBikeRider} alt="sexy Bike Rider" />
               <img src={SexyBikeRider2} alt="sexy Bike Rider" />
               <img src={Micha} alt="Micha" />
@@ -51,8 +92,9 @@ const Illustrations = styled.div`
   justify-content: flex-end;
   margin: 2rem auto 1rem;
   > * {
-    animation-duration: 3s;
-    animation-name: slideOutRight;
+    animation-duration: ${(props) => (props.loggedIn ? "5s" : "3s")};
+    animation-name: ${(props) =>
+      props.loggedIn ? "slideOutRight" : " slideInLeft"};
     transition: ease-out;
     height: clamp(30px, 5vw, 70px);
     margin: auto 1fr;
@@ -62,23 +104,19 @@ const Illustrations = styled.div`
   @keyframes slideInLeft {
     from {
       margin-right: 200%;
-      /* transform: rotate(720deg); */
     }
 
     to {
       margin-right: 0;
-      /* transform: rotate(0deg); */
     }
   }
   @keyframes slideOutRight {
     from {
       padding-left: 1;
-      /* transform: rotate(720deg); */
     }
 
     to {
-      padding-left: 70%;
-      /* transform: rotate(0deg); */
+      padding-left: 100rem;
     }
   }
 `;
