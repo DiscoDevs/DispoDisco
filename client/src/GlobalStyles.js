@@ -2,14 +2,7 @@ import { createGlobalStyle } from "styled-components/macro";
 // import GoogleFonts from "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap";
 
 const GlobalStyle = createGlobalStyle`
-  .sbWrapper {
-      height:100vh;
-      width:100%;
-      display:flex;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-  }
+
   :root {
     --text-primary: hsla(0, 0%, 94%, 1);
     --text-secondary: hsla(0, 0%, 14%, 1);
@@ -27,17 +20,55 @@ const GlobalStyle = createGlobalStyle`
 
     --border-radius: 3px;
     --shadow: 0 3px 6px var(--text-secondary50);
-    --insetShadow: inset 2px 0 1px var(--text-secondary50), inset -2px 0 1px var(--text-secondary50);
+    --insetShadow: inset 2px 0 1px var(--text-secondary50),
+      inset -2px 0 1px var(--text-secondary50);
 
-    --gradient-main: linear-gradient(0deg, rgba(106,48,235,1) 0%, rgba(109,16,126,1) 59%, rgba(106,48,235,1) 100%);
-    --gradient-dark:linear-gradient(0deg, rgba(40,18,89,1) 0%, rgba(109,16,126,1) 59%, rgba(20,9,43,1) 100%);;
+    --gradient-main: linear-gradient(
+      0deg,
+      rgba(106, 48, 235, 1) 0%,
+      rgba(109, 16, 126, 1) 59%,
+      rgba(106, 48, 235, 1) 100%
+    );
+    --gradient-dark: linear-gradient(
+      0deg,
+      rgba(40, 18, 89, 1) 0%,
+      rgba(109, 16, 126, 1) 59%,
+      rgba(20, 9, 43, 1) 100%
+    );
 
-    --gradient-normal: linear-gradient(0deg, rgba(8,61,119,1) 0%, rgba(71,112,155,1) 59%, rgba(79,124,172,1) 100%);
-    --gradient-concurrent:linear-gradient(0deg, rgba(167,138,15,1) 0%, rgba(219,184,34,1) 55%, rgba(235,199,51,1) 100%);
-    --gradient-direct:linear-gradient(0deg, rgba(128,26,26,1) 20%, rgba(200,26,26,1) 100%);
-    --gradient-dayRide:linear-gradient(0deg, rgba(40,62,86,1) 0%, rgba(46,167,65,1) 100%);
-    --gradient-onTime:linear-gradient(0deg, rgba(53,24,118,1) 0%, rgba(106,48,235,1) 100%);
-    --gradient-menu: linear-gradient(0deg, rgba(36,36,36,1) 0%, rgba(36,36,36,1) 72%, rgba(70,59,94,1) 100%);
+    --gradient-normal: linear-gradient(
+      0deg,
+      rgba(8, 61, 119, 1) 0%,
+      rgba(71, 112, 155, 1) 59%,
+      rgba(79, 124, 172, 1) 100%
+    );
+    --gradient-concurrent: linear-gradient(
+      0deg,
+      rgba(167, 138, 15, 1) 0%,
+      rgba(219, 184, 34, 1) 55%,
+      rgba(235, 199, 51, 1) 100%
+    );
+    --gradient-direct: linear-gradient(
+      0deg,
+      rgba(128, 26, 26, 1) 20%,
+      rgba(200, 26, 26, 1) 100%
+    );
+    --gradient-dayRide: linear-gradient(
+      0deg,
+      rgba(40, 62, 86, 1) 0%,
+      rgba(46, 167, 65, 1) 100%
+    );
+    --gradient-onTime: linear-gradient(
+      0deg,
+      rgba(53, 24, 118, 1) 0%,
+      rgba(106, 48, 235, 1) 100%
+    );
+    --gradient-menu: linear-gradient(
+      0deg,
+      rgba(36, 36, 36, 1) 0%,
+      rgba(36, 36, 36, 1) 72%,
+      rgba(70, 59, 94, 1) 100%
+    );
 
     --green-crayola: hsla(158, 68%, 42%, 1);
     --eerie-black: hsla(0, 0%, 14%, 1);
@@ -58,7 +89,6 @@ const GlobalStyle = createGlobalStyle`
   }
   #root {
     min-height: 100vh;
-
   }
 
   body {
@@ -74,7 +104,6 @@ const GlobalStyle = createGlobalStyle`
   h6 {
     font-family: "Goldman", cursive;
   }
-
 `;
 
 export default GlobalStyle;

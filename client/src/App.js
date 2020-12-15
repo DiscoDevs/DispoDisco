@@ -15,9 +15,13 @@ import AddCustomer from "./pages/AddCustomer";
 import CustomerInfo from "./pages/CustomerInfo";
 import RiderInfo from "./pages/RiderInfo";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <Router>
         <Switch>
@@ -71,7 +75,8 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

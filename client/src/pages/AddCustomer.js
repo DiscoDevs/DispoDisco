@@ -7,6 +7,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import CardCustomer from "../components/CardCustomer";
 import Header from "../components/Header";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 
 export default function AddCustomer() {
   const { id } = useParams();
@@ -75,8 +76,8 @@ export default function AddCustomer() {
 
   return (
     <PageWrapper>
-      <Header title={id ? "Kunde ändern" : "Kunde hinzufügen"} />
-      <Wrapper>
+      <ContentWrapper>
+        <Header title={id ? "Kunde ändern" : "Kunde hinzufügen"} />
         <CardCustomer {...customer} />
         <Form
           onSubmit={(event) => {
@@ -113,30 +114,15 @@ export default function AddCustomer() {
             label={id ? "Kunde ändern" : "Kunde hinzufügen"}
           />
         </Form>
-      </Wrapper>
+      </ContentWrapper>
     </PageWrapper>
   );
 }
 
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  margin: auto;
-  padding: 8rem 0;
-
+const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  max-width: 400px;
-  > :first-child {
-    margin-bottom: 2rem;
-  }
-`;
+// d
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;

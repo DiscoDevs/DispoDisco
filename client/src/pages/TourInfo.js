@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import Badge from "../components/Badge";
 import Card from "../components/Card";
 import Header from "../components/Header";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import Todo from "../components/Todo";
 import { getDataByID } from "../utils/api";
 
@@ -23,9 +24,9 @@ export default function TourInfo() {
     doFetch();
   }, [id]);
   return (
-    <Background>
-      <Header title="Info" />
-      <Wrapper>
+    <MainWrapper>
+      <TourInfoWrapper>
+        <Header title="Info" />
         <Card
           type={task.priority}
           rider={task.assignment}
@@ -36,11 +37,9 @@ export default function TourInfo() {
           labels={
             <>
               {task.priority !== "normal" &&
-              task.priority !== "concurrentRide" ? (
-                <Badge type="carriage" active />
-              ) : (
-                ""
-              )}
+                task.priority !== "concurrentRide" && (
+                  <Badge type="carriage" active />
+                )}
               {task.cargo && <Badge type={task.cargo} active />}
               {task.carriage && <Badge type="carriage" active />}
             </>
@@ -48,7 +47,6 @@ export default function TourInfo() {
         />
         <InfoContainer>
           <h2>Checkliste</h2>
-          {console.log(task.checkboxes)}
           {task.checkboxes &&
             task.checkboxes.map((checkbox) => (
               <Todo key={checkbox}>{checkbox} </Todo>
@@ -56,34 +54,22 @@ export default function TourInfo() {
           <h2>Infos</h2>
           <p>{task.info}</p>
         </InfoContainer>
-      </Wrapper>
-    </Background>
+      </TourInfoWrapper>
+    </MainWrapper>
   );
 }
-
-const Background = styled.div`
+const MainWrapper = styled(Wrapper)`
   background-color: var(--text-secondary);
-  min-height: 100%;
-  width: 100%;
-  padding-top: 200px;
 `;
-const Wrapper = styled.div`
-  min-height: 100vh;
-  height: 100%;
-  max-width: 500px;
-  margin: auto;
-  text-align: center;
-  color: var(--text-primary);
-
+const TourInfoWrapper = styled(ContentWrapper)`
   h2 {
-    margin-top: 1.5rem;
+    margin: 1.5rem auto 0.5rem;
+
     text-align: center;
   }
 `;
 
 const InfoContainer = styled.div`
-  padding: 0.5rem;
-  margin: auto;
-  width: 80%;
+  color: var(--text-primary);
   text-align: left;
 `;
