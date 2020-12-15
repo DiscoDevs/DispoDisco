@@ -70,7 +70,7 @@ const Card = ({
     setProgress(newProgress);
     setCounter(counter + 1);
     await updateData(
-      { collectionName: "tasks", id: rideID },
+      { collectionName: "tours", id: rideID },
       { status: newProgress }
     );
     if (counter >= progressBar.length - 1) {

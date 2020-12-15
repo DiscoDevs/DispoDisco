@@ -16,12 +16,14 @@ import Wrapper from "../components/helpers/Wrapper";
 const Tours = () => {
   const history = useHistory();
 
-  const { isLoading, isError, data, error } = useQuery("concurrenctTours", () =>
-    getSortedDataByQuery({
-      collectionName: "tours",
-      type: "type",
-      query: "concurrentRide",
-    })
+  const { isLoading, isError, data, error, refetch } = useQuery(
+    "concurrenctTours",
+    () =>
+      getSortedDataByQuery({
+        collectionName: "tours",
+        type: "type",
+        query: "concurrentRide",
+      })
   );
 
   return (
@@ -37,11 +39,13 @@ const Tours = () => {
             data.map((ride) => {
               return (
                 <Card
+                  onChange={refetch}
                   key={ride._id}
                   rideID={ride._id}
                   rider={ride.assignment}
                   type={ride.priority}
                   {...ride}
+                  info={true}
                   labels={
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
