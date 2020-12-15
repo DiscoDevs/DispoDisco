@@ -16,7 +16,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const data = getCollection({ collectionName, sortBy: "company" });
+  const data = await getCollection({ collectionName, sortBy: "company" });
   res.send(data);
 });
 

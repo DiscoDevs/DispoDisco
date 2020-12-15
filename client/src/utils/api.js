@@ -14,14 +14,8 @@ export async function getSortedData({ collectionName, dataName }) {
   return returnedData;
 }
 
-export async function getSortedDataByQuery({
-  collectionName,
-  dataName,
-  query,
-}) {
-  const result = await fetch(
-    `/api/${collectionName}?name=${dataName}&value=${query}&sortBy=${dataName}`
-  );
+export async function getSortedDataByQuery({ collectionName, type, query }) {
+  const result = await fetch(`/api/${collectionName}/${type}?query=${query}`);
   const returnedData = await result.json();
   return returnedData;
 }
@@ -32,8 +26,8 @@ export async function getDataByID({ collectionName, id }) {
   return data;
 }
 
-export async function getEntryList({ collectionName, key }) {
-  const results = await fetch(`/api/${collectionName}/filter/${key}`);
+export async function getEntryList({ collectionName }) {
+  const results = await fetch(`/api/${collectionName}/list`);
   const data = await results.json();
   return data;
 }

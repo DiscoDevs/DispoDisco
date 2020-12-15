@@ -37,7 +37,7 @@ const CardRider = ({
             src={SettingsImg}
             alt="Fahrer ändern"
             onClick={() => {
-              history.push(`/riders/${id}`);
+              history.push(`/riders/${id}/edit`);
             }}
           />
         )}

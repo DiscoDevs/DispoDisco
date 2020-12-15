@@ -25,8 +25,8 @@ const ToursToday = () => {
 
   const { isLoading, isError, data, error } = useQuery(["tours", today], () =>
     getSortedDataByQuery({
-      collectionName: "tasks",
-      dataName: "finish",
+      collectionName: "tours",
+      type: "date",
       query: today,
     })
   );

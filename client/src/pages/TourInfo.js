@@ -14,7 +14,7 @@ export default function TourInfo() {
   useEffect(() => {
     const doFetch = async () => {
       const data = await getDataByID({
-        collectionName: "tasks",
+        collectionName: "tours",
         id,
       });
       setTask(data);

@@ -11,22 +11,22 @@ const router = express.Router();
 const collectionName = "tasks";
 
 router.get("/date", async (req, res) => {
-  const { date } = req.query;
+  const { query } = req.query;
   const data = await getCollection({
     collectionName,
     name: "date",
-    value: date,
+    value: query,
     sortBy: "date",
   });
   res.send(data);
 });
 
 router.get("/type", async (req, res) => {
-  const { type } = req.query;
+  const { query } = req.query;
   const data = await getCollection({
     collectionName,
     name: "priority",
-    value: type,
+    value: query,
     filterBy: "date",
   });
   res.send(data);
