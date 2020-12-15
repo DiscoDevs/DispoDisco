@@ -62,6 +62,7 @@ const MainMenu = () => {
 const PageWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: space-around;
   flex-direction: column;
   height: 100vh;
   width: 100%;
@@ -75,7 +76,7 @@ const MenuWrapper = styled.div`
   justify-content: center;
   padding: 1.5rem 2rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
   Button {
     margin-top: 1rem;

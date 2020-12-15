@@ -5,6 +5,7 @@ import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import SettingsImg from "../assets/settingsIcon.svg";
 import { deleteData } from "../utils/api";
+import CardContainer from "./helpers/CardContainer";
 
 const CardRider = ({
   name,
@@ -21,7 +22,7 @@ const CardRider = ({
   const history = useHistory();
   const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
   return (
-    <CardContainer color={color}>
+    <RidersWrapper color={color}>
       <div>
         <h3>{alias}</h3>
         <p>{name}</p>
@@ -64,7 +65,7 @@ const CardRider = ({
           />
         )}
       </InfoContainer>
-    </CardContainer>
+    </RidersWrapper>
   );
 };
 
@@ -84,21 +85,10 @@ CardRider.propTypes = {
 
 export default CardRider;
 
-const CardContainer = styled.div`
-  position: relative;
-  min-width: 300px;
-  max-width: 350px;
-  margin: auto;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
-  color: var(--text-primary);
-  background: var(--gradient-direct);
+const RidersWrapper = styled(CardContainer)`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
-  border-radius: var(--border-radius);
 
   > img {
     height: 75px;

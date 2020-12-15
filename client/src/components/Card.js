@@ -7,6 +7,7 @@ import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import { deleteData, updateData } from "../utils/api";
 import Countdown from "./Countdown";
+import CardContainer from "./helpers/CardContainer";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -31,24 +32,51 @@ const Card = ({
   rideID,
   finish,
   date,
+  onChange,
 }) => {
+  Card.propTypes = {
+    type: PropTypes.oneOf([
+      "normal",
+      "dayRide",
+      "direct",
+      "concurrentRide",
+      "onTimeRide",
+      "removeButton",
+    ]),
+    labels: PropTypes.object,
+    info: PropTypes.bool,
+    status: PropTypes.string,
+    removeButton: PropTypes.bool,
+    settings: PropTypes.string,
+    rideID: PropTypes.string,
+    name: PropTypes.string,
+    rider: PropTypes.string,
+    onClick: PropTypes.func,
+    start: PropTypes.string,
+    onChange: PropTypes.func,
+    dest: PropTypes.string,
+    finish: PropTypes.string,
+    date: PropTypes.string,
+  };
+
   const progressBar = ["fetched", "delivered", "open"];
   const initalCount = status !== "open" ? progressBar.indexOf(status) + 1 : 0;
   const history = useHistory();
   const [progress, setProgress] = useState(status || "open");
   const [counter, setCounter] = useState(initalCount);
 
-  const changeTourStatus = () => {
+  const changeTourStatus = async () => {
     const newProgress = progressBar[counter];
     setProgress(newProgress);
     setCounter(counter + 1);
-    updateData(
+    await updateData(
       { collectionName: "tasks", id: rideID },
       { status: newProgress }
     );
     if (counter >= progressBar.length - 1) {
       setCounter(0);
     }
+    onChange();
   };
   const handleLabel = () => {
     switch (progress) {
@@ -63,7 +91,7 @@ const Card = ({
     }
   };
   return (
-    <CardContainer progress={progress} type={type}>
+    <CardWrapper progress={progress} type={type}>
       <Header>
         <Start type={type}>{type !== "concurrentRide" ? start : name}</Start>
         {type !== "concurrentRide" && (
@@ -123,7 +151,6 @@ const Card = ({
             type="info"
             label="Info"
             onClick={() => {
-              console.log(rideID);
               history.push(`/tours/${rideID}`);
             }}
           />
@@ -152,39 +179,15 @@ const Card = ({
           />
         )}
       </InfoContainer>
-    </CardContainer>
+    </CardWrapper>
   );
 };
 
-Card.propTypes = {
-  type: PropTypes.oneOf([
-    "normal",
-    "dayRide",
-    "direct",
-    "concurrentRide",
-    "onTimeRide",
-    "removeButton",
-  ]),
-  labels: PropTypes.object,
-  info: PropTypes.string,
-  status: PropTypes.string,
-  removeButton: PropTypes.bool,
-  settings: PropTypes.string,
-  rideID: PropTypes.string,
-  name: PropTypes.string,
-  rider: PropTypes.string,
-  onClick: PropTypes.func,
-  start: PropTypes.string,
-  dest: PropTypes.string,
-  finish: PropTypes.string,
-  date: PropTypes.string,
-};
 export default Card;
 
-const CardContainer = styled.div`
+const CardWrapper = styled(CardContainer)`
   position: relative;
-  min-width: 300px;
-  max-width: 350px;
+
   margin: auto;
   padding: 1rem;
   text-align: center;
@@ -213,11 +216,12 @@ const Start = styled.div`
     props.type === "concurrentRide" ? "var(--cargo)" : "transparent"};
 `;
 
+const Destination = styled(Start)``;
+
 const SettingsIcon = styled.img`
   height: 30px;
   margin: auto;
 `;
-const Destination = styled(Start)``;
 const Header = styled.div`
   display: flex;
   align-items: center;
