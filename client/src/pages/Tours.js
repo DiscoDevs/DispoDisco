@@ -18,8 +18,8 @@ const Tours = () => {
 
   const { isLoading, isError, data, error } = useQuery("concurrenctTours", () =>
     getSortedDataByQuery({
-      collectionName: "tasks",
-      dataName: "priority",
+      collectionName: "tours",
+      type: "type",
       query: "concurrentRide",
     })
   );

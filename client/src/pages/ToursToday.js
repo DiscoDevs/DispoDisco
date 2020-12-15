@@ -28,8 +28,8 @@ const ToursToday = () => {
     ["tours", today],
     () =>
       getSortedDataByQuery({
-        collectionName: "tasks",
-        dataName: "finish",
+        collectionName: "tours",
+        type: "date",
         query: today,
       })
   );
@@ -45,7 +45,6 @@ const ToursToday = () => {
           {!isError &&
             !isLoading &&
             data.sort(sortByPriority).map((ride) => {
-              // console.log({ ...ride });
               return (
                 <Card
                   onChange={refetch}

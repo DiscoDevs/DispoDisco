@@ -48,7 +48,7 @@ export default function AddTour() {
       const doFetch = async () => {
         try {
           const data = await getDataByID({
-            collectionName: "tasks",
+            collectionName: "tours",
             id: id,
           });
           setTask(data);
