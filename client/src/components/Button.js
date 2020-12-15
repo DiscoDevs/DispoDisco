@@ -45,10 +45,19 @@ const designs = {
   },
 };
 
-const Button = ({ primary, type, design, category, label, ...props }) => {
+const Button = ({
+  primary,
+  type,
+  design,
+  category,
+  label,
+  children,
+  ...props
+}) => {
   Button.propTypes = {
     category: PropTypes.string,
     type: PropTypes.string,
+    children: PropTypes.node,
     design: PropTypes.string,
     primary: PropTypes.bool,
     label: PropTypes.string.isRequired,
@@ -65,6 +74,7 @@ const Button = ({ primary, type, design, category, label, ...props }) => {
       {categories[category] && (
         <Icons src={categories[category].src} alt={categories[category].alt} />
       )}
+      {children}
       {label}
     </StyledButton>
   );

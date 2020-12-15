@@ -1,17 +1,77 @@
 import React from "react";
 import logoDark from "../assets/ddLogoDark.svg";
+import Login from "../assets/login.svg";
+import Register from "../assets/register.svg";
 import styled from "styled-components/macro";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+const Launch = () => {
+  const history = useHistory();
+  return (
+    <Wrapper>
+      <Title>DispoDisco</Title>
+      <LogoContainer>
+        <Logo
+          src={logoDark}
+          alt="Logo Dark"
+          onClick={() => history.push("/menu")}
+        />
+      </LogoContainer>
+      <EnterContainer>
+        <LinkButton to="/login">
+          <img src={Login} alt="Login" />
+          login
+        </LinkButton>
+        <LinkButton to="/register">
+          <img src={Register} alt="Register" />
+          register
+        </LinkButton>
+      </EnterContainer>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
-  height: 100vh;
   display: grid;
-  grid-template-rows: 40% 60%;
+  place-items: center;
+  height: 100%;
+  min-height: 100vh;
   grid-template-areas:
     "title"
-    "logo";
+    "logo"
+    "enter";
 `;
 
+const EnterContainer = styled.div`
+  grid-area: enter;
+  > * {
+    margin: 1rem auto;
+    min-width: 250px;
+    font-size: 1.5rem;
+    display: flex;
+    img {
+      height: 30px;
+    }
+  }
+`;
+const LinkButton = styled(Link)`
+  background: var(--gradient-menu);
+  margin: auto;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-family: "Goldman";
+  font-size: 2rem;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  > :first-child {
+    min-width: 35px;
+    margin-right: 10px;
+  }
+`;
 const Title = styled.h1`
   grid-area: title;
   place-self: end center;
@@ -59,19 +119,4 @@ const Logo = styled.img`
   }
 `;
 
-const Launch = () => {
-  const history = useHistory();
-  return (
-    <Wrapper>
-      <Title>DispoDisco</Title>
-      <LogoContainer>
-        <Logo
-          src={logoDark}
-          alt="Logo Dark"
-          onClick={() => history.push("/menu")}
-        />
-      </LogoContainer>
-    </Wrapper>
-  );
-};
 export default Launch;

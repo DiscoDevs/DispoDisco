@@ -32,6 +32,7 @@ const HeaderElement = styled.header`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 100vw;
   position: fixed;
   top: 0;
   padding: 1rem 1rem 0.5rem;
@@ -47,7 +48,8 @@ const HeaderElement = styled.header`
   }
 `;
 const Top = styled.div`
-  max-width: 1000px;
+  max-width: 100vw;
+  overflow: hidden;
   width: 100%;
   margin: auto;
   display: flex;
@@ -59,7 +61,7 @@ const HeaderText = styled.h2`
 `;
 const Logo = styled.img`
   height: clamp(56px, 10vw, 100px);
-  margin-top: -0.75rem;
+  margin-bottom: 1rem;
   filter: drop-shadow(0px 3px 6px var(--cargo));
 `;
 const Title = styled.h1`

@@ -17,6 +17,8 @@ import RiderInfo from "./pages/RiderInfo";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 const queryClient = new QueryClient();
 
 function App() {
@@ -60,6 +62,12 @@ function App() {
           </Route>
           <Route path="/menu">
             <MainMenu />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
           <Route path="/tours/today">
             <ToursToday />
