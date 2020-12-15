@@ -3,8 +3,7 @@ import logoDark from "../assets/ddLogoDark.svg";
 import Login from "../assets/login.svg";
 import Register from "../assets/register.svg";
 import styled from "styled-components/macro";
-import { useHistory } from "react-router-dom";
-import Button from "../components/Button";
+import { Link, useHistory } from "react-router-dom";
 
 const Launch = () => {
   const history = useHistory();
@@ -19,20 +18,14 @@ const Launch = () => {
         />
       </LogoContainer>
       <EnterContainer>
-        <Button
-          label="login"
-          design="menu"
-          onClick={() => history.push("/login")}
-        >
+        <LinkButton to="/login">
           <img src={Login} alt="Login" />
-        </Button>
-        <Button
-          label="register"
-          design="menu"
-          onClick={() => history.push("/register")}
-        >
+          login
+        </LinkButton>
+        <LinkButton to="/register">
           <img src={Register} alt="Register" />
-        </Button>
+          register
+        </LinkButton>
       </EnterContainer>
     </Wrapper>
   );
@@ -61,7 +54,24 @@ const EnterContainer = styled.div`
     }
   }
 `;
-
+const LinkButton = styled(Link)`
+  background: var(--gradient-menu);
+  margin: auto;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-family: "Goldman";
+  font-size: 2rem;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  > :first-child {
+    min-width: 35px;
+    margin-right: 10px;
+  }
+`;
 const Title = styled.h1`
   grid-area: title;
   place-self: end center;

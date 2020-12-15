@@ -23,15 +23,13 @@ const Login = () => {
         <CenterContent>
           <ContentWrapper>
             <Title>Login</Title>
-            <Illustrations loggedIn={loggedIn}>
-              <img src={SexyBike} alt="sexy Bike" />
-            </Illustrations>
             <Subtitle>You are about to get on your bike...</Subtitle>
             <Form
               onSubmit={(event) => {
                 event.preventDefault();
               }}
             >
+              <Subtitle>Select Player:</Subtitle>
               <label htmlFor="userName">userName</label>
               <Input
                 required
@@ -70,12 +68,15 @@ const Login = () => {
               >
                 Login
               </Button>
+              <IllustrationTop loggedIn={loggedIn}>
+                <img src={SexyBike} alt="sexy Bike" />
+              </IllustrationTop>
+              <Illustrations loggedIn={loggedIn}>
+                <img src={SexyBikeRider} alt="sexy Bike Rider" />
+                <img src={SexyBikeRider2} alt="sexy Bike Rider" />
+                <img src={Micha} alt="Micha" />
+              </Illustrations>
             </Form>
-            <Illustrations loggedIn={loggedIn}>
-              <img src={SexyBikeRider} alt="sexy Bike Rider" />
-              <img src={SexyBikeRider2} alt="sexy Bike Rider" />
-              <img src={Micha} alt="Micha" />
-            </Illustrations>
           </ContentWrapper>
         </CenterContent>
       </Wrapper>
@@ -88,15 +89,19 @@ const Title = styled.h1`
   font-size: clamp(2rem, 10vw, 3rem);
 `;
 const Illustrations = styled.div`
+  position: absolute;
+  pointer-events: none;
   display: flex;
   justify-content: flex-end;
-  margin: 2rem auto 1rem;
+  align-items: center;
+  bottom: -5rem;
+  left: 20%;
   > * {
     animation-duration: ${(props) => (props.loggedIn ? "5s" : "3s")};
     animation-name: ${(props) =>
       props.loggedIn ? "slideOutRight" : " slideInLeft"};
     transition: ease-out;
-    height: clamp(30px, 5vw, 70px);
+    height: clamp(50px, 5vw, 70px);
     margin: auto 1fr;
     padding: 0 1rem;
   }
@@ -112,13 +117,18 @@ const Illustrations = styled.div`
   }
   @keyframes slideOutRight {
     from {
-      padding-left: 1;
+      margin-right: 0;
     }
 
     to {
-      padding-left: 100rem;
+      margin-right: -200%;
     }
   }
+`;
+
+const IllustrationTop = styled(Illustrations)`
+  left: 40%;
+  bottom: 15rem;
 `;
 const Subtitle = styled.h2`
   text-align: center;
@@ -127,7 +137,7 @@ const Subtitle = styled.h2`
   font-size: clamp(0.75rem, 3vw, 1.25rem);
 `;
 const Form = styled.form`
-  margin-top: 2rem;
+  margin-top: 10rem;
   Input {
     margin: 0.3rem auto;
   }

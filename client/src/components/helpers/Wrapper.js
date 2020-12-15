@@ -14,6 +14,7 @@ export const ContentWrapper = styled.div`
 `;
 const Wrapper = styled.div`
   min-height: 100vh;
+  overflow: hidden;
   height: 1px;
   width: 100%;
   margin: auto;
