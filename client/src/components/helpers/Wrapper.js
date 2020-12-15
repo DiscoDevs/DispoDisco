@@ -14,10 +14,10 @@ export const ContentWrapper = styled.div`
 `;
 const Wrapper = styled.div`
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   height: 1px;
   width: 100%;
   margin: auto;
-  padding-top: clamp(9rem, 25vw, 200px);
+  padding-top: clamp(11rem, 25vw, 200px);
 `;
 export default Wrapper;
