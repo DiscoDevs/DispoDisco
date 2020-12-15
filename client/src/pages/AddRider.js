@@ -12,10 +12,12 @@ import Header from "../components/Header";
 export default function AddRider() {
   const { id } = useParams();
 
-  const [rider, setRider] = useState({
-    picture: DefaultAvatar,
-    color: "var(--gradient-menu)",
-  });
+  const [rider, setRider] = useState(
+    !id && {
+      picture: DefaultAvatar,
+      color: "var(--gradient-menu)",
+    }
+  );
 
   const history = useHistory();
 
@@ -28,7 +30,6 @@ export default function AddRider() {
             id,
           });
           setRider(data);
-          console.log(data);
         } catch (e) {
           console.error(e);
         }
@@ -65,12 +66,14 @@ export default function AddRider() {
       func: (event) => setRider({ ...rider, phone: event.target.value }),
     },
   ];
-
+  function handleChange(picSrc) {
+    setRider({ ...rider, picture: picSrc });
+  }
   return (
     <PageWrapper>
       <Header title={id ? "Rider ändern" : "Rider hinzufügen"} />
       <Wrapper>
-        <CardRider {...rider} />
+        <CardRider onChange={handleChange} />
         <Form
           onSubmit={(event) => {
             event.preventDefault();
@@ -100,6 +103,7 @@ export default function AddRider() {
               onChange={inputObj.func}
             />
           ))}
+          <label htmlFor="Avatar">Avatar speichern</label>
           <Button
             type="submit"
             design="addRide"
