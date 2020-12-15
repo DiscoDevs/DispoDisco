@@ -14,10 +14,12 @@ const {
 const app = express();
 const port = process.env.PORT || 3600;
 const tours = require("./routes/tours");
+const riders = require("./routes/riders");
 
 app.use(express.json());
 
 app.use("/api/tours", tours);
+app.use("/api/riders", riders);
 
 app
   .route("/api/:collectionName")
