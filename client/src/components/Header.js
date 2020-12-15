@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import PropTypes from "prop-types";
-import MirrorBall from "../assets/mirrorBall.svg";
+import MirrorBall from "../assets/ddLogoDark.svg";
 import Backward from "../assets/back.svg";
 import { useHistory } from "react-router-dom";
 import { getCurrentDateShort } from "../utils/date";
@@ -59,8 +59,8 @@ const HeaderText = styled.h2`
 `;
 const Logo = styled.img`
   height: clamp(56px, 10vw, 100px);
-  margin-top: -1.5rem;
-  filter: drop-shadow(0px 3px 6px var(--text-secondary));
+  margin-top: -0.75rem;
+  filter: drop-shadow(0px 3px 6px var(--cargo));
 `;
 const Title = styled.h1`
   text-align: center;
