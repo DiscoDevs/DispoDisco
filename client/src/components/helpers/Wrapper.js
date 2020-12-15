@@ -1,6 +1,7 @@
 import styled from "styled-components/macro";
 
 export const ContentWrapper = styled.div`
+  position: relative;
   max-width: 400px;
   display: flex;
   flex-direction: column;
