@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
 import CardRider from "../components/CardRider";
 import Header from "../components/Header";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import { getDataByID } from "../utils/api";
 
 export default function RiderInfo() {
@@ -21,9 +22,9 @@ export default function RiderInfo() {
     doFetch();
   }, [id]);
   return (
-    <Background>
-      <Header title="Info" />
-      <Wrapper>
+    <InfoWrapper>
+      <ContentWrapper>
+        <Header title="Info" />
         <CardRider
           id={id}
           {...rider}
@@ -31,27 +32,11 @@ export default function RiderInfo() {
           removeButton={true}
           settings={true}
         />
-      </Wrapper>
-    </Background>
+      </ContentWrapper>
+    </InfoWrapper>
   );
 }
 
-const Background = styled.div`
+const InfoWrapper = styled(Wrapper)`
   background-color: var(--text-secondary);
-  min-height: 100%;
-  width: 100%;
-  padding-top: 200px;
-`;
-const Wrapper = styled.div`
-  min-height: 100vh;
-  height: 100%;
-  max-width: 500px;
-  margin: auto;
-  text-align: center;
-  color: var(--text-primary);
-
-  h2 {
-    margin-top: 1.5rem;
-    text-align: center;
-  }
 `;

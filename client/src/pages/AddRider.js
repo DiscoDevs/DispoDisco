@@ -41,27 +41,27 @@ export default function AddRider() {
     {
       name: "Name",
       type: "text",
-      value: rider.name,
+      value: rider.name || "",
       required: true,
       func: (event) => setRider({ ...rider, name: event.target.value }),
     },
     {
       name: "alias",
       type: "text",
-      value: rider.alias,
+      value: rider.alias || "",
       required: true,
       func: (event) => setRider({ ...rider, alias: event.target.value }),
     },
     {
       name: "Geburtsdatum",
       type: "date",
-      value: rider.dateOfBirth,
+      value: rider.dateOfBirth || "",
       func: (event) => setRider({ ...rider, dateOfBirth: event.target.value }),
     },
     {
       name: "Phone",
       type: "tel",
-      value: rider.phone,
+      value: rider.phone || "",
       func: (event) => setRider({ ...rider, phone: event.target.value }),
     },
   ];

@@ -101,21 +101,21 @@ export default function AddTour() {
       {
         name: "Start",
         type: "text",
-        value: task.start,
+        value: task.start || "",
         required: true,
         func: (event) => setTask({ ...task, start: event.target.value }),
       },
       {
         name: "Ziel",
         type: "text",
-        value: task.dest,
+        value: task.dest || "",
         required: true,
         func: (event) => setTask({ ...task, dest: event.target.value }),
       },
       {
         name: "Datum",
         type: "datetime-local",
-        value: task.date,
+        value: task.date || "",
         required: false,
         func: (event) =>
           setTask({
@@ -128,7 +128,7 @@ export default function AddTour() {
       {
         name: "Titel",
         type: "text",
-        value: task.name,
+        value: task.name || "",
         required: false,
         func: (event) => setTask({ ...task, name: event.target.value }),
       },
@@ -136,7 +136,7 @@ export default function AddTour() {
       {
         name: "Abgabe",
         type: "datetime-local",
-        value: task.finish,
+        value: task.finish || "",
         func: (event) =>
           setTask({
             ...task,
@@ -149,7 +149,7 @@ export default function AddTour() {
       {
         name: "Abgabe",
         type: "datetime-local",
-        value: task.finish,
+        value: task.finish || "",
         required: false,
         func: (event) =>
           setTask({

@@ -40,7 +40,7 @@ export default function AddCustomer() {
     {
       name: "Firma",
       type: "text",
-      value: customer.company,
+      value: customer.company || "",
       required: true,
       func: (event) =>
         setCustomer({ ...customer, company: event.target.value }),
@@ -48,21 +48,21 @@ export default function AddCustomer() {
     {
       name: "Name",
       type: "text",
-      value: customer.name,
+      value: customer.name || "",
       required: true,
       func: (event) => setCustomer({ ...customer, name: event.target.value }),
     },
     {
       name: "alias",
       type: "text",
-      value: customer.alias,
+      value: customer.alias || "",
       required: true,
       func: (event) => setCustomer({ ...customer, alias: event.target.value }),
     },
     {
       name: "Straße Hausnummer, PLZ Stadt",
       type: "text",
-      value: customer.address,
+      value: customer.address || "",
       func: (event) =>
         setCustomer({ ...customer, address: event.target.value }),
     },
@@ -122,7 +122,6 @@ export default function AddCustomer() {
 const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
-// d
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
