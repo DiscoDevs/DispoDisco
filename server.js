@@ -8,12 +8,14 @@ const port = process.env.PORT || 3600;
 const tours = require("./routes/tours");
 const riders = require("./routes/riders");
 const customers = require("./routes/customers");
+const users = require("./routes/users");
 
 app.use(express.json());
 
 app.use("/api/tours", tours);
 app.use("/api/riders", riders);
 app.use("/api/customers", customers);
+app.use("/api/users", users);
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
