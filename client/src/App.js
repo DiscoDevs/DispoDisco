@@ -19,72 +19,79 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { UserProvider } from "./context/user";
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <GlobalStyle />
-      <Router>
-        <Switch>
-          <Route path="/customers/new">
-            <AddCustomer />
-          </Route>
-          <Route path="/customers/:id/edit">
-            <AddCustomer />
-          </Route>
-          <Route path="/customers/:id/">
-            <CustomerInfo />
-          </Route>
-          <Route path="/customers">
-            <Customers />
-          </Route>
-          <Route path="/riders/new">
-            <AddRider />
-          </Route>
-          <Route path="/riders/:id/edit">
-            <AddRider />
-          </Route>
-          <Route path="/riders/:id">
-            <RiderInfo />
-          </Route>
-          <Route path="/riders">
-            <Riders />
-          </Route>
-          <Route path="/tours/:id/edit">
-            <AddTour />
-          </Route>
-          <Route path="/tours/new">
-            <AddTour />
-          </Route>
-          <Route path="/tours/new?type=concurrent">
-            <AddTour concurrentTour />
-          </Route>
-          <Route path="/menu">
-            <MainMenu />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/tours/today">
-            <ToursToday />
-          </Route>
-          <Route path="/tours/:id/">
-            <TourInfo />
-          </Route>
-          <Route path="/tours">
-            <Tours />
-          </Route>
-          <Route path="/">
-            <Launch />
-          </Route>
-        </Switch>
-      </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <UserProvider
+      currentUser={
+        "https://robohash.org/35adfadfadsf3091.pngsize=75x75?set=set5&size=100x100"
+      }
+    >
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
+        <Router>
+          <Switch>
+            <Route path="/customers/new">
+              <AddCustomer />
+            </Route>
+            <Route path="/customers/:id/edit">
+              <AddCustomer />
+            </Route>
+            <Route path="/customers/:id/">
+              <CustomerInfo />
+            </Route>
+            <Route path="/customers">
+              <Customers />
+            </Route>
+            <Route path="/riders/new">
+              <AddRider />
+            </Route>
+            <Route path="/riders/:id/edit">
+              <AddRider />
+            </Route>
+            <Route path="/riders/:id">
+              <RiderInfo />
+            </Route>
+            <Route path="/riders">
+              <Riders />
+            </Route>
+            <Route path="/tours/:id/edit">
+              <AddTour />
+            </Route>
+            <Route path="/tours/new">
+              <AddTour />
+            </Route>
+            <Route path="/tours/new?type=concurrent">
+              <AddTour concurrentTour />
+            </Route>
+            <Route path="/menu">
+              <MainMenu />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/tours/today">
+              <ToursToday />
+            </Route>
+            <Route path="/tours/:id/">
+              <TourInfo />
+            </Route>
+            <Route path="/tours">
+              <Tours />
+            </Route>
+            <Route path="/">
+              <Launch />
+            </Route>
+          </Switch>
+        </Router>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </UserProvider>
   );
 }
 
