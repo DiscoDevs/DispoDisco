@@ -5,9 +5,11 @@ import GlobalStyle from "../GlobalStyles";
 import HeaderHome from "../components/HeaderHome";
 import Button from "../components/Button";
 import { useHistory } from "react-router-dom";
+import { useUser } from "../context/user";
 
 const MainMenu = () => {
   const history = useHistory();
+  const user = useUser();
   const buttons = [
     {
       category: "settings",
@@ -45,6 +47,7 @@ const MainMenu = () => {
       <GlobalStyle />
       <PageWrapper>
         <HeaderHome />
+        <img className="avatar" src={user} alt={"Avatar"} />
         <MenuWrapper>
           {buttons.map((button) => (
             <Button
@@ -67,6 +70,11 @@ const PageWrapper = styled.div`
   height: 100vh;
   width: 100%;
   background: var(--gradient-dark);
+  .avatar {
+    height: 75px;
+    width: 75px;
+    margin: 0 auto;
+  }
 `;
 
 const MenuWrapper = styled.div`

@@ -5,23 +5,17 @@ import FilterIcon from "../assets/filter.svg";
 import Header from "./Header";
 import PropTypes from "prop-types";
 import { getCurrentDateString } from "../utils/date";
-
-const Infobox = styled.p`
-  display: flex;
-  align-items: flex-end;
-`;
-
-const IconContainer = styled.div`
-  > :not(:last-child) {
-    margin-right: 1rem;
-  }
-`;
+import { useUser } from "../context/user";
 
 const HeaderMain = ({ handleChange }) => {
+  HeaderMain.propTypes = {
+    handleChange: PropTypes.func,
+  };
+
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [datePicker, setDatePicker] = useState(<></>);
   const [date, setDate] = useState("");
-
+  const user = useUser();
   const today = getCurrentDateString();
 
   useEffect(() => {
@@ -50,6 +44,7 @@ const HeaderMain = ({ handleChange }) => {
 
   return (
     <Header>
+      <Avatar src={user} alt={"avatar"} />
       <Infobox>Next Stop 1:30h</Infobox>
       <IconContainer>
         {datePicker}
@@ -69,7 +64,17 @@ const HeaderMain = ({ handleChange }) => {
 };
 
 export default HeaderMain;
+const Avatar = styled.img`
+  height: 50px;
+  border-radius: 50%;
+`;
+const Infobox = styled.p`
+  display: flex;
+  align-items: flex-end;
+`;
 
-HeaderMain.propTypes = {
-  handleChange: PropTypes.func,
-};
+const IconContainer = styled.div`
+  > :not(:last-child) {
+    margin-right: 1rem;
+  }
+`;
