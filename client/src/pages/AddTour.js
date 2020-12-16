@@ -229,7 +229,7 @@ export default function AddTour() {
               required={inputObj.required}
             />
           ))}
-          <RiderSelect />
+          <RiderSelect onRiderChange={setTask} task={task} />
           {concurrentTour && (
             <WeekDaysSelector
               weekDays={weekDays}
@@ -273,9 +273,6 @@ const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
 
-// const RiderSelect = styled.select`
-//   padding: 0.5rem;
-// `;
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
