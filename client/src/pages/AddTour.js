@@ -212,13 +212,13 @@ export default function AddTour() {
             if (id) {
               updateData(
                 {
-                  collectionName: "tasks",
+                  collectionName: "tours",
                   id,
                 },
                 task
               );
             } else {
-              addData({ collectionName: "tasks", data: task });
+              addData({ collectionName: "tours", data: task });
             }
             if (concurrentTour) {
               history.goBack();
