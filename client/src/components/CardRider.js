@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import SettingsImg from "../assets/settingsIcon.svg";
+import stillLoading from "../assets/fastBiker.gif";
 import { deleteData } from "../utils/api";
 import CardContainer from "./helpers/CardContainer";
 
@@ -14,20 +15,49 @@ const CardRider = ({
   phone,
   picture,
   color,
+  handleClick,
+  addRider = false,
   id,
   info = true,
   settings = false,
   removeButton = false,
 }) => {
+  CardRider.propTypes = {
+    handleClick: PropTypes.func,
+    removeButton: PropTypes.bool,
+    addRider: PropTypes.bool,
+    info: PropTypes.bool,
+    settings: PropTypes.bool,
+    name: PropTypes.string,
+    alias: PropTypes.string,
+    id: PropTypes.string,
+    dateOfBirth: PropTypes.string,
+    phone: PropTypes.string,
+    picture: PropTypes.string,
+    color: PropTypes.string,
+  };
+
   const history = useHistory();
   const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
+  const [imgIsLoading, setImgIsLoading] = useState(+true);
+
   return (
     <RidersWrapper color={color}>
       <div>
         <h3>{alias}</h3>
         <p>{name}</p>
       </div>
-      <img src={picture} alt="Profilbild" />
+      <AvatarContainer loaded={+imgIsLoading}>
+        {imgIsLoading === 1 && <img src={stillLoading} alt="loading.." />}
+        <img
+          className="avatar"
+          loaded={imgIsLoading}
+          src={picture}
+          alt="Profilbild"
+          onLoad={() => setImgIsLoading(+false)}
+        />
+      </AvatarContainer>
+
       <InfoContainer>
         <div>
           {dateOfBirth && <p>{dateOfBirthOrdered}</p>}
@@ -51,6 +81,16 @@ const CardRider = ({
             }}
           />
         )}
+        {addRider && (
+          <CardButton
+            type="info"
+            label="change Avatar"
+            onClick={() => {
+              setImgIsLoading(+true);
+              handleClick();
+            }}
+          />
+        )}
         {removeButton && (
           <CardButton
             type="remove"
@@ -69,31 +109,27 @@ const CardRider = ({
   );
 };
 
-// !Verkürzbar ??
-CardRider.propTypes = {
-  name: PropTypes.string,
-  alias: PropTypes.string,
-  id: PropTypes.string,
-  dateOfBirth: PropTypes.string,
-  phone: PropTypes.string,
-  picture: PropTypes.string,
-  color: PropTypes.string,
-  info: PropTypes.string,
-  settings: PropTypes.string,
-  removeButton: PropTypes.string,
-};
-
 export default CardRider;
-
+const AvatarContainer = styled.div`
+  height: 90px;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > img {
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+  }
+  > img.avatar {
+    display: ${(props) => (props.loaded === 1 ? "none" : "block")};
+  }
+`;
 const RidersWrapper = styled(CardContainer)`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
-  > img {
-    height: 75px;
-    width: 75px;
-  }
 `;
 
 const InfoContainer = styled.div`

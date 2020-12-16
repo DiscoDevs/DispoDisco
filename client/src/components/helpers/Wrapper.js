@@ -18,6 +18,6 @@ const Wrapper = styled.div`
   height: 1px;
   width: 100%;
   margin: auto;
-  padding-top: clamp(11rem, 25vw, 200px);
+  padding-top: clamp(11rem, 25vw, 250px);
 `;
 export default Wrapper;
