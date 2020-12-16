@@ -26,6 +26,13 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
+//eslint-disable-next-line
+app.use((error, req, res, next) => {
+  res.json({
+    message: "An unexpected server error occured. Please try again later.",
+  });
+});
+
 async function run() {
   console.log("Connection to Database...");
   await connectToDb(process.env.DB_URI, process.env.DB_NAME);
