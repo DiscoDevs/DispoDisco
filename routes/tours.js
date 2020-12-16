@@ -10,49 +10,73 @@ const router = express.Router();
 
 const collectionName = "tasks";
 
-router.get("/date", async (req, res) => {
+router.get("/date", async (req, res, next) => {
   const { query } = req.query;
-  const data = await getCollection({
-    collectionName,
-    name: "date",
-    value: query,
-    sortBy: "date",
-  });
-  res.send(data);
+  try {
+    const data = await getCollection({
+      collectionName,
+      name: "date",
+      value: query,
+      sortBy: "date",
+    });
+    res.send(data);
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.get("/type", async (req, res) => {
+router.get("/type", async (req, res, next) => {
   const { query } = req.query;
-  const data = await getCollection({
-    collectionName,
-    name: "priority",
-    value: query,
-    filterBy: "date",
-  });
-  res.send(data);
+  try {
+    const data = await getCollection({
+      collectionName,
+      name: "priority",
+      value: query,
+      filterBy: "date",
+    });
+    res.send(data);
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
-  const data = await getByID({ collectionName, id });
-  res.send(data);
+  try {
+    const data = await getByID({ collectionName, id });
+    res.send(data);
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.post("/", async (req, res) => {
-  await insertData({ collectionName, data: req.body });
-  res.send("Tour added.");
+router.post("/", async (req, res, next) => {
+  try {
+    await insertData({ collectionName, data: req.body });
+    res.send("Tour added.");
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", async (req, res, next) => {
   const { id } = req.query;
-  await deleteData({ collectionName, id });
-  res.send("Tour deleted");
+  try {
+    await deleteData({ collectionName, id });
+    res.send("Tour deleted");
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/", async (req, res, next) => {
   const { id } = req.query;
-  await updateData({ collectionName, id, data: req.body });
-  res.send("Tour updated");
+  try {
+    await updateData({ collectionName, id, data: req.body });
+    res.send("Tour updated");
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
 module.exports = router;

@@ -11,41 +11,65 @@ const {
 const router = express.Router();
 const collectionName = "riders";
 
-router.get("/list", async (req, res) => {
-  const data = await getListByKey({
-    collectionName,
-    key1: "alias",
-    key2: "picture",
-  });
-  res.send(data);
+router.get("/list", async (req, res, next) => {
+  try {
+    const data = await getListByKey({
+      collectionName,
+      key1: "alias",
+      key2: "picture",
+    });
+    res.send(data);
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
-  const data = await getByID({ collectionName, id });
-  res.send(data);
+  try {
+    const data = await getByID({ collectionName, id });
+    res.send(data);
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.get("/", async (req, res) => {
-  const data = await getCollection({ collectionName, sortBy: "name" });
-  res.send(data);
+router.get("/", async (req, res, next) => {
+  try {
+    const data = await getCollection({ collectionName, sortBy: "name" });
+    res.send(data);
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.post("/", async (req, res) => {
-  await insertData({ collectionName, data: req.body });
-  res.send("Rider added.");
+router.post("/", async (req, res, next) => {
+  try {
+    await insertData({ collectionName, data: req.body });
+    res.send("Rider added.");
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", async (req, res, next) => {
   const { id } = req.query;
-  await deleteData({ collectionName, id });
-  res.send("Rider deleted");
+  try {
+    await deleteData({ collectionName, id });
+    res.send("Rider deleted");
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/", async (req, res, next) => {
   const { id } = req.query;
-  await updateData({ collectionName, id, data: req.body });
-  res.send("Rider updated");
+  try {
+    await updateData({ collectionName, id, data: req.body });
+    res.send("Rider updated");
+  } catch (error) {
+    next(new Error(error));
+  }
 });
 
 module.exports = router;
