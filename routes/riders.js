@@ -13,7 +13,11 @@ const collectionName = "riders";
 
 router.get("/list", async (req, res, next) => {
   try {
-    const data = await getListByKey({ collectionName, key: "alias" });
+    const data = await getListByKey({
+      collectionName,
+      key1: "alias",
+      key2: "picture",
+    });
     res.send(data);
   } catch (error) {
     next(new Error(error));
