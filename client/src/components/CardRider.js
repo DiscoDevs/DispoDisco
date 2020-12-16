@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import SettingsImg from "../assets/settingsIcon.svg";
+import stillLoading from "../assets/fastBiker.gif";
 import { deleteData } from "../utils/api";
 import CardContainer from "./helpers/CardContainer";
 
@@ -38,7 +39,7 @@ const CardRider = ({
 
   const history = useHistory();
   const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
-  const [imgIsLoading, setImgIsLoading] = useState(true);
+  const [imgIsLoading, setImgIsLoading] = useState(+true);
 
   return (
     <RidersWrapper color={color}>
@@ -46,13 +47,15 @@ const CardRider = ({
         <h3>{alias}</h3>
         <p>{name}</p>
       </div>
-      <AvatarContainer>
+      <AvatarContainer loaded={+imgIsLoading}>
+        {imgIsLoading === 1 && <img src={stillLoading} alt="loading.." />}
         <img
+          className="avatar"
+          loaded={imgIsLoading}
           src={picture}
           alt="Profilbild"
-          onLoad={() => setImgIsLoading(false)}
+          onLoad={() => setImgIsLoading(+false)}
         />
-        {imgIsLoading && <span>Loading...</span>}
       </AvatarContainer>
 
       <InfoContainer>
@@ -83,7 +86,7 @@ const CardRider = ({
             type="info"
             label="change Avatar"
             onClick={() => {
-              setImgIsLoading(true);
+              setImgIsLoading(+true);
               handleClick();
             }}
           />
@@ -109,14 +112,18 @@ const CardRider = ({
 export default CardRider;
 const AvatarContainer = styled.div`
   height: 90px;
+  width: 90px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   > img {
+    border-radius: 50%;
     height: 75px;
     width: 75px;
   }
-  span {
-    margin-top: 0.5rem;
+  > img.avatar {
+    display: ${(props) => (props.loaded === 1 ? "none" : "block")};
   }
 `;
 const RidersWrapper = styled(CardContainer)`

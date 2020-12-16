@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useParams } from "react-router-dom";
 import { addData, getDataByID, updateData } from "../utils/api";
-// import DefaultAvatar from "../assets/defaultAvatar.svg";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
 import CardRider from "../components/CardRider";
 import Header from "../components/Header";
 import generateNewAvatarUrl from "../components/helpers/SeedGenerator";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 
 export default function AddRider() {
   const { id } = useParams();
@@ -70,8 +70,8 @@ export default function AddRider() {
   };
   return (
     <PageWrapper>
-      <Header title={id ? "Rider ändern" : "Rider hinzufügen"} />
-      <Wrapper>
+      <ContentWrapper>
+        <Header title={id ? "Rider ändern" : "Rider hinzufügen"} />
         <CardRider handleClick={handleClick} addRider info={false} {...rider} />
         <Form
           onSubmit={(event) => {
@@ -108,30 +108,15 @@ export default function AddRider() {
             label={id ? "Rider ändern" : "Rider hinzufügen"}
           />
         </Form>
-      </Wrapper>
+      </ContentWrapper>
     </PageWrapper>
   );
 }
 
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  margin: auto;
-  padding: 12rem 0;
-
+const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  max-width: 400px;
-  > :first-child {
-    margin-bottom: 2rem;
-  }
-`;
+
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
