@@ -18,6 +18,10 @@ const IconContainer = styled.div`
 `;
 
 const HeaderMain = ({ handleChange }) => {
+  HeaderMain.propTypes = {
+    handleChange: PropTypes.func,
+  };
+
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [datePicker, setDatePicker] = useState(<></>);
   const [date, setDate] = useState("");
@@ -50,6 +54,10 @@ const HeaderMain = ({ handleChange }) => {
 
   return (
     <Header>
+      <img
+        src={"https://robohash.org/353091.pngsize=75x75?set=set5&size=100x100"}
+        alt={"avatar"}
+      />
       <Infobox>Next Stop 1:30h</Infobox>
       <IconContainer>
         {datePicker}
@@ -69,7 +77,3 @@ const HeaderMain = ({ handleChange }) => {
 };
 
 export default HeaderMain;
-
-HeaderMain.propTypes = {
-  handleChange: PropTypes.func,
-};

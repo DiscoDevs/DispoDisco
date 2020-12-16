@@ -66,7 +66,7 @@ export default function AddRider() {
     },
   ];
   const handleClick = () => {
-    setRider({ ...rider, picture: generateNewAvatarUrl() });
+    setRider({ ...rider, picture: generateNewAvatarUrl("ACAB") });
   };
   return (
     <PageWrapper>
