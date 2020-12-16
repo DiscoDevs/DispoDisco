@@ -238,18 +238,19 @@ export default function AddTour() {
             />
           ))}
 
-          <select
+          <RiderSelect
             onChange={(event) =>
               setTask({ ...task, assignment: event.target.value })
             }
           >
-            <option value={null}>Offen</option>
+            <option value={null}>Kein Fahrer gewählt</option>
             {riders.map((rider) => (
               <option key={rider._id} value={rider.alias}>
+                <img src={rider.picture} alt={rider.alias} />
                 {rider.alias}
               </option>
             ))}
-          </select>
+          </RiderSelect>
 
           {concurrentTour && (
             <WeekDaysSelector
@@ -292,6 +293,13 @@ export default function AddTour() {
 
 const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
+`;
+
+const RiderSelect = styled.select`
+  padding: 0.5rem;
+  option > img {
+    height: 30px;
+  }
 `;
 const Form = styled.form`
   > * {
