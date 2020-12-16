@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useParams } from "react-router-dom";
 import { addData, getDataByID, updateData } from "../utils/api";
-import DefaultAvatar from "../assets/defaultAvatar.svg";
+// import DefaultAvatar from "../assets/defaultAvatar.svg";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
 import CardRider from "../components/CardRider";
 import Header from "../components/Header";
+import generateNewAvatarUrl from "../components/helpers/SeedGenerator";
 
 export default function AddRider() {
   const { id } = useParams();
 
   const [rider, setRider] = useState({
-    picture: DefaultAvatar,
+    picture: generateNewAvatarUrl("ACAB"),
     color: "var(--gradient-menu)",
   });
 
@@ -28,7 +29,6 @@ export default function AddRider() {
             id,
           });
           setRider(data);
-          console.log(data);
         } catch (e) {
           console.error(e);
         }
@@ -65,12 +65,14 @@ export default function AddRider() {
       func: (event) => setRider({ ...rider, phone: event.target.value }),
     },
   ];
-
+  const handleClick = () => {
+    setRider({ ...rider, picture: generateNewAvatarUrl() });
+  };
   return (
     <PageWrapper>
       <Header title={id ? "Rider ändern" : "Rider hinzufügen"} />
       <Wrapper>
-        <CardRider {...rider} />
+        <CardRider handleClick={handleClick} addRider info={false} {...rider} />
         <Form
           onSubmit={(event) => {
             event.preventDefault();

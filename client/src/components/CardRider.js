@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import CardButton from "./CardButton";
@@ -14,20 +14,47 @@ const CardRider = ({
   phone,
   picture,
   color,
+  handleClick,
+  addRider = false,
   id,
   info = true,
   settings = false,
   removeButton = false,
 }) => {
+  CardRider.propTypes = {
+    handleClick: PropTypes.func,
+    removeButton: PropTypes.bool,
+    addRider: PropTypes.bool,
+    info: PropTypes.bool,
+    settings: PropTypes.bool,
+    name: PropTypes.string,
+    alias: PropTypes.string,
+    id: PropTypes.string,
+    dateOfBirth: PropTypes.string,
+    phone: PropTypes.string,
+    picture: PropTypes.string,
+    color: PropTypes.string,
+  };
+
   const history = useHistory();
   const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
+  const [imgIsLoading, setImgIsLoading] = useState(true);
+
   return (
     <RidersWrapper color={color}>
       <div>
         <h3>{alias}</h3>
         <p>{name}</p>
       </div>
-      <img src={picture} alt="Profilbild" />
+      <AvatarContainer>
+        <img
+          src={picture}
+          alt="Profilbild"
+          onLoad={() => setImgIsLoading(false)}
+        />
+        {imgIsLoading && <span>Loading...</span>}
+      </AvatarContainer>
+
       <InfoContainer>
         <div>
           {dateOfBirth && <p>{dateOfBirthOrdered}</p>}
@@ -51,6 +78,16 @@ const CardRider = ({
             }}
           />
         )}
+        {addRider && (
+          <CardButton
+            type="info"
+            label="change Avatar"
+            onClick={() => {
+              setImgIsLoading(true);
+              handleClick();
+            }}
+          />
+        )}
         {removeButton && (
           <CardButton
             type="remove"
@@ -69,31 +106,23 @@ const CardRider = ({
   );
 };
 
-// !Verkürzbar ??
-CardRider.propTypes = {
-  name: PropTypes.string,
-  alias: PropTypes.string,
-  id: PropTypes.string,
-  dateOfBirth: PropTypes.string,
-  phone: PropTypes.string,
-  picture: PropTypes.string,
-  color: PropTypes.string,
-  info: PropTypes.string,
-  settings: PropTypes.string,
-  removeButton: PropTypes.string,
-};
-
 export default CardRider;
-
-const RidersWrapper = styled(CardContainer)`
+const AvatarContainer = styled.div`
+  height: 90px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
+  flex-direction: column;
   > img {
     height: 75px;
     width: 75px;
   }
+  span {
+    margin-top: 0.5rem;
+  }
+`;
+const RidersWrapper = styled(CardContainer)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 const InfoContainer = styled.div`
