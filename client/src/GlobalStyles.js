@@ -2,7 +2,29 @@ import { createGlobalStyle } from "styled-components/macro";
 // import GoogleFonts from "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap";
 
 const GlobalStyle = createGlobalStyle`
-
+   .custom-select-container {
+        width: 300px;
+      }
+      .custom-select-opener {
+        white-space: nowrap;
+        height: 2.3em;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+        border-radius: 5px;
+        border: 2px solid #ccc;
+      }
+      .custom-select-opener:focus {
+        outline: none;
+        border-color: CornflowerBlue;
+      }
+      .custom-select-opener span {
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
+      }
+      .custom-select-panel {
+        border-radius: 5px;
+      }
   :root {
     --text-primary: hsla(0, 0%, 94%, 1);
     --text-secondary: hsla(0, 0%, 14%, 1);

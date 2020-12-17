@@ -15,7 +15,6 @@ export default function AddRider() {
 
   const [rider, setRider] = useState({
     picture: generateNewAvatarUrl("ACAB"),
-    color: "var(--gradient-menu)",
   });
 
   const history = useHistory();

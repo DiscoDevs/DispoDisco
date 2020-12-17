@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addData, getDataByID, getEntryList, updateData } from "../utils/api";
+import { addData, getDataByID, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -12,6 +12,7 @@ import WeekDaysSelector from "../components/WeekDaysSelector";
 import { add30Minutes, add90Minutes } from "../utils/time";
 import Header from "../components/Header";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
+import RiderSelect from "../components/helpers/RiderSelect";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -32,18 +33,9 @@ export default function AddTour() {
   });
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
-  const [riders, setRiders] = useState([]);
   const [arrayToMap, setArrayToMap] = useState([]);
 
   useEffect(() => {
-    const fetchList = async () => {
-      const list = await getEntryList({
-        collectionName: "riders",
-        key: "alias",
-      });
-      setRiders(list);
-    };
-    fetchList();
     if (id) {
       const doFetch = async () => {
         try {
@@ -237,20 +229,7 @@ export default function AddTour() {
               required={inputObj.required}
             />
           ))}
-
-          <select
-            onChange={(event) =>
-              setTask({ ...task, assignment: event.target.value })
-            }
-          >
-            <option value={null}>Offen</option>
-            {riders.map((rider) => (
-              <option key={rider._id} value={rider.alias}>
-                {rider.alias}
-              </option>
-            ))}
-          </select>
-
+          <RiderSelect onRiderChange={setTask} task={task} />
           {concurrentTour && (
             <WeekDaysSelector
               weekDays={weekDays}
@@ -293,6 +272,7 @@ export default function AddTour() {
 const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
+
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
