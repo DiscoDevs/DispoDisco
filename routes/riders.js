@@ -6,10 +6,24 @@ const {
   insertData,
   deleteData,
   updateData,
+  getPictureByName,
 } = require("../lib/serverMethods");
 
 const router = express.Router();
 const collectionName = "riders";
+
+router.get("/picture", async (req, res, next) => {
+  const { alias } = req.query;
+  try {
+    const data = await getPictureByName({
+      collectionName,
+      alias: alias,
+    });
+    res.send(data);
+  } catch (error) {
+    next(new Error(error));
+  }
+});
 
 router.get("/list", async (req, res, next) => {
   try {
