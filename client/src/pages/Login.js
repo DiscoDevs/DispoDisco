@@ -10,13 +10,16 @@ import SexyBike from "../assets/sexyBike.svg";
 import SexyBikeRider from "../assets/sexyBikeRider.svg";
 import SexyBikeRider2 from "../assets/sexyBikeRider2.svg";
 import Micha from "../assets/micha.svg";
-import { validateUser } from "../utils/api";
+import { getRiderImage, validateUser } from "../utils/api";
 import RiderSelect from "../components/helpers/RiderSelect";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
+  const [riderImage, setRiderImage] = useState(null);
 
   useEffect(() => {
     const doFetch = async () => {
@@ -27,6 +30,19 @@ const Login = () => {
     };
     doFetch();
   }, [username, password]);
+
+  useEffect(() => {
+    if (user !== "") {
+      const doFetch = async () => {
+        setRiderImage(await getRiderImage({ alias: user }));
+      };
+      doFetch();
+    }
+  }, [user]);
+
+  const onRiderChange = (rider) => {
+    setUser(rider);
+  };
 
   return (
     <div>
@@ -73,10 +89,17 @@ const Login = () => {
                   />
                 </>
               )}
-              {loggedIn && (
+              {loggedIn && user === "" && (
                 <>
                   <Subtitle>Select Player:</Subtitle>
-                  <RiderSelect onRiderChange="" task="" />
+                  <RiderSelect onRiderChange={onRiderChange} />
+                </>
+              )}
+              {loggedIn && user !== "" && (
+                <>
+                  <img src={riderImage} alt={user} />
+                  <p>{user}</p>
+                  <Link to="/menu">Zum Hauptmenü</Link>
                 </>
               )}
 
