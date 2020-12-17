@@ -25,11 +25,11 @@ const Login = () => {
     const doFetch = async () => {
       const loginstate = await validateUser({ username, password });
       if (loginstate === true) {
-        setLoggedIn(true);
+        setLoggedIn(!loggedIn);
       }
     };
     doFetch();
-  }, [username, password]);
+  }, [username, password, loggedIn]);
 
   useEffect(() => {
     if (user !== "") {

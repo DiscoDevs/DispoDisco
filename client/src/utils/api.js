@@ -39,9 +39,13 @@ export async function getRiderImage({ alias }) {
 }
 
 export async function validateUser({ username, password }) {
-  const result = await fetch(
-    `/api/users?username=${username}&password=${password}`
-  );
+  const result = await fetch(`/api/users/login`, {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   return result;
 }
 
