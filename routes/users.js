@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password } = req.query;
     const validation = await validateUser({ username, password });
     res.send(validation);
   } catch (error) {
