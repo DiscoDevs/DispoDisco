@@ -159,6 +159,10 @@ export default function AddTour() {
     }
   }, [task.priority, concurrentTour, task]);
 
+  const onRiderChange = (rider) => {
+    setTask({ ...task, assignment: rider });
+  };
+
   return (
     <PageWrapper>
       <ContentWrapper>
@@ -229,7 +233,7 @@ export default function AddTour() {
               required={inputObj.required}
             />
           ))}
-          <RiderSelect onRiderChange={setTask} task={task} />
+          <RiderSelect onRiderChange={onRiderChange} task={task} />
           {concurrentTour && (
             <WeekDaysSelector
               weekDays={weekDays}

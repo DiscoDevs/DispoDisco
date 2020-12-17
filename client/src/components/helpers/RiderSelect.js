@@ -4,7 +4,7 @@ import { getEntryList } from "../../utils/api";
 import CardGrid from "./CardGrid";
 import PropTypes from "prop-types";
 
-const RiderSelect = ({ task, onRiderChange }) => {
+const RiderSelect = ({ onRiderChange }) => {
   RiderSelect.propTypes = {
     task: PropTypes.object,
     onRiderChange: PropTypes.func,
@@ -31,7 +31,7 @@ const RiderSelect = ({ task, onRiderChange }) => {
           selected={activeAlias === item.alias}
           onClick={() => {
             setActiveAlias(item.alias);
-            onRiderChange({ ...task, assignment: item.alias });
+            onRiderChange(item.alias);
           }}
         >
           <img src={item.picture} alt={item.alias} />

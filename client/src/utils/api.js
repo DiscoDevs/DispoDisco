@@ -38,6 +38,17 @@ export async function getRiderImage({ alias }) {
   return data.picture;
 }
 
+export async function validateUser({ username, password }) {
+  const result = await fetch(`/api/users/login`, {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return result;
+}
+
 export async function deleteData({ collectionName, id }) {
   await fetch(`/api/${collectionName}?id=${id}`, {
     method: "DELETE",

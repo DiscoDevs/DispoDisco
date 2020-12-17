@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import Header from "../components/Header";
@@ -10,11 +10,39 @@ import SexyBike from "../assets/sexyBike.svg";
 import SexyBikeRider from "../assets/sexyBikeRider.svg";
 import SexyBikeRider2 from "../assets/sexyBikeRider2.svg";
 import Micha from "../assets/micha.svg";
+import { getRiderImage, validateUser } from "../utils/api";
+import RiderSelect from "../components/helpers/RiderSelect";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
+  const [riderImage, setRiderImage] = useState(null);
+
+  useEffect(() => {
+    const doFetch = async () => {
+      const loginstate = await validateUser({ username, password });
+      if (loginstate === true) {
+        setLoggedIn(!loggedIn);
+      }
+    };
+    doFetch();
+  }, [username, password, loggedIn]);
+
+  useEffect(() => {
+    if (user !== "") {
+      const doFetch = async () => {
+        setRiderImage(await getRiderImage({ alias: user }));
+      };
+      doFetch();
+    }
+  }, [user]);
+
+  const onRiderChange = (rider) => {
+    setUser(rider);
+  };
 
   return (
     <div>
@@ -29,45 +57,52 @@ const Login = () => {
                 event.preventDefault();
               }}
             >
-              <Subtitle>Select Player:</Subtitle>
-              <label htmlFor="userName">userName</label>
-              <Input
-                required
-                id="userName"
-                placeholder="userName"
-                value={userName}
-                onChange={(event) => {
-                  setUserName(event.target.value);
-                }}
-              />
-              <label htmlFor="password">Password</label>
-              <Input
-                required
-                id="password"
-                placeholder="password"
-                value={password}
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-              />
-              {userName && (
-                <p>
-                  <b>UserName: </b> {userName}
-                </p>
+              {!loggedIn && (
+                <>
+                  <label htmlFor="username">Username</label>
+                  <Input
+                    required
+                    id="username"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(event) => {
+                      setUsername(event.target.value);
+                    }}
+                  />
+                  <label htmlFor="password">Password</label>
+                  <Input
+                    required
+                    id="password"
+                    placeholder="password"
+                    value={password}
+                    type="password"
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                    }}
+                  />
+                  <Button
+                    design="menu"
+                    label="Login"
+                    onClick={() => {
+                      setLoggedIn(!loggedIn);
+                    }}
+                  />
+                </>
               )}
-              {password && (
-                <p>
-                  <b>Kennwort: </b> {password}
-                </p>
+              {loggedIn && user === "" && (
+                <>
+                  <Subtitle>Select Player:</Subtitle>
+                  <RiderSelect onRiderChange={onRiderChange} />
+                </>
               )}
-              <Button
-                design="menu"
-                onClick={() => {
-                  setLoggedIn(!loggedIn);
-                }}
-              >
-                Login
-              </Button>
+              {loggedIn && user !== "" && (
+                <>
+                  <img src={riderImage} alt={user} />
+                  <p>{user}</p>
+                  <Link to="/menu">Zum Hauptmenü</Link>
+                </>
+              )}
+
               <IllustrationTop loggedIn={loggedIn}>
                 <img src={SexyBike} alt="sexy Bike" />
               </IllustrationTop>
