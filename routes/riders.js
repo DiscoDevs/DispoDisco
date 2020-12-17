@@ -17,7 +17,7 @@ router.get("/picture", async (req, res, next) => {
   try {
     const data = await getPictureByName({
       collectionName,
-      alias: alias,
+      alias,
     });
     res.send(data);
   } catch (error) {
