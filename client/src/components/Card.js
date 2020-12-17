@@ -171,7 +171,7 @@ const Card = ({
             label="X"
             onClick={() => {
               deleteData({
-                collectionName: "tasks",
+                collectionName: "tours",
                 id: rideID,
               });
               history.goBack();
