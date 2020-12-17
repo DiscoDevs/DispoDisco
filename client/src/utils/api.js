@@ -32,6 +32,12 @@ export async function getEntryList({ collectionName }) {
   return data;
 }
 
+export async function getRiderImage({ alias }) {
+  const result = await fetch(`/api/riders/picture?alias=${alias}`);
+  const data = await result.json();
+  return data.picture;
+}
+
 export async function deleteData({ collectionName, id }) {
   await fetch(`/api/${collectionName}?id=${id}`, {
     method: "DELETE",
