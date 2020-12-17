@@ -135,7 +135,7 @@ const Card = ({
             }}
           />
         ) : (
-          <CardButton type="rider" label={`🚴‍♀️ ${rider}`} />
+          <CardButton type="rider" label={rider} />
         )}
         {info ? (
           <CardButton type="timer" label={<Countdown finish={finish} />} />
