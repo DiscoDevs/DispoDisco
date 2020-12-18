@@ -65,8 +65,9 @@ const HeaderMain = ({ handleChange }) => {
 
 export default HeaderMain;
 const Avatar = styled.img`
-  height: 50px;
+  height: clamp(35px, 7vw, 60px);
   border-radius: 50%;
+  border: 1px solid gold;
 `;
 const Infobox = styled.p`
   display: flex;

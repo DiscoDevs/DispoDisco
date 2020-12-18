@@ -45,7 +45,7 @@ const RiderSelect = ({ onRiderChange }) => {
 export default RiderSelect;
 const RiderGrid = styled(CardGrid)`
   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  max-width: 500px;
+  max-width: clamp(310px, 70vw, 500px);
   grid-gap: 0.5rem;
 `;
 

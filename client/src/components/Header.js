@@ -9,6 +9,11 @@ import StatusBar from "../components/StatusBar";
 
 const date = getCurrentDateShort();
 const Header = ({ title, children }) => {
+  Header.propTypes = {
+    title: PropTypes.string,
+    children: PropTypes.node,
+  };
+
   const history = useHistory();
   return (
     <HeaderElement title={title}>
@@ -56,7 +61,7 @@ const HeaderText = styled.h2`
   display: flex;
   justify-content: ${(props) => (props.title ? "center" : "space-between")};
   padding-top: 1rem;
-  font-size: clamp(1.7rem, 8vw, 3.5rem);
+  font-size: clamp(1.5rem, 8vw, 3.5rem);
   font-weight: 400;
 `;
 const Logo = styled.img`
@@ -76,8 +81,5 @@ const Children = styled.div`
   align-items: flex-end;
   justify-content: ${(props) => (props.title ? "center" : "space-between")};
 `;
-Header.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.node,
-};
+
 export default Header;
