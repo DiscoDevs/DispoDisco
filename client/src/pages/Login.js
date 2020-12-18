@@ -12,8 +12,8 @@ import SexyBikeRider2 from "../assets/sexyBikeRider2.svg";
 import Micha from "../assets/micha.svg";
 import { getCompanyName, getRiderImage, validateUser } from "../utils/api";
 import RiderSelect from "../components/helpers/RiderSelect";
-import { Link } from "react-router-dom";
 import { useChangeUser } from "../context/user";
+import LinkButton from "../components/LinkButton";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -63,6 +63,7 @@ const Login = () => {
   const onRiderChange = (rider) => {
     setUser(rider.alias);
     changeUser(rider);
+    localStorage.setItem("user", JSON.stringify(rider));
   };
 
   return (
@@ -116,11 +117,11 @@ const Login = () => {
                 </>
               )}
               {loggedIn && user !== "" && (
-                <>
+                <UserSelector>
                   <img src={riderImage} alt={user} />
                   <p>{user}</p>
-                  <Link to="/menu">Zum Hauptmenü</Link>
-                </>
+                  <LinkButton to="/menu">Zum Hauptmenü</LinkButton>
+                </UserSelector>
               )}
 
               <IllustrationTop loggedIn={loggedIn}>
@@ -143,14 +144,24 @@ const Title = styled.h1`
   color: var(--text-primary);
   font-size: clamp(2rem, 10vw, 3rem);
 `;
+const UserSelector = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 80px;
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+`;
 const Illustrations = styled.div`
-  position: absolute;
   pointer-events: none;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  bottom: -5rem;
-  left: 20%;
   > * {
     animation-duration: ${(props) => (props.loggedIn ? "5s" : "3s")};
     animation-name: ${(props) =>

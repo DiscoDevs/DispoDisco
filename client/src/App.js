@@ -22,10 +22,17 @@ import Register from "./pages/Register";
 import { UserProvider } from "./context/user";
 const queryClient = new QueryClient();
 
-function getUser() {}
 function App() {
+  function getUser() {
+    const player = {
+      alias: "benji",
+      picture:
+        "https://robohash.org/844921.pngsize=75x75?set=set5&size=100x100",
+    };
+    return player;
+  }
   return (
-    <UserProvider currentUser={"benji"}>
+    <UserProvider currentUser={getUser()}>
       <QueryClientProvider client={queryClient}>
         <GlobalStyle />
         <Router>
