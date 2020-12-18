@@ -13,6 +13,7 @@ import Micha from "../assets/micha.svg";
 import { getCompanyName, getRiderImage, validateUser } from "../utils/api";
 import RiderSelect from "../components/helpers/RiderSelect";
 import { Link } from "react-router-dom";
+import { useChangeUser } from "../context/user";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,6 +24,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [falseLogin, setFalseLogin] = useState(false);
   const [companyName, setCompanyName] = useState("");
+  const changeUser = useChangeUser();
 
   useEffect(() => {
     const doFetch = async () => {
@@ -59,7 +61,8 @@ const Login = () => {
   }, [companyName]);
 
   const onRiderChange = (rider) => {
-    setUser(rider);
+    setUser(rider.alias);
+    changeUser(rider);
   };
 
   return (

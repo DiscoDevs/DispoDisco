@@ -31,7 +31,7 @@ const RiderSelect = ({ onRiderChange }) => {
           selected={activeAlias === item.alias}
           onClick={() => {
             setActiveAlias(item.alias);
-            onRiderChange(item.alias);
+            onRiderChange(item);
           }}
         >
           <img src={item.picture} alt={item.alias} />

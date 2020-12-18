@@ -47,7 +47,7 @@ const MainMenu = () => {
       <GlobalStyle />
       <PageWrapper>
         <HeaderHome />
-        <img className="avatar" src={user} alt={"Avatar"} />
+        <img className="avatar" src={user.picture} alt={"Avatar"} />
         <MenuWrapper>
           {buttons.map((button) => (
             <Button
