@@ -14,11 +14,9 @@ import ButtonPlus from "../components/ButtonPlus";
 import CardGrid from "../components/helpers/CardGrid";
 import LoadingData from "../components/LoadingData";
 import Wrapper from "../components/helpers/Wrapper";
-import useBroadcastOrQuery from "../hooks/useBroadcastOrQuery";
 
 const ToursToday = () => {
   const [today, setToday] = useState(getCurrentDateString());
-  const tours = useBroadcastOrQuery({ endpoint: "tours", today });
 
   const history = useHistory();
 
@@ -26,34 +24,49 @@ const ToursToday = () => {
     setToday(date !== "" ? date : getCurrentDateString());
   };
 
+  const { isLoading, isError, data, error, refetch } = useQuery(
+    ["tours", today],
+    () =>
+      getSortedDataByQuery({
+        collectionName: "tours",
+        type: "date",
+        query: today,
+      })
+  );
+
   return (
     <>
       <GlobalStyle />
       <Wrapper>
         <HeaderMain handleChange={handleDateChange} />
         <CardGrid>
-          {tours?.sort(sortByPriority).map((ride) => {
-            return (
-              <Card
-                rideID={ride._id}
-                key={ride._id}
-                type={ride.priority}
-                rider={ride.assignment}
-                {...ride}
-                info={true}
-                labels={
-                  <>
-                    {ride.cargo && <Badge type={ride.cargo} active />}
-                    {ride.priority !== "normal" &&
-                      ride.priority !== "concurrentRide" && (
-                        <Badge type={ride.priority} active />
-                      )}
-                    {ride.carriage && <Badge type="carriage" active />}
-                  </>
-                }
-              />
-            );
-          })}
+          {isLoading && <LoadingData>Loading...</LoadingData>}
+          {isError && <span>Error: {error.message}</span>}
+          {!isError &&
+            !isLoading &&
+            data.sort(sortByPriority).map((ride) => {
+              return (
+                <Card
+                  onChange={refetch}
+                  rideID={ride._id}
+                  key={ride._id}
+                  type={ride.priority}
+                  rider={ride.assignment}
+                  {...ride}
+                  info={true}
+                  labels={
+                    <>
+                      {ride.cargo && <Badge type={ride.cargo} active />}
+                      {ride.priority !== "normal" &&
+                        ride.priority !== "concurrentRide" && (
+                          <Badge type={ride.priority} active />
+                        )}
+                      {ride.carriage && <Badge type="carriage" active />}
+                    </>
+                  }
+                />
+              );
+            })}
         </CardGrid>
         <ButtonPlus onClick={() => history.push("/tours/new")} />
       </Wrapper>

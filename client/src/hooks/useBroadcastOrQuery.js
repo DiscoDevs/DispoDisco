@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getSortedDataByQuery } from "../utils/api";
 import useBroadcastUpdate from "./useBroadcastUpdate";
@@ -17,7 +16,7 @@ const useBroadcastOrQuery = ({ endpoint, today, option = "today" }) => {
   );
   console.log({ data }, { broadcastedTours });
   if (data?.length <= broadcastedTours?.length) {
-    return data;
+    return { data, isLoading, isError, error, refetch };
   }
   return data;
 };
