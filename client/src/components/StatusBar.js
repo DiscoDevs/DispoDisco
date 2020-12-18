@@ -4,24 +4,30 @@ import useOnline from "../hooks/useOnlineStatus";
 import { useSpring, animated } from "react-spring";
 
 const StatusBar = () => {
-  const floatIn = useSpring({ y: 100, from: { y: 0 } });
   let online = useOnline();
+
+  const floatIn = useSpring({
+    backgroundColor: `rgba(230, 0, 0, ${online ? "0" : "1"})`,
+    fontSize: online ? "0px" : "14px",
+  });
+
   return (
-    <ContentWrapper isOnline={online} style={floatIn}>
-      <span>🔴 Du bist offline</span>
+    <ContentWrapper online={online} style={floatIn}>
+      {online ? (
+        <span>🟢 Du bist online</span>
+      ) : (
+        <span>🔴 Du bist offline</span>
+      )}
     </ContentWrapper>
   );
 };
 const ContentWrapper = styled(animated.div)`
-  display: ${(props) => (props.isOnline ? "none" : "flex")};
+  display: flex;
   justify-content: center;
   width: 100%;
-  margin: 0.5rem auto;
-  padding: 0 !important;
-  background: ${(props) =>
-    props.isOnline ? "green" : "var(--gradient-direct)"};
+  margin: 1rem auto 0.5rem;
+  padding: 1;
   span {
-    width: 100%;
     text-align: center;
     padding-bottom: 0.5rem;
   }
