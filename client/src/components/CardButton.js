@@ -44,7 +44,7 @@ const CardButton = ({ type, label = "", status, onClick }) => {
   const [imgIsLoading, setImgIsLoading] = useState(+true);
 
   useEffect(() => {
-    if (type === "rider") {
+    if (type === "rider" && label !== "") {
       const doFetch = async () => {
         const pic = await getRiderImage({ alias: label });
         setPicture(pic);
