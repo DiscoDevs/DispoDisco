@@ -44,7 +44,7 @@ const HeaderMain = ({ handleChange }) => {
 
   return (
     <Header>
-      <Avatar src={user} alt={"avatar"} />
+      <Avatar src={user.picture} alt={"avatar"} />
       <Infobox>Next Stop 1:30h</Infobox>
       <IconContainer>
         {datePicker}

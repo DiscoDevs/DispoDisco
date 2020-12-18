@@ -47,8 +47,12 @@ const MainMenu = () => {
       <GlobalStyle />
       <PageWrapper>
         <HeaderHome />
-        <img className="avatar" src={user} alt={"Avatar"} />
         <MenuWrapper>
+          <AvatarBox>
+            <h5>Selected Player:</h5>
+            <img src={user?.picture} alt={"Avatar"} />
+            <p>{user?.alias}</p>
+          </AvatarBox>
           {buttons.map((button) => (
             <Button
               key={button.label}
@@ -70,9 +74,17 @@ const PageWrapper = styled.div`
   height: 100vh;
   width: 100%;
   background: var(--gradient-dark);
-  .avatar {
-    height: 75px;
-    width: 75px;
+`;
+const AvatarBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  h5 {
+    margin-bottom: 0.5rem;
+  }
+  img {
+    height: clamp(35px, 10vw, 75px);
     margin: 0 auto;
   }
 `;
@@ -82,12 +94,16 @@ const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 1.5rem 2rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 375px;
   margin: 0 auto;
   Button {
-    margin-top: 1rem;
+    margin-top: clamp(0.5rem, 1vw, 1rem);
+    width: 100%;
+    font-size: clamp(1.2rem, 5vw, 1.7rem);
+    justify-content: flex-start;
   }
   > :last-child {
     margin-top: 1.5rem;
