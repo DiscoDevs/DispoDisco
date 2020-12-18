@@ -160,7 +160,7 @@ export default function AddTour() {
   }, [task.priority, concurrentTour, task]);
 
   const onRiderChange = (rider) => {
-    setTask({ ...task, assignment: rider });
+    setTask({ ...task, assignment: rider.alias });
   };
 
   return (
