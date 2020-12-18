@@ -10,7 +10,7 @@ import SexyBike from "../assets/sexyBike.svg";
 import SexyBikeRider from "../assets/sexyBikeRider.svg";
 import SexyBikeRider2 from "../assets/sexyBikeRider2.svg";
 import Micha from "../assets/micha.svg";
-import { getRiderImage, validateUser } from "../utils/api";
+import { getCompanyName, getRiderImage, validateUser } from "../utils/api";
 import RiderSelect from "../components/helpers/RiderSelect";
 import { Link } from "react-router-dom";
 
@@ -22,6 +22,7 @@ const Login = () => {
   const [riderImage, setRiderImage] = useState(null);
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [falseLogin, setFalseLogin] = useState(false);
+  const [companyName, setCompanyName] = useState("");
 
   useEffect(() => {
     const doFetch = async () => {
@@ -31,6 +32,10 @@ const Login = () => {
         if (loginstate === true) {
           setLoggedIn(true);
           setFalseLogin(false);
+          setCompanyName(
+            await getCompanyName({ username: loginData.username })
+          );
+          console.log(await getCompanyName({ username: loginData.username }));
         } else {
           setFalseLogin(true);
         }
@@ -47,6 +52,11 @@ const Login = () => {
       doFetch();
     }
   }, [user]);
+
+  useEffect(() => {
+    console.log(companyName);
+    localStorage.setItem("company", companyName);
+  }, [companyName]);
 
   const onRiderChange = (rider) => {
     setUser(rider);

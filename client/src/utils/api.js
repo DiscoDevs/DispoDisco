@@ -50,6 +50,18 @@ export async function validateUser({ username, password }) {
   return data;
 }
 
+export async function getCompanyName({ username }) {
+  const result = await fetch(`/api/users/company`, {
+    method: "POST",
+    body: JSON.stringify({ username }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await result.json();
+  return data.company;
+}
+
 export async function deleteData({ collectionName, id }) {
   await fetch(`/api/${collectionName}?id=${id}`, {
     method: "DELETE",
