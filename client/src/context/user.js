@@ -3,15 +3,20 @@ import propTypes from "prop-types";
 
 export const userContext = React.createContext(null);
 
-export const UserProvider = ({ children, currentUser = "benji" }) => {
+export const UserProvider = ({ children, currentUser }) => {
   UserProvider.propTypes = {
     children: propTypes.node,
-    currentUser: propTypes.string,
+    currentUser: propTypes.object,
   };
-  const [user, setUser] = useState("benji");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    setUser(currentUser);
+    const storrageUser = JSON.parse(localStorage.getItem("user"));
+
+    if (currentUser.alias !== storrageUser?.alias) {
+      localStorage.setItem("user", JSON.stringify(currentUser));
+    }
+    setUser(storrageUser);
   }, [currentUser]);
 
   return (
