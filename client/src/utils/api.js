@@ -46,7 +46,8 @@ export async function validateUser({ username, password }) {
       "Content-Type": "application/json",
     },
   });
-  return result;
+  const data = result.json();
+  return data;
 }
 
 export async function deleteData({ collectionName, id }) {

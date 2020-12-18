@@ -20,16 +20,24 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [riderImage, setRiderImage] = useState(null);
+  const [loginData, setLoginData] = useState({ username: "", password: "" });
+  const [falseLogin, setFalseLogin] = useState(false);
 
   useEffect(() => {
     const doFetch = async () => {
-      const loginstate = await validateUser({ username, password });
-      if (loginstate === true) {
-        setLoggedIn(!loggedIn);
+      if (loginData.username !== "") {
+        const loginstate = await validateUser(loginData);
+        console.log(loginstate);
+        if (loginstate === true) {
+          setLoggedIn(true);
+          setFalseLogin(false);
+        } else {
+          setFalseLogin(true);
+        }
       }
     };
     doFetch();
-  }, [username, password, loggedIn]);
+  }, [loginData, loggedIn]);
 
   useEffect(() => {
     if (user !== "") {
@@ -55,6 +63,10 @@ const Login = () => {
             <Form
               onSubmit={(event) => {
                 event.preventDefault();
+                setLoginData({
+                  username,
+                  password,
+                });
               }}
             >
               {!loggedIn && (
@@ -80,13 +92,8 @@ const Login = () => {
                       setPassword(event.target.value);
                     }}
                   />
-                  <Button
-                    design="menu"
-                    label="Login"
-                    onClick={() => {
-                      setLoggedIn(!loggedIn);
-                    }}
-                  />
+                  {falseLogin && <p>Benutzername oder Passwort falsch</p>}
+                  <Button design="menu" label="Login" type="submit" />
                 </>
               )}
               {loggedIn && user === "" && (
