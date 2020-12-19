@@ -6,7 +6,7 @@ import GlobalStyle from "../GlobalStyles";
 
 import { getCurrentDateString } from "../utils/date";
 import { getSortedDataByQuery } from "../utils/api";
-
+import { useTransition, animated, config } from "react-spring";
 import Badge from "../components/Badge";
 import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
@@ -33,7 +33,11 @@ const ToursToday = () => {
         query: today,
       })
   );
-
+  const rides = data || [];
+  const transition = useTransition(rides, (item) => item?._id, {
+    from: { opacity: 0, marginRight: 100 },
+    enter: { opacity: 1, marginRight: 0 },
+  });
   return (
     <>
       <GlobalStyle />
@@ -44,27 +48,29 @@ const ToursToday = () => {
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
             !isLoading &&
-            data.sort(sortByPriority).map((ride) => {
+            transition.sort(sortByPriority).map(({ item, key, props }) => {
               return (
-                <Card
-                  onChange={refetch}
-                  rideID={ride._id}
-                  key={ride._id}
-                  type={ride.priority}
-                  rider={ride.assignment}
-                  {...ride}
-                  info={true}
-                  labels={
-                    <>
-                      {ride.cargo && <Badge type={ride.cargo} active />}
-                      {ride.priority !== "normal" &&
-                        ride.priority !== "concurrentRide" && (
-                          <Badge type={ride.priority} active />
-                        )}
-                      {ride.carriage && <Badge type="carriage" active />}
-                    </>
-                  }
-                />
+                <animated.div key={key} style={props}>
+                  <Card
+                    onChange={refetch}
+                    rideID={item._id}
+                    key={item._id}
+                    type={item.priority}
+                    rider={item.assignment}
+                    {...item}
+                    info={true}
+                    labels={
+                      <>
+                        {item.cargo && <Badge type={item.cargo} active />}
+                        {item.priority !== "normal" &&
+                          item.priority !== "concurrentRide" && (
+                            <Badge type={item.priority} active />
+                          )}
+                        {item.carriage && <Badge type="carriage" active />}
+                      </>
+                    }
+                  />
+                </animated.div>
               );
             })}
         </CardGrid>

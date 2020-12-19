@@ -17,8 +17,7 @@
 	Twitter:
 
 
-	Media Queries by: Marta Armada (@martuishere) and Javier Usobiaga (@htmlboy)
-
+"Robots lovingly delivered by Robohash.org"
 
 /* SITE */
 	Last update:
