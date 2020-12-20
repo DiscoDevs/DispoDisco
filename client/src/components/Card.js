@@ -188,7 +188,7 @@ export default Card;
 
 const CardWrapper = styled(CardContainer)`
   position: relative;
-
+  max-width: 336px;
   margin: auto;
   padding: 1rem;
   text-align: center;
