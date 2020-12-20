@@ -1,5 +1,9 @@
 const express = require("express");
-const { validateUser, getCompanyName } = require("../lib/serverMethods");
+const {
+  validateUser,
+  getCompanyName,
+  insertData,
+} = require("../lib/serverMethods");
 const router = express.Router();
 
 router.post("/login", async (req, res, next) => {
@@ -7,6 +11,14 @@ router.post("/login", async (req, res, next) => {
     const { username, password } = req.body;
     const validation = await validateUser({ username, password });
     res.send(validation);
+  } catch (error) {
+    next(new Error(error));
+  }
+});
+
+router.post("/register", async (req, res, next) => {
+  try {
+    await insertData({ collectionName: "users", data: req.body });
   } catch (error) {
     next(new Error(error));
   }

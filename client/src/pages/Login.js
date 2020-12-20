@@ -30,14 +30,12 @@ const Login = () => {
     const doFetch = async () => {
       if (loginData.username !== "") {
         const loginstate = await validateUser(loginData);
-        console.log(loginstate);
         if (loginstate === true) {
           setLoggedIn(true);
           setFalseLogin(false);
           setCompanyName(
             await getCompanyName({ username: loginData.username })
           );
-          console.log(await getCompanyName({ username: loginData.username }));
         } else {
           setFalseLogin(true);
         }
@@ -49,14 +47,15 @@ const Login = () => {
   useEffect(() => {
     if (user !== "") {
       const doFetch = async () => {
-        setRiderImage(await getRiderImage({ alias: user }));
+        setRiderImage(
+          await getRiderImage({ alias: user, company: companyName })
+        );
       };
       doFetch();
     }
-  }, [user]);
+  }, [user, companyName]);
 
   useEffect(() => {
-    console.log(companyName);
     localStorage.setItem("company", companyName);
   }, [companyName]);
 

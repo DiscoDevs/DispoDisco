@@ -12,16 +12,19 @@ const RiderSelect = ({ onRiderChange }) => {
   const [riders, setRiders] = useState([]);
   const [activeAlias, setActiveAlias] = useState(null);
 
+  const company = localStorage.getItem("company");
+
   useEffect(() => {
     const fetchList = async () => {
       const list = await getEntryList({
         collectionName: "riders",
         key: "alias",
+        company,
       });
       setRiders(list);
     };
     fetchList();
-  }, []);
+  }, [company]);
 
   return (
     <RiderGrid>
