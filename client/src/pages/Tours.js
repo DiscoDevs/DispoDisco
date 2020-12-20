@@ -16,6 +16,8 @@ import Wrapper from "../components/helpers/Wrapper";
 const Tours = () => {
   const history = useHistory();
 
+  const company = localStorage.getItem("company");
+
   const { isLoading, isError, data, error, refetch } = useQuery(
     "concurrenctTours",
     () =>
@@ -23,6 +25,7 @@ const Tours = () => {
         collectionName: "tours",
         type: "type",
         query: "concurrentRide",
+        company,
       })
   );
 

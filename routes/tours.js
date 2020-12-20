@@ -11,13 +11,14 @@ const router = express.Router();
 const collectionName = "tasks";
 
 router.get("/date", async (req, res, next) => {
-  const { query } = req.query;
+  const { query, company } = req.query;
   try {
     const data = await getCollection({
       collectionName,
       name: "date",
       value: query,
       sortBy: "date",
+      company,
     });
     res.send(data);
   } catch (error) {
@@ -26,13 +27,14 @@ router.get("/date", async (req, res, next) => {
 });
 
 router.get("/type", async (req, res, next) => {
-  const { query } = req.query;
+  const { query, company } = req.query;
   try {
     const data = await getCollection({
       collectionName,
       name: "priority",
       value: query,
       filterBy: "date",
+      company,
     });
     res.send(data);
   } catch (error) {

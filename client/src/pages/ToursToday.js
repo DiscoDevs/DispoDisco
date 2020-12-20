@@ -20,6 +20,8 @@ const ToursToday = () => {
 
   const history = useHistory();
 
+  const company = localStorage.getItem("company");
+
   const handleDateChange = (date) => {
     setToday(date !== "" ? date : getCurrentDateString());
   };
@@ -31,6 +33,7 @@ const ToursToday = () => {
         collectionName: "tours",
         type: "date",
         query: today,
+        company,
       })
   );
 

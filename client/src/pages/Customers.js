@@ -13,10 +13,12 @@ import Wrapper from "../components/helpers/Wrapper";
 const Customers = () => {
   const history = useHistory();
 
+  const company = localStorage.getItem("company");
+
   const { isLoading, isError, data, error } = useQuery("customers", () =>
     getSortedData({
       collectionName: "customers",
-      dataName: "name",
+      company,
     })
   );
 

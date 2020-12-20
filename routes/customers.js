@@ -20,8 +20,13 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
+  const { company } = req.query;
   try {
-    const data = await getCollection({ collectionName, sortBy: "company" });
+    const data = await getCollection({
+      collectionName,
+      sortBy: "company",
+      company,
+    });
     res.send(data);
   } catch (error) {
     next(new Error(error));

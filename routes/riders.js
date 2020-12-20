@@ -13,11 +13,12 @@ const router = express.Router();
 const collectionName = "riders";
 
 router.get("/picture", async (req, res, next) => {
-  const { alias } = req.query;
+  const { alias, company } = req.query;
   try {
     const data = await getPictureByName({
       collectionName,
       alias,
+      company,
     });
     res.send(data);
   } catch (error) {
@@ -26,11 +27,13 @@ router.get("/picture", async (req, res, next) => {
 });
 
 router.get("/list", async (req, res, next) => {
+  const { company } = req.query;
   try {
     const data = await getListByKey({
       collectionName,
       key1: "alias",
       key2: "picture",
+      company,
     });
     res.send(data);
   } catch (error) {
@@ -49,8 +52,13 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
+  const { company } = req.query;
   try {
-    const data = await getCollection({ collectionName, sortBy: "name" });
+    const data = await getCollection({
+      collectionName,
+      sortBy: "name",
+      company,
+    });
     res.send(data);
   } catch (error) {
     next(new Error(error));

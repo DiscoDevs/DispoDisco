@@ -8,14 +8,21 @@ export async function addData({ collectionName, data }) {
   });
 }
 
-export async function getSortedData({ collectionName, dataName }) {
-  const result = await fetch(`/api/${collectionName}?sortBy=${dataName}`);
+export async function getSortedData({ collectionName, company }) {
+  const result = await fetch(`/api/${collectionName}?company=${company}`);
   const returnedData = await result.json();
   return returnedData;
 }
 
-export async function getSortedDataByQuery({ collectionName, type, query }) {
-  const result = await fetch(`/api/${collectionName}/${type}?query=${query}`);
+export async function getSortedDataByQuery({
+  collectionName,
+  type,
+  query,
+  company,
+}) {
+  const result = await fetch(
+    `/api/${collectionName}/${type}?query=${query}&company=${company}`
+  );
   const returnedData = await result.json();
   return returnedData;
 }
