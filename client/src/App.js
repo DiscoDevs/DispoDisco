@@ -26,7 +26,7 @@ const queryClient = new QueryClient();
 function App() {
   useEffect(() => {
     async function doFetch() {
-      await prefetchData({ queryClient });
+      await prefetchData(queryClient);
     }
     doFetch();
   }, []);

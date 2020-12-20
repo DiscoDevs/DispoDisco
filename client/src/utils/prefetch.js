@@ -2,7 +2,7 @@ import { getEntryList, getSortedDataByQuery } from "./api";
 import { getCurrentDateString } from "./date";
 const today = getCurrentDateString();
 
-const prefetchData = async ({ queryClient }) => {
+const prefetchData = async (queryClient) => {
   await queryClient.prefetchQuery(
     ["tours", today],
     getSortedDataByQuery({
