@@ -12,7 +12,9 @@ const InfoInput = ({
 }) => {
   return (
     <Details>
-      <summary>Info & Todo-Liste</summary>
+      <summary>
+        <h3>Info & Todo-Liste</h3>
+      </summary>
 
       <h3>Infos</h3>
       <textarea
@@ -39,6 +41,9 @@ const Details = styled.details`
   text-align: left;
   margin: 1rem 0;
   width: 100%;
+  summary > h3 {
+    display: inline;
+  }
   textarea {
     width: 100%;
   }

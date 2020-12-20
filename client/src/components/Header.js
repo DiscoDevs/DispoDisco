@@ -45,7 +45,7 @@ const HeaderElement = styled.header`
   min-height: 65px;
   background-color: var(--text-secondary);
   color: var(--text-primary);
-  box-shadow: 0 3px 6px var(--cargo);
+  box-shadow: 0 3px 18px black;
   border-radius: 0 0 10px 10px;
 `;
 const Top = styled.div`

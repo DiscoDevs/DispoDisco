@@ -232,7 +232,7 @@ export default function AddTour() {
               required={inputObj.required}
             />
           ))}
-          <RiderSelect onRiderChange={onRiderChange} task={task} />
+
           {concurrentTour && (
             <WeekDaysSelector
               weekDays={weekDays}
@@ -261,6 +261,7 @@ export default function AddTour() {
               );
             })}
           </BadgeContainer>
+          <RiderSelect onRiderChange={onRiderChange} task={task} />
           <Button
             type="submit"
             design="addRide"
