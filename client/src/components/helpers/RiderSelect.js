@@ -1,43 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components/macro";
 import { getEntryList } from "../../utils/api";
 import CardGrid from "./CardGrid";
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 
 const RiderSelect = ({ onRiderChange }) => {
   RiderSelect.propTypes = {
     task: PropTypes.object,
     onRiderChange: PropTypes.func,
   };
-  const [riders, setRiders] = useState([]);
   const [activeAlias, setActiveAlias] = useState(null);
 
-  useEffect(() => {
-    const fetchList = async () => {
-      const list = await getEntryList({
-        collectionName: "riders",
-        key: "alias",
-      });
-      setRiders(list);
-    };
-    fetchList();
-  }, []);
+  const { isLoading, isError, data, error } = useQuery(["riders"], () =>
+    getEntryList({
+      collectionName: "riders",
+      key: "alias",
+    })
+  );
 
   return (
     <RiderGrid>
-      {riders.map((item) => (
-        <Rider
-          key={item._id}
-          selected={activeAlias === item.alias}
-          onClick={() => {
-            setActiveAlias(item.alias);
-            onRiderChange(item);
-          }}
-        >
-          <img src={item.picture} alt={item.alias} />
-          <span>{item.alias}</span>
-        </Rider>
-      ))}
+      {isLoading && <p>loading...</p>}
+      {isError && <p>{error}</p>}
+      {data &&
+        data.map((item) => (
+          <Rider
+            key={item._id}
+            selected={activeAlias === item.alias}
+            onClick={() => {
+              setActiveAlias(item.alias);
+              onRiderChange(item);
+            }}
+          >
+            <img src={item.picture} alt={item.alias} />
+            <span>{item.alias}</span>
+          </Rider>
+        ))}
     </RiderGrid>
   );
 };

@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { deleteData, updateData } from "../utils/api";
 import Countdown from "./Countdown";
 import CardContainer from "./helpers/CardContainer";
+import RiderLabel from "./RiderLabel";
 
 const types = {
   normal: "var(--gradient-normal)",
@@ -135,7 +136,7 @@ const Card = ({
             }}
           />
         ) : (
-          <CardButton type="rider" label={rider} />
+          <RiderLabel riderName={rider} />
         )}
         {info ? (
           <CardButton type="timer" label={<Countdown finish={finish} />} />
