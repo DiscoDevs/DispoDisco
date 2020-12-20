@@ -75,6 +75,7 @@ const QueryStatusIcon = styled(animated.div)`
   border-radius: 50%;
 `;
 const Avatar = styled.img`
+  height: 35px;
   height: clamp(35px, 7vw, 60px);
   border-radius: 50%;
   border: 1px solid gold;

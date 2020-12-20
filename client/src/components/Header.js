@@ -64,12 +64,14 @@ const HeaderText = styled.h2`
   font-weight: 400;
 `;
 const Logo = styled.img`
+  height: 56px;
   height: clamp(56px, 10vw, 100px);
   margin-bottom: 1rem;
   filter: drop-shadow(0px 3px 6px var(--cargo));
 `;
 const Title = styled.h1`
   text-align: center;
+  font-size: 1.7rem;
   font-size: clamp(1.7rem, 5vw, 3rem);
 `;
 const Children = styled.div`

@@ -67,81 +67,80 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Wrapper>
-        <Header />
-        <CenterContent>
-          <ContentWrapper>
-            <Title>Login</Title>
-            <Subtitle>You are about to get on your bike...</Subtitle>
-            <Form
-              onSubmit={(event) => {
-                event.preventDefault();
-                setLoginData({
-                  username,
-                  password,
-                });
-              }}
-            >
-              {!loggedIn && (
-                <>
-                  <label htmlFor="username">Username</label>
-                  <Input
-                    required
-                    id="username"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(event) => {
-                      setUsername(event.target.value);
-                    }}
-                  />
-                  <label htmlFor="password">Password</label>
-                  <Input
-                    required
-                    id="password"
-                    placeholder="password"
-                    value={password}
-                    type="password"
-                    onChange={(event) => {
-                      setPassword(event.target.value);
-                    }}
-                  />
-                  {falseLogin && <p>Benutzername oder Passwort falsch</p>}
-                  <Button design="menu" label="Login" type="submit" />
-                </>
-              )}
-              {loggedIn && user === "" && (
-                <>
-                  <Subtitle>Select Player:</Subtitle>
-                  <RiderSelect onRiderChange={onRiderChange} />
-                </>
-              )}
-              {loggedIn && user !== "" && (
-                <UserSelector>
-                  <img src={riderImage} alt={user} />
-                  <p>{user}</p>
-                  <LinkButton to="/menu">Zum Hauptmenü</LinkButton>
-                </UserSelector>
-              )}
+    <Wrapper>
+      <Header />
+      <CenterContent>
+        <ContentWrapper>
+          <Title>Login</Title>
+          <Subtitle>You are about to get on your bike...</Subtitle>
+          <Form
+            onSubmit={(event) => {
+              event.preventDefault();
+              setLoginData({
+                username,
+                password,
+              });
+            }}
+          >
+            {!loggedIn && (
+              <>
+                <label htmlFor="username">Username</label>
+                <Input
+                  required
+                  id="username"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(event) => {
+                    setUsername(event.target.value);
+                  }}
+                />
+                <label htmlFor="password">Password</label>
+                <Input
+                  required
+                  id="password"
+                  placeholder="password"
+                  value={password}
+                  type="password"
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+                {falseLogin && <p>Benutzername oder Passwort falsch</p>}
+                <Button design="menu" label="Login" type="submit" />
+              </>
+            )}
+            {loggedIn && user === "" && (
+              <>
+                <Subtitle>Select Player:</Subtitle>
+                <RiderSelect onRiderChange={onRiderChange} />
+              </>
+            )}
+            {loggedIn && user !== "" && (
+              <UserSelector>
+                <img src={riderImage} alt={user} />
+                <p>{user}</p>
+                <LinkButton to="/menu">Zum Hauptmenü</LinkButton>
+              </UserSelector>
+            )}
 
-              <IllustrationTop loggedIn={loggedIn}>
-                <img src={SexyBike} alt="sexy Bike" />
-              </IllustrationTop>
-              <Illustrations loggedIn={loggedIn}>
-                <img src={SexyBikeRider} alt="sexy Bike Rider" />
-                <img src={SexyBikeRider2} alt="sexy Bike Rider" />
-                <img src={Micha} alt="Micha" />
-              </Illustrations>
-            </Form>
-          </ContentWrapper>
-        </CenterContent>
-      </Wrapper>
-    </div>
+            <IllustrationTop loggedIn={loggedIn}>
+              <img src={SexyBike} alt="sexy Bike" />
+            </IllustrationTop>
+            <Illustrations loggedIn={loggedIn}>
+              <img src={SexyBikeRider} alt="sexy Bike Rider" />
+              <img src={SexyBikeRider2} alt="sexy Bike Rider" />
+              <img src={Micha} alt="Micha" />
+            </Illustrations>
+          </Form>
+        </ContentWrapper>
+      </CenterContent>
+    </Wrapper>
   );
 };
 
 const Title = styled.h1`
   color: var(--text-primary);
+  font-size: 2rem;
   font-size: clamp(2rem, 10vw, 3rem);
 `;
 const UserSelector = styled.div`
@@ -149,6 +148,9 @@ const UserSelector = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  a {
+    font-size: 1rem;
+  }
   img {
     width: 80px;
     margin-bottom: 1rem;
@@ -167,6 +169,7 @@ const Illustrations = styled.div`
     animation-name: ${(props) =>
       props.loggedIn ? "slideOutRight" : " slideInLeft"};
     transition: ease-out;
+    height: 50px;
     height: clamp(50px, 5vw, 70px);
     margin: auto 1fr;
     padding: 0 1rem;
@@ -200,6 +203,7 @@ const Subtitle = styled.h2`
   text-align: center;
   font-family: "Open Sans";
   color: var(--text-primary);
+  font-size: 0.75rem;
   font-size: clamp(0.75rem, 3vw, 1.25rem);
 `;
 const Form = styled.form`
@@ -209,6 +213,7 @@ const Form = styled.form`
   }
   Button {
     margin-top: 1rem;
+    font-size: 1rem;
   }
 `;
 
