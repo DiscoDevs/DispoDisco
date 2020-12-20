@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQuery } from "react-query";
@@ -6,7 +6,6 @@ import GlobalStyle from "../GlobalStyles";
 
 import { getCurrentDateString } from "../utils/date";
 import { getSortedDataByQuery } from "../utils/api";
-import { useTransition, animated, config } from "react-spring";
 import Badge from "../components/Badge";
 import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
@@ -33,11 +32,29 @@ const ToursToday = () => {
         query: today,
       })
   );
-  const rides = data || [];
-  const transition = useTransition(rides, (item) => item?._id, {
-    from: { opacity: 0, marginRight: 100 },
-    enter: { opacity: 1, marginRight: 0 },
-  });
+  // eslint-disable-next-line react/display-name
+  const FunctionalCard = forwardRef((item, ref) => (
+    <Card
+      ref={ref}
+      onChange={refetch}
+      rideID={item._id}
+      key={item._id}
+      type={item.priority}
+      rider={item.assignment}
+      {...item}
+      info={true}
+      labels={
+        <>
+          {item.cargo && <Badge type={item.cargo} active />}
+          {item.priority !== "normal" && item.priority !== "concurrentRide" && (
+            <Badge type={item.priority} active />
+          )}
+          {item.carriage && <Badge type="carriage" active />}
+        </>
+      }
+    />
+  ));
+
   return (
     <>
       <GlobalStyle />
@@ -48,30 +65,8 @@ const ToursToday = () => {
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
             !isLoading &&
-            transition.sort(sortByPriority).map(({ item, key, props }) => {
-              return (
-                <animated.div key={key} style={props}>
-                  <Card
-                    onChange={refetch}
-                    rideID={item._id}
-                    key={item._id}
-                    type={item.priority}
-                    rider={item.assignment}
-                    {...item}
-                    info={true}
-                    labels={
-                      <>
-                        {item.cargo && <Badge type={item.cargo} active />}
-                        {item.priority !== "normal" &&
-                          item.priority !== "concurrentRide" && (
-                            <Badge type={item.priority} active />
-                          )}
-                        {item.carriage && <Badge type="carriage" active />}
-                      </>
-                    }
-                  />
-                </animated.div>
-              );
+            data?.sort(sortByPriority).map((item) => {
+              return <FunctionalCard key={item._id} {...item} />;
             })}
         </CardGrid>
         <ButtonPlus onClick={() => history.push("/tours/new")} />
