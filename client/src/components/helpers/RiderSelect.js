@@ -5,9 +5,10 @@ import CardGrid from "./CardGrid";
 import PropTypes from "prop-types";
 import { useQuery } from "react-query";
 
-const RiderSelect = ({ onRiderChange }) => {
+const RiderSelect = ({ onRiderChange, filtered = false }) => {
   RiderSelect.propTypes = {
     task: PropTypes.object,
+    filtered: PropTypes.bool,
     onRiderChange: PropTypes.func,
   };
   const [activeAlias, setActiveAlias] = useState(null);
@@ -27,23 +28,36 @@ const RiderSelect = ({ onRiderChange }) => {
         {isLoading && <p>loading...</p>}
         {isError && <p>{error}</p>}
         {data &&
+          !filtered &&
+          data.map((item) => (
+            <Rider
+              key={item._id}
+              selected={activeAlias === item.alias}
+              onClick={() => {
+                setActiveAlias(item.alias);
+                onRiderChange(item);
+              }}
+            >
+              <img src={item.picture} alt={item.alias} />
+              <span>{item.alias}</span>
+            </Rider>
+          ))}
+        {data &&
+          filtered &&
           data
             .filter((item) => item.active)
             .map((item) => (
-              <>
-                {console.log(item)}
-                <Rider
-                  key={item._id}
-                  selected={activeAlias === item.alias}
-                  onClick={() => {
-                    setActiveAlias(item.alias);
-                    onRiderChange(item);
-                  }}
-                >
-                  <img src={item.picture} alt={item.alias} />
-                  <span>{item.alias}</span>
-                </Rider>
-              </>
+              <Rider
+                key={item._id}
+                selected={activeAlias === item.alias}
+                onClick={() => {
+                  setActiveAlias(item.alias);
+                  onRiderChange(item);
+                }}
+              >
+                <img src={item.picture} alt={item.alias} />
+                <span>{item.alias}</span>
+              </Rider>
             ))}
       </RiderGrid>
     </>
