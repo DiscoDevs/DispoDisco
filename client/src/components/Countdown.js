@@ -12,6 +12,7 @@ export default function Countdown({ finish }) {
     } else {
       setCounter("00:00:00");
     }
+    // TODO wie kommt hier ein CleanUp rein? gibt ne Fehlermeldung bei laufendem Timer
   }, [counter, finish]);
 
   function timer(finish) {

@@ -14,7 +14,7 @@ const StatusBar = () => {
   });
 
   return (
-    <ContentWrapper online={online} style={floatIn}>
+    <ContentWrapper style={floatIn}>
       {online ? <span>Du bist online</span> : <span>Du bist offline</span>}
     </ContentWrapper>
   );

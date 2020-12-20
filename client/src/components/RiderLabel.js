@@ -23,12 +23,7 @@ const RiderLabel = ({ riderName }) => {
       {isError && <p>{error}</p>}
       {data && riderImg && (
         <>
-          <img
-            className="avatar"
-            loaded={!!data}
-            src={riderImg}
-            alt={riderName}
-          />
+          <img className="avatar" src={riderImg} alt={riderName} />
           <span>{riderName}</span>
         </>
       )}
@@ -45,7 +40,7 @@ const RiderWrapper = styled.div`
     width: 25px;
   }
   > img.avatar {
-    display: ${(props) => (props.loaded === 1 ? "none" : "inline")};
+    display: "inline";
   }
   span {
     pointer-events: none;

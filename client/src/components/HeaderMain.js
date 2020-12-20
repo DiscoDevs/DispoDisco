@@ -11,7 +11,7 @@ import { useSpring, animated } from "react-spring";
 const HeaderMain = ({ handleChange, isLoading }) => {
   HeaderMain.propTypes = {
     handleChange: PropTypes.func,
-    isLoading: PropTypes.string,
+    isLoading: PropTypes.bool,
   };
 
   const [showDatePicker, setShowDatePicker] = useState(false);
