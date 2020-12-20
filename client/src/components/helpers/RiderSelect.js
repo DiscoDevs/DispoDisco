@@ -15,7 +15,8 @@ const RiderSelect = ({ onRiderChange }) => {
   const { isLoading, isError, data, error } = useQuery(["riders"], () =>
     getEntryList({
       collectionName: "riders",
-      key: "alias",
+      // wurde das für was gebraucht?
+      // key: "alias",
     })
   );
 
@@ -26,19 +27,24 @@ const RiderSelect = ({ onRiderChange }) => {
         {isLoading && <p>loading...</p>}
         {isError && <p>{error}</p>}
         {data &&
-          data.map((item) => (
-            <Rider
-              key={item._id}
-              selected={activeAlias === item.alias}
-              onClick={() => {
-                setActiveAlias(item.alias);
-                onRiderChange(item);
-              }}
-            >
-              <img src={item.picture} alt={item.alias} />
-              <span>{item.alias}</span>
-            </Rider>
-          ))}
+          data
+            .filter((item) => item.active)
+            .map((item) => (
+              <>
+                {console.log(item)}
+                <Rider
+                  key={item._id}
+                  selected={activeAlias === item.alias}
+                  onClick={() => {
+                    setActiveAlias(item.alias);
+                    onRiderChange(item);
+                  }}
+                >
+                  <img src={item.picture} alt={item.alias} />
+                  <span>{item.alias}</span>
+                </Rider>
+              </>
+            ))}
       </RiderGrid>
     </>
   );

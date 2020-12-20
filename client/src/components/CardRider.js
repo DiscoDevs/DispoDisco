@@ -5,7 +5,7 @@ import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
 import SettingsImg from "../assets/settingsIcon.svg";
 import stillLoading from "../assets/fastBiker.gif";
-import { deleteData } from "../utils/api";
+import { deleteData, updateData } from "../utils/api";
 import CardContainer from "./helpers/CardContainer";
 
 const CardRider = ({
@@ -19,6 +19,7 @@ const CardRider = ({
   addRider = false,
   id,
   info = true,
+  riderActive = false,
   settings = false,
   removeButton = false,
 }) => {
@@ -26,6 +27,7 @@ const CardRider = ({
     handleClick: PropTypes.func,
     removeButton: PropTypes.bool,
     addRider: PropTypes.bool,
+    riderActive: PropTypes.bool,
     info: PropTypes.bool,
     settings: PropTypes.bool,
     name: PropTypes.string,
@@ -40,6 +42,7 @@ const CardRider = ({
   const history = useHistory();
   const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
   const [imgIsLoading, setImgIsLoading] = useState(+true);
+  const [isActive, setIsActive] = useState(riderActive || false);
 
   return (
     <RidersWrapper color={color}>
@@ -49,12 +52,19 @@ const CardRider = ({
       </div>
       <AvatarContainer loaded={+imgIsLoading}>
         {imgIsLoading === 1 && <img src={stillLoading} alt="loading.." />}
-        <img
-          className="avatar"
+        <Avatar
+          isActive={isActive}
           loaded={imgIsLoading}
           src={picture}
           alt="Profilbild"
           onLoad={() => setImgIsLoading(+false)}
+          onClick={async () => {
+            setIsActive(!isActive);
+            await updateData(
+              { collectionName: "riders", id },
+              { active: !isActive }
+            );
+          }}
         />
       </AvatarContainer>
 
@@ -122,9 +132,14 @@ const AvatarContainer = styled.div`
     height: 75px;
     width: 75px;
   }
-  > img.avatar {
-    display: ${(props) => (props.loaded === 1 ? "none" : "block")};
-  }
+`;
+const Avatar = styled.img`
+  transition: all 300ms ease-in-out;
+  padding-top: 4px;
+  box-shadow: ${(props) =>
+    props.isActive ? "0 0 5px gold" : "0 0 0 transparent"};
+  border: ${(props) => (props.isActive ? "1px solid gold" : "transparent")};
+  transform: scale(${(props) => (props.isActive ? "1.1" : "1")});
 `;
 const RidersWrapper = styled(CardContainer)`
   display: flex;
