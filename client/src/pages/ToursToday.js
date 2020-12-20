@@ -33,12 +33,11 @@ const ToursToday = () => {
         query: today,
       })
   );
-
   return (
     <>
       <GlobalStyle />
       <Wrapper>
-        <HeaderMain handleChange={handleDateChange} />
+        <HeaderMain handleChange={handleDateChange} isLoading={isLoading} />
         <CardGrid>
           {isLoading && <LoadingData>Loading...</LoadingData>}
           {isError && <span>Error: {error.message}</span>}

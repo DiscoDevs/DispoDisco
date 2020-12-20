@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components/macro";
-import { getRiderImage } from "../utils/api";
-import stillLoading from "../assets/fastBiker.gif";
 
 const types = {
   rider: {
@@ -30,44 +28,13 @@ const types = {
 const CardButton = ({ type, label = "", status, onClick }) => {
   CardButton.propTypes = {
     type: PropTypes.oneOf(["timer", "info", "rider", "remove"]),
-
     label: PropTypes.node,
     status: PropTypes.string,
-
     onClick: PropTypes.func,
   };
 
-  CardButton.defaultProps = {
-    type: "info",
-  };
-  const [picture, setPicture] = useState(null);
-  const [imgIsLoading, setImgIsLoading] = useState(+true);
-
-  useEffect(() => {
-    if (type === "rider" && label !== "") {
-      const doFetch = async () => {
-        const pic = await getRiderImage({ alias: label });
-        setPicture(pic);
-      };
-
-      doFetch();
-    }
-  }, [label, type]);
-
   return (
     <ButtonElement type={type} status={status} onClick={onClick}>
-      {type === "rider" && imgIsLoading === 1 && (
-        <img src={stillLoading} alt="loading.." />
-      )}
-      {type === "rider" && label !== "" && (
-        <img
-          className="avatar"
-          loaded={imgIsLoading}
-          src={picture}
-          alt={label}
-          onLoad={() => setImgIsLoading(+false)}
-        />
-      )}
       {label}
     </ButtonElement>
   );
@@ -107,14 +74,6 @@ const ButtonElement = styled.div`
       : props.type === "info"
       ? "var(--shadow)"
       : "none"};
-
-  > img {
-    height: 25px;
-    width: 25px;
-  }
-  > img.avatar {
-    display: ${(props) => (props.loaded === 1 ? "none" : "inline")};
-  }
 `;
 
 export default CardButton;

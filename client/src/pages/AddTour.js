@@ -13,14 +13,15 @@ import { add30Minutes, add90Minutes } from "../utils/time";
 import Header from "../components/Header";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import RiderSelect from "../components/helpers/RiderSelect";
+import { useQuery } from "react-query";
 
-function useQuery() {
+function useQueryParams() {
   return new URLSearchParams(useLocation().search);
 }
 
 export default function AddTour() {
   const { id } = useParams();
-  const query = useQuery();
+  const query = useQueryParams();
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
@@ -35,22 +36,21 @@ export default function AddTour() {
   const [weekDays, setWeekDays] = useState([]);
   const [arrayToMap, setArrayToMap] = useState([]);
 
+  const { data } = useQuery(
+    ["ride", id],
+    () =>
+      getDataByID({
+        collectionName: "tours",
+        id,
+      }),
+    { enabled: !!id }
+  );
+
   useEffect(() => {
-    if (id) {
-      const doFetch = async () => {
-        try {
-          const data = await getDataByID({
-            collectionName: "tours",
-            id: id,
-          });
-          setTask(data);
-        } catch (e) {
-          console.error(e);
-        }
-      };
-      doFetch();
+    if (id && data) {
+      setTask(data);
     }
-  }, [id]);
+  }, [id, data]);
 
   const handlePriorityClick = (badgeName) => () => {
     setTask({
@@ -167,7 +167,6 @@ export default function AddTour() {
     <PageWrapper>
       <ContentWrapper>
         <Header title="Fahrt" />
-
         <Card
           type={task.priority}
           rider={task.assignment}
@@ -233,7 +232,7 @@ export default function AddTour() {
               required={inputObj.required}
             />
           ))}
-          <RiderSelect onRiderChange={onRiderChange} task={task} />
+
           {concurrentTour && (
             <WeekDaysSelector
               weekDays={weekDays}
@@ -262,6 +261,7 @@ export default function AddTour() {
               );
             })}
           </BadgeContainer>
+          <RiderSelect onRiderChange={onRiderChange} task={task} />
           <Button
             type="submit"
             design="addRide"
