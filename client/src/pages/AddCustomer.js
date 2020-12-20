@@ -18,6 +18,8 @@ export default function AddCustomer() {
 
   const history = useHistory();
 
+  const company = localStorage.getItem("company");
+
   useEffect(() => {
     if (id) {
       const doFetch = async () => {
@@ -82,6 +84,9 @@ export default function AddCustomer() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            if (!customer.association) {
+              customer.association = company;
+            }
             if (id) {
               updateData(
                 {

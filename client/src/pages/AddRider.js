@@ -19,6 +19,8 @@ export default function AddRider() {
 
   const history = useHistory();
 
+  const company = localStorage.getItem("company");
+
   useEffect(() => {
     if (id) {
       const doFetch = async () => {
@@ -75,6 +77,9 @@ export default function AddRider() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            if (!rider.association) {
+              rider.association = company;
+            }
             if (id) {
               updateData(
                 {
