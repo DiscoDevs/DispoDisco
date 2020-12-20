@@ -88,9 +88,9 @@ registerRoute(
 );
 
 // https://developers.google.com/web/tools/workbox/modules/workbox-broadcast-update
-registerRoute(
-  ({ url }) => url.pathname.startsWith("/api/"),
-  new StaleWhileRevalidate({
-    plugins: [new BroadcastUpdatePlugin({})],
-  })
-);
+// registerRoute(
+//   ({ url }) => url.pathname.startsWith("/api/"),
+//   new StaleWhileRevalidate({
+//     plugins: [new BroadcastUpdatePlugin({})],
+//   })
+// );
