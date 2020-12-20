@@ -33,7 +33,6 @@ const Header = ({ title, children }) => {
     </HeaderElement>
   );
 };
-
 const HeaderElement = styled.header`
   z-index: 10;
   display: flex;

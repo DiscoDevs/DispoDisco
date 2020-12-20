@@ -24,7 +24,7 @@ const ToursToday = () => {
     setToday(date !== "" ? date : getCurrentDateString());
   };
 
-  const { isLoading, isError, data, error, isFetching, refetch } = useQuery(
+  const { isLoading, isError, data, error, refetch } = useQuery(
     ["tours", today],
     () =>
       getSortedDataByQuery({
@@ -33,16 +33,13 @@ const ToursToday = () => {
         query: today,
       })
   );
-
   return (
     <>
       <GlobalStyle />
       <Wrapper>
-        <HeaderMain handleChange={handleDateChange} />
+        <HeaderMain handleChange={handleDateChange} isLoading={isLoading} />
         <CardGrid>
           {isLoading && <LoadingData>Loading...</LoadingData>}
-          {isFetching && <div>Refreshing...</div>}
-
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
             !isLoading &&
