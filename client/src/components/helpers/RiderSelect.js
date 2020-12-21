@@ -26,14 +26,13 @@ const RiderSelect = ({
       company,
     })
   );
-  console.log(data);
   useEffect(() => {
     handleRefetch(refetch);
   }, [refetch, handleRefetch]);
 
   return (
     <>
-      <h3>Fahrer</h3>
+      {filtered && <h3>Fahrer</h3>}
       <RiderGrid>
         {isLoading && <p>loading...</p>}
         {isError && <p>{error}</p>}
@@ -61,8 +60,13 @@ const RiderSelect = ({
                 key={item._id}
                 selected={activeAlias === item.alias}
                 onClick={() => {
-                  setActiveAlias(item.alias);
-                  onRiderChange(item);
+                  if (activeAlias === item.alias) {
+                    setActiveAlias("frei");
+                    onRiderChange("frei");
+                  } else {
+                    setActiveAlias(item.alias);
+                    onRiderChange(item.alias);
+                  }
                 }}
               >
                 <img src={item.picture} alt={item.alias} />

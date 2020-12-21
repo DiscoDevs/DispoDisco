@@ -8,11 +8,12 @@ const RiderLabel = ({ riderName }) => {
   RiderLabel.propTypes = {
     riderName: PropTypes.string,
   };
-
+  const company = localStorage.getItem("company");
   const { isLoading, isError, data, error } = useQuery(["riders"], () =>
     getEntryList({
       collectionName: "riders",
       key: "alias",
+      company,
     })
   );
   const riderImg = data?.filter((rider) => rider.alias === riderName)[0]
