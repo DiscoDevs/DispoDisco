@@ -10,6 +10,7 @@ import { useUser } from "../context/user";
 const MainMenu = () => {
   const history = useHistory();
   const user = useUser();
+  console.log(user);
   const buttons = [
     {
       category: "settings",

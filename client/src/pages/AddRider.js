@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { addData, getDataByID, updateData } from "../utils/api";
 
 import Input from "../components/Input";
@@ -9,16 +9,23 @@ import CardRider from "../components/CardRider";
 import Header from "../components/Header";
 import generateNewAvatarUrl from "../components/helpers/SeedGenerator";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
+import { useChangeUser } from "../context/user";
 
-export default function AddRider() {
+export default function AddRider({ register = false }) {
   const { id } = useParams();
 
+  function useQueryParams() {
+    return new URLSearchParams(useLocation().search);
+  }
+  const query = useQueryParams();
+  const initalRider = query.get("type") === "register";
+  console.log(initalRider);
   const [rider, setRider] = useState({
     picture: generateNewAvatarUrl("ACAB"),
   });
 
   const history = useHistory();
-
+  const changeUser = useChangeUser();
   const company = localStorage.getItem("company");
 
   useEffect(() => {
@@ -94,7 +101,12 @@ export default function AddRider() {
                 data: rider,
               });
             }
-            history.goBack();
+            if (initalRider) {
+              changeUser(rider);
+              history.push("/menu");
+            } else {
+              history.goBack();
+            }
           }}
         >
           {inputArray.map((inputObj) => (
