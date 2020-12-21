@@ -91,6 +91,7 @@ export default CardCustomer;
 const CustomerCard = styled(CardContainer)`
   display: flex;
   flex-wrap: wrap;
+  max-width: 336px;
   justify-content: space-between;
 `;
 const InfoContainer = styled.div`

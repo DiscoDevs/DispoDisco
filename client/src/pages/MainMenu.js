@@ -84,6 +84,7 @@ const AvatarBox = styled.div`
     margin-bottom: 0.5rem;
   }
   img {
+    height: 35px;
     height: clamp(35px, 10vw, 75px);
     margin: 0 auto;
   }
@@ -100,8 +101,10 @@ const MenuWrapper = styled.div`
   max-width: 375px;
   margin: 0 auto;
   Button {
+    margin-top: 0.5rem;
     margin-top: clamp(0.5rem, 1vw, 1rem);
     width: 100%;
+    font-size: 1.2rem;
     font-size: clamp(1.2rem, 5vw, 1.7rem);
     justify-content: flex-start;
   }
