@@ -4,7 +4,7 @@ const CardContainer = styled.div`
   position: relative;
 
   width: 100%;
-  width: clamp(320px, 20vw, 400px);
+  width: clamp(320px, 20vw, 336px);
   margin: auto 0.5rem;
   padding: 1rem;
   text-align: center;
