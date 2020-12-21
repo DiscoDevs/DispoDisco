@@ -16,6 +16,9 @@ export default function AddCustomer() {
   const [customer, setCustomer] = useState({ counter: 0 });
 
   const history = useHistory();
+
+  const company = localStorage.getItem("company");
+
   const { data, error, isError, isLoading } = useQuery(["customer", id], () =>
     getDataByID({
       collectionName: "customers",
@@ -79,6 +82,9 @@ export default function AddCustomer() {
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            if (!customer.association) {
+              customer.association = company;
+            }
             if (id) {
               updateData({
                 collectionName: "customers",

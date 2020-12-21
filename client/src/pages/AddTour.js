@@ -35,6 +35,7 @@ export default function AddTour() {
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
   const [arrayToMap, setArrayToMap] = useState([]);
+  const company = localStorage.getItem("company");
 
   const { data } = useQuery(
     ["ride", id],
@@ -203,6 +204,9 @@ export default function AddTour() {
               } else {
                 task.finish = task.date;
               }
+            }
+            if (!task.association) {
+              task.association = company;
             }
             if (id) {
               updateData(

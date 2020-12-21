@@ -13,11 +13,12 @@ const RiderSelect = ({ onRiderChange, filtered = false }) => {
   };
   const [activeAlias, setActiveAlias] = useState(null);
 
+  const company = localStorage.getItem("company");
+
   const { isLoading, isError, data, error } = useQuery(["riders"], () =>
     getEntryList({
       collectionName: "riders",
-      // wurde das für was gebraucht?
-      // key: "alias",
+      company,
     })
   );
 
