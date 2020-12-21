@@ -122,21 +122,35 @@ const Login = () => {
                 <LinkButton to="/menu">Zum Hauptmenü</LinkButton>
               </UserSelector>
             )}
-
-            <IllustrationTop loggedIn={loggedIn}>
-              <img src={SexyBike} alt="sexy Bike" />
-            </IllustrationTop>
-            <Illustrations loggedIn={loggedIn}>
-              <img src={SexyBikeRider} alt="sexy Bike Rider" />
-              <img src={SexyBikeRider2} alt="sexy Bike Rider" />
-              <img src={Micha} alt="Micha" />
-            </Illustrations>
           </Form>
+          <Illustrations loggedIn={loggedIn}>
+            <img src={Micha} alt="Micha" />
+            <img src={SexyBikeRider} alt="sexy Bike Rider" />
+            <img src={SexyBike} alt="sexy Bike" />
+            <img src={SexyBikeRider2} alt="sexy Bike Rider" />
+          </Illustrations>
         </ContentWrapper>
       </CenterContent>
     </Wrapper>
   );
 };
+const Subtitle = styled.h2`
+  text-align: center;
+  font-family: "Open Sans";
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-size: clamp(0.75rem, 3vw, 1.25rem);
+`;
+const Form = styled.form`
+  margin: 2rem auto 3rem;
+  Input {
+    margin: 0.3rem auto;
+  }
+  Button {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+`;
 
 const Title = styled.h1`
   color: var(--text-primary);
@@ -192,28 +206,6 @@ const Illustrations = styled.div`
     to {
       margin-right: -200%;
     }
-  }
-`;
-
-const IllustrationTop = styled(Illustrations)`
-  left: 40%;
-  bottom: 15rem;
-`;
-const Subtitle = styled.h2`
-  text-align: center;
-  font-family: "Open Sans";
-  color: var(--text-primary);
-  font-size: 0.75rem;
-  font-size: clamp(0.75rem, 3vw, 1.25rem);
-`;
-const Form = styled.form`
-  margin-top: 10rem;
-  Input {
-    margin: 0.3rem auto;
-  }
-  Button {
-    margin-top: 1rem;
-    font-size: 1rem;
   }
 `;
 
