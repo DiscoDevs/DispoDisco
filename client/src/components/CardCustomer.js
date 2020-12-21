@@ -19,6 +19,19 @@ const CardCustomer = ({
   removeButton = false,
   settings = false,
 }) => {
+  CardCustomer.propTypes = {
+    name: PropTypes.string,
+    company: PropTypes.string,
+    address: PropTypes.string,
+    alias: PropTypes.string,
+    counter: PropTypes.number,
+    phone: PropTypes.string,
+    id: PropTypes.string,
+    info: PropTypes.bool,
+    settings: PropTypes.bool,
+    removeButton: PropTypes.bool,
+  };
+
   const history = useHistory();
   const addressSplitted = address?.split(",");
   return (
@@ -75,22 +88,10 @@ const CardCustomer = ({
 
 export default CardCustomer;
 
-CardCustomer.propTypes = {
-  name: PropTypes.string,
-  company: PropTypes.string,
-  address: PropTypes.string,
-  alias: PropTypes.string,
-  counter: PropTypes.number,
-  phone: PropTypes.string,
-  id: PropTypes.string,
-  info: PropTypes.string,
-  settings: PropTypes.string,
-  removeButton: PropTypes.string,
-};
-
 const CustomerCard = styled(CardContainer)`
   display: flex;
   flex-wrap: wrap;
+  max-width: 336px;
   justify-content: space-between;
 `;
 const InfoContainer = styled.div`

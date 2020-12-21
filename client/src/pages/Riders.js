@@ -30,7 +30,12 @@ const Riders = () => {
         {isError && <span>Error: {error.message}</span>}
         {!isError &&
           data?.map((rider) => (
-            <CardRider key={rider._id} id={rider._id} {...rider} />
+            <CardRider
+              key={rider._id}
+              id={rider._id}
+              riderActive={rider.active}
+              {...rider}
+            />
           ))}
       </CardGrid>
       <ButtonPlus onClick={() => history.push("/riders/new")} />

@@ -30,6 +30,7 @@ const First = styled.h2`
 const Second = styled(First)``;
 
 const MirrorBall = styled.img`
+  height: 70px;
   height: clamp(70px, 30vw, 100px);
   padding: 0 1rem;
   margin-top: -1.5rem;

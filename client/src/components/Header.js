@@ -33,7 +33,6 @@ const Header = ({ title, children }) => {
     </HeaderElement>
   );
 };
-
 const HeaderElement = styled.header`
   z-index: 10;
   display: flex;
@@ -46,7 +45,7 @@ const HeaderElement = styled.header`
   min-height: 65px;
   background-color: var(--text-secondary);
   color: var(--text-primary);
-  box-shadow: 0 3px 6px var(--cargo);
+  box-shadow: 0 3px 18px black;
   border-radius: 0 0 10px 10px;
 `;
 const Top = styled.div`
@@ -65,12 +64,14 @@ const HeaderText = styled.h2`
   font-weight: 400;
 `;
 const Logo = styled.img`
+  height: 56px;
   height: clamp(56px, 10vw, 100px);
   margin-bottom: 1rem;
   filter: drop-shadow(0px 3px 6px var(--cargo));
 `;
 const Title = styled.h1`
   text-align: center;
+  font-size: 1.7rem;
   font-size: clamp(1.7rem, 5vw, 3rem);
 `;
 const Children = styled.div`

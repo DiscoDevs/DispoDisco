@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components/macro";
 import CardCustomer from "../components/CardCustomer";
 import Header from "../components/Header";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import { getDataByID } from "../utils/api";
 
 export default function CustomerInfo() {
@@ -21,9 +22,9 @@ export default function CustomerInfo() {
     doFetch();
   }, [id]);
   return (
-    <Background>
+    <CustomerWrapper>
       <Header title="Info" />
-      <Wrapper>
+      <ContentWrapper>
         <CardCustomer
           id={id}
           {...customer}
@@ -31,27 +32,11 @@ export default function CustomerInfo() {
           removeButton={true}
           settings={true}
         />
-      </Wrapper>
-    </Background>
+      </ContentWrapper>
+    </CustomerWrapper>
   );
 }
 
-const Background = styled.div`
+const CustomerWrapper = styled(Wrapper)`
   background-color: var(--text-secondary);
-  min-height: 100%;
-  width: 100%;
-  padding-top: 200px;
-`;
-const Wrapper = styled.div`
-  min-height: 100vh;
-  height: 100%;
-  max-width: 500px;
-  margin: auto;
-  text-align: center;
-  color: var(--text-primary);
-
-  h2 {
-    margin-top: 1.5rem;
-    text-align: center;
-  }
 `;

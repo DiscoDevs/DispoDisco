@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GlobalStyle from "./GlobalStyles";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -20,9 +20,16 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { UserProvider } from "./context/user";
+import prefetchData from "./utils/prefetch";
 const queryClient = new QueryClient();
 
 function App() {
+  useEffect(() => {
+    async function doFetch() {
+      await prefetchData(queryClient);
+    }
+    doFetch();
+  }, []);
   function getUser() {
     const player = {
       alias: "benji",

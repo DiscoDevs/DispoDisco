@@ -33,6 +33,7 @@ router.get("/list", async (req, res, next) => {
       collectionName,
       key1: "alias",
       key2: "picture",
+      key3: "active",
       company,
     });
     res.send(data);

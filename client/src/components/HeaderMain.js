@@ -6,10 +6,12 @@ import Header from "./Header";
 import PropTypes from "prop-types";
 import { getCurrentDateString } from "../utils/date";
 import { useUser } from "../context/user";
+import { useSpring, animated } from "react-spring";
 
-const HeaderMain = ({ handleChange }) => {
+const HeaderMain = ({ handleChange, isLoading }) => {
   HeaderMain.propTypes = {
     handleChange: PropTypes.func,
+    isLoading: PropTypes.bool,
   };
 
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -42,6 +44,12 @@ const HeaderMain = ({ handleChange }) => {
     }
   }, [showDatePicker, date, handleChange, today]);
 
+  const smoothColorChange = useSpring({
+    backgroundColor: isLoading ? "red" : "green",
+    tension: 350,
+    friction: 250,
+  });
+
   return (
     <Header>
       <Avatar src={user.picture} alt={"avatar"} />
@@ -51,20 +59,23 @@ const HeaderMain = ({ handleChange }) => {
         <img
           src={CalendarIcon}
           alt="Calendar"
-          onClick={() =>
-            showDatePicker === false
-              ? setShowDatePicker(true)
-              : setShowDatePicker(false)
-          }
+          onClick={() => showDatePicker === setShowDatePicker(!showDatePicker)}
         />
         <img src={FilterIcon} alt="Filter" />
+        <QueryStatusIcon style={smoothColorChange} />
       </IconContainer>
     </Header>
   );
 };
 
 export default HeaderMain;
+const QueryStatusIcon = styled(animated.div)`
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+`;
 const Avatar = styled.img`
+  height: 35px;
   height: clamp(35px, 7vw, 60px);
   border-radius: 50%;
   border: 1px solid gold;
@@ -75,6 +86,8 @@ const Infobox = styled.p`
 `;
 
 const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
   > :not(:last-child) {
     margin-right: 1rem;
   }
