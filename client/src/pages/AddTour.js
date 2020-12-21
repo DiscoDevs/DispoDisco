@@ -261,7 +261,7 @@ export default function AddTour() {
               );
             })}
           </BadgeContainer>
-          <RiderSelect onRiderChange={onRiderChange} task={task} />
+          <RiderSelect onRiderChange={onRiderChange} task={task} filtered />
           <Button
             type="submit"
             design="addRide"
