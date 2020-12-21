@@ -1,26 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/macro";
 import { getEntryList } from "../../utils/api";
 import CardGrid from "./CardGrid";
 import PropTypes from "prop-types";
 import { useQuery } from "react-query";
 
-const RiderSelect = ({ onRiderChange, filtered = false }) => {
+const RiderSelect = ({
+  onRiderChange,
+  filtered = false,
+  company = localStorage.getItem("company"),
+  handleRefetch,
+}) => {
   RiderSelect.propTypes = {
     task: PropTypes.object,
     filtered: PropTypes.bool,
     onRiderChange: PropTypes.func,
+    company: PropTypes.string,
+    handleRefetch: PropTypes.func,
   };
   const [activeAlias, setActiveAlias] = useState(null);
 
-  const company = localStorage.getItem("company");
-
-  const { isLoading, isError, data, error } = useQuery(["riders"], () =>
-    getEntryList({
-      collectionName: "riders",
-      company,
-    })
+  const { isLoading, isError, data, error, refetch } = useQuery(
+    ["riders"],
+    () =>
+      getEntryList({
+        collectionName: "riders",
+        company,
+      })
   );
+
+  useEffect(() => {
+    handleRefetch(refetch);
+  }, [refetch, handleRefetch]);
 
   return (
     <>

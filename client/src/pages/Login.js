@@ -65,6 +65,10 @@ const Login = () => {
     localStorage.setItem("user", JSON.stringify(rider));
   };
 
+  const handleRiderRefetch = (refetch) => {
+    refetch();
+  };
+
   return (
     <Wrapper>
       <Header />
@@ -111,7 +115,11 @@ const Login = () => {
             {loggedIn && user === "" && (
               <>
                 <Subtitle>Select Player:</Subtitle>
-                <RiderSelect onRiderChange={onRiderChange} />
+                <RiderSelect
+                  onRiderChange={onRiderChange}
+                  company={companyName}
+                  handleRefetch={handleRiderRefetch}
+                />
               </>
             )}
             {loggedIn && user !== "" && (
