@@ -9,7 +9,7 @@ const RiderSelect = ({
   onRiderChange,
   filtered = false,
   company = localStorage.getItem("company"),
-  handleRefetch,
+  handleRefetch = () => {},
 }) => {
   RiderSelect.propTypes = {
     task: PropTypes.object,
@@ -20,15 +20,13 @@ const RiderSelect = ({
   };
   const [activeAlias, setActiveAlias] = useState(null);
 
-  const { isLoading, isError, data, error, refetch } = useQuery(
-    ["riders"],
-    () =>
-      getEntryList({
-        collectionName: "riders",
-        company,
-      })
+  const { isLoading, isError, data, error, refetch } = useQuery("riders", () =>
+    getEntryList({
+      collectionName: "riders",
+      company,
+    })
   );
-
+  console.log(data);
   useEffect(() => {
     handleRefetch(refetch);
   }, [refetch, handleRefetch]);
