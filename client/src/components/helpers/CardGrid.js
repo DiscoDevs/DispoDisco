@@ -3,7 +3,7 @@ const { default: styled } = require("styled-components");
 const CardGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(317px, 1fr));
   align-items: center;
   justify-items: center;
   max-width: 1400px;
