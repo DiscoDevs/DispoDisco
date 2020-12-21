@@ -10,6 +10,7 @@ const RiderSelect = ({
   filtered = false,
   company = localStorage.getItem("company"),
   handleRefetch = () => {},
+  task,
 }) => {
   RiderSelect.propTypes = {
     task: PropTypes.object,
@@ -18,7 +19,6 @@ const RiderSelect = ({
     company: PropTypes.string,
     handleRefetch: PropTypes.func,
   };
-  const [activeAlias, setActiveAlias] = useState(null);
 
   const { isLoading, isError, data, error, refetch } = useQuery("riders", () =>
     getEntryList({
@@ -26,14 +26,19 @@ const RiderSelect = ({
       company,
     })
   );
-  console.log(data);
+  const [activeAlias, setActiveAlias] = useState(data?.assignment || null);
   useEffect(() => {
     handleRefetch(refetch);
   }, [refetch, handleRefetch]);
 
+  useEffect(() => {
+    if (task) {
+      setActiveAlias(task.assignment);
+    }
+  }, [task]);
   return (
     <>
-      <h3>Fahrer</h3>
+      {filtered && <h3>Fahrer</h3>}
       <RiderGrid>
         {isLoading && <p>loading...</p>}
         {isError && <p>{error}</p>}
@@ -61,8 +66,13 @@ const RiderSelect = ({
                 key={item._id}
                 selected={activeAlias === item.alias}
                 onClick={() => {
-                  setActiveAlias(item.alias);
-                  onRiderChange(item);
+                  if (activeAlias === item.alias) {
+                    setActiveAlias("frei");
+                    onRiderChange("frei");
+                  } else {
+                    setActiveAlias(item.alias);
+                    onRiderChange(item.alias);
+                  }
                 }}
               >
                 <img src={item.picture} alt={item.alias} />
