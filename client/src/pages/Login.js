@@ -42,7 +42,7 @@ const Login = () => {
       }
     };
     doFetch();
-  }, [loginData, loggedIn]);
+  }, [loginData]);
 
   useEffect(() => {
     if (user !== "") {

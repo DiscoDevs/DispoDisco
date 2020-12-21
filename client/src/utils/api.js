@@ -65,7 +65,7 @@ export async function validateUser({ username, password }) {
       "Content-Type": "application/json",
     },
   });
-  const data = result.json();
+  const data = await result.json();
   return data;
 }
 
@@ -77,8 +77,8 @@ export async function getCompanyName({ username }) {
       "Content-Type": "application/json",
     },
   });
-  const data = await result.json();
-  return data.company;
+  const companyName = await result.json();
+  return companyName;
 }
 
 export async function deleteData({ collectionName, id }) {
