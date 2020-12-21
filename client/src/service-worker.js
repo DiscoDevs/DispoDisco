@@ -11,9 +11,13 @@ import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate } from "workbox-strategies";
+import {
+  StaleWhileRevalidate,
+  NetworkFirst,
+  NetworkOnly,
+} from "workbox-strategies";
 import { BackgroundSyncPlugin } from "workbox-background-sync";
-import { NetworkOnly } from "workbox-strategies";
+
 // import { BroadcastUpdatePlugin } from "workbox-broadcast-update";
 clientsClaim();
 
@@ -85,6 +89,11 @@ registerRoute(
     plugins: [bgSyncPlugin],
   }),
   "POST"
+);
+//https://developers.google.com/web/tools/workbox/modules/workbox-strategies
+registerRoute(
+  ({ url }) => url.pathname.startsWith("/api/"),
+  new NetworkFirst()
 );
 
 // https://developers.google.com/web/tools/workbox/modules/workbox-broadcast-update
