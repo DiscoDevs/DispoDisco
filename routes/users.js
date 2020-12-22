@@ -25,7 +25,6 @@ router.post("/register", async (req, res, next) => {
   const { username, password, company, hash } = req.body;
   const hashedPassword = CryptoJS.SHA256(password).toString();
   const hashedCompany = CryptoJS.AES.encrypt(company, hash).toString();
-  console.log("password", hashedPassword);
   try {
     await insertData({
       collectionName: "users",

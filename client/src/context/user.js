@@ -12,9 +12,7 @@ export const UserProvider = ({ children, currentUser }) => {
 
   useEffect(() => {
     const storrageUser = JSON.parse(localStorage.getItem("user"));
-    console.log(currentUser);
     if (currentUser && currentUser.alias !== storrageUser?.alias) {
-      console.log("beep");
       localStorage.setItem("user", JSON.stringify(currentUser));
     }
     setUser(storrageUser);

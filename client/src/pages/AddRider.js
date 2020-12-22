@@ -19,7 +19,6 @@ export default function AddRider({ register = false }) {
   }
   const query = useQueryParams();
   const initalRider = query.get("type") === "register";
-  console.log(initalRider);
   const [rider, setRider] = useState({
     picture: generateNewAvatarUrl("ACAB"),
   });
