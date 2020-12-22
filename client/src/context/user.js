@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import propTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { accessCookie, createCookie, deleteCookie } from "../utils/cookies";
@@ -11,15 +11,28 @@ export const UserProvider = ({ children }) => {
     currentUser: propTypes.object,
   };
   const history = useHistory();
+
+  // const cookieUser = JSON.parse(accessCookie("user"));
+  const cookieUser = accessCookie("user");
+
+  // const cookieCompany = JSON.parse(accessCookie("company"));
+  const cookieCompany = accessCookie("company");
+
   const [user, setUser] = useState("not logged in ");
   const [company, setCompany] = useState({
     name: "no company logged in",
   });
 
+  useEffect(() => {
+    if (cookieUser !== "" && cookieCompany !== "") {
+      setUser(cookieUser);
+      setCompany(cookieCompany);
+    }
+  }, [cookieCompany, cookieUser]);
+  console.log({ user, cookieUser, company, cookieCompany });
   const loginUser = async (user) => {
     setUser(user);
     createCookie("user", user, 1);
-    console.log(user, "set");
   };
 
   const checkUser = async (user) => {
@@ -30,7 +43,6 @@ export const UserProvider = ({ children }) => {
   const loginCompany = async (company) => {
     setCompany(company);
     createCookie("company", company, 1);
-    console.log(company, "set");
   };
 
   const logout = async () => {

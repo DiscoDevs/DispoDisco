@@ -1,18 +1,20 @@
 export const createCookie = (cookieName, cookieValue, daysToExpire) => {
   const date = new Date();
   date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
-  document.cookie = `${cookieName}=${cookieValue}; expires=${date.toGMTString()}`;
+  const cookieString = JSON.stringify(cookieValue);
+  document.cookie = `${cookieName}=${cookieString}; expires=${date.toGMTString()}`;
 };
 
 export const accessCookie = (cookieName) => {
-  const name = cookieName + "=";
-  const allCookieArray = document.cookie.split(";");
-  for (const i = 0; i < allCookieArray.length; i++) {
-    const temp = allCookieArray[i].trim();
-    if (temp.indexOf(name) == 0)
-      return temp.substring(name.length, temp.length);
+  const cookieArray = document.cookie;
+  let cookie = "";
+  if (cookieArray.length > 0) {
+    cookie = cookieArray
+      .split("; ")
+      .find((row) => row.startsWith(cookieName))
+      .split("=")[1];
   }
-  return "";
+  return cookie;
 };
 
 export const deleteCookie = (cookieName) => {
