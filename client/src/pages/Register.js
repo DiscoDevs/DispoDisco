@@ -29,7 +29,7 @@ const Register = () => {
                   userdata.hash = "tree";
                 }
                 registerNewUser({ ...userdata });
-                history.push("/riders/new");
+                history.push("/riders/new?type=register");
               }}
             >
               <Input

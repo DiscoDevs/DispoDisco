@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import Header from "../components/Header";
 import Input from "../components/Input";
@@ -14,8 +14,12 @@ import { getCompanyName, getRiderImage, validateUser } from "../utils/api";
 import RiderSelect from "../components/helpers/RiderSelect";
 import { useChangeUser } from "../context/user";
 import LinkButton from "../components/LinkButton";
+import prefetchData from "../utils/prefetch";
 
-const Login = () => {
+const Login = ({ queryClient }) => {
+  Login.propTypes = {
+    queryClient: PropTypes.object,
+  };
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +47,12 @@ const Login = () => {
     };
     doFetch();
   }, [loginData]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      prefetchData({ queryClient, companyName });
+    }
+  }, [loggedIn, companyName, queryClient]);
 
   useEffect(() => {
     if (user !== "") {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GlobalStyle from "./GlobalStyles";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -20,19 +20,16 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { UserProvider } from "./context/user";
-import prefetchData from "./utils/prefetch";
 const queryClient = new QueryClient();
 
 function App() {
-  useEffect(() => {
-    async function doFetch() {
-      await prefetchData(queryClient);
-    }
-    doFetch();
-  }, []);
   function getUser() {
+    const storrageUser = JSON.parse(localStorage.getItem("user"));
+    if (storrageUser) {
+      return storrageUser;
+    }
     const player = {
-      alias: "benji",
+      alias: "not logged in",
       picture:
         "https://robohash.org/844921.pngsize=75x75?set=set5&size=100x100",
     };
@@ -74,14 +71,11 @@ function App() {
             <Route path="/tours/new">
               <AddTour />
             </Route>
-            <Route path="/tours/new?type=concurrent">
-              <AddTour concurrentTour />
-            </Route>
             <Route path="/menu">
               <MainMenu />
             </Route>
             <Route path="/login">
-              <Login />
+              <Login queryClient={queryClient} />
             </Route>
             <Route path="/register">
               <Register />
