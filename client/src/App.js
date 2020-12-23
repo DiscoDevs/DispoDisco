@@ -23,23 +23,11 @@ import { UserProvider } from "./context/user";
 const queryClient = new QueryClient();
 
 function App() {
-  function getUser() {
-    const storrageUser = JSON.parse(localStorage.getItem("user"));
-    if (storrageUser) {
-      return storrageUser;
-    }
-    const player = {
-      alias: "not logged in",
-      picture:
-        "https://robohash.org/844921.pngsize=75x75?set=set5&size=100x100",
-    };
-    return player;
-  }
   return (
-    <UserProvider currentUser={getUser()}>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <Router>
+    <Router>
+      <UserProvider>
+        <QueryClientProvider client={queryClient}>
+          <GlobalStyle />
           <Switch>
             <Route path="/customers/new">
               <AddCustomer />
@@ -93,10 +81,10 @@ function App() {
               <Launch />
             </Route>
           </Switch>
-        </Router>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </UserProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </UserProvider>
+    </Router>
   );
 }
 

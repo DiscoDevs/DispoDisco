@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import Header from "../components/Header";
@@ -12,7 +12,7 @@ import SexyBikeRider2 from "../assets/sexyBikeRider2.svg";
 import Micha from "../assets/micha.svg";
 import { getCompanyName, getRiderImage, validateUser } from "../utils/api";
 import RiderSelect from "../components/helpers/RiderSelect";
-import { useChangeUser } from "../context/user";
+import { useUsers } from "../context/user";
 import LinkButton from "../components/LinkButton";
 import prefetchData from "../utils/prefetch";
 
@@ -25,54 +25,20 @@ const Login = ({ queryClient }) => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [riderImage, setRiderImage] = useState(null);
-  const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [falseLogin, setFalseLogin] = useState(false);
   const [companyName, setCompanyName] = useState("");
-  const changeUser = useChangeUser();
 
-  useEffect(() => {
-    const doFetch = async () => {
-      if (loginData.username !== "") {
-        const loginstate = await validateUser(loginData);
-        if (loginstate === true) {
-          setLoggedIn(true);
-          setFalseLogin(false);
-          setCompanyName(
-            await getCompanyName({ username: loginData.username })
-          );
-        } else {
-          setFalseLogin(true);
-        }
-      }
-    };
-    doFetch();
-  }, [loginData]);
+  const { loginUser, loginCompany } = useUsers();
 
-  useEffect(() => {
-    if (loggedIn) {
-      prefetchData({ queryClient, companyName });
-    }
-  }, [loggedIn, companyName, queryClient]);
-
-  useEffect(() => {
-    if (user !== "") {
-      const doFetch = async () => {
-        setRiderImage(
-          await getRiderImage({ alias: user, company: companyName })
-        );
-      };
-      doFetch();
-    }
-  }, [user, companyName]);
-
-  useEffect(() => {
-    localStorage.setItem("company", companyName);
-  }, [companyName]);
-
-  const onRiderChange = (rider) => {
+  const onRiderChange = async (rider) => {
     setUser(rider.alias);
-    changeUser(rider);
-    localStorage.setItem("user", JSON.stringify(rider));
+    loginUser(rider);
+    console.log("beep");
+    const img = await getRiderImage({
+      alias: rider.alias,
+      company: companyName,
+    });
+    setRiderImage(img);
   };
 
   const handleRiderRefetch = (refetch) => {
@@ -87,12 +53,24 @@ const Login = ({ queryClient }) => {
           <Title>Login</Title>
           <Subtitle>You are about to get on your bike...</Subtitle>
           <Form
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
-              setLoginData({
-                username,
-                password,
-              });
+
+              if (username !== "") {
+                const loginstate = await validateUser({ username, password });
+                if (loginstate === true) {
+                  setLoggedIn(true);
+                  setFalseLogin(false);
+                  const companyByUser = await getCompanyName({
+                    username,
+                  });
+                  setCompanyName(companyByUser);
+                  loginCompany({ name: companyByUser });
+                  prefetchData({ queryClient, companyName: companyByUser });
+                } else {
+                  setFalseLogin(true);
+                }
+              }
             }}
           >
             {!loggedIn && (
@@ -103,6 +81,7 @@ const Login = ({ queryClient }) => {
                   id="username"
                   placeholder="Username"
                   value={username}
+                  autoComplete="username"
                   onChange={(event) => {
                     setUsername(event.target.value);
                   }}
@@ -111,6 +90,7 @@ const Login = ({ queryClient }) => {
                 <Input
                   required
                   id="password"
+                  autoComplete="current-password"
                   placeholder="password"
                   value={password}
                   type="password"
@@ -122,12 +102,12 @@ const Login = ({ queryClient }) => {
                 <Button design="menu" label="Login" type="submit" />
               </>
             )}
+
             {loggedIn && user === "" && (
               <>
                 <Subtitle>Select Player:</Subtitle>
                 <RiderSelect
                   onRiderChange={onRiderChange}
-                  company={companyName}
                   handleRefetch={handleRiderRefetch}
                 />
               </>

@@ -5,11 +5,11 @@ import GlobalStyle from "../GlobalStyles";
 import HeaderHome from "../components/HeaderHome";
 import Button from "../components/Button";
 import { useHistory } from "react-router-dom";
-import { useUser } from "../context/user";
+import { useUsers } from "../context/user";
 
 const MainMenu = () => {
   const history = useHistory();
-  const user = useUser();
+  const { user, company, logout } = useUsers();
   const buttons = [
     {
       category: "settings",
@@ -48,6 +48,7 @@ const MainMenu = () => {
       <PageWrapper>
         <HeaderHome />
         <MenuWrapper>
+          <h3>{company.name}</h3>
           <AvatarBox>
             <h5>Selected Player:</h5>
             <img src={user?.picture} alt={"Avatar"} />
@@ -60,6 +61,7 @@ const MainMenu = () => {
               {...button}
             />
           ))}
+          <Button label="logout" design="menu" onClick={logout} />
         </MenuWrapper>
       </PageWrapper>
     </>

@@ -14,13 +14,13 @@ import ButtonPlus from "../components/ButtonPlus";
 import CardGrid from "../components/helpers/CardGrid";
 import LoadingData from "../components/LoadingData";
 import Wrapper from "../components/helpers/Wrapper";
+import { useUsers } from "../context/user";
 
 const ToursToday = () => {
   const [today, setToday] = useState(getCurrentDateString());
 
   const history = useHistory();
-
-  const company = localStorage.getItem("company");
+  const { company } = useUsers();
 
   const handleDateChange = (date) => {
     setToday(date !== "" ? date : getCurrentDateString());
@@ -33,7 +33,7 @@ const ToursToday = () => {
         collectionName: "tours",
         type: "date",
         query: today,
-        company,
+        company: company.name,
       })
   );
   return (

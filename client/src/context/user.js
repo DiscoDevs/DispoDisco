@@ -5,6 +5,9 @@ import { accessCookie, createCookie, deleteCookie } from "../utils/cookies";
 
 export const userContext = React.createContext();
 
+const cookieUser = accessCookie("user");
+const cookieCompany = accessCookie("company");
+
 export const UserProvider = ({ children }) => {
   UserProvider.propTypes = {
     children: propTypes.node,
@@ -12,32 +15,28 @@ export const UserProvider = ({ children }) => {
   };
   const history = useHistory();
 
-  // const cookieUser = JSON.parse(accessCookie("user"));
-  const cookieUser = accessCookie("user");
+  const [user, setUser] = useState({ alias: "not logged in " });
 
-  // const cookieCompany = JSON.parse(accessCookie("company"));
-  const cookieCompany = accessCookie("company");
-
-  const [user, setUser] = useState("not logged in ");
   const [company, setCompany] = useState({
     name: "no company logged in",
   });
 
   useEffect(() => {
-    if (cookieUser !== "" && cookieCompany !== "") {
-      setUser(cookieUser);
-      setCompany(cookieCompany);
+    if (cookieUser && cookieCompany) {
+      setUser(JSON.parse(cookieUser));
+      setCompany(JSON.parse(cookieCompany));
     }
-  }, [cookieCompany, cookieUser]);
-  console.log({ user, cookieUser, company, cookieCompany });
+  }, []);
+
   const loginUser = async (user) => {
     setUser(user);
     createCookie("user", user, 1);
   };
 
-  const checkUser = async (user) => {
-    const cookie = accessCookie("user");
-    return cookie === user;
+  const checkUser = (user) => {
+    if (cookieUser) {
+      return cookieUser.alias === user.alias;
+    }
   };
 
   const loginCompany = async (company) => {
@@ -54,9 +53,9 @@ export const UserProvider = ({ children }) => {
     setCompany({
       name: "company logged out",
     });
+    history.push("/");
     deleteCookie("user");
     deleteCookie("company");
-    history.push("/");
   };
 
   return (

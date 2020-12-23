@@ -14,6 +14,7 @@ import Header from "../components/Header";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import RiderSelect from "../components/helpers/RiderSelect";
 import { useQuery } from "react-query";
+import { useUsers } from "../context/user";
 
 function useQueryParams() {
   return new URLSearchParams(useLocation().search);
@@ -35,7 +36,7 @@ export default function AddTour() {
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
   const [arrayToMap, setArrayToMap] = useState([]);
-  const company = localStorage.getItem("company");
+  const { company } = useUsers();
 
   const { data } = useQuery(
     ["ride", id],
@@ -205,7 +206,7 @@ export default function AddTour() {
               }
             }
             if (!task.association) {
-              task.association = company;
+              task.association = company.name;
             }
             if (id) {
               updateData(

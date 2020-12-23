@@ -4,11 +4,11 @@ import { getEntryList } from "../../utils/api";
 import CardGrid from "./CardGrid";
 import PropTypes from "prop-types";
 import { useQuery } from "react-query";
+import { useUsers } from "../../context/user";
 
 const RiderSelect = ({
   onRiderChange,
   filtered = false,
-  company = localStorage.getItem("company"),
   handleRefetch = () => {},
   task,
 }) => {
@@ -16,14 +16,15 @@ const RiderSelect = ({
     task: PropTypes.object,
     filtered: PropTypes.bool,
     onRiderChange: PropTypes.func,
-    company: PropTypes.string,
     handleRefetch: PropTypes.func,
   };
 
+  const { company } = useUsers();
   const { isLoading, isError, data, error, refetch } = useQuery("riders", () =>
     getEntryList({
       collectionName: "riders",
-      company,
+      key: "alias",
+      company: company.name,
     })
   );
   const [activeAlias, setActiveAlias] = useState(data?.assignment || null);
