@@ -3,17 +3,18 @@ import PropTypes from "prop-types";
 import { getEntryList } from "../utils/api";
 import { useQuery } from "react-query";
 import styled from "styled-components";
+import { useUsers } from "../context/user";
 
 const RiderLabel = ({ riderName }) => {
   RiderLabel.propTypes = {
     riderName: PropTypes.string,
   };
-  const company = localStorage.getItem("company");
+  const { company } = useUsers();
   const { isLoading, isError, data, error } = useQuery(["riders"], () =>
     getEntryList({
       collectionName: "riders",
       key: "alias",
-      company,
+      company: company.name,
     })
   );
   const riderImg = data?.filter((rider) => rider.alias === riderName)[0]

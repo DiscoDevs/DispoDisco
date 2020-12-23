@@ -12,11 +12,12 @@ import ButtonPlus from "../components/ButtonPlus";
 import Header from "../components/Header";
 import CardGrid from "../components/helpers/CardGrid";
 import Wrapper from "../components/helpers/Wrapper";
+import { useUsers } from "../context/user";
 
 const Tours = () => {
   const history = useHistory();
 
-  const company = localStorage.getItem("company");
+  const { company } = useUsers();
 
   const { isLoading, isError, data, error, refetch } = useQuery(
     "concurrenctTours",
@@ -25,7 +26,7 @@ const Tours = () => {
         collectionName: "tours",
         type: "type",
         query: "concurrentRide",
-        company,
+        company: company.name,
       })
   );
 

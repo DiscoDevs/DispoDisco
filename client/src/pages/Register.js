@@ -6,11 +6,12 @@ import Header from "../components/Header";
 import { CenterContent } from "../components/helpers/CenterContent";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import Input from "../components/Input";
+import { useUsers } from "../context/user";
 import { registerNewUser } from "../utils/api";
 
 const Register = () => {
   const history = useHistory();
-
+  const { loginCompany } = useUsers();
   const [userdata, setUserdata] = useState({});
 
   return (
@@ -24,7 +25,7 @@ const Register = () => {
             <Form
               onSubmit={(event) => {
                 event.preventDefault();
-                localStorage.setItem("company", userdata.company);
+                loginCompany({ name: userdata.company });
                 if (!userdata.hash) {
                   userdata.hash = "tree";
                 }

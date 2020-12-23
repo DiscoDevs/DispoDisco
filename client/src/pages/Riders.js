@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 
 import { getSortedData } from "../utils/api";
 import { useHistory } from "react-router-dom";
+import { useUsers } from "../context/user";
 
 import Header from "../components/Header";
 import CardGrid from "../components/helpers/CardGrid";
@@ -13,12 +14,12 @@ import Wrapper from "../components/helpers/Wrapper";
 const Riders = () => {
   const history = useHistory();
 
-  const company = localStorage.getItem("company");
+  const { company } = useUsers();
 
   const { isLoading, isError, data, error } = useQuery("riders", () =>
     getSortedData({
       collectionName: "riders",
-      company,
+      company: company.name,
     })
   );
 

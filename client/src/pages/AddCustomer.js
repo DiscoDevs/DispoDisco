@@ -9,6 +9,7 @@ import CardCustomer from "../components/CardCustomer";
 import Header from "../components/Header";
 import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
 import { useQuery } from "react-query";
+import { useUsers } from "../context/user";
 
 export default function AddCustomer() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ export default function AddCustomer() {
 
   const history = useHistory();
 
-  const company = localStorage.getItem("company");
+  const { company } = useUsers();
 
   const { data, error, isError, isLoading } = useQuery(["customer", id], () =>
     getDataByID({
@@ -83,7 +84,7 @@ export default function AddCustomer() {
           onSubmit={(event) => {
             event.preventDefault();
             if (!customer.association) {
-              customer.association = company;
+              customer.association = company.name;
             }
             if (id) {
               updateData({

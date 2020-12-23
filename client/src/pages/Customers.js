@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { useHistory } from "react-router-dom";
+import { useUsers } from "../context/user";
 
 import { getSortedData } from "../utils/api";
 
@@ -13,12 +14,12 @@ import Wrapper from "../components/helpers/Wrapper";
 const Customers = () => {
   const history = useHistory();
 
-  const company = localStorage.getItem("company");
+  const { company } = useUsers();
 
   const { isLoading, isError, data, error } = useQuery("customers", () =>
     getSortedData({
       collectionName: "customers",
-      company,
+      company: company.name,
     })
   );
 
