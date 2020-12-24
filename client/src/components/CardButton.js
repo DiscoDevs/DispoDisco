@@ -25,16 +25,28 @@ const types = {
   },
 };
 
-const CardButton = ({ type, label = "", status, onClick }) => {
+const CardButton = ({
+  type,
+  label = "",
+  status,
+  onClick,
+  disabled = false,
+}) => {
   CardButton.propTypes = {
     type: PropTypes.oneOf(["timer", "info", "rider", "remove"]),
     label: PropTypes.node,
     status: PropTypes.string,
     onClick: PropTypes.func,
+    disabled: PropTypes.bool,
   };
 
   return (
-    <ButtonElement type={type} status={status} onClick={onClick}>
+    <ButtonElement
+      type={type}
+      status={status}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {label}
     </ButtonElement>
   );
@@ -42,9 +54,8 @@ const CardButton = ({ type, label = "", status, onClick }) => {
 
 const statusColor = { open: "green", fetched: "orange", delivered: "grey" };
 
-const ButtonElement = styled.div`
+const ButtonElement = styled.button`
   padding: ${(props) => types[props.type].padding};
-
   height: ${(props) =>
     props.type === "rider" || props.type === "timer" ? "30px" : "40px"};
   width: ${(props) => (props.type === "rider" ? "100px" : "auto")};

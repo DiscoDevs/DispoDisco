@@ -43,7 +43,7 @@ const CardRider = ({
   const dateOfBirthOrdered = new Date(dateOfBirth).toLocaleDateString("de-DE");
   const [imgIsLoading, setImgIsLoading] = useState(+true);
   const [isActive, setIsActive] = useState(riderActive || false);
-
+  console.log(imgIsLoading);
   return (
     <RidersWrapper color={color}>
       <div>
@@ -93,8 +93,9 @@ const CardRider = ({
         )}
         {addRider && (
           <CardButton
+            disabled={imgIsLoading === 1}
             type="info"
-            label="change Avatar"
+            label={imgIsLoading === 1 ? "...loading" : "change Avatar"}
             onClick={() => {
               setImgIsLoading(+true);
               handleClick();
@@ -140,6 +141,7 @@ const Avatar = styled.img`
     props.isActive ? "0 0 5px gold" : "0 0 0 transparent"};
   border: ${(props) => (props.isActive ? "1px solid gold" : "transparent")};
   transform: scale(${(props) => (props.isActive ? "1.1" : "1")});
+  display: ${(props) => (props.loaded ? "none" : "block")};
 `;
 const RidersWrapper = styled(CardContainer)`
   display: flex;
