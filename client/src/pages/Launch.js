@@ -8,6 +8,7 @@ import LinkButton from "../components/LinkButton";
 
 const Launch = () => {
   const history = useHistory();
+
   return (
     <Wrapper>
       <Title>DispoDisco</Title>
@@ -44,8 +45,13 @@ const Wrapper = styled.div`
 `;
 
 const EnterContainer = styled.div`
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  right: 0;
   grid-area: enter;
   > * {
+    width: 200px;
     margin: 1rem auto;
     min-width: 250px;
     font-size: 1.5rem;
