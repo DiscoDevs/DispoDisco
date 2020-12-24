@@ -6,6 +6,7 @@ import HeaderHome from "../components/HeaderHome";
 import Button from "../components/Button";
 import { useHistory } from "react-router-dom";
 import { useUsers } from "../context/user";
+import Logout from "../assets/exit.png";
 
 const MainMenu = () => {
   const history = useHistory();
@@ -48,11 +49,14 @@ const MainMenu = () => {
       <PageWrapper>
         <HeaderHome />
         <MenuWrapper>
-          <h3>{company.name}</h3>
+          <h2>{company.name}</h2>
+          <h5>Selected Player:</h5>
           <AvatarBox>
-            <h5>Selected Player:</h5>
-            <img src={user?.picture} alt={"Avatar"} />
-            <p>{user?.alias}</p>
+            <div>
+              <img src={user?.picture} alt={"Avatar"} />
+              <p>{user?.alias}</p>
+            </div>
+            <LogoutButton src={Logout} onClick={logout} />
           </AvatarBox>
           {buttons.map((button) => (
             <Button
@@ -61,13 +65,14 @@ const MainMenu = () => {
               {...button}
             />
           ))}
-          <Button label="logout" design="menu" onClick={logout} />
         </MenuWrapper>
       </PageWrapper>
     </>
   );
 };
-
+const LogoutButton = styled.img`
+  height: 50px;
+`;
 const PageWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -79,16 +84,19 @@ const PageWrapper = styled.div`
 `;
 const AvatarBox = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  h5 {
-    margin-bottom: 0.5rem;
-  }
-  img {
-    height: 35px;
-    height: clamp(35px, 10vw, 75px);
-    margin: 0 auto;
+  div {
+    margin-right: 1rem;
+    h5 {
+      margin-bottom: 0.5rem;
+    }
+    img {
+      height: 35px;
+      height: clamp(35px, 10vw, 75px);
+      margin: 0 auto;
+    }
   }
 `;
 
@@ -102,6 +110,9 @@ const MenuWrapper = styled.div`
   width: 100%;
   max-width: 375px;
   margin: 0 auto;
+  > :first-child {
+    margin-bottom: 1rem;
+  }
   Button {
     margin-top: 0.5rem;
     margin-top: clamp(0.5rem, 1vw, 1rem);
