@@ -10,7 +10,7 @@ const RiderLabel = ({ riderName }) => {
     riderName: PropTypes.string,
   };
   const { company } = useUsers();
-  const { isLoading, isError, data, error } = useQuery(["riders"], () =>
+  const { isLoading, isError, data, error } = useQuery("riders", () =>
     getEntryList({
       collectionName: "riders",
       key: "alias",
