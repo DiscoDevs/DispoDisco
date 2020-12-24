@@ -35,23 +35,29 @@ const types = {
   },
 };
 
-const BadgeElement = styled.div`
-  display: grid;
-  align-content: center;
-  height: 40px;
-  width: 40px;
-
-  background-color: var(--text-secondary30);
-  border-radius: 3px;
-  box-shadow: var(--shadow), 3px 0 6px rgba(100, 100, 100, 0.5);
-  img {
-    width: 28px;
-    margin: auto;
-    filter: grayscale(${(props) => (props.isActive === true ? "0" : "1")});
-  }
-`;
-
 const Badge = ({ type, active, onClick = false }) => {
+  Badge.propTypes = {
+    type: PropTypes.oneOf([
+      "direct",
+      "carriage",
+      "cargoS",
+      "cargoM",
+      "cargoL",
+      "onTimeRide",
+      "dayRide",
+      "timer",
+      "info",
+      "rider",
+    ]),
+
+    active: PropTypes.bool,
+    onClick: PropTypes.func,
+  };
+
+  Badge.defaultProps = {
+    type: "default",
+    active: false,
+  };
   const [isActive, setIsActive] = useState(active);
 
   function changeStatus() {
@@ -70,28 +76,20 @@ const Badge = ({ type, active, onClick = false }) => {
     </BadgeElement>
   );
 };
+const BadgeElement = styled.div`
+  display: grid;
+  align-content: center;
+  height: 40px;
+  width: 40px;
 
-Badge.propTypes = {
-  type: PropTypes.oneOf([
-    "direct",
-    "carriage",
-    "cargoS",
-    "cargoM",
-    "cargoL",
-    "onTimeRide",
-    "dayRide",
-    "timer",
-    "info",
-    "rider",
-  ]),
-
-  active: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
-Badge.defaultProps = {
-  type: "default",
-  active: false,
-};
+  background-color: var(--text-secondary30);
+  border-radius: 3px;
+  box-shadow: var(--shadow), 3px 0 6px rgba(100, 100, 100, 0.5);
+  img {
+    width: 28px;
+    margin: auto;
+    filter: grayscale(${(props) => (props.isActive === true ? "0" : "1")});
+  }
+`;
 
 export default Badge;

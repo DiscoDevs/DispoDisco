@@ -8,44 +8,23 @@ export async function addData({ collectionName, data }) {
   });
 }
 
-export async function getDataByQuery({ collectionName, dataName, query }) {
-  const result = await fetch(
-    `/api/${collectionName}?name=${dataName}&value=${query}`
-  );
-  const returnedData = await result.json();
-  return returnedData;
-}
-
-export async function getSortedData({ collectionName, dataName }) {
-  const result = await fetch(`/api/${collectionName}?sortBy=${dataName}`);
+export async function getSortedData({ collectionName, company }) {
+  const result = await fetch(`/api/${collectionName}?company=${company}`);
   const returnedData = await result.json();
   return returnedData;
 }
 
 export async function getSortedDataByQuery({
   collectionName,
-  dataName,
+  type,
   query,
+  company,
 }) {
   const result = await fetch(
-    `/api/${collectionName}?name=${dataName}&value=${query}&sortBy=${dataName}`
+    `/api/${collectionName}/${type}?query=${query}&company=${company}`
   );
   const returnedData = await result.json();
   return returnedData;
-}
-
-export async function getFilteredDataByQuery({
-  collectionName,
-  dataName,
-  dataValue,
-  filterBy,
-  filterValue,
-}) {
-  const results = await fetch(
-    `/api/${collectionName}?name=${dataName}&value=${dataValue}&filterBy=${filterBy}&filterValue=${filterValue}`
-  );
-  const data = await results.json();
-  return data;
 }
 
 export async function getDataByID({ collectionName, id }) {
@@ -54,10 +33,52 @@ export async function getDataByID({ collectionName, id }) {
   return data;
 }
 
-export async function getEntryList({ collectionName, key }) {
-  const results = await fetch(`/api/${collectionName}/filter/${key}`);
+export async function getEntryList({ collectionName, company }) {
+  const results = await fetch(`/api/${collectionName}/list?company=${company}`);
   const data = await results.json();
   return data;
+}
+
+export async function getRiderImage({ alias, company }) {
+  const result = await fetch(
+    `/api/riders/picture?alias=${alias}&company=${company}`
+  );
+  const data = await result.json();
+  return data.picture;
+}
+
+export async function registerNewUser({ username, password, company, hash }) {
+  await fetch("/api/users/register", {
+    method: "POST",
+    body: JSON.stringify({ username, password, company, hash }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+export async function validateUser({ username, password }) {
+  const result = await fetch(`/api/users/login`, {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await result.json();
+  return data;
+}
+
+export async function getCompanyName({ username }) {
+  const result = await fetch(`/api/users/company`, {
+    method: "POST",
+    body: JSON.stringify({ username }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const companyName = await result.json();
+  return companyName;
 }
 
 export async function deleteData({ collectionName, id }) {

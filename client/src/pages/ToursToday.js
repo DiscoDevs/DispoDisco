@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQuery } from "react-query";
-import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
 import { getCurrentDateString } from "../utils/date";
@@ -12,78 +11,74 @@ import Badge from "../components/Badge";
 import Card from "../components/Card";
 import HeaderMain from "../components/HeaderMain";
 import ButtonPlus from "../components/ButtonPlus";
-import ToursGrid from "../components/helpers/ToursGrid";
+import CardGrid from "../components/helpers/CardGrid";
+import LoadingData from "../components/LoadingData";
+import Wrapper from "../components/helpers/Wrapper";
+import { useUsers } from "../context/user";
 
 const ToursToday = () => {
   const [today, setToday] = useState(getCurrentDateString());
 
   const history = useHistory();
+  const { company } = useUsers();
 
   const handleDateChange = (date) => {
     setToday(date !== "" ? date : getCurrentDateString());
   };
 
-  const { isLoading, isError, data, error } = useQuery(["tours", today], () =>
-    getSortedDataByQuery({
-      collectionName: "tasks",
-      dataName: "finish",
-      query: today,
-    })
+  const { isLoading, isError, data, error, refetch } = useQuery(
+    ["tours", today],
+    () =>
+      getSortedDataByQuery({
+        collectionName: "tours",
+        type: "date",
+        query: today,
+        company: company.name,
+      })
   );
-
   return (
     <>
       <GlobalStyle />
-      <PageWrapper>
-        <HeaderMain handleChange={handleDateChange} />
-        <ToursGrid>
-          {isLoading && <span>Loading...</span>}
+      <Wrapper>
+        <HeaderMain handleChange={handleDateChange} isLoading={isLoading} />
+        <CardGrid>
+          {isLoading && <LoadingData>Loading...</LoadingData>}
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
             !isLoading &&
-            data.map((ride) => {
+            data.sort(sortByPriority).map((ride) => {
               return (
                 <Card
-                  {...ride}
+                  onChange={refetch}
                   rideID={ride._id}
                   key={ride._id}
                   type={ride.priority}
                   rider={ride.assignment}
                   {...ride}
+                  info={true}
                   labels={
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
                       {ride.priority !== "normal" &&
-                      ride.priority !== "concurrentRide" ? (
-                        <Badge type={ride.priority} active />
-                      ) : (
-                        ""
-                      )}
+                        ride.priority !== "concurrentRide" && (
+                          <Badge type={ride.priority} active />
+                        )}
                       {ride.carriage && <Badge type="carriage" active />}
                     </>
                   }
                 />
               );
             })}
-        </ToursGrid>
+        </CardGrid>
         <ButtonPlus onClick={() => history.push("/tours/new")} />
-      </PageWrapper>
+      </Wrapper>
     </>
   );
 };
 
-const PageWrapper = styled.div`
-  position: fixed;
-  overflow: auto;
-  height: 100%;
-  width: 100%;
-  background: var(--gradient-dark);
-  & > *:not(:first-child) {
-    margin: 1rem auto;
-  }
-  & > :nth-child(2) {
-    margin-top: clamp(10rem, 25vw, 12rem);
-  }
-`;
+const statusPriorities = ["open", "fetched", "delivered"];
+
+const sortByPriority = (a, b) =>
+  statusPriorities.indexOf(a.status) - statusPriorities.indexOf(b.status);
 
 export default ToursToday;

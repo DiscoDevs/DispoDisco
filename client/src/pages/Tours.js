@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import { useQuery } from "react-query";
-import styled from "styled-components/macro";
 import GlobalStyle from "../GlobalStyles";
 
 import { getSortedDataByQuery } from "../utils/api";
@@ -11,25 +10,32 @@ import Badge from "../components/Badge";
 import Card from "../components/Card";
 import ButtonPlus from "../components/ButtonPlus";
 import Header from "../components/Header";
-import ToursGrid from "../components/helpers/ToursGrid";
+import CardGrid from "../components/helpers/CardGrid";
+import Wrapper from "../components/helpers/Wrapper";
+import { useUsers } from "../context/user";
 
 const Tours = () => {
   const history = useHistory();
 
-  const { isLoading, isError, data, error } = useQuery("concurrenctTours", () =>
-    getSortedDataByQuery({
-      collectionName: "tasks",
-      dataName: "priority",
-      query: "concurrentRide",
-    })
+  const { company } = useUsers();
+
+  const { isLoading, isError, data, error, refetch } = useQuery(
+    "concurrenctTours",
+    () =>
+      getSortedDataByQuery({
+        collectionName: "tours",
+        type: "type",
+        query: "concurrentRide",
+        company: company.name,
+      })
   );
 
   return (
     <>
       <GlobalStyle />
-      <PageWrapper>
+      <Wrapper>
         <Header title="Geplante Touren" />
-        <ToursGrid>
+        <CardGrid>
           {isLoading && <span>Loading...</span>}
           {isError && <span>Error: {error.message}</span>}
           {!isError &&
@@ -37,10 +43,13 @@ const Tours = () => {
             data.map((ride) => {
               return (
                 <Card
+                  onChange={refetch}
                   key={ride._id}
+                  rideID={ride._id}
                   rider={ride.assignment}
                   type={ride.priority}
                   {...ride}
+                  info={true}
                   labels={
                     <>
                       {ride.cargo && <Badge type={ride.cargo} active />}
@@ -54,28 +63,13 @@ const Tours = () => {
                 />
               );
             })}
-        </ToursGrid>
+        </CardGrid>
         <ButtonPlus
           onClick={() => history.push("/tours/new?type=concurrent")}
         />
-      </PageWrapper>
+      </Wrapper>
     </>
   );
 };
-
-const PageWrapper = styled.div`
-  position: fixed;
-  overflow: auto;
-  height: 100%;
-  width: 100%;
-
-  background: var(--gradient-dark);
-  & > *:not(:first-child) {
-    margin: 1rem auto;
-  }
-  & > :nth-child(2) {
-    margin-top: clamp(9rem, 25vw, 200px);
-  }
-`;
 
 export default Tours;

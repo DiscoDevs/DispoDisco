@@ -3,6 +3,9 @@ import styled from "styled-components/macro";
 import PropTypes from "prop-types";
 import CardButton from "./CardButton";
 import { useHistory } from "react-router-dom";
+import { deleteData } from "../utils/api";
+import SettingsImg from "../assets/settingsIcon.svg";
+import CardContainer from "./helpers/CardContainer";
 
 const CardCustomer = ({
   id,
@@ -12,11 +15,27 @@ const CardCustomer = ({
   alias,
   counter,
   phone,
+  info = true,
+  removeButton = false,
+  settings = false,
 }) => {
+  CardCustomer.propTypes = {
+    name: PropTypes.string,
+    company: PropTypes.string,
+    address: PropTypes.string,
+    alias: PropTypes.string,
+    counter: PropTypes.number,
+    phone: PropTypes.string,
+    id: PropTypes.string,
+    info: PropTypes.bool,
+    settings: PropTypes.bool,
+    removeButton: PropTypes.bool,
+  };
+
   const history = useHistory();
   const addressSplitted = address?.split(",");
   return (
-    <CardContainer>
+    <CustomerCard>
       <div>
         <h3>{company}</h3>
         <p>{name}</p>
@@ -26,41 +45,64 @@ const CardCustomer = ({
         <p>{alias}</p>
         <p>Aufträge: {counter}</p>
       </div>
-      <div>
-        {addressSplitted && <p>{addressSplitted[0]}</p>}
-        {addressSplitted && <p>{addressSplitted[1]}</p>}
-      </div>
-      <CardButton
-        label="ändern"
-        onClick={() => history.push(`/customers/${id}/edit`)}
-      />
-    </CardContainer>
+      <InfoContainer>
+        <div>
+          {addressSplitted && <p>{addressSplitted[0]}</p>}
+          {addressSplitted && <p>{addressSplitted[1]}</p>}
+        </div>
+        {settings && (
+          <SettingsIcon
+            src={SettingsImg}
+            alt="Kunde ändern"
+            onClick={() => {
+              history.push(`/customers/${id}/edit`);
+            }}
+          />
+        )}
+        {info && (
+          <CardButton
+            type="info"
+            label="Info"
+            onClick={() => {
+              history.push(`/customers/${id}`);
+            }}
+          />
+        )}
+        {removeButton && (
+          <CardButton
+            type="remove"
+            label="X"
+            onClick={() => {
+              deleteData({
+                collectionName: "customers",
+                id,
+              });
+              history.goBack();
+            }}
+          />
+        )}
+      </InfoContainer>
+    </CustomerCard>
   );
 };
 
 export default CardCustomer;
 
-CardCustomer.propTypes = {
-  name: PropTypes.string,
-  company: PropTypes.string,
-  address: PropTypes.string,
-  alias: PropTypes.string,
-  counter: PropTypes.number,
-  phone: PropTypes.string,
-  id: PropTypes.string,
-};
+const CustomerCard = styled(CardContainer)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+const InfoContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  bottom: 1rem;
+  left: 0;
+  padding: 1rem 0 0.2rem;
+`;
 
-const CardContainer = styled.div`
-  display: grid;
-  grid-template-rows: 2fr 1fr;
-  grid-template-columns: 2fr 1fr;
-  position: relative;
-  min-width: 300px;
+const SettingsIcon = styled.img`
+  height: 30px;
   margin: auto;
-  padding: 1rem;
-  text-align: left;
-  font-weight: bold;
-  color: var(--text-primary);
-  background: var(--gradient-direct);
-  border-radius: var(--border-radius);
 `;

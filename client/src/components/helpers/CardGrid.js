@@ -1,14 +1,14 @@
 const { default: styled } = require("styled-components");
 
-const ToursGrid = styled.div`
+const CardGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(317px, 1fr));
   align-items: center;
   justify-items: center;
-  padding: 0 2rem;
-  max-width: 1000px;
+  max-width: 1400px;
   margin: auto;
+  padding: 0 0.5rem;
 `;
 
-export default ToursGrid;
+export default CardGrid;

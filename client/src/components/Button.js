@@ -45,12 +45,36 @@ const designs = {
   },
 };
 
-const Button = ({ primary, type, design, category, label, ...props }) => {
+const Button = ({
+  primary,
+  type,
+  design,
+  category,
+  label,
+  children,
+  ...props
+}) => {
+  Button.propTypes = {
+    category: PropTypes.string,
+    type: PropTypes.string,
+    children: PropTypes.node,
+    design: PropTypes.string,
+    primary: PropTypes.bool,
+    label: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+  };
+  Button.defaultProps = {
+    backgroundColor: null,
+    primary: false,
+    size: "medium",
+    onClick: undefined,
+  };
   return (
     <StyledButton type={type} design={design} {...props}>
       {categories[category] && (
         <Icons src={categories[category].src} alt={categories[category].alt} />
       )}
+      {children}
       {label}
     </StyledButton>
   );
@@ -69,6 +93,7 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   > :first-child {
+    min-width: 35px;
     margin-right: 10px;
   }
 `;
@@ -77,19 +102,4 @@ const Icons = styled.img`
   height: 25px;
 `;
 
-Button.propTypes = {
-  category: PropTypes.string,
-  type: PropTypes.string,
-  design: PropTypes.string,
-  primary: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-};
-
-Button.defaultProps = {
-  backgroundColor: null,
-  primary: false,
-  size: "medium",
-  onClick: undefined,
-};
 export default Button;

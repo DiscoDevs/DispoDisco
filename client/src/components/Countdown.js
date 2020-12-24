@@ -12,6 +12,10 @@ export default function Countdown({ finish }) {
     } else {
       setCounter("00:00:00");
     }
+    // !BUG
+    // return () => {
+    //   clearTimeout(() => setCounter(timer(finish)), 1000);
+    // };
   }, [counter, finish]);
 
   function timer(finish) {

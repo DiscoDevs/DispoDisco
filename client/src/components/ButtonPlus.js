@@ -5,9 +5,21 @@ import styled from "styled-components/macro";
  * Primary UI component for user interaction
  */
 
+const ButtonPlus = ({ onClick }) => {
+  ButtonPlus.propTypes = {
+    onClick: PropTypes.func,
+  };
+
+  return (
+    <ButtonElement onClick={onClick}>
+      <div>+</div>
+    </ButtonElement>
+  );
+};
+
 const ButtonElement = styled.button`
   position: fixed;
-  bottom: 2px;
+  bottom: 2rem;
   left: calc(50% - 25px);
   display: grid;
   align-items: center;
@@ -31,15 +43,4 @@ const ButtonElement = styled.button`
   }
 `;
 
-const ButtonPlus = ({ onClick }) => {
-  return (
-    <ButtonElement onClick={onClick}>
-      <div>+</div>
-    </ButtonElement>
-  );
-};
-
-ButtonPlus.propTypes = {
-  onClick: PropTypes.func,
-};
 export default ButtonPlus;

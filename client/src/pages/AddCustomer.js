@@ -7,39 +7,40 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import CardCustomer from "../components/CardCustomer";
 import Header from "../components/Header";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
+import { useQuery } from "react-query";
+import { useUsers } from "../context/user";
 
 export default function AddCustomer() {
   const { id } = useParams();
 
-  const [customer, setCustomer] = useState({
-    counter: 0,
-  });
+  const [customer, setCustomer] = useState({ counter: 0 });
 
   const history = useHistory();
 
+  const { company } = useUsers();
+
+  const { data, error, isError, isLoading } = useQuery(["customer", id], () =>
+    getDataByID({
+      collectionName: "customers",
+      id,
+    })
+  );
   useEffect(() => {
-    if (id) {
-      const doFetch = async () => {
-        try {
-          const data = await getDataByID({
-            collectionName: "customers",
-            id,
-          });
-          setCustomer(data);
-          console.log(data);
-        } catch (e) {
-          console.error(e);
-        }
-      };
-      doFetch();
+    async function doFetch() {
+      if (id) {
+        setCustomer(data);
+      }
+      isError && console.log(error);
     }
-  }, [id]);
+    doFetch();
+  }, [id, data, error, isError]);
 
   const inputArray = [
     {
       name: "Firma",
       type: "text",
-      value: customer.company,
+      value: customer?.company || "",
       required: true,
       func: (event) =>
         setCustomer({ ...customer, company: event.target.value }),
@@ -47,48 +48,49 @@ export default function AddCustomer() {
     {
       name: "Name",
       type: "text",
-      value: customer.name,
+      value: customer?.name || "",
       required: true,
       func: (event) => setCustomer({ ...customer, name: event.target.value }),
     },
     {
       name: "alias",
       type: "text",
-      value: customer.alias,
+      value: customer?.alias || "",
       required: true,
       func: (event) => setCustomer({ ...customer, alias: event.target.value }),
     },
     {
       name: "Straße Hausnummer, PLZ Stadt",
       type: "text",
-      value: customer.address,
+      value: customer?.address || "",
       func: (event) =>
         setCustomer({ ...customer, address: event.target.value }),
     },
     {
       name: "Phone",
       type: "tel",
-      value: customer.phone,
+      value: customer?.phone || "",
       func: (event) => setCustomer({ ...customer, phone: event.target.value }),
     },
   ];
 
   return (
     <PageWrapper>
-      <Header title={id ? "Kunde ändern" : "Kunde hinzufügen"} />
-      <Wrapper>
+      <ContentWrapper>
+        <Header title={id ? "Kunde ändern" : "Kunde hinzufügen"} />
         <CardCustomer {...customer} />
+        {isLoading && <p>Loading...</p>}
         <Form
           onSubmit={(event) => {
             event.preventDefault();
+            if (!customer.association) {
+              customer.association = company.name;
+            }
             if (id) {
-              updateData(
-                {
-                  collectionName: "customers",
-                  id,
-                },
-                customer
-              );
+              updateData({
+                collectionName: "customers",
+                id,
+              });
             } else {
               addData({
                 collectionName: "customers",
@@ -113,29 +115,13 @@ export default function AddCustomer() {
             label={id ? "Kunde ändern" : "Kunde hinzufügen"}
           />
         </Form>
-      </Wrapper>
+      </ContentWrapper>
     </PageWrapper>
   );
 }
 
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  margin: auto;
-  padding: 8rem 0;
-
+const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
-`;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  max-width: 400px;
-  > :first-child {
-    margin-bottom: 2rem;
-  }
 `;
 const Form = styled.form`
   > * {

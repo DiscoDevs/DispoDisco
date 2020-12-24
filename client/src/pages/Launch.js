@@ -1,15 +1,65 @@
 import React from "react";
 import logoDark from "../assets/ddLogoDark.svg";
+import Login from "../assets/login.svg";
+import Register from "../assets/register.svg";
 import styled from "styled-components/macro";
 import { useHistory } from "react-router-dom";
+import LinkButton from "../components/LinkButton";
+
+const Launch = () => {
+  const history = useHistory();
+
+  return (
+    <Wrapper>
+      <Title>DispoDisco</Title>
+      <LogoContainer>
+        <Logo
+          src={logoDark}
+          alt="Logo Dark"
+          onClick={() => history.push("/menu")}
+        />
+      </LogoContainer>
+      <EnterContainer>
+        <LinkButton to="/login">
+          <img src={Login} alt="Login" />
+          login
+        </LinkButton>
+        <LinkButton to="/register">
+          <img src={Register} alt="Register" />
+          register
+        </LinkButton>
+      </EnterContainer>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
-  height: 100vh;
   display: grid;
-  grid-template-rows: 40% 60%;
+  place-items: center;
+  height: 100%;
+  min-height: 100vh;
   grid-template-areas:
     "title"
-    "logo";
+    "logo"
+    "enter";
+`;
+
+const EnterContainer = styled.div`
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  grid-area: enter;
+  > * {
+    width: 200px;
+    margin: 1rem auto;
+    min-width: 250px;
+    font-size: 1.5rem;
+    display: flex;
+    img {
+      height: 30px;
+    }
+  }
 `;
 
 const Title = styled.h1`
@@ -59,19 +109,4 @@ const Logo = styled.img`
   }
 `;
 
-const Launch = () => {
-  const history = useHistory();
-  return (
-    <Wrapper>
-      <Title>DispoDisco</Title>
-      <LogoContainer>
-        <Logo
-          src={logoDark}
-          alt="Logo Dark"
-          onClick={() => history.push("/menu")}
-        />
-      </LogoContainer>
-    </Wrapper>
-  );
-};
 export default Launch;

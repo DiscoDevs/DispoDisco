@@ -1,36 +1,39 @@
 import React from "react";
 import styled from "styled-components/macro";
-import MirrorBall from "../assets/mirrorBall.svg";
+import MirrorBallSrc from "../assets/discoBall.gif";
+
+const HeaderHome = () => (
+  <>
+    <HeaderElement>
+      <First>
+        Disp
+        <MirrorBall src={MirrorBallSrc} alt={"MirrorBall"} />
+      </First>
+      <Second>Disco</Second>
+    </HeaderElement>
+  </>
+);
 
 const HeaderElement = styled.header`
+  margin: 1rem auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 1rem;
+  flex-direction: column;
+  padding: 1rem auto;
   color: var(--text-primary);
 `;
 
 const First = styled.h2`
-  grid-area: first;
-  font-size: 2.5rem;
+  align-self: flex-end;
+  font-size: clamp(2rem, 10vw, 4rem);
 `;
 
-const Second = styled(First)`
-  grid-area: second;
-`;
+const Second = styled(First)``;
 
-const Logo = styled.img`
-  height: 150px;
-  margin-top: -50px;
+const MirrorBall = styled.img`
+  height: 70px;
+  height: clamp(70px, 30vw, 100px);
+  padding: 0 1rem;
+  margin-top: -1.5rem;
   filter: drop-shadow(0px 3px 6px var(--text-secondary));
 `;
-const HeaderHome = () => (
-  <HeaderElement>
-    <First>Disp</First>
-    <Logo src={MirrorBall} alt={"Logo"} />
-    <Second>Disco</Second>
-  </HeaderElement>
-);
-
 export default HeaderHome;

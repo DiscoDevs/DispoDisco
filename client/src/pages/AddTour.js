@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { addData, getDataByID, getEntryList, updateData } from "../utils/api";
+import { addData, getDataByID, updateData } from "../utils/api";
 
 import Badge from "../components/Badge";
 import Card from "../components/Card";
@@ -11,14 +11,18 @@ import InfoInput from "../components/InfoInput";
 import WeekDaysSelector from "../components/WeekDaysSelector";
 import { add30Minutes, add90Minutes } from "../utils/time";
 import Header from "../components/Header";
+import Wrapper, { ContentWrapper } from "../components/helpers/Wrapper";
+import RiderSelect from "../components/helpers/RiderSelect";
+import { useQuery } from "react-query";
+import { useUsers } from "../context/user";
 
-function useQuery() {
+function useQueryParams() {
   return new URLSearchParams(useLocation().search);
 }
 
 export default function AddTour() {
   const { id } = useParams();
-  const query = useQuery();
+  const query = useQueryParams();
   const concurrentTour = query.get("type") === "concurrent";
   const priSwitch = concurrentTour ? "concurrentRide" : "normal";
   const [task, setTask] = useState({
@@ -31,33 +35,24 @@ export default function AddTour() {
   });
   const history = useHistory();
   const [weekDays, setWeekDays] = useState([]);
-  const [riders, setRiders] = useState([]);
   const [arrayToMap, setArrayToMap] = useState([]);
+  const { company } = useUsers();
+
+  const { data } = useQuery(
+    ["ride", id],
+    () =>
+      getDataByID({
+        collectionName: "tours",
+        id,
+      }),
+    { enabled: !!id }
+  );
 
   useEffect(() => {
-    const fetchList = async () => {
-      const list = await getEntryList({
-        collectionName: "riders",
-        key: "alias",
-      });
-      setRiders(list);
-    };
-    fetchList();
-    if (id) {
-      const doFetch = async () => {
-        try {
-          const data = await getDataByID({
-            collectionName: "tasks",
-            id: id,
-          });
-          setTask(data);
-        } catch (e) {
-          console.error(e);
-        }
-      };
-      doFetch();
+    if (id && data) {
+      setTask(data);
     }
-  }, [id]);
+  }, [id, data]);
 
   const handlePriorityClick = (badgeName) => () => {
     setTask({
@@ -100,21 +95,21 @@ export default function AddTour() {
       {
         name: "Start",
         type: "text",
-        value: task.start,
+        value: task.start || "",
         required: true,
         func: (event) => setTask({ ...task, start: event.target.value }),
       },
       {
         name: "Ziel",
         type: "text",
-        value: task.dest,
+        value: task.dest || "",
         required: true,
         func: (event) => setTask({ ...task, dest: event.target.value }),
       },
       {
         name: "Datum",
         type: "datetime-local",
-        value: task.date,
+        value: task.date || "",
         required: false,
         func: (event) =>
           setTask({
@@ -127,7 +122,7 @@ export default function AddTour() {
       {
         name: "Titel",
         type: "text",
-        value: task.name,
+        value: task.name || "",
         required: false,
         func: (event) => setTask({ ...task, name: event.target.value }),
       },
@@ -135,7 +130,7 @@ export default function AddTour() {
       {
         name: "Abgabe",
         type: "datetime-local",
-        value: task.finish,
+        value: task.finish || "",
         func: (event) =>
           setTask({
             ...task,
@@ -148,7 +143,7 @@ export default function AddTour() {
       {
         name: "Abgabe",
         type: "datetime-local",
-        value: task.finish,
+        value: task.finish || "",
         required: false,
         func: (event) =>
           setTask({
@@ -166,10 +161,13 @@ export default function AddTour() {
     }
   }, [task.priority, concurrentTour, task]);
 
+  const onRiderChange = (riderAlias) => {
+    setTask({ ...task, assignment: riderAlias });
+  };
   return (
     <PageWrapper>
-      <Header title="Fahrt" />
-      <Wrapper>
+      <ContentWrapper>
+        <Header title="Fahrt" />
         <Card
           type={task.priority}
           rider={task.assignment}
@@ -207,16 +205,19 @@ export default function AddTour() {
                 task.finish = task.date;
               }
             }
+            if (!task.association) {
+              task.association = company.name;
+            }
             if (id) {
               updateData(
                 {
-                  collectionName: "tasks",
+                  collectionName: "tours",
                   id,
                 },
                 task
               );
             } else {
-              addData({ collectionName: "tasks", data: task });
+              addData({ collectionName: "tours", data: task });
             }
             if (concurrentTour) {
               history.goBack();
@@ -235,19 +236,6 @@ export default function AddTour() {
               required={inputObj.required}
             />
           ))}
-
-          <select
-            onChange={(event) =>
-              setTask({ ...task, assignment: event.target.value })
-            }
-          >
-            <option value={null}>Offen</option>
-            {riders.map((rider) => (
-              <option key={rider._id} value={rider.alias}>
-                {rider.alias}
-              </option>
-            ))}
-          </select>
 
           {concurrentTour && (
             <WeekDaysSelector
@@ -277,36 +265,22 @@ export default function AddTour() {
               );
             })}
           </BadgeContainer>
+          <RiderSelect onRiderChange={onRiderChange} task={task} filtered />
           <Button
             type="submit"
             design="addRide"
             label={id ? "Fahrt ändern" : "Fahrt hinzufügen"}
           />
         </Form>
-      </Wrapper>
+      </ContentWrapper>
     </PageWrapper>
   );
 }
 
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  margin: auto;
-  padding: 9rem 0;
-
+const PageWrapper = styled(Wrapper)`
   background: var(--text-secondary);
 `;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  max-width: 400px;
-  > :first-child {
-    margin-bottom: 2rem;
-  }
-`;
+
 const Form = styled.form`
   > * {
     margin-top: 0.7rem;
