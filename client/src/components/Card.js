@@ -232,7 +232,7 @@ const InfoContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-gap: 0.5rem;
+  grid-gap: 0.75rem;
   bottom: 1rem;
   left: 0;
   padding: 0rem 0 0.2rem;
@@ -240,7 +240,6 @@ const InfoContainer = styled.div`
 
 const LabelContainer = styled.div`
   pointer-events: none;
-  height: 40px;
   display: flex;
   margin: 0.75rem 0;
   & > :not(:first-child) {

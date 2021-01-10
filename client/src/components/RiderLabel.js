@@ -40,6 +40,7 @@ const RiderWrapper = styled.div`
   > img {
     height: 25px;
     width: 25px;
+    margin-right: 0.5rem;
   }
   > img.avatar {
     display: "inline";
