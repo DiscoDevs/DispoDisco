@@ -16,7 +16,7 @@ import CustomerInfo from "./pages/CustomerInfo";
 import RiderInfo from "./pages/RiderInfo";
 
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+// import { ReactQueryDevtools } from "react-query/devtools";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { UserProvider } from "./context/user";
@@ -81,7 +81,7 @@ function App() {
               <Launch />
             </Route>
           </Switch>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </QueryClientProvider>
       </UserProvider>
     </Router>

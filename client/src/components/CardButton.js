@@ -76,6 +76,8 @@ const ButtonElement = styled.button`
     types[props.type].background ||
     types.default.background};
 
+  border: none;
+
   ${(props) => props.type === "timer" && "justify-self: center;"}
 
   border-radius: var(--border-radius);
